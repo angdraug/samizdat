@@ -1,0 +1,863 @@
+# Esperanta tradukaĵo de Samizdat 
+# Samizdat Esperanto translation
+#
+#   Copyright (c) 2003  Denis Valoha <_denis@tut.by>
+#   Copyright (c) 2004-2005  Dmitry Borodaenko <angdraug@debian.org>
+#   Kopirajto (c) 2004-2005  Antono Vasiljev <esperanto.minsk@tut.by>
+#
+#   La programo estas libera softvaro.
+#   Vi povas disvastigi/modifi ĉi tiun programon laŭ
+#   kondiĉoj de GNU General Public License versio 3 aŭ pli malfrua.
+#
+#   This program is free software.                              
+#   You can distribute/modify this program under the terms of   
+#   the GNU General Public License version 3 or later.
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat 0.5.5\n"
+"POT-Creation-Date: 2006-04-16 16:20+0300\n"
+"PO-Revision-Date: 2006-02-27 12:56+0300\n"
+"Last-Translator: Dmitry Borodaenko <angdraug@debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+
+#: cgi-bin/foci.rb:20 cgi-bin/index.rb:147
+msgid "Top Focuses"
+msgstr "Ĉefaj Fokusoj"
+
+#: cgi-bin/foci.rb:21 cgi-bin/history.rb:24 cgi-bin/index.rb:158
+#: cgi-bin/index.rb:168 cgi-bin/moderation.rb:20 cgi-bin/query.rb:149
+#: cgi-bin/resource.rb:124 lib/samizdat/engine/resource.rb:192
+#: lib/samizdat/engine/resource.rb:233
+msgid ", page %s"
+msgstr ", paĝo %s"
+
+#: cgi-bin/history.rb:23
+msgid "History of Changes"
+msgstr "Historio de Ŝanĝoj"
+
+#: cgi-bin/history.rb:40
+msgid "compare with previous version"
+msgstr "komparu kun antaŭa versio"
+
+#: cgi-bin/history.rb:49 cgi-bin/history.rb:62
+msgid "Changes"
+msgstr "Ŝanĝoj"
+
+#: cgi-bin/history.rb:49
+msgid "Versions"
+msgstr "Versioj"
+
+#: cgi-bin/history.rb:54 cgi-bin/history.rb:60
+#: lib/samizdat/engine/message.rb:485
+msgid "Bad input"
+msgstr "Malregulaj donitaĵoj"
+
+#: cgi-bin/index.rb:90 cgi-bin/index.rb:134 cgi-bin/index.rb:157
+msgid "Features"
+msgstr "Temaj mesaĝoj"
+
+#: cgi-bin/index.rb:90 cgi-bin/index.rb:134 cgi-bin/index.rb:167
+msgid "Recent Updates"
+msgstr "Lastaj Aldonaĵoj"
+
+#: cgi-bin/index.rb:186
+msgid "Links"
+msgstr "Ligiloj"
+
+#: cgi-bin/index.rb:188
+msgid "All Replies"
+msgstr "Ĉiuj komentoj"
+
+#: cgi-bin/index.rb:189
+msgid "All Focuses (verbose)"
+msgstr "Ĉiuj fokusoj (verbose)"
+
+#: cgi-bin/index.rb:190 cgi-bin/moderation.rb:20
+msgid "Moderation Log"
+msgstr "Jurnalo de moderigoj"
+
+#: cgi-bin/item.rb:17
+msgid "Not Implemented"
+msgstr "Ĝis nun ne estas realigita"
+
+#: cgi-bin/item.rb:18
+msgid "<p>Material item exchange is not implemented yet.</p>"
+msgstr "<p>Interŝanĝo de objektoj ne estas realigita.</p>"
+
+#: cgi-bin/login.rb:22 lib/samizdat/engine/template.rb:113
+msgid "Log in"
+msgstr "Ensalutu"
+
+#: cgi-bin/login.rb:23
+msgid "Use existing account:"
+msgstr "Ekzistanta uzanto:"
+
+#: cgi-bin/login.rb:24 cgi-bin/member.rb:103 cgi-bin/member.rb:273
+#: lib/samizdat/engine/resource.rb:155
+msgid "Login"
+msgstr "Saluto"
+
+#: cgi-bin/login.rb:25 cgi-bin/member.rb:279
+msgid "Password"
+msgstr "Pasvorto"
+
+#: cgi-bin/login.rb:27 cgi-bin/member.rb:314
+msgid "Create New Account"
+msgstr "Krei novan konton"
+
+#: cgi-bin/login.rb:29 cgi-bin/member.rb:99 cgi-bin/member.rb:102
+msgid "Recover Lost Password"
+msgstr "Restitui Perditan Pasvorton"
+
+#: cgi-bin/member.rb:24 cgi-bin/member.rb:257
+msgid "Malformed email address: '%s'"
+msgstr "Malpermesita retpoŝtadreso: '%s'"
+
+#: cgi-bin/member.rb:37
+msgid "Failed to send email"
+msgstr "Ne sukcesis sendi retopŝt-mesaĝon"
+
+#: cgi-bin/member.rb:68
+msgid "Confirmation hash not found"
+msgstr "La hateto ne troviĝis"
+
+#: cgi-bin/member.rb:70
+msgid "This confirmation hash is intended for another user"
+msgstr "Ĉi tiu haketo estas antaŭdestinita por alia uzanto"
+
+#: cgi-bin/member.rb:79
+msgid "Confirmation Accepted"
+msgstr "Konfirmaĵo estas alprenita"
+
+#: cgi-bin/member.rb:80
+msgid "Changes confirmed."
+msgstr "Ŝanĝoj estas konfirmitaj."
+
+#: cgi-bin/member.rb:91
+msgid "Wrong login"
+msgstr "Malregula saluto"
+
+#: cgi-bin/member.rb:100
+msgid "New password has been sent to you."
+msgstr "Nova pasvorto estas sendita al vi."
+
+#: cgi-bin/member.rb:115
+msgid "Full name you have specified is used by someone else"
+msgstr "Nomo enskribita estas jam okupita de iu"
+
+#: cgi-bin/member.rb:120
+msgid "Email address you have specified is used by someone else"
+msgstr "Entajpita retpoŝtadreso jam estas uzata de iu alia"
+
+#: cgi-bin/member.rb:148
+msgid "Confirmation Requested"
+msgstr "Konfirmon oni mendis"
+
+#: cgi-bin/member.rb:149
+msgid "Confirmation request is sent to your new email address."
+msgstr "Informendo pri konfirmo estas sendita al via retpoŝtadreso."
+
+#: cgi-bin/member.rb:155
+msgid "Changes Accepted"
+msgstr "Ŝanĝoj estas Akceptitaj"
+
+#: cgi-bin/member.rb:156 lib/samizdat/engine/session.rb:302
+msgid "Press 'Back' button of your browser to return."
+msgstr "Premi butonon 'Reen' en via krozilo por reveni antauan paĝon."
+
+#: cgi-bin/member.rb:167
+msgid "You didn't fill all mandatory fields"
+msgstr "Vi ne plenigis ĉiujn kampojn necesajn"
+
+#: cgi-bin/member.rb:169
+msgid "Login name you specified is reserved"
+msgstr "Elektita nomo jam estas okupita"
+
+#: cgi-bin/member.rb:171
+msgid "Use only latin letters and numbers in login name"
+msgstr "Uzu nur literoj Latinaj kaj ciferoj por via salutnomo"
+
+#: cgi-bin/member.rb:174
+msgid "Login name you specified is already used by someone else"
+msgstr "Elektita salutnomo jam estas uzata de iu alia"
+
+#: cgi-bin/member.rb:190
+msgid "Login error: failed to open session for new account"
+msgstr "Aperis eraro dum ensaluto: ne estas eble komenci novan sesion por nova uzanto"
+
+#: cgi-bin/member.rb:221
+msgid "Moderator accounts can not be blocked"
+msgstr "Kontoj de moderigistoj ne povas esti blokitaj"
+
+#: cgi-bin/member.rb:253
+msgid "Passwords do not match"
+msgstr "Pasvortoj ne kongruas"
+
+#: cgi-bin/member.rb:277
+msgid "Full name"
+msgstr "Plena nomo"
+
+#: cgi-bin/member.rb:278
+msgid "Email"
+msgstr "Retpoŝta adreso"
+
+#: cgi-bin/member.rb:280
+msgid "Reenter password to confirm"
+msgstr "Retajpu pasvorton por verigi ĝin"
+
+#: cgi-bin/member.rb:287
+msgid "Theme"
+msgstr "Temo"
+
+#: cgi-bin/member.rb:298
+msgid "Show static content on the front page"
+msgstr "Aperigi statikan tekston sur la ĉefpaĝo"
+
+#: cgi-bin/member.rb:299
+msgid "Hide static content from the front page"
+msgstr "Ne aperigi statikan tekston sur la ĉefpaĝo"
+
+#: cgi-bin/member.rb:303
+msgid "Return to basic interface"
+msgstr "Reen al facila interfaco"
+
+#: cgi-bin/member.rb:304
+msgid "Enable advanced interface"
+msgstr "Ŝalti komplikan interfacon"
+
+#: cgi-bin/member.rb:306
+msgid "Change Appearance"
+msgstr "Ŝanĝu interfacon"
+
+#: cgi-bin/member.rb:309
+msgid "Moderation Facility"
+msgstr "Moderigiloj"
+
+#: cgi-bin/member.rb:310
+msgid "Disable"
+msgstr "Malŝalti"
+
+#: cgi-bin/member.rb:311
+msgid "Enable"
+msgstr "Ŝalti"
+
+#: cgi-bin/member.rb:314
+msgid "Change Account Settings"
+msgstr "Ŝanĝu agordojn de via konto"
+
+#: cgi-bin/member.rb:315
+msgid "Member Settings"
+msgstr "Membraj agordoj"
+
+#: cgi-bin/message.rb:18
+msgid "Your current access level (%s) does not allow to publish messages"
+msgstr "Via kuranta atinganivelo (%s) ne permesas publikigi mesaĝojn"
+
+#: cgi-bin/moderation.rb:34
+msgid "Action"
+msgstr "Ago"
+
+#: cgi-bin/moderation.rb:34
+msgid "Date"
+msgstr "Dato"
+
+#: cgi-bin/moderation.rb:34
+msgid "Moderator"
+msgstr "Moderanto"
+
+#: cgi-bin/moderation.rb:34
+msgid "Resource"
+msgstr "Risurco"
+
+#: cgi-bin/query.rb:22
+msgid "Error in your query: "
+msgstr "Eraro estas en via informmendo: "
+
+#: cgi-bin/query.rb:26
+msgid "Must-bind list should contain only one blank node, filters based on queries with a complex answer pattern are not implemented"
+msgstr "Must-bin listo devas enhavi nur unu blankan verticon. Filtriloj bazitaj sur serĉomendoj kun kompleksa reponda ŝablono ankoraŭ ne estas subtenataj."
+
+#: cgi-bin/query.rb:29
+msgid "User-defined query pattern should not be longer than %s clauses"
+msgstr "Definita de uzanto serĉomendo devas esti ne pli longa ol %s propozicioj"
+
+#: cgi-bin/query.rb:53 cgi-bin/query.rb:148
+msgid "Search Result"
+msgstr "Serci Rezulton"
+
+#: cgi-bin/query.rb:160
+msgid "Publish This Query"
+msgstr "Publikigi la informendon"
+
+#: cgi-bin/query.rb:165
+msgid "No matching resources found."
+msgstr "Ne trovis respektivajn risurcojn."
+
+#: cgi-bin/query.rb:174
+msgid "Select Target"
+msgstr "Elektu celon"
+
+#: cgi-bin/query.rb:178
+msgid "Query Pattern (predicate subject object)"
+msgstr "Ŝablono de informmendo (predikato subjekto objekto)"
+
+#: cgi-bin/query.rb:188
+msgid "BLANK CLAUSE "
+msgstr "MALPLENIGU KONDIĈON "
+
+#: cgi-bin/query.rb:197
+msgid "Literal Condition"
+msgstr "Laŭlitera kondiĉo"
+
+#: cgi-bin/query.rb:200
+msgid "Order By"
+msgstr "Ordigi laŭ"
+
+#: cgi-bin/query.rb:204
+msgid "Ascending"
+msgstr "Laŭ kreskado"
+
+#: cgi-bin/query.rb:204
+msgid "Descending"
+msgstr "Laŭ malkreskado"
+
+#: cgi-bin/query.rb:211
+msgid "Search By Substring"
+msgstr "Serĉi laŭ subĉeno"
+
+#: cgi-bin/query.rb:213 lib/samizdat/engine/template.rb:84
+msgid "Search"
+msgstr "Serĉo"
+
+#: cgi-bin/query.rb:216
+msgid "Construct Query"
+msgstr "Krei informmendon"
+
+#: cgi-bin/query.rb:217
+msgid "Update"
+msgstr "Renovigi"
+
+#: cgi-bin/query.rb:218
+msgid "Edit Raw Query"
+msgstr "Redakti informmendon permane"
+
+#: cgi-bin/query.rb:221 lib/samizdat/engine/template.rb:459
+msgid "Run"
+msgstr "Lanĉi"
+
+#: cgi-bin/query.rb:227
+msgid "Edit Query"
+msgstr "Redaktu informmendo"
+
+#: cgi-bin/resource.rb:68
+msgid "Incorrect resource id '%s'"
+msgstr "Malregula identigilo de risurco - %s"
+
+#: cgi-bin/resource.rb:78
+msgid "Literal"
+msgstr "Literalo"
+
+#: cgi-bin/resource.rb:78
+msgid "Member"
+msgstr "Membro"
+
+#: cgi-bin/resource.rb:78 lib/samizdat/engine/resource.rb:249
+msgid "Statement"
+msgstr "Aserto"
+
+#: cgi-bin/resource.rb:78
+msgid "Uriref"
+msgstr "Referenco"
+
+#: cgi-bin/resource.rb:78 cgi-bin/resource.rb:106 cgi-bin/resource.rb:107
+#: lib/samizdat/engine/resource.rb:271
+msgid "Vote"
+msgstr "Voĉoj"
+
+#: cgi-bin/resource.rb:79
+msgid "Item"
+msgstr "Elemento"
+
+#: cgi-bin/resource.rb:86
+msgid "Your current access level (%s) does not allow to vote"
+msgstr "Via kuranto atingnivelo (%s) ne premesas voĉdoni"
+
+#: cgi-bin/resource.rb:104 lib/samizdat/engine/template.rb:225
+msgid "Submit"
+msgstr "Akceptu"
+
+#: lib/samizdat/engine/focus.rb:39
+msgid "Translation"
+msgstr "Traduko"
+
+#: lib/samizdat/engine/focus.rb:60
+msgid "Focus"
+msgstr "Fokuso"
+
+#: lib/samizdat/engine/focus.rb:95
+msgid "none"
+msgstr "neniom da voĉoj"
+
+#: lib/samizdat/engine/focus.rb:106
+msgid "You can't relate resource to itself"
+msgstr "Vi ne povas alligi risurcon al ĝi mem"
+
+#: lib/samizdat/engine/focus.rb:108
+msgid "Translations should be published as replies to the original message"
+msgstr "Tradukojn publikigu kiel komentoj al fonta mesaĝo"
+
+#: lib/samizdat/engine/message.rb:30
+msgid "Can't derive message format and creator login name"
+msgstr "Ne eblas difini formaton de l' mesaĝo kaj nomon de l' aŭtoro"
+
+#: lib/samizdat/engine/message.rb:236
+msgid "Reference to previous version lost"
+msgstr "Referenco al antaŭa versio prediĝis "
+
+#: lib/samizdat/engine/message.rb:340
+msgid "Warning: content is longer than %s characters. In some situations, it will be truncated."
+msgstr "Averto: enhavo de l' mesaĝo estas pli longa ol %s simboloj. En kelkaj situacioj retejo ĝin ĉirkaŭtranĉos."
+
+#: lib/samizdat/engine/message.rb:341
+msgid "Message Preview"
+msgstr "Antaŭrigardo de la mesaĝo"
+
+#: lib/samizdat/engine/message.rb:344
+msgid "Press 'Back' button to change the message."
+msgstr "Premu butonon 'Reen' por ŝanĝi la mesaĝon."
+
+#: lib/samizdat/engine/message.rb:346 lib/samizdat/engine/message.rb:408
+#: lib/samizdat/engine/message.rb:416
+msgid "Confirm"
+msgstr "Konfirmu"
+
+#: lib/samizdat/engine/message.rb:373 lib/samizdat/engine/template.rb:477
+#: lib/samizdat/engine/template.rb:479
+msgid "Reply"
+msgstr "Respondi"
+
+#: lib/samizdat/engine/message.rb:375
+msgid "Edit Message"
+msgstr "Redaktu mesaĝon"
+
+#: lib/samizdat/engine/message.rb:377
+msgid "Hide Message"
+msgstr "Kaŝu mesaĝon"
+
+#: lib/samizdat/engine/message.rb:379
+msgid "Unhide Message"
+msgstr "Malkaŝu mesaĝon"
+
+#: lib/samizdat/engine/message.rb:381
+msgid "Take Over Message"
+msgstr "Preni la mesaĝon"
+
+#: lib/samizdat/engine/message.rb:383
+msgid "Replace Message"
+msgstr "Anstataŭigi la mesaĝon"
+
+#: lib/samizdat/engine/message.rb:385
+msgid "Reparent Message"
+msgstr "Repatrigi la Mesagon"
+
+#: lib/samizdat/engine/message.rb:387
+msgid "New Message"
+msgstr "Nova mesaĝo"
+
+#: lib/samizdat/engine/message.rb:392
+msgid "Parent Message"
+msgstr "Gepatra Mesaĝo"
+
+#: lib/samizdat/engine/message.rb:395
+msgid "The message will be hidden from public view."
+msgstr "La mesaĝo estos kaŝita de publiko."
+
+#: lib/samizdat/engine/message.rb:397
+msgid "The message will not be hidden from public view."
+msgstr "La mesaĝo ne estos kaŝita de publiko."
+
+#: lib/samizdat/engine/message.rb:399
+msgid "The message will be attributed to you after takeover."
+msgstr "Kiam vi prenos la mesaĝon, oni rigardos vin kiel aŭtoro."
+
+#: lib/samizdat/engine/message.rb:401
+msgid "MESSAGE WILL BE COMPLETELY REPLACED, NO RECOVERY WILL BE POSSIBLE. PLEASE PROVIDE DETAILED JUSTIFICATION FOR THIS ACTION."
+msgstr "MESAĜO ESTOS ANSTATAŬITA SEN EBLECO DE REKONSTRUO. BONVOLU DONI SUFIĈAJN KAKAŬZOJN POR TIO."
+
+#: lib/samizdat/engine/message.rb:403
+msgid "This message will be moved to new parent"
+msgstr "Ci tiu mesago estos alligita al nova patra mesago"
+
+#: lib/samizdat/engine/message.rb:414
+msgid "New Parent"
+msgstr "Elekti novan patran mesagon"
+
+#: lib/samizdat/engine/message.rb:422
+msgid "Title"
+msgstr "Titolo"
+
+#: lib/samizdat/engine/message.rb:423
+msgid "Content"
+msgstr "Enhavo"
+
+#: lib/samizdat/engine/message.rb:424
+msgid "Upload content from file"
+msgstr "Alŝuti mesaĝon kiel dosiero"
+
+#: lib/samizdat/engine/message.rb:436
+msgid "Language of the message"
+msgstr "Lingvo de la mesaĝo"
+
+#: lib/samizdat/engine/message.rb:439
+msgid "Format"
+msgstr "Formato"
+
+#: lib/samizdat/engine/message.rb:440
+msgid "Default"
+msgstr "Sen formato"
+
+#: lib/samizdat/engine/message.rb:444
+msgid "Reference to description (ID or URL of another message on this site)"
+msgstr "Referenco al priskribo (numero aŭ URL de alia mesaĝo en nia retejo)"
+
+#: lib/samizdat/engine/message.rb:446
+msgid "Editing is open for all members"
+msgstr "Redaktado malfermita por ĉiuj membroj"
+
+#: lib/samizdat/engine/message.rb:451
+msgid "Preview"
+msgstr "Antaŭrigardo"
+
+#: lib/samizdat/engine/message.rb:512
+msgid "Use only <a href=\"%s\">current version</a> for replies and edits"
+msgstr "Bonvolu redakti kaj komenti nur <a href=\"%s\">kurantan version</a>"
+
+#: lib/samizdat/engine/message.rb:517
+msgid "You are not allowed to edit this message"
+msgstr "Vi ne povas redakti ĉi tiun mesaĝon"
+
+#: lib/samizdat/engine/message.rb:534
+msgid "Specified language is not supported on this site"
+msgstr "La retejo ne subtenas la lingvon difinitan de vi"
+
+#: lib/samizdat/engine/message.rb:545
+msgid "Invalid message reference"
+msgstr "Malregula referenco al mesaĝo"
+
+#: lib/samizdat/engine/message.rb:548
+msgid "Message reference should refer to an existing message"
+msgstr "Referenco necesas fari nur por ekzistanta mesaĝo"
+
+#: lib/samizdat/engine/message.rb:560
+msgid "Format '%s' is not supported"
+msgstr "Formato '%s' ne estas subtenata"
+
+#: lib/samizdat/engine/message.rb:572
+msgid "It is not possible to upload a file without specifying format"
+msgstr "Ne eblas alŝuti dosieron sen elekto de ĝia formato"
+
+#: lib/samizdat/engine/message.rb:575
+msgid "Uploaded file is larger than %s bytes limit"
+msgstr "Alŝutita dosiero estas pli granda ol difinita limo (%s bajtoj)"
+
+#: lib/samizdat/engine/message.rb:587
+msgid "Multimedia upload is disabled on this site"
+msgstr "Alŝutado de plurmediaj dosieroj estas malpremesita en ĉi tiu TTT-ejo"
+
+#: lib/samizdat/engine/message.rb:609
+msgid "You should upload %s content from file"
+msgstr "Mesaĝoj kiel %s vi alŝutu kiel dosiero"
+
+#: lib/samizdat/engine/resource.rb:63
+msgid "refers to <a href=\"%s\">external uriref</a>"
+msgstr "<a href=\"%s\">ekstera referenco</a>"
+
+#: lib/samizdat/engine/resource.rb:79
+msgid "Unknown resource type '%s'"
+msgstr "Nekonata tipo de risurco - %s"
+
+#: lib/samizdat/engine/resource.rb:114
+msgid "Also related to this focus: "
+msgstr "Tio estas ligita al tiu temo: "
+
+#: lib/samizdat/engine/resource.rb:119
+msgid "Recent updates in focus: "
+msgstr "Lastaj novaĵoj laŭ temo: "
+
+#: lib/samizdat/engine/resource.rb:177
+msgid "Account blocked by moderator: %s."
+msgstr "Konto estas blokita de moderigisto: %s."
+
+#: lib/samizdat/engine/resource.rb:186
+msgid "UNBLOCK"
+msgstr "MALBLOKI"
+
+#: lib/samizdat/engine/resource.rb:187
+msgid "BLOCK"
+msgstr "LOKI"
+
+#: lib/samizdat/engine/resource.rb:191
+msgid "Latest Messages"
+msgstr "Lastaj Mesaĝoj"
+
+#: lib/samizdat/engine/resource.rb:233
+msgid "Replies"
+msgstr "Komentoj"
+
+#: lib/samizdat/engine/resource.rb:256
+msgid "Object"
+msgstr "Objekto"
+
+#: lib/samizdat/engine/resource.rb:256
+msgid "Predicate"
+msgstr "Predikato"
+
+#: lib/samizdat/engine/resource.rb:256
+msgid "Subject"
+msgstr "Subjekto"
+
+#: lib/samizdat/engine/resource.rb:280
+msgid "<a href=\"%s\">%s</a> gave rating %4.2f to the <a href=\"%s\">Statement %s</a> on %s."
+msgstr "<a href=\"%s\">%s</a> pritaksis %4.2f <a href=\"%s\">aserton %s</a>, dato %s."
+
+#: lib/samizdat/engine/resource.rb:284
+msgid "Vote Proposition"
+msgstr "Pridiskutata aserto"
+
+#: lib/samizdat/engine/resource.rb:323
+msgid "Similar Items"
+msgstr "Similaj Elementoj"
+
+#: lib/samizdat/engine/resource.rb:324
+msgid "<p><b>Possessed by:</b></p>"
+msgstr "<p><b>Prilaborita fare de:</b></p>"
+
+#: lib/samizdat/engine/session.rb:179 lib/samizdat/engine/template.rb:362
+msgid "guest"
+msgstr "gasto"
+
+#: lib/samizdat/engine/session.rb:179
+msgid "member"
+msgstr "uzanto"
+
+#: lib/samizdat/engine/session.rb:179
+msgid "moderator"
+msgstr "moderigisto"
+
+#: lib/samizdat/engine/session.rb:220
+msgid "Login Failed"
+msgstr "Ensalutado malsukcesas"
+
+#: lib/samizdat/engine/session.rb:221
+msgid "Wrong login name or password. Try again."
+msgstr "Entajpita Pasvorto aŭ Nomo ne estas vera. Bonvolu reprovi."
+
+#: lib/samizdat/engine/session.rb:261
+msgid "Input size exceeds content size limit"
+msgstr "Amplekco de entajpitaĵo estas pli granda ol difinita limo"
+
+#: lib/samizdat/engine/session.rb:296
+msgid "Access Denied"
+msgstr "Atingo estas malpermesita"
+
+#: lib/samizdat/engine/session.rb:298
+msgid "Account Is Blocked"
+msgstr "Konto estas Blokita"
+
+#: lib/samizdat/engine/session.rb:299
+msgid "Your account is blocked until the email address you have specified is confirmed. Confirmation message with instructions was sent to that address."
+msgstr "Via konto estos blokia ĝis tiam, kiam vi verigos vian retpoŝtan adreson. Ni sendis mesaĝon kun instrukcio al tiu adreso."
+
+#: lib/samizdat/engine/session.rb:301
+msgid "User Error"
+msgstr "Uzanta Eraro"
+
+#: lib/samizdat/engine/session.rb:305
+msgid "looks like it was"
+msgstr "ŝajnas, ke tiu estis"
+
+#: lib/samizdat/engine/session.rb:306
+msgid "Resource Not Found"
+msgstr "Risurco ne estas trovita"
+
+#: lib/samizdat/engine/session.rb:307
+msgid "The resource you requested was not found on this site. Please report this error back to the site you came from"
+msgstr "Mendiita risurco ne troviĝis en tiu ĉi TTT-ejo. Informu referencintan TTT-ejon pri tiu ĉi eraro"
+
+#: lib/samizdat/engine/session.rb:309
+msgid "Runtime Error"
+msgstr "Eraro aperis dum laboro"
+
+#: lib/samizdat/engine/session.rb:310
+msgid "Runtime error has occured."
+msgstr "Aperis rultempa eraro."
+
+#: lib/samizdat/engine/session.rb:312
+msgid "Please report this error to the site administrator."
+msgstr "Bonvolu informi administranton pri tiu ĉi eraro."
+
+#: lib/samizdat/engine/template.rb:82
+msgid "Publish"
+msgstr "Publikigu"
+
+#: lib/samizdat/engine/template.rb:83
+msgid "Share"
+msgstr "Interŝanĝo"
+
+#: lib/samizdat/engine/template.rb:108
+msgid "Account settings, interface language, theme"
+msgstr "Agordoj de konto, lingvo de interfaco, ekstera aspekto"
+
+#: lib/samizdat/engine/template.rb:108
+msgid "Settings"
+msgstr "Agordoj"
+
+#: lib/samizdat/engine/template.rb:111
+msgid "Log out"
+msgstr "Elsalutu"
+
+#: lib/samizdat/engine/template.rb:156
+msgid "next page"
+msgstr "sekva paĝo"
+
+#: lib/samizdat/engine/template.rb:256
+msgid "Click to vote on how this resource is related to this focus"
+msgstr "Premu por pritaski kunligon de ĉi tiu risurco kut ĉi tiu temo"
+
+#: lib/samizdat/engine/template.rb:259
+msgid "vote"
+msgstr "voĉdonu"
+
+#: lib/samizdat/engine/template.rb:269
+msgid "Related Focuses"
+msgstr "Kunligo kun Fokusoj "
+
+#: lib/samizdat/engine/template.rb:277
+msgid "Add another focus"
+msgstr "Aldonu alian fokuson"
+
+#: lib/samizdat/engine/template.rb:277
+msgid "Click to relate this resource to another focus"
+msgstr "Klaku por alligi tiun ĉi risurcon al alia fokuso"
+
+#: lib/samizdat/engine/template.rb:286
+msgid "related to"
+msgstr "kunligita kun"
+
+#: lib/samizdat/engine/template.rb:301
+msgid "SELECT FOCUS"
+msgstr "SELEKTU FOKUSON"
+
+#: lib/samizdat/engine/template.rb:304
+msgid "Select focus that this resource will be related to"
+msgstr "Selektu fokuson al kiu vi volas alligi ĉi tiun risurcon"
+
+#: lib/samizdat/engine/template.rb:308
+msgid "Enter focus id if it's not in the list"
+msgstr "Entajpu identigilo de fokuso se ĝi ne estas en listo"
+
+#: lib/samizdat/engine/template.rb:310
+msgid "Give a rating of how strongly this resource is related to selected focus"
+msgstr ""
+
+#: lib/samizdat/engine/template.rb:312
+msgid "-2 (No)"
+msgstr "-2 (Ne)"
+
+#: lib/samizdat/engine/template.rb:313
+msgid "-1 (Not Likely)"
+msgstr "-1 (Eble ne)"
+
+#: lib/samizdat/engine/template.rb:314
+msgid "0 (Uncertain)"
+msgstr "0 (Svage)"
+
+#: lib/samizdat/engine/template.rb:315
+msgid "1 (Likely)"
+msgstr "1 (Eble jes)"
+
+#: lib/samizdat/engine/template.rb:316
+msgid "2 (Yes)"
+msgstr "2 (Jes)"
+
+#: lib/samizdat/engine/template.rb:338
+msgid "Click to view the resource"
+msgstr "Premu por rigardi risurcon"
+
+#: lib/samizdat/engine/template.rb:344
+msgid "See the full message"
+msgstr "Rigardu tutan mesaĝon"
+
+#: lib/samizdat/engine/template.rb:366
+msgid "parent message"
+msgstr "gepatra mesaĝo"
+
+#: lib/samizdat/engine/template.rb:367
+msgid "current version"
+msgstr "kuranta versio"
+
+#: lib/samizdat/engine/template.rb:369
+msgid "history"
+msgstr "historio"
+
+#: lib/samizdat/engine/template.rb:372
+msgid "replies"
+msgstr "komentoj"
+
+#: lib/samizdat/engine/template.rb:374
+msgid "translation"
+msgstr "traduko"
+
+#: lib/samizdat/engine/template.rb:382
+msgid "hidden"
+msgstr "kaŝita"
+
+#: lib/samizdat/engine/template.rb:383
+msgid "by&nbsp;%s on&nbsp;%s"
+msgstr "aŭtoro&nbsp;%s, dato&nbsp;%s"
+
+#: lib/samizdat/engine/template.rb:464
+msgid "%s content"
+msgstr "%s enhavo"
+
+#: lib/samizdat/engine/template.rb:489
+msgid "Edit"
+msgstr "Redakti"
+
+#: lib/samizdat/engine/template.rb:491
+msgid "UNHIDE"
+msgstr "MALKAŜIGU"
+
+#: lib/samizdat/engine/template.rb:492
+msgid "HIDE"
+msgstr "KAŜIGU"
+
+#: lib/samizdat/engine/template.rb:494
+msgid "TAKE OVER"
+msgstr "PRENI"
+
+#: lib/samizdat/engine/template.rb:495 lib/samizdat/engine/template.rb:499
+msgid "REPLACE"
+msgstr "ANSTATAŬIGI"
+
+#: lib/samizdat/engine/template.rb:496
+msgid "REPARENT"
+msgstr "REALLIGI"
+
+#: lib/samizdat/engine/template.rb:537
+msgid "Description"
+msgstr "Priskribo"
+
+# language name
+#: lib/samizdat/engine/template.rb:557
+msgid "(name that this language calls itself)"
+msgstr "Esperanto"
+
+#: lib/samizdat/engine/template.rb:560
+msgid " (default language)"
+msgstr " (defaŭlta lingvo)"

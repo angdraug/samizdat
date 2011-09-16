@@ -1,0 +1,170 @@
+#!/usr/bin/env ruby
+#
+# Samizdat role management
+#
+#   Copyright (c) 2002-2009  Dmitry Borodaenko <angdraug@debian.org>
+#
+#   This program is free software.
+#   You can distribute/modify this program under the terms of
+#   the GNU General Public License version 3 or later.
+#
+# vim: et sw=2 sts=2 ts=8 tw=0
+
+require 'samizdat'
+require 'getoptlong'
+
+class SamizdatRole
+  def initialize
+    opts = GetoptLong.new(
+      [ '--help', '-h', GetoptLong::NO_ARGUMENT ],
+      [ '--site', '-s', GetoptLong::REQUIRED_ARGUMENT ],
+      [ '--role', GetoptLong::REQUIRED_ARGUMENT ],
+      [ '--list', '-l', GetoptLong::NO_ARGUMENT ],
+      [ '--grant', '-g', GetoptLong::REQUIRED_ARGUMENT ],
+      [ '--revoke', '-r', GetoptLong::REQUIRED_ARGUMENT ]
+    )
+
+    @role = 'moderator'
+    @list = nil
+    @grant = nil
+    @revoke = nil
+    @member = nil
+
+    opts.each do |opt, arg|
+      case opt
+      when '--help'
+        usage
+      when '--site'
+        ENV['SAMIZDAT_SITE'] = arg
+      when '--role'
+        @role = arg
+      when '--list'
+        @list = true
+      when '--grant'
+        @grant = true
+        @member = arg
+      when '--revoke'
+        @revoke = true
+        @member = arg
+      end
+    end
+
+    unless @list or @grant or @revoke
+      usage
+    end
+
+    unless ENV['SAMIZDAT_SITE']
+      raise "Samizdat site must be defined in either --site option or SAMIZDAT_SITE environment variable"
+    end
+
+    if @grant or @revoke
+      set_id
+      set_dbroot
+    end
+  end
+
+  def run
+    if @grant or @revoke
+      @dbroot.transaction do
+        grant if @grant
+        revoke if @revoke
+      end
+    end
+
+    list if @list
+  end
+
+  private
+
+  def usage
+    puts %q{
+Usage: 
+
+  samizdat-role --help
+      display this message
+
+  samizdat-role [ OPTIONS ] --list
+      list members who have ROLE priviledges
+
+  samizdat-role [ OPTIONS ] --grant MEMBER
+      grant ROLE priviledges to MEMBER
+
+  samizdat-role [ OPTIONS ] --revoke MEMBER
+      revoke ROLE priviledges from MEMBER
+
+Options:
+
+  --site SITE
+      name of the Samizdat site (overrides SAMIZDAT_SITE environment variable)
+
+  --role ROLE
+      name of a role, default is 'moderator'
+
+  --grant MEMBER, --revoke MEMBER
+      id or login of a member
+
+      NB: To grant or revoke priviledges using this command, you must use
+      database superuser priviledges (in PostgreSQL, this is 'postgres').
+
+Example:
+
+  su postgres -c 'samizdat-role --site s1 --grant joe --role moderator --list'
+
+  Grant moderator priviledges to the member 'joe' of site 's1' and list all
+  moderators.
+
+}
+
+    exit
+  end
+
+  def set_id
+    if @member.to_i > 0
+      @id = member.to_i
+    else
+      @id, = db.select_one(%q{SELECT id FROM Member WHERE login = ?}, @member)
+      @id or raise "Member #{@member} not found."
+    end
+  end
+
+  def set_dbroot
+    case db.driver_name
+    when 'Pg'
+      @dbroot = DBI.connect(config['db']['dsn'], 'postgres')
+    when 'SQLite3'
+      @dbroot = db
+    else
+      raise "Database driver #{db.driver_name} is not supported by this command."
+    end
+  end
+
+  def list
+    puts "Members of the site #{ENV['SAMIZDAT_SITE']} with #{@role} priviledges:"
+    puts db.select_all(
+      %q{SELECT DISTINCT m.login
+      FROM Role r
+      INNER JOIN Member m ON r.member = m.id
+      WHERE r.role = ?
+      ORDER BY m.login}, @role
+    ).join("\n")
+  end
+
+  def grant
+    @dbroot.select_all(
+      %q{SELECT * FROM Role WHERE member = ? AND role = ?}, @id, @role
+    ).empty? or raise "Member #{@member} already has #{@role} priviledges."
+
+    @dbroot.do(%q{INSERT INTO Role (member, role) VALUES (?, ?)}, @id, @role)
+  end
+
+  def revoke
+    @dbroot.do(%q{DELETE FROM Role WHERE member = ? AND role = ?}, @id, @role)
+  end
+end
+
+begin
+  SamizdatRole.new.run
+rescue RuntimeError => e
+  puts "ERROR: " + e.message
+  exit 1
+end

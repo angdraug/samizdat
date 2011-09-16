@@ -1,0 +1,174 @@
+Samizdat News
+=============
+
+2009-02-12: Samizdat 0.6.2 is released.
+
+    The most important part of this release is the long list of security
+    improvements in various parts of Samizdat engine. Password encryption is now
+    as strong as it gets, HTTPS now gets the emphasis it deserves, cross-site
+    scripting protection has been tightened, and in general the engine is even
+    more paranoid about user-submitted data than before.
+
+    End users will be most interested in the integration with Flowplayer free
+    Flash video player and the thumbnailing capabilities of the new image
+    plugin. Both features are enabled by the new plugin mechanism, which, in
+    addition to handling different content types, allows to add fancy member
+    profile parameters and alternative access control schemes.
+
+    As usual, see release notes [0] for details and upgrade instructions.
+
+    [0] http://samizdat.nongnu.org/release-notes/samizdat-0.6.2.html
+
+2008-03-04: Samizdat 0.6.1 is released.
+
+    Main goal of 0.6.x series is to address the shortcomings that were
+    identified in the IMC CMS Survey in November 2006 [0]. This version
+    takes care of the most important part: security. New security
+    features in Samizdat 0.6.1 include: CSRF protection, Antispam
+    module, per-resource moderation logs, moderation requests tracker.
+
+    [0] http://samizdat.nongnu.org/doc/CMSSurveyReportSamizdat.html
+
+    Samizdat's internals have changed beyond recognition since previous
+    release. The engine code is refactored into MVC architecture,
+    Samizdat Cache now uses a deadlock-proof two-level locking
+    algorithm, RDF Storage has undergone a massive overhaul that allowed
+    to add support for optional sub-patterns in Squish queries.
+    Apache/PostgreSQL combo is no longer the only way to install
+    Samizdat: Lighttpd web server and MySQL and SQLite3 databases are
+    now supported. The database schema is changed once again, see
+    release notes [1] on how to upgrade.
+
+    [1] http://samizdat.nongnu.org/release-notes/samizdat-0.6.1.html
+
+    There's also a lot of small features and usability improvements here
+    and there. The tired "next page" link is replaced with proper
+    pagination system, file sizes are displayed next to download links,
+    replies are sorted by id instead of last edit date, posting comment
+    to a multi-page thread redirects to thread's last page, translations
+    don't appear in the replies list and can't be replied to, error
+    reporting is more detailed and less confusing to users. User
+    interface was translated into several more languages, with varying
+    degrees of completeness.
+
+    And the "cherry on top" prize goes to RSS import module, with
+    special thanks to Boud who evangelized this feature for a long time
+    and created the first implementation.
+
+2006-11-29: Samizdat 0.6.0 is released.
+
+    The version increase attributes to the gradual changes in 0.5.x
+    series and incorporates almost two years worth of real-world
+    deployment. Now that Samizdat has finally become a mature open
+    publishing system, the road is cleared for more intrusive changes
+    and major new features, such as free exchange and calendaring.
+
+    In the way of major features, this version introduces ubiquitous
+    message translations and RSS syndication. Many old tools are now
+    more flexible and easier to use: focus management interface is
+    simplified, the front page now packs more information in better
+    layout and allows to include static headers and footers.
+
+    There are even more changes under the hood: multi-layer caching,
+    gzip and ETag support, support for audio and video uploads,
+    BitTorrent links, HTML and CSS filtering, flexible access control,
+    new moderation features, new UI translations and themes, code
+    reorganization, simplified installation, and more.
+
+2004-10-22: Samizdat 0.5.4 is released.
+
+    In this version, front page layout was changed to the more familiar
+    vertial split with the main column featuring focuses and right
+    column running recent updates in the open publishing wire. New
+    moderation facility allows to take over messages, displace their
+    contents completely, and block member accounts. More new features:
+    alternative CSS theme Indy is added and now is selectable from the
+    Settings page; Belarussian translation is added; database connection
+    is now configurable and allows to run multiple Samizdat instances on
+    a single server; oversize titles and descriptions are now truncated.
+
+2004-09-20: Samizdat 0.5.3 is released.
+
+    Starting with this version, Samizdat can send out email: currently,
+    it is used to recover lost passwords and to confirm that member
+    email address is real. Email addresses are now unique, making it
+    more difficult to cheat using throwaway accounts. Other changes
+    include new dc:description message property for attaching article
+    abstract, thumbnail image, or table of contents to a message, new
+    preferences infrastructure allowing to add more server-side member
+    settings in the future, and the inevitable database schema change.
+
+2004-07-05: Samizdat 0.5.2 is released.
+
+    This version adds Wiki functionality to Samizdat, allowing to edit
+    messages and track history of changes. Messages may use Textile
+    format for advanced hypertext markup, editing may be limited to the
+    original creator or open for all site members. Other highlights of
+    this release are FastCGI support, configurable site logo, multiple
+    usability improvements, and the usual bunch of bugfixes. Once again,
+    database schema is slightly changed.
+
+2004-03-18: Samizdat 0.5.1 "Paris Commune" release is out.
+
+    This release is dedicated to 133rd anniversary of the Paris Commune.
+    Main feature of this version is i18n support, with Russian
+    translation already in place. Other improvements include ability to
+    work as plain CGI without mod_ruby, support for Windows/Cygwin,
+    massive speed increase, and a long list of bugfixes. Database schema
+    is changed again, but this time it is trivial to migrate from the
+    previous version.
+
+2003-12-01: Samizdat 0.5.0 is released.
+
+    This version introduces basic focus management, completing the
+    minimal set of features required for an open publishing part of the
+    engine, and making Samizdat ready for public beta testing. Other
+    major changes in this release include Pingback support, many user
+    interface improvements, another rewrite of multimedia upload,
+    testing framework, and more.
+
+2003-10-17: samizdat-devel mailing list is created.
+
+    The mailing list is dedicated to development of the Samizdat
+    collaboration and open publishing engine. Secondary list topics
+    include Samizdat demployment, usage, and other related issues.
+
+2003-09-01: Samizdat 0.0.4 is released.
+
+    This version allows to upload multimedia messages, including images
+    and verbatim plain text, and introduces publishing of user-defined
+    queries in form of "application/x-squish" messages. When migrating
+    from older versions, Samizdat database should be dropped and
+    recreated from scratch because of incompatible database schema
+    change: content is now stored as a blob. In addition, file upload
+    feature relies on StringIO module that is available as part of the
+    Ruby 1.8 or can be installed separately from the Ruby Shim library
+    for Ruby 1.6.
+
+2003-08-08: Samizdat 0.0.3 is released.
+
+    In this version, query construction UI is added, allowing to compose
+    and modify search queries more conveniently and without having to
+    manually edit raw Squish. Other major changes include switch to
+    Unicode UTF-8 as default encoding, great improvement of browsers
+    support in CSS, more code refactoring. Many minor bugs and
+    inconsistencies are fixed, UI is enhanced in several places.
+
+2003-07-14: Samizdat 0.0.2 is released.
+
+    This version implements query validation and security limits, making
+    execution of user-defined search queries safer. Other changes
+    include schema improvements (better integration of Samizdat RDF
+    schema with Dublin Core, separate namespace for tags, switch from
+    RDF/XML to more readable N3 notation), enhanced search result
+    display (resource rendering is separated into a class), UI CSS
+    clean-up, documentation updates. Access to utility classes is
+    reorganized and simplified.
+
+2003-06-12: Samizdat 0.0.1 is released.
+
+    This is the first version that includes basic RDF search query
+    construction UI. Other functionality covered by this version
+    includes: registering site members, publishing and replying to
+    messages, voting for standard tags on resources.
+

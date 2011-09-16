@@ -1,0 +1,101 @@
+Samizdat ToDo Lists
+===================
+
+Short-term Goals
+----------------
+
+0.6.3
+- feature: basic calendar
+- feature: wysiwig HTML editor
+- performance: mark-and-sweep, static caching
+
+0.6.x-0.7.x
+- security: captcha
+- bug: catch and report db connect timeout error
+- feature: image manipulation (galleries)
+- feature: user notifications
+- feature: tag proximity (show tags related to messages in this tag)
+- feature: front page filters (belarus.indymedia.org/7285)
+- feature: pod/vodcasting
+- feature: mobile phones support
+- install: database clustering
+- install: restart web server in postinst
+
+
+Release Roadmap
+---------------
+
+0.0.1 - basic search interface
+0.0.2 - query validation and security limits
+0.0.3 - query construction UI
+0.0.4 - multimedia messages, query publishing
+0.5.0 - basic focus management, first beta release
+0.5.1 - i18n, plain CGI, performance
+0.5.2 - FastCGI, Textile, versioning
+0.5.3 - email interface, account management
+0.5.4 - frontpage, moderation
+0.6.0 - translations, syndication, caching, packaging
+0.6.1 - MVC, security, portability, optional RDF subqueries, RSS import
+0.6.2 - security, plugins, Flowplayer
+0.7.0 - free exchange, wiki
+0.8.0 - groupware (calendar, task tracker)
+0.8.1 - full RDQL, Memcached
+0.8.2 - alternate RDF backends: 3store
+0.9.0 - multi-part resources
+1.0.0 - distributed operation (personal, p2p)
+
+
+Development Directions
+----------------------
+
+- filter and search (important)
+- RDF schema integration with Dublin Core (done), FOAF and Annotea
+- testing framework (important, in progress)
+- email interface (in progress)
+- web of trust management -- depends on email interface
+- gettext l10n (done)
+- calendar/collaboration (help needed)
+- p2p (in progress, research help needed)
+- usability (in progress)
+
+
+RDF Storage Tasks
+-----------------
+
+- generalize RDF storage, implement SPARQL[0]
+- unit, functional, and performance test suite (in progress)
+- separate library for RDF storage (done)
+- investigate alternative backends: FramerD, 3store, Redland
+  -- depends on separate library for RDF storage
+  -- depends on test suite
+- security: Squish literal condition safety (done), limited number of
+  query clauses (done), dry-run of user-defined query, approvable
+  resource usage
+- query result set representation
+- don't-bind variables in query pattern (in progress)
+- parametrized queries (done)
+- support blob literals
+  -- depends on parametrized queries
+- vocabulary entailment: RDF, RDFS, OWL
+- RDF aggregates storage internalization (Seq, Bag, Alt)
+- storage workflow control (triggers)
+- transparent (structured) RDF query storage
+  -- depends on RDF aggregates storage
+  -- depends on storage workflow control
+- subqueries (query premise)
+  -- depends on transparent query storage
+- chain queries
+  -- depends on native RDF storage
+
+[0] http://www.w3.org/TR/rdf-sparql-query/
+
+
+RDF Storage Performance
+-----------------------
+
+- URIref hashes
+- may-bind and don't-bind parameters
+- parametrized queries (done)
+- query introspection
+- query result set representation
+

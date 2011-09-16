@@ -1,0 +1,267 @@
+/*
+* based on default.css, savannah.css
+*/ 
+
+/* definitions common to every stylesheet 
+(due to bug in NN4.x @import should use full path to stylesheet) */
+@import url("common.css");
+
+/* global settings */
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font: normal 1pt/1pt Arial,Helvetica,sans-serif;
+	color: #000000; 
+	background: #fff;  }
+p { margin: 0.5em 0; }
+form { margin: 0; padding: 0; }
+pre { margin: 0.25em 0; }
+
+
+/* site head */
+#head {
+	width: 100%; height: 2.7em;
+	padding: 0.2em 0 0 0;
+	color: #ffffff;
+	font: normal 9pt/11pt Arial,Helvetica,sans-serif;
+	background: #ffffff;
+	border-bottom: thin solid #ffffff; }
+#head-left {
+	position: absolute;
+	z-index: 100;
+	padding: 0.2em 0 0 0;
+	top:0; left: 5%; }
+#head-right {
+	position: absolute;
+	z-index: 200;
+	padding: 0.2em 0 0 0;
+	top:0; right: 7%; }
+#subhead {
+	position: relative;
+	z-index: 50;
+	top: 0; left: 0;
+	width: 100%; height: 2.6em;
+	font: normal 9pt/11pt Arial,Helvetica,sans-serif;
+	color: #ffffff;
+	background: #ffffff;
+	border-bottom: 1pt solid #000; }
+#subhead-right {
+	position: absolute;
+	right: 13pt; }
+#languages {
+	margin-right: 2%;
+	text-align: right;
+	font: normal 9pt/11pt Arial,Helvetica,sans-serif; }
+
+/* main section */
+#main {
+	position: relative;
+	z-index: 150;
+	color: #666666;
+	font: normal 9pt/11pt Arial;
+	margin: 1em 0.1em; }
+
+/* site foot */
+#foot {
+	position: relative;
+	left: 5pt;
+	margin: 0 0 2% 0;
+	font: normal 9pt/11pt Arial,Helvetica,sans-serif; }
+
+/* front page header and footer */
+#front-header, #front-footer {
+	position: relative;
+	top: 0; right: 0;
+	margin: 2pt;
+	padding: 0 0.5em;
+	background: #ffffff;
+	font: normal 9pt/11pt Arial,Helvetica,sans-serif;
+	border: 1px dotted #ffffff }
+
+/* content box */
+div.box {
+	margin: 4pt 0 4pt 4pt;
+	font: normal 9pt/11pt Arial,Helvetica,sans-serif;
+	border-right: thin dotted #000000;
+	border-bottom: thin dotted #000000; }
+div.box-title {
+	padding: 1pt;
+	padding-left: 10pt;
+	margin-right: -1pt;
+	text-align: left;
+	font: normal 9pt/11pt Arial,Helvetica,sans-serif;
+	color: #666666;
+	font-weight: bold;
+	background: #ffffff;
+	border: thin outset #ffffff; }
+div.box-content {
+	text-align: left;
+	padding: 4pt;
+	margin-left: 7pt; }
+div.box-content div.box-title {
+	font: normal 9pt/11pt Arial,Helvetica,sans-serif;
+	color: #000000;
+	background: #ffffff;
+	border: thin solid #ffffff; }
+div.box-content div.box-content div.box {
+	border: none; }
+div.box-content div.box-content div.box-title {
+	background: #ffffff;
+	border: none;
+	border-bottom: 1pt solid #000000; }
+
+/* form elements */
+div.label {
+	margin-bottom: 3pt; }
+input, textarea {
+	border: 1px solid #000000;
+	margin-top: 1pt;
+	margin-bottom: 4pt;
+	padding: 1pt;
+	background: #fff; }
+input + input { margin-left: 15pt; }
+select {
+	border: 1pt solid #ffffff;
+	margin-top: 1pt;
+	margin-bottom: 4pt;
+	margin-right: 15pt;
+	padding: 0pt;
+	background: #ffffff; }
+input.submit {
+	background: #ffffff;
+	margin-top: 4pt;
+	padding: 0 }
+p.moderation {
+	border-bottom: 1px solid #666666;
+	font-weight: bold; }
+
+/* action links */
+a.action, a.action:visited { color: #336699; }
+a.moderator_action, a.moderator_action:visited, a.moderator_action:hover {
+	border: 1px solid #000000;
+	padding-left: 2px;
+	padding-right: 2px;
+	font: normal 9pt/11pt Arial,Helvetica,sans-serif;
+	font-weight: bold;
+	text-decoration: none;
+	color: #ff0000;
+	background: #ffffff; }
+
+/* resource list */
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0; }
+ul li {
+	margin-top: 2pt;
+	border-right: 1pt dotted #ffffff;
+	border-bottom: 1pt dotted #ffffff; }
+ul li.even { background: #ffffff; }
+
+/* table */
+table { width: 97%; }
+div>table { width: 100%; }  /* MSIE hack */
+th { background: #ffffff; border: thin outset #ffffff; }
+td {
+	border-left: thin dotted #ffffff;
+	border-bottom: thin dotted #ffffff;
+	border-right: thin dotted #ffffff; }
+td, th {
+	padding: 1pt;
+	vertical-align: top; }
+tr { background: #ffffff; font: normal 9pt/11pt Arial,Helvetica,sans-serif;}
+tr.even { background: #ffffff; font: normal 9pt/11pt Arial,Helvetica,sans-serif;}
+td.tags { width: 15%; height: 100%; text-align: left; background: #ffffff; }
+td.links-head { height: 100%; font-weight: bold; background: #ffffff; border: thin outset #ffffff; }
+td.links { text-align: left; font: normal 9pt/11pt Arial,Helvetica,sans-serif; background: #ffffff; }
+td.features { width: 62%; text-align: left; }
+
+/* diff table */
+table.diff th { font: normal 9pt/11pt Arial,Helvetica,sans-serif; }
+table.diff td {
+	vertical-align: top;
+	text-align: left; }
+table.diff td.delete { background: #ffffff; }
+table.diff td.add { background: #ffffff; }
+
+/* list foot */
+div.foot { text-align: right; }
+
+/* navigation link */
+div.nav { font: normal 9pt/11pt Arial,Helvetica,sans-serif; }
+
+/* resource description */
+div.resource {
+	text-align: left;
+	padding-bottom: 3pt; }
+div.title { font-weight: bold; }
+div.info { font: normal 9pt/11pt Arial,Helvetica,sans-serif; }
+
+/* message */
+div.message { margin-top: 1pt; text-align: left; }
+ul div.message {
+	margin: 0 -1pt -1pt 0;
+	background: #ffffff;
+	border-right: thin dotted #ffffff;
+	border-bottom: thin dotted #ffffff;
+	border-left: thin dotted #ffffff; }
+div.message div.title {
+	background: #ffffff; 
+	border-bottom: thin solid #ffffff; }
+div.message div.info {
+	padding-bottom: 2pt;
+	background:  #ffffff; }
+div.message div.content {
+	margin-top: 2pt;
+	padding: 4pt 4pt 4pt 0; }
+div.replies div.replies {
+	padding-left: 1.5em; }
+
+/* markup in a message */
+div.content ul {
+	list-style-type: square;
+	margin: 0.25em 0;
+	padding-left: 2em; }
+div.content li { border: none; }
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	font: normal 12pt/14pt Arial,Helvetica,sans-serif;
+	margin-bottom: 0.25em;
+	border-bottom: thin solid #ffffff; }
+
+/* <h2> Page title */
+h2 { text-indent: 0.3em; }
+/* <h3> Section title */
+h3 {
+	text-indent: 1em;
+	background: #ffffff; }
+/* <h4> Small section title */
+/* <h5> Input form label */
+h5 {
+	font: normal 9pt/10pt Arial,Helvetica,sans-serif;
+	background: #ffffff; 
+	border: thin solid #336699; }
+
+/* feeds */
+div.feed {
+	margin-top: 0.5em;
+	padding-top: 0.25em; }
+div.feed-name {
+	font-weight: bold;
+	margin-bottom: 0.5em; }
+div.feed li {
+	margin-bottom: 0.5em;
+	border: 0; }
+
+/* notice */
+div.notice {
+	margin: 4px 0 4px 4px;
+	padding: 0 10px 0 10px;
+	border: thin dotted #000000; }
+
+/* anchors */
+a { text-decoration: none; color: #336699; }
+a:visited { color: #336699; }
+a:hover { text-decoration: underline; color: #000000; }
+

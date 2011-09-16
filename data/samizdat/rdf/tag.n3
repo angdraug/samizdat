@@ -1,0 +1,76 @@
+# Samizdat RDF Tag Subschema, N3 notation
+# 
+#   Copyright (c) 2002-2009 Dmitry Borodaenko <angdraug@debian.org>
+#
+#   This program is free software.
+#   You can distribute/modify this program under the terms of
+#   the GNU General Public License version 3 or later.
+#
+
+@prefix : <#> .
+@prefix s: <http://www.nongnu.org/samizdat/rdf/schema#> .
+
+# RDF Namespaces
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Standard Tags
+:Quality
+	a s:Tag ;
+	rdfs:comment "Overall quality of the resource." .
+
+:Priority
+	a s:Tag ;
+	rdfs:comment "Importance of the resource to site members." .
+
+:Relevance
+	a s:Tag ;
+	rdfs:comment "Shows how much content of the resource is related to the enclosing aggregate resource; low Relevance highlights off-topic resources." .
+
+# Optional Tags
+:Fairness
+	a s:Tag ;
+	rdfs:comment "Whether resource fairly represents all sides of the story." .
+
+:Representation
+	a s:Tag ;
+	rdfs:comment "Readability, quality of prose, cinematics, etc." .
+
+:Factuality
+	a s:Tag ;
+	rdfs:comment "Extent of sources usage vs. speculation." .
+
+:Novelty
+	a s:Tag ;
+	rdfs:comment "Whether resource adds anything new to the body of information (low Novelty highlights redundant resources)." .
+
+:FrontPage
+	a s:Tag ;
+	rdfs:comment "Whether resource is worthy of adding to the site's default front page." .
+
+# Versioning-specific Tags
+:Correction
+	a s:Tag ;
+	rdfs:comment "Minor correction that doesn't change structure or meaning." .
+
+:Rewrite
+	a s:Tag ;
+	rdfs:comment "Full rewrite of the message." .
+
+:Summary
+	a s:Tag ;
+	rdfs:comment "Short digest or summary of this and possibly other messages." .
+
+:Translation
+	a s:Tag ;
+	rdfs:comment "Translation to a different language." .
+
+:Mirror
+	a s:Tag ;
+	rdfs:comment "Alternative location of the message." .
+
+# Member Tags
+:Friendship
+	a s:Tag ;
+	rdfs:comment "Overall friendship towards a member." .
+

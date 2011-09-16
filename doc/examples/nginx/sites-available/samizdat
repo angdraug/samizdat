@@ -1,0 +1,9 @@
+server {
+    listen 80;
+
+    server_name samizdat;
+    root /var/www/samizdat;
+    access_log /var/log/nginx/samizdat.access.log noip;
+
+    include /etc/nginx/include/samizdat-site.conf;
+}

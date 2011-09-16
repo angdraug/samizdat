@@ -1,0 +1,23 @@
+.TH "UPDATE-INDYMEDIA-CITIES" "1" 
+.SH "NAME" 
+update-indymedia-cities - create cities.inc from http://www.indymedia.org/cities.xml
+.SH "SYNOPSIS" 
+.PP 
+\fBupdate-indymedia-cities\fP > cities.inc 
+.SH "DESCRIPTION" 
+.PP 
+\fBupdate-indymedia-cities\fP 
+Retrieves cities.xml file holding the list of all Independent Media
+Centers and produces an HTML rendering of this list suitable for
+inclusion in a static footer of Samizdat front page.
+
+.SH "OPTIONS" 
+.PP
+Accepts no options. The URL to fetch cities.xml is hardcoded into the
+script, the resulting HTML is printed to standard output.
+
+.SH "AUTHOR" 
+.PP 
+This manual page was written by Dmitry Borodaenko <angdraug@debian.org>.
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU GPL version 3 or later.

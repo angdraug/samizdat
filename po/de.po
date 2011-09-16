@@ -1,0 +1,852 @@
+# translation of de.po to Deutsch
+# Copyright (C) 2007
+# This file is distributed under the same license as the samizdat package.
+#
+# Matthias Kaschub <mjk@aellaweil.de>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat 0.6.0\n"
+"POT-Creation-Date: 2007-01-30 17:50+0100\n"
+"PO-Revision-Date: 2007-01-31 14:10+0100\n"
+"Last-Translator: Matthias Kaschub <mjk@aellaweil.de>\n"
+"Language-Team: Deutsch\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: cgi-bin/foci.rb:20 cgi-bin/index.rb:147
+msgid "Top Focuses"
+msgstr "Haupt-Fokusse"
+
+#: cgi-bin/foci.rb:21 cgi-bin/history.rb:24 cgi-bin/index.rb:158 cgi-bin/index.rb:168
+#: cgi-bin/moderation.rb:20 cgi-bin/query.rb:149 cgi-bin/resource.rb:124
+#: lib/samizdat/engine/resource.rb:194 lib/samizdat/engine/resource.rb:235
+msgid ", page %s"
+msgstr ", Seite %s"
+
+#: cgi-bin/history.rb:23
+msgid "History of Changes"
+msgstr "Änderungsgeschichte"
+
+#: cgi-bin/history.rb:40
+msgid "compare with previous version"
+msgstr "vergleiche mit vorheriger Version"
+
+#: cgi-bin/history.rb:49
+msgid "Versions"
+msgstr "Versionen"
+
+#: cgi-bin/history.rb:49 cgi-bin/history.rb:62
+msgid "Changes"
+msgstr "Änderungen"
+
+#: cgi-bin/history.rb:54 cgi-bin/history.rb:60 lib/samizdat/engine/message.rb:620
+msgid "Bad input"
+msgstr "Falsche Eingabe"
+
+#: cgi-bin/index.rb:90 cgi-bin/index.rb:134 cgi-bin/index.rb:157
+msgid "Features"
+msgstr "Schlagzeilen"
+
+#: cgi-bin/index.rb:90 cgi-bin/index.rb:134 cgi-bin/index.rb:167
+msgid "Recent Updates"
+msgstr "jüngste Änderungen"
+
+#: cgi-bin/index.rb:186
+msgid "Links"
+msgstr "Links"
+
+#: cgi-bin/index.rb:188
+msgid "All Replies"
+msgstr "Alle Antworten"
+
+#: cgi-bin/index.rb:189
+msgid "All Focuses (verbose)"
+msgstr "Alle Fokusse (viel)"
+
+#: cgi-bin/index.rb:190 cgi-bin/moderation.rb:20
+msgid "Moderation Log"
+msgstr "Moderator-Log"
+
+#: cgi-bin/item.rb:17
+msgid "Not Implemented"
+msgstr "Nicht implementiert"
+
+#: cgi-bin/item.rb:18
+msgid "<p>Material item exchange is not implemented yet.</p>"
+msgstr "<p>Das Austauschen von Inhalten ist noch nicht implementiert.</p>"
+
+#: cgi-bin/login.rb:22 lib/samizdat/engine/template.rb:113
+msgid "Log in"
+msgstr "Einloggen"
+
+#: cgi-bin/login.rb:23
+msgid "Use existing account:"
+msgstr "Bestehender Benutzer:"
+
+#: cgi-bin/login.rb:24 cgi-bin/member.rb:103 cgi-bin/member.rb:273
+#: lib/samizdat/engine/resource.rb:157
+msgid "Login"
+msgstr "Login-Name"
+
+#: cgi-bin/login.rb:25 cgi-bin/member.rb:279
+msgid "Password"
+msgstr "Passwort"
+
+#: cgi-bin/login.rb:27 cgi-bin/member.rb:314
+msgid "Create New Account"
+msgstr "Neuen Benutzer anlegen"
+
+#: cgi-bin/login.rb:29 cgi-bin/member.rb:99 cgi-bin/member.rb:102
+msgid "Recover Lost Password"
+msgstr "Passwort vergessen"
+
+#: cgi-bin/member.rb:24 cgi-bin/member.rb:257
+msgid "Malformed email address: '%s'"
+msgstr "ungültige E-Mail-Adresse: %s"
+
+#: cgi-bin/member.rb:37
+msgid "Failed to send email"
+msgstr "Konnte E-Mail nicht verschicken"
+
+#: cgi-bin/member.rb:68
+msgid "Confirmation hash not found"
+msgstr "Bestätigungscode nicht gefunden"
+
+#: cgi-bin/member.rb:70
+msgid "This confirmation hash is intended for another user"
+msgstr "Dieser Bestätigungscode gehört einem anderen Benutzer"
+
+#: cgi-bin/member.rb:79
+msgid "Confirmation Accepted"
+msgstr "Bestätigung erfolgreich"
+
+#: cgi-bin/member.rb:80
+msgid "Changes confirmed."
+msgstr "Änderungen bestätigt"
+
+#: cgi-bin/member.rb:91
+msgid "Wrong login"
+msgstr "Falscher Login-Name"
+
+#: cgi-bin/member.rb:100
+msgid "New password has been sent to you."
+msgstr "Neues Passwort wurde verschickt."
+
+#: cgi-bin/member.rb:115
+msgid "Full name you have specified is used by someone else"
+msgstr "Dieser Name ist bereits vergeben"
+
+#: cgi-bin/member.rb:120
+msgid "Email address you have specified is used by someone else"
+msgstr "Die E-Mail-Adresse ist bereits vergeben"
+
+#: cgi-bin/member.rb:148
+msgid "Confirmation Requested"
+msgstr "Bestätigung angefordert"
+
+#: cgi-bin/member.rb:149
+msgid "Confirmation request is sent to your new email address."
+msgstr "Bestätigungscode wurde an die neue E-Mail-Adresse gesendet"
+
+#: cgi-bin/member.rb:155
+msgid "Changes Accepted"
+msgstr "Änderungen akzeptiert"
+
+#: cgi-bin/member.rb:156 lib/samizdat/engine/session.rb:312
+msgid "Press 'Back' button of your browser to return."
+msgstr "um zurück zu gehen, den \"Zurück\"-Knopf des Browsers benutzen"
+
+#: cgi-bin/member.rb:167
+msgid "You didn't fill all mandatory fields"
+msgstr "Bitte alle Pflichtfelder ausfüllen"
+
+#: cgi-bin/member.rb:169
+msgid "Login name you specified is reserved"
+msgstr "Dieser Login-Name ist reserviert"
+
+#: cgi-bin/member.rb:171
+msgid "Use only latin letters and numbers in login name"
+msgstr "Im Benutzernamen sind nur die Buchstaben A bis Z sowie Ziffern möglich"
+
+#: cgi-bin/member.rb:174
+msgid "Login name you specified is already used by someone else"
+msgstr "Dieser Login-Name ist bereits vergeben"
+
+#: cgi-bin/member.rb:190
+msgid "Login error: failed to open session for new account"
+msgstr "Login fehlgeschlagen: konnte keine neue Sitzung anlegen"
+
+#: cgi-bin/member.rb:221
+msgid "Moderator accounts can not be blocked"
+msgstr "Moderatoren können nicht gesperrt werden"
+
+#: cgi-bin/member.rb:253
+msgid "Passwords do not match"
+msgstr "Passwörter sind ungleich"
+
+#: cgi-bin/member.rb:277
+msgid "Full name"
+msgstr "Angezeigter Name"
+
+#: cgi-bin/member.rb:278
+msgid "Email"
+msgstr "E-Mail"
+
+#: cgi-bin/member.rb:280
+msgid "Reenter password to confirm"
+msgstr "Passwort wiederholen"
+
+#: cgi-bin/member.rb:287
+msgid "Theme"
+msgstr "Darstellung"
+
+#: cgi-bin/member.rb:298
+msgid "Show static content on the front page"
+msgstr "Feststehende Inhalte der Hauptseite anzeigen"
+
+#: cgi-bin/member.rb:299
+msgid "Hide static content from the front page"
+msgstr "Keine feststehenden Inhalte der Hauptseite anzeigen"
+
+#: cgi-bin/member.rb:303
+msgid "Return to basic interface"
+msgstr "zurück zur einfachen Oberfläche"
+
+#: cgi-bin/member.rb:304
+msgid "Enable advanced interface"
+msgstr "erweiterte Oberfläche benutzen"
+
+#: cgi-bin/member.rb:306
+msgid "Change Appearance"
+msgstr "Darstellung ändern"
+
+#: cgi-bin/member.rb:309
+msgid "Moderation Facility"
+msgstr "Moderation"
+
+#: cgi-bin/member.rb:310
+msgid "Disable"
+msgstr "Deaktivieren"
+
+#: cgi-bin/member.rb:311
+msgid "Enable"
+msgstr "Aktivieren"
+
+#: cgi-bin/member.rb:314
+msgid "Change Account Settings"
+msgstr "Benutzerdaten ändern"
+
+#: cgi-bin/member.rb:315
+msgid "Member Settings"
+msgstr "Eigene Einstellungen"
+
+#: cgi-bin/message.rb:17
+msgid "Your current access level (%s) does not allow to publish messages"
+msgstr "Diesem Benutzerstatus (%s) ist das Veröffentlichen von Nachrichten nicht erlaubt"
+
+#: cgi-bin/moderation.rb:34
+msgid "Date"
+msgstr "Datum"
+
+#: cgi-bin/moderation.rb:34
+msgid "Moderator"
+msgstr "Moderator"
+
+#: cgi-bin/moderation.rb:34
+msgid "Action"
+msgstr "Vorgang"
+
+#: cgi-bin/moderation.rb:34
+msgid "Resource"
+msgstr "Ressource"
+
+#: cgi-bin/query.rb:22
+msgid "Error in your query: "
+msgstr "Fehler in der Abfrage:"
+
+#: cgi-bin/query.rb:26
+msgid "Must-bind list should contain only one blank node, filters based on queries with a complex answer pattern are not implemented"
+msgstr "Bindende Liste darf nur einen leeren Knoten haben, Filter mit komplizierteren Antwort-Mustern sind nicht implementiert."
+
+#: cgi-bin/query.rb:29
+msgid "User-defined query pattern should not be longer than %s clauses"
+msgstr "Selbstdefinierte Abfragen sollten maximal %s Bedingungen haben."
+
+#: cgi-bin/query.rb:53 cgi-bin/query.rb:148
+msgid "Search Result"
+msgstr "Suchergebnis"
+
+#: cgi-bin/query.rb:160
+msgid "Publish This Query"
+msgstr "Diese Abfrage veröffentlichen"
+
+#: cgi-bin/query.rb:165
+msgid "No matching resources found."
+msgstr "Keine passende Ressource gefunden."
+
+#: cgi-bin/query.rb:174
+msgid "Select Target"
+msgstr "Ziel auswählen"
+
+#: cgi-bin/query.rb:178
+msgid "Query Pattern (predicate subject object)"
+msgstr "Abfragemuster (Prädikat Subjekt Objekt)"
+
+#: cgi-bin/query.rb:189
+msgid "BLANK CLAUSE "
+msgstr "LEERE BEDINGUNG"
+
+#: cgi-bin/query.rb:198
+msgid "Literal Condition"
+msgstr "buchstäbliche Bedingung"
+
+#: cgi-bin/query.rb:201
+msgid "Order By"
+msgstr "Sortieren nach"
+
+#: cgi-bin/query.rb:205
+msgid "Ascending"
+msgstr "Aufsteigend"
+
+#: cgi-bin/query.rb:205
+msgid "Descending"
+msgstr "Absteigend"
+
+#: cgi-bin/query.rb:212
+msgid "Search By Substring"
+msgstr "Nach Teilwort suchen"
+
+#: cgi-bin/query.rb:214 lib/samizdat/engine/template.rb:84
+msgid "Search"
+msgstr "Suche"
+
+#: cgi-bin/query.rb:217
+msgid "Construct Query"
+msgstr "Abfrage zusammenstellen"
+
+#: cgi-bin/query.rb:218
+msgid "Update"
+msgstr "Aktualisieren"
+
+#: cgi-bin/query.rb:219
+msgid "Edit Raw Query"
+msgstr "Abfrage direkt bearbeiten"
+
+#: cgi-bin/query.rb:222 lib/samizdat/engine/message.rb:152
+msgid "Run"
+msgstr "Ausführen"
+
+#: cgi-bin/query.rb:228
+msgid "Edit Query"
+msgstr "Abfrage bearbeiten"
+
+#: cgi-bin/resource.rb:68
+msgid "Incorrect resource id '%s'"
+msgstr "Falsche Ressourcen-Nummer \"%s\""
+
+#: cgi-bin/resource.rb:78
+msgid "Uriref"
+msgstr "URIref"
+
+#: cgi-bin/resource.rb:78
+msgid "Literal"
+msgstr "Literal"
+
+#: cgi-bin/resource.rb:78
+msgid "Member"
+msgstr "Mitglied"
+
+#: cgi-bin/resource.rb:78 lib/samizdat/engine/resource.rb:251
+msgid "Statement"
+msgstr "Ausdruck"
+
+#: cgi-bin/resource.rb:78 cgi-bin/resource.rb:106 cgi-bin/resource.rb:107
+#: lib/samizdat/engine/resource.rb:273
+msgid "Vote"
+msgstr "Stimme"
+
+#: cgi-bin/resource.rb:79
+msgid "Item"
+msgstr "Item"
+
+#: cgi-bin/resource.rb:86
+msgid "Your current access level (%s) does not allow to vote"
+msgstr "Diesem Benutzerstatus (%s) ist das Abstimmen nicht erlaubt"
+
+#: cgi-bin/resource.rb:104 lib/samizdat/engine/template.rb:225
+msgid "Submit"
+msgstr "Senden"
+
+#: lib/samizdat/engine/focus.rb:39
+msgid "Translation"
+msgstr "Übersetzung"
+
+#: lib/samizdat/engine/focus.rb:60
+msgid "Focus"
+msgstr "Fokus"
+
+#: lib/samizdat/engine/focus.rb:95
+msgid "none"
+msgstr "nichts"
+
+#: lib/samizdat/engine/focus.rb:106
+msgid "You can't relate resource to itself"
+msgstr "Man kann Ressourcen nicht auf sich selbst verweisen lassen"
+
+#: lib/samizdat/engine/focus.rb:108
+msgid "Translations should be published as replies to the original message"
+msgstr "Übersetzungen sollten als Antwort auf die ursprüngliche Nachricht geschrieben werden."
+
+#: lib/samizdat/engine/message.rb:157
+msgid "%s content"
+msgstr "%s Inhalt"
+
+#: lib/samizdat/engine/message.rb:336
+msgid "Reference to previous version lost"
+msgstr "Verweis auf die Vorversion verloren gegangen"
+
+#: lib/samizdat/engine/message.rb:442
+msgid "Warning: content is longer than %s characters. In some situations, it will be truncated."
+msgstr "Achtung: dieser Inhalt ist länger als %s Zeichen, er wird daher in einigen Fällen abgeschnitten werden."
+
+#: lib/samizdat/engine/message.rb:443
+msgid "Message Preview"
+msgstr "Vorschau"
+
+#: lib/samizdat/engine/message.rb:446
+msgid "Press 'Back' button to change the message."
+msgstr "Um die Nachricht zu ändern, den \"Zurück\"-Knopf drücken."
+
+#: lib/samizdat/engine/message.rb:448 lib/samizdat/engine/message.rb:522
+#: lib/samizdat/engine/message.rb:530
+msgid "Confirm"
+msgstr "Bestätigen"
+
+#: lib/samizdat/engine/message.rb:477 lib/samizdat/engine/template.rb:435
+#: lib/samizdat/engine/template.rb:437
+msgid "Reply"
+msgstr "Antworten"
+
+#: lib/samizdat/engine/message.rb:479
+msgid "Edit Message"
+msgstr "Nachricht bearbeiten"
+
+#: lib/samizdat/engine/message.rb:481
+msgid "Hide Message"
+msgstr "Nachricht verstecken"
+
+#: lib/samizdat/engine/message.rb:483
+msgid "Unhide Message"
+msgstr "Nachricht wieder anzeigen"
+
+#: lib/samizdat/engine/message.rb:485
+msgid "Take Over Message"
+msgstr "Nachricht übernehmen"
+
+#: lib/samizdat/engine/message.rb:487
+msgid "Replace Message"
+msgstr "Nachricht ersetzen"
+
+#: lib/samizdat/engine/message.rb:489
+msgid "Reparent Message"
+msgstr "Nachricht verschieben"
+
+#: lib/samizdat/engine/message.rb:491
+msgid "New Message"
+msgstr "Neue Nachricht"
+
+#: lib/samizdat/engine/message.rb:496
+msgid "The message will be hidden from public view."
+msgstr "Diese Nachricht nicht mehr öffentlich sichtbar machen."
+
+#: lib/samizdat/engine/message.rb:498
+msgid "The message will not be hidden from public view."
+msgstr "Diese Nachricht öffentlich sichtbar machen."
+
+#: lib/samizdat/engine/message.rb:500
+msgid "The message will be attributed to you after takeover."
+msgstr "Diese Nachricht wird nach der Übernahme als Deine gelten."
+
+#: lib/samizdat/engine/message.rb:502
+msgid "MESSAGE WILL BE COMPLETELY REPLACED, NO RECOVERY WILL BE POSSIBLE. PLEASE PROVIDE DETAILED JUSTIFICATION FOR THIS ACTION."
+msgstr "DIESE NACHRICHT WIRD KOMPLETT ERSETZT, KEINE WIEDERHERSTELLUNG MÖGLICH. BITTE DIESEN SCHRITT AUSFÜHRLICH BEGRÜNDEN"
+
+#: lib/samizdat/engine/message.rb:504
+msgid "This message will be moved to new parent"
+msgstr "Dieser Nachricht wird "
+
+#: lib/samizdat/engine/message.rb:510
+msgid "Parent Message"
+msgstr "Übergeordnete Nachricht"
+
+#: lib/samizdat/engine/message.rb:518 lib/samizdat/engine/message.rb:537
+msgid "Content"
+msgstr "Inhalt"
+
+#: lib/samizdat/engine/message.rb:528
+msgid "New Parent"
+msgstr "Neue übergeordnete Nachricht"
+
+#: lib/samizdat/engine/message.rb:536
+msgid "Title"
+msgstr "Überschrift"
+
+#: lib/samizdat/engine/message.rb:538
+msgid "Upload content from file"
+msgstr "Datei hochladen"
+
+#: lib/samizdat/engine/message.rb:550
+msgid "Language of the message"
+msgstr "Sprache dieser Nachricht"
+
+#: lib/samizdat/engine/message.rb:553
+msgid "Format"
+msgstr "Format"
+
+#: lib/samizdat/engine/message.rb:554
+msgid "Default"
+msgstr "Standard"
+
+#: lib/samizdat/engine/message.rb:557
+msgid "Reference to description (ID or URL of another message on this site)"
+msgstr "Referenz zur Beschreibung (Nummer oder URL einer anderen Nachricht dieser Seite)"
+
+#: lib/samizdat/engine/message.rb:559
+msgid "Editing is open for all members"
+msgstr "Alle Benutzer dürfen bearbeiten"
+
+#: lib/samizdat/engine/message.rb:564
+msgid "Preview"
+msgstr "Vorschau"
+
+#: lib/samizdat/engine/message.rb:645
+msgid "Use only <a href=\"%s\">current version</a> for replies and edits"
+msgstr "Für Antworten und Bearbeitungen immer <a href=\"%s\">aktuelle Version</a> verwenden"
+
+#: lib/samizdat/engine/message.rb:650
+msgid "You are not allowed to edit this message"
+msgstr "Bearbeiten nicht erlaubt"
+
+#: lib/samizdat/engine/message.rb:667
+msgid "Specified language is not supported on this site"
+msgstr "Diese Sprache ist auf dieser Seite nicht verfügbar."
+
+#: lib/samizdat/engine/message.rb:678
+msgid "Invalid message reference"
+msgstr "ungültige Referenz"
+
+#: lib/samizdat/engine/message.rb:681
+msgid "Message reference should refer to an existing message"
+msgstr "Referenz muss auf bestehende Nachricht verweisen"
+
+#: lib/samizdat/engine/message.rb:693
+msgid "Format '%s' is not supported"
+msgstr "Das Format \"%s\" wird nicht unterstützt."
+
+#: lib/samizdat/engine/message.rb:707
+msgid "It is not possible to upload a file without specifying format"
+msgstr "Beim Hochladen von Dateien muss deren Format angegeben werden"
+
+#: lib/samizdat/engine/message.rb:710
+msgid "Uploaded file is larger than %s bytes limit"
+msgstr "Hochgeladene Datei ist größer als die erlaubten \"%s\" Bytes"
+
+#: lib/samizdat/engine/message.rb:721
+msgid "Multimedia upload is disabled on this site"
+msgstr "Hochladen von Multimedia-Dateien ist auf dieser Seite deaktiviert."
+
+#: lib/samizdat/engine/message.rb:743
+msgid "You should upload %s content from file"
+msgstr "Bitte %s-Inhalte aus einer Datei hochladen"
+
+#: lib/samizdat/engine/resource.rb:64
+msgid "refers to <a href=\"%s\">external uriref</a>"
+msgstr "verweist auf <a href=\"%s\">externe URIref</a>"
+
+#: lib/samizdat/engine/resource.rb:80
+msgid "Unknown resource type '%s'"
+msgstr "Typ \"%s\" ist unbekannt."
+
+#: lib/samizdat/engine/resource.rb:116
+msgid "Also related to this focus: "
+msgstr "Auch mit diesem Fokus verwandt:"
+
+#: lib/samizdat/engine/resource.rb:121
+msgid "Recent updates in focus: "
+msgstr "Aktuelle Fokus-Änderungen:"
+
+#: lib/samizdat/engine/resource.rb:179
+msgid "Account blocked by moderator: %s."
+msgstr "Account durch folgenden Moderator gesperrt: %s."
+
+#: lib/samizdat/engine/resource.rb:188
+msgid "UNBLOCK"
+msgstr "EINSPERREN"
+
+#: lib/samizdat/engine/resource.rb:189
+msgid "BLOCK"
+msgstr "SPERREN"
+
+#: lib/samizdat/engine/resource.rb:193
+msgid "Latest Messages"
+msgstr "Neueste Nachrichten"
+
+#: lib/samizdat/engine/resource.rb:235
+msgid "Replies"
+msgstr "Antworten"
+
+#: lib/samizdat/engine/resource.rb:258
+msgid "Predicate"
+msgstr "Prädikate"
+
+#: lib/samizdat/engine/resource.rb:258
+msgid "Subject"
+msgstr "Subjekte"
+
+#: lib/samizdat/engine/resource.rb:258
+msgid "Object"
+msgstr "Objekte"
+
+#: lib/samizdat/engine/resource.rb:282
+msgid "<a href=\"%s\">%s</a> gave rating %4.2f to the <a href=\"%s\">Statement %s</a> on %s."
+msgstr "<a href=\"%s\">%s</a> wertete %4.2f für die <a href=\"%s\">Aussage %s</a> zu %s."
+
+#: lib/samizdat/engine/resource.rb:286
+msgid "Vote Proposition"
+msgstr "Bewerte Satz"
+
+#: lib/samizdat/engine/resource.rb:325
+msgid "Similar Items"
+msgstr "Ähnliches"
+
+#: lib/samizdat/engine/resource.rb:326
+msgid "<p><b>Possessed by:</b></p>"
+msgstr "<p><b>gehört:</b></p>"
+
+#: lib/samizdat/engine/session.rb:185
+msgid "moderator"
+msgstr "Moderator"
+
+#: lib/samizdat/engine/session.rb:185
+msgid "member"
+msgstr "Mitglied"
+
+#: lib/samizdat/engine/session.rb:185 lib/samizdat/engine/template.rb:369
+msgid "guest"
+msgstr "Gast"
+
+#: lib/samizdat/engine/session.rb:230
+msgid "Login Failed"
+msgstr "Login fehlgeschlagen"
+
+#: lib/samizdat/engine/session.rb:231
+msgid "Wrong login name or password. Try again."
+msgstr "Passwort oder Login-Name falsch. Neuer Versuch."
+
+#: lib/samizdat/engine/session.rb:271
+msgid "Input size exceeds content size limit"
+msgstr "Grenze für Eingabegröße überschritten"
+
+#: lib/samizdat/engine/session.rb:306
+msgid "Access Denied"
+msgstr "Zugriff verweigert"
+
+#: lib/samizdat/engine/session.rb:308
+msgid "Account Is Blocked"
+msgstr "Benutzer ist gesperrt"
+
+#: lib/samizdat/engine/session.rb:309
+msgid "Your account is blocked until the email address you have specified is confirmed. Confirmation message with instructions was sent to that address."
+msgstr "Das Benutzer-Konto ist vorübergehend gesperrt, bis die E-Mail-Adresse bestätigt wird. Bestätigungscode und Anleitung wurden an die angegebene E-Mail-Adresse gesendet."
+
+#: lib/samizdat/engine/session.rb:311
+msgid "User Error"
+msgstr "Benutzer Fehler"
+
+#: lib/samizdat/engine/session.rb:315
+msgid "looks like it was"
+msgstr "es scheint "
+
+#: lib/samizdat/engine/session.rb:316
+msgid "Resource Not Found"
+msgstr "Ressource nicht gefunden"
+
+#: lib/samizdat/engine/session.rb:317
+msgid "The resource you requested was not found on this site. Please report this error back to the site you came from"
+msgstr "Die angeforderte Ressource existiert auf dieser Seite nicht. Bitte diesen Fehler auf der verweisenden Seite melden."
+
+#: lib/samizdat/engine/session.rb:327
+msgid "Runtime Error"
+msgstr "Laufzeitfehler"
+
+#: lib/samizdat/engine/session.rb:328
+msgid "Runtime error has occured."
+msgstr "Es ist ein Laufzeitfehler aufgetreten."
+
+#: lib/samizdat/engine/session.rb:329
+msgid "Please report this error to the site administrator."
+msgstr "Bitte diesen Fehler dem Administrator der Seite melden"
+
+#: lib/samizdat/engine/template.rb:82
+msgid "Publish"
+msgstr "Veröffentlichen"
+
+#: lib/samizdat/engine/template.rb:83
+msgid "Share"
+msgstr "Teilen"
+
+#: lib/samizdat/engine/template.rb:108
+msgid "Account settings, interface language, theme"
+msgstr "Benutzer-Einstellungen, Sprache der Oberfläche, Darstellung"
+
+#: lib/samizdat/engine/template.rb:108
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: lib/samizdat/engine/template.rb:111
+msgid "Log out"
+msgstr "Ausloggen"
+
+#: lib/samizdat/engine/template.rb:156
+msgid "next page"
+msgstr "nächste Seite"
+
+#: lib/samizdat/engine/template.rb:256
+msgid "Click to vote on how this resource is related to this focus"
+msgstr "Hier abstimmen, wie gut diese Ressource zum dem Fokus passt"
+
+#: lib/samizdat/engine/template.rb:259
+msgid "vote"
+msgstr "abstimmen"
+
+#: lib/samizdat/engine/template.rb:269
+msgid "Related Focuses"
+msgstr "verwandte Fokusse"
+
+#: lib/samizdat/engine/template.rb:277
+msgid "Click to relate this resource to another focus"
+msgstr "Diese Ressource mit anderen Fokussen verknüpfen"
+
+#: lib/samizdat/engine/template.rb:277
+msgid "Add another focus"
+msgstr "Anderen Fokus hinzufügen"
+
+#: lib/samizdat/engine/template.rb:286
+msgid "related to"
+msgstr "verwandt mit"
+
+#: lib/samizdat/engine/template.rb:301
+msgid "SELECT FOCUS"
+msgstr "FOKUS AUSWÄHLEN"
+
+#: lib/samizdat/engine/template.rb:304
+msgid "Select focus that this resource will be related to"
+msgstr "Fokus Auswählen, der mit dieser Ressource verknüpft werden soll "
+
+#: lib/samizdat/engine/template.rb:308
+msgid "Enter focus id if it's not in the list"
+msgstr "Andere Ressourcen-Nummer als Fokus benutzen"
+
+#: lib/samizdat/engine/template.rb:310
+msgid "Give a rating of how strongly this resource is related to selected focus"
+msgstr "Wie gut passt die Ressource zum gewählten Fokus?"
+
+#: lib/samizdat/engine/template.rb:312
+msgid "-2 (No)"
+msgstr "-2 (gar nicht)"
+
+#: lib/samizdat/engine/template.rb:313
+msgid "-1 (Not Likely)"
+msgstr "-1 (eher nicht)"
+
+#: lib/samizdat/engine/template.rb:314
+msgid "0 (Uncertain)"
+msgstr "0 (unsicher)"
+
+#: lib/samizdat/engine/template.rb:315
+msgid "1 (Likely)"
+msgstr "1 (ein wenig)"
+
+#: lib/samizdat/engine/template.rb:316
+msgid "2 (Yes)"
+msgstr "2 (sehr)"
+
+#: lib/samizdat/engine/template.rb:338
+msgid "Click to view the resource"
+msgstr "Hier Klicken um die Ressource zu betrachten"
+
+#: lib/samizdat/engine/template.rb:344
+msgid "See the full message"
+msgstr "Ganze Nachricht anzeigen"
+
+#: lib/samizdat/engine/template.rb:373
+msgid "parent message"
+msgstr "übergeordnete Nachricht"
+
+#: lib/samizdat/engine/template.rb:374
+msgid "current version"
+msgstr "aktuelle Version"
+
+#: lib/samizdat/engine/template.rb:376
+msgid "history"
+msgstr "Änderungsgeschichte"
+
+#: lib/samizdat/engine/template.rb:380
+msgid "view source"
+msgstr "Quelltext anzeigen"
+
+#: lib/samizdat/engine/template.rb:383
+msgid "replies"
+msgstr "Antworten"
+
+#: lib/samizdat/engine/template.rb:385
+msgid "translation"
+msgstr "Übersetzungen"
+
+#: lib/samizdat/engine/template.rb:393
+msgid "hidden"
+msgstr "versteckt"
+
+#: lib/samizdat/engine/template.rb:394
+msgid "by&nbsp;%s on&nbsp;%s"
+msgstr "von&nbsp;%s am&nbsp;%s"
+
+#: lib/samizdat/engine/template.rb:447
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: lib/samizdat/engine/template.rb:449
+msgid "UNHIDE"
+msgstr "ANZEIGEN"
+
+#: lib/samizdat/engine/template.rb:450
+msgid "HIDE"
+msgstr "VERSTECKEN"
+
+#: lib/samizdat/engine/template.rb:452
+msgid "TAKE OVER"
+msgstr "ÜBERNEHMEN"
+
+#: lib/samizdat/engine/template.rb:453 lib/samizdat/engine/template.rb:457
+msgid "REPLACE"
+msgstr "ERSETZEN"
+
+#: lib/samizdat/engine/template.rb:454
+msgid "REPARENT"
+msgstr "VERSCHIEBEN"
+
+#: lib/samizdat/engine/template.rb:495
+msgid "Description"
+msgstr "Beschreibung"
+
+#: lib/samizdat/engine/template.rb:515
+msgid "(name that this language calls itself)"
+msgstr "Deutsch"
+
+#: lib/samizdat/engine/template.rb:518
+msgid " (default language)"
+msgstr " (Vorgabe)"
+

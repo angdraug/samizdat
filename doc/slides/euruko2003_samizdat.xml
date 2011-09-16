@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- http://www.slideml.org/specification/slideml_1.0/ -->
+<s:slideset xmlns:s="http://www.oscom.org/2003/SlideML/1.0/"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:dc="http://purl.org/dc/elements/1.1"
+    xmlns:dct="http://purl.org/dc/terms/"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+    <s:metadata>
+	<s:title>Samizdat</s:title>
+	<s:subtitle>RDF storage for Ruby: the case of Samizdat</s:subtitle>
+	<s:author>
+	    <s:givenname>Dmitry</s:givenname>
+	    <s:familyname>Borodaenko</s:familyname>
+	    <s:orgname href="http://www.sam-solutions.net/">SaM Solutions</s:orgname>
+	    <s:email>d.borodaenko@sam-solutions.net</s:email>
+        </s:author>
+
+        <s:confgroup>
+            <s:confdates>
+                <s:start>2003-06-21</s:start>
+                <s:end>2003-06-22</s:end>
+            </s:confdates>
+	    <s:conftitle href="http://www.approximity.com/euruko03/">First European Ruby Conference</s:conftitle>
+            <s:address>University of Karlsruhe</s:address>
+        </s:confgroup>
+
+        <dc:subject>Samizdat, Ruby, RDF, Squish, PostgreSQL</dc:subject>
+        <dc:date>2003-05-21</dc:date>
+        <dc:rights>Dmitry Borodaenko</dc:rights>
+
+        <s:abstract>
+	    <p><a href="http://www.nongnu.org/samizdat/">Samizdat</a> is an open
+	    publishing and collaboration engine based on RDF model, written in
+	    Ruby, and using Apache mod_ruby, PostgreSQL with Ruby/DBI, and YAML.
+	    Samizdat will let everyone publish, view, comment, edit, and
+	    aggregate text and multimedia resources, vote on ratings and
+	    classifications, filter resources by flexible sets of criteria,
+	    cooperate and coordinate on all kinds of activities.</p>
+
+	    <p>The talk introduces Samizdat project requirements, design goals
+	    and RDF model, and describes RDF storage module that provides a
+	    mapping and interface between the RDF model and its relational
+	    representation.</p>
+	</s:abstract>
+    </s:metadata>
+
+    <s:slide>
+        <s:title>Open publishing requirements</s:title>
+        <s:content>
+	    <p>Process of creating content is transparent to readers</p>
+	    <p>Readers' contributions are immediately available</p>
+	    <p>Content can be freely redistributed</p>
+	    <p>Content is structured and categorized</p>
+	    <p>Open editing: readers can see and participate in editorial
+	    decisions</p>
+	    <p>Distributed (p2p) operation</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Samizdat design goals</s:title>
+        <s:content>
+            <p>Publish: open, multimedia, editing, aggregation, trust</p>
+            <p>Vote: visibility, content organization</p>
+            <p>Search and filter: quality, category, relation</p>
+            <p>Cooperate: calendar, material item exchange, time management</p>
+            <p>View: internationalization, accessibility, email interface</p>
+            <p>Develop: modular architecture, documentation, security</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Resource Description Framework</s:title>
+        <s:content>
+	    <p>Language for representing information about resources on the
+	    Web</p>
+	    <p>RDF resource is identified by a uriref</p>
+	    <p>RDF knowledge base (KB) is a directed labeled graph without
+	    forced referential integrity</p>
+	    <p>RDF statement is a triple</p>
+	    <pre>    (property subject object)</pre>
+	    <p>Higher-order logic: statement can be reified into a resource</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Samizdat RDF model</s:title>
+        <s:content>
+	    <p>Member: view and create resources, use and publish filters</p>
+	    <p>Message: basic unit of information, subject of most metadata</p>
+	    <p>Tag: metadata glue (Quality, Priority, Relevance, ...)</p>
+	    <pre>    (s::tag resource-uri tag-uri)</pre>
+	    <p>Proposition and Vote: RDF statement that can be approved
+	    with votes (tag rating, content clustering, meta-mederation)</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Samizdat RDF storage</s:title>
+        <s:content>
+	    <p>Extended Squish query language</p>
+	    <p>Graph-to-relational translation layer</p>
+	    <p>PostgreSQL RDBMS</p>
+	    <p>Resource (id, published_date, literal, uriref, label)</p>
+	    <p>Statement (id, subject, predicate, object)</p>
+	    <p>Resource tables: Member, Message, Proposition, Vote, Item,
+	    Possession, whatever...</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Squish query language</s:title>
+        <s:content>
+	    <p>Must-bind variables</p>
+	    <pre>    SELECT ?blank_node [, ...]</pre>
+	    <p>Query pattern</p>
+	    <pre>    WHERE (predicate subject object) [...]</pre>
+	    <p>SQL-level constructs over blank nodes</p>
+	    <pre>    [ LITERAL condition ] [ ORDER BY expression ]</pre>
+	    <p>Namespaces</p>
+	    <pre>    [ USING prefix FOR namespace [...] ]</pre>
+	    <p>Query answer is such a binding of must-bind blank nodes that
+	    produces query pattern interpretation (answer KB) entailed by (or,
+	    more strictly, being subgraph of) site KB.</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Squish data manipulation language</s:title>
+        <s:content>
+	    <p>Don't-bind variables</p>
+	    <pre>    INSERT ?blank_node [, ...]</pre>
+	    <p>Assignments</p>
+	    <pre>    UPDATE ?blank_node = value [, ...]</pre>
+	    <p>Merge pattern</p>
+	    <pre>    WHERE (predicate subject object) [...]</pre>
+	    <p>Namespaces</p>
+	    <pre>    [ USING prefix FOR namespace [...] ]</pre>
+	    <p>Logical difference between merge KB and site KB (the part of
+	    merge KB that is not entailed by site KB, assuming don't-bind
+	    blank nodes are not in site KB) is inserted into site KB. Expanded
+	    site KB is updated with assignments.</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Mapping RDF model to SQL schema</s:title>
+        <s:content>
+	    <p>Uriref: http://&lt;site-url&gt;/&lt;resource-id&gt;</p>
+	    <p>Resource table<br/>
+	    - id<br/>
+	    - label: internal table name, external uriref or literal value<br/>
+	    - published_date</p>
+	    <p>Statement table<br/>
+	    - id: refers to Resource.id<br/>
+	    - subject, predicate, object: refer to Resource.id</p>
+	    <p>config.yaml: map from property uriref to internal table
+	    field name<br/>
+	    - consistent with database schema (create.sql)<br/>
+	    - backed up with constraints and triggers that maintain references
+	      to Resource.id and relations between resource classes as defined
+	      by Samizdat RDF schema</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Query pattern translation: Stage 1</s:title>
+        <s:content>
+	    <p style="text-decoration: underline">Stage 1: predicate mapping</p>
+	    <pre>    c: position -&gt; table, field
+    pm: node -&gt; positions*</pre>
+	    <p>Remove ambiguous mappings</p>
+	    <ul>scan positions of the same node for non-empty intersection of
+	    mappings</ul>
+	    <ul>refine both subject and object mapping</ul>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Query pattern translation: Stage 2</s:title>
+        <s:content>
+	    <p style="text-decoration: underline">Stage 2.1: relation aliases</p>
+	    <p>for each clause position, alias is the same for all subject
+	    occurences of the clause subject with same table mapping, and
+	    different for positions with different table maping:</p>
+	    <pre>    c: position -&gt; table, field, alias</pre>
+	    <p style="text-decoration: underline">Stage 2.2: join conditions</p>
+	    <p>join each node that is mapped to different alias in different
+	    positions</p>
+	    <p>join each external resource to the Resource table by uriref</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Query pattern translation: Squish query</s:title>
+        <s:content>
+<pre>SELECT ?msg, ?title, ?name, ?date, ?rating
+WHERE (dc::title ?msg ?title)
+      (s::author ?msg ?author)
+      (s::fullName ?author ?name)
+      (s::publishedDate ?msg ?date)
+      (rdf::subject ?stmt ?msg)
+      (rdf::predicate ?stmt s::tag)
+      (rdf::object ?stmt s::Quality)
+      (s::rating ?stmt ?rating)
+LITERAL ?rating >= -1
+ORDER BY ?rating
+USING rdf FOR http://www.w3.org/1999/02/22-rdf-syntax-ns#
+      dc FOR http://purl.org/dc/elements/1.1/
+      s FOR http://localhost/~angdraug/samizdat/rdf/schema#</pre>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Query pattern translation: SQL query</s:title>
+        <s:content>
+<pre>SELECT a.id AS msg, a.title AS title, d.full_name AS name,
+       b.published.date AS date, e.rating AS rating
+FROM Message a, Resource b, Statement c, Member d, Proposition e,
+     Resource f, Resource g 
+WHERE a.id = b.id
+  AND a.author = d.id
+  AND a.id = c.subject AND c.id = e.id
+  AND c.predicate = f.id AND f.uriref = true AND f.label = 's::tag'
+  AND c.object = g.id AND f.uriref = true AND g.label = 's::Quality'
+  AND e.rating >= 2
+ORDER BY e.rating</pre>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Merge pattern translation: Stage 1</s:title>
+        <s:content>
+<pre>    where: position -> p, s, o
+    c: position -> table, field, alias
+    pm: node -> positions*
+    jc: join-conditions*</pre>
+	    <p style="text-decoration: underline">Stage 1: resources</p>
+<pre>if internal: v[node] = Resource(id),
+    if missing, error: fake internal resource id;
+elsif literal, v[node] = node;
+elsif blank node and only in object position,
+    v[node] = update[node];
+elsif blank node: v[node] = (select node where subgraph) or
+external: v[node] = Resource(uriref, label=node),
+    if missing,
+        v[node] = (insert blank resource);</pre>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Merge pattern translation: Stage 2</s:title>
+        <s:content>
+<pre>    v: node -&gt; value
+    a: alias -&gt; positions*</pre>
+	    <p style="text-decoration: underline">Stage 2: properties</p>
+<pre>for each alias,
+
+key_node = where[position].subject;
+table = c[position].table;
+for each position,
+    node = where[position].object;
+    field = c[position].field;
+    value = v[node];
+    if new[key_node] (if key_node was inserted at Stage 1) or
+        if update[node], push [field, value]
+if new[key_node],
+    insert into table (id, field, ...)
+        values (v[key_node], value, ...);
+else update table set field = value, ... where id = v[key_node].
+</pre>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>RDF storage tasks</s:title>
+        <s:content>
+	    <p>split RDF storage into a separate library</p>
+	    <p>security: Squish literal condition safety, limited number of
+	    query clauses, dry-run of user-defined query</p>
+	    <p>RDF aggregates storage internalization (Seq, Bag, Alt)</p>
+	    <p>storage workflow control (triggers)</p>
+	    <p>transparent (structured) RDF query storage<br/>
+	    - depends on RDF aggregates storage<br/>
+	    - depends on storage workflow control</p>
+	    <p>subqueries (query premise)<br/>
+	    - depends on transparent query storage</p>
+	    <p>native graph RDF storage (FramerD, Gene)</p>
+	    <p>chain queries<br/>
+	    - depends on native RDF storage</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Samizdat Roadmap</s:title>
+        <s:content>
+	    <p>0.0.1 - basic search interface (done)</p>
+	    <p>0.0.2 - query validation and security limits</p>
+	    <p>0.0.3 - query construction UI</p>
+	    <p>0.0.4 - multimedia messages, query publishing</p>
+	    <p>0.0.5 - basic tag management</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Thank you</s:title>
+        <s:content>
+	    <p>Questions?</p>
+	</s:content>
+    </s:slide>
+
+</s:slideset>

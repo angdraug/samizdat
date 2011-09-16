@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- http://www.slideml.org/specification/slideml_1.0/ -->
+<s:slideset xmlns:s="http://www.oscom.org/2003/SlideML/1.0/"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:dc="http://purl.org/dc/elements/1.1"
+    xmlns:dct="http://purl.org/dc/terms/"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+    <s:metadata>
+	<s:title>Samizdat: Ruby без Рельс</s:title>
+	<s:subtitle>О пользе езды на велосипедах</s:subtitle>
+	<s:author>
+	    <s:givenname>Дмитрий</s:givenname>
+	    <s:familyname>Бородаенко</s:familyname>
+	    <s:orgname href="http://www.alatys.com/">Alatys</s:orgname>
+	    <s:email>d.borodaenko@alatys.com</s:email>
+        </s:author>
+
+        <s:confgroup>
+            <s:confdates>
+                <s:start>2008-06-26</s:start>
+                <s:end>2006-06-30</s:end>
+            </s:confdates>
+	    <s:conftitle href="http://lvee.org/">Linux Vacation Eastern Europe 2008</s:conftitle>
+            <s:address>Беларусь, г. Гродно</s:address>
+        </s:confgroup>
+
+        <dc:subject>Samizdat, Ruby, RDF, PostgreSQL, Security, MVC, Cache</dc:subject>
+        <dc:date>2008-06-27</dc:date>
+        <dc:rights>Дмитрий Бородаенко</dc:rights>
+
+        <s:abstract>
+	    <p><a href="http://samizdat.nongnu.org/">Samizdat</a> --
+	    система открытой публикации и совместной работы в Web на
+	    базе модели знаний RDF, написанная на Ruby. Samizdat
+	    использует интерфейсы CGI, FastCGI, и Apache mod_ruby, СУБД
+	    PostgreSQL, MySQL и SQLite (с помощью Ruby/DBI), и формат
+	    данных YAML.</p>
+
+	    <p>Samizdat позволяет всем пользователям публиковать,
+	    просматривать, комментировать и редактировать текстовые и
+	    мультимедиа-ресурсы, голосованием определять
+	    классификационные рейтинги, и фильтровать опубликованные
+	    ресурсы по гибкому набору критериев.</p>
+
+	    <p>В данном докладе предлагается краткое описание
+	    возможностей и внутреннего устройства системы Samizdat,
+	    после чего рассматриваются причины, по которым вместо Rails
+	    в Samizdat используется собственная реализация архитектуры
+	    MVC.</p>
+	</s:abstract>
+    </s:metadata>
+
+    <s:slide>
+        <s:title>Открытая публикация</s:title>
+        <s:content>
+	    <p>Лента сообщений, добавлять в которую может каждый</p>
+	    <p>Вложенные комментарии</p>
+	    <p>Мультимедиа-сообщения</p>
+	    <p>Форматы: просто текст, текст с сохранением
+	    форматирования, HTML, Textile</p>
+	    <p>Интегрированные переводы сообщений</p>
+	    <p>Wiki: история модификаций, режим "открыто для
+	    редактирования" выбирается при публикации</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Открытое редактирование</s:title>
+        <s:content>
+	    <p>Струтура сайта определяется голосованием</p>
+	    <p>Содержимое главной страницы определяется голосованием</p>
+	    <p>Любое сообщение может быть избрано темой</p>
+	    <p>Средства модерации: скрыть, отредактировать, перевесить,
+	    заблокировать пользователя, журнал модерации</p>
+	    <p>Плагины управления доступом к публикации, голосованию и
+	    модерации</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>RDF</s:title>
+        <s:content>
+	    <p>Структура сайта соответствует модели знаний RDF</p>
+	    <p>Поиск с помощью RDF-запросов на языке Squish</p>
+	    <p>Запросы можно публиковать как сообщения</p>
+	    <p>Метаданные Dublin Core</p>
+	    <p>Встроенная система хранения RDF в реляционной СУБД</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Синдикация</s:title>
+        <s:content>
+	    <p>Экспорт в RSS 1.0:</p>
+	    <ul>
+		<li>Ленты главной страницы</li>
+		<li>Ленты тем</li>
+		<li>Результаты RDF-запросов</li>
+	    </ul>
+	    <p>Импорт внешних RSS-лент на главную страницу</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Безопасность</s:title>
+        <s:content>
+	    <p>Весь пользовательский ввод помечается как tainted</p>
+	    <p>Весь исходящий HTML пропускается через модуль Sanitize
+	    (фильтрация HTML и CSS по белому списку)</p>
+	    <p>Защита от Cross-Site Request Forgery</p>
+	    <p>Фильтр Wiki-спама</p>
+	    <p>Отдельный журнал модерации для каждого ресурса</p>
+	    <p>Список запросов на модерацию</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Локализация</s:title>
+        <s:content>
+	    <p>Всё в UTF-8</p>
+	    <p>Интерфейс сайта переводится при помощи gettext (9 языков)</p>
+	    <p>Язык выбирается на основании кук и заголовка
+	    Accept-Language</p>
+	    <p>Для каждого отображаемого сообщения выбирается наиболее
+	    подходящий для пользователя перевод</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Установка</s:title>
+        <s:content>
+	    <p>Несколько сайтов на одном хосте</p>
+<pre>localhost:
+  '/samizdat': samizdat
+  '/site2': site2
+
+samizdat.onedomain.org: { '/': samizdat }
+site2.anotherdomain.org: { '/': site2 }</pre>
+	    <p>Конфигурация сайта наследует и перекрывает конфигурацию
+	    по умолчанию</p>
+<pre>/etc/samizdat/defaults.yaml
+/etc/samizdat/sites/samizdat.yaml
+/etc/samizdat/sites/site2.yaml</pre>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Кэш</s:title>
+        <s:content>
+	    <p>Ассоциативный массив объектов (делегатор Hash)</p>
+	    <p>Доступ через Distributed Ruby</p>
+	    <p>Двухуровневая блокировка с защитой от deadlocks и
+	    livelocks</p>
+	    <p>Лимиты по размеру массива и сроку годности элементов</p>
+	    <p>Модульная стратегия замещения объектов (по умолчанию
+	    LRU)</p>
+	    <p>Синхронизированный доступ к "тяжёлым" данным:</p>
+	    <pre>cache.fetch_or_add(key) { do_heavy_lifting }</pre>
+	    <p>Реализация Samizdat::Cache: 157 строк кода</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Хранилище RDF</s:title>
+        <s:content>
+	    <!-- Программирование суть искусство отладки пустого
+	    исходника -->
+	    <p>Модель знаний RDF:</p>
+	    <ul>
+		<li>(предикат субъект объект)</li>
+		<li>всё ресурсы идентифицируются ссылками URIref с
+		использованием пространств имён</li>
+		<li>реификация утверждений</li>
+	    </ul>
+	    <p>Реляционные данные отображаются в RDF:</p>
+	    <pre>ns:
+  dc: 'http://purl.org/dc/elements/1.1/'
+map:
+  'dc::date': {Resource: published_date}
+</pre>
+	    <p>Прочие данные хранятся в виде троек в таблицах Resource и
+	    Statement</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Model-View-Controller</s:title>
+        <s:content>
+	    <p>Первоначальная архитектура: набор CGI-скриптов</p>
+	    <p>Рассмотрены системы Rails и Nitro/Og</p>
+	    <p>Rails требует слишком большой переработки (aka переписать
+	    с нуля)</p>
+	    <p>Nitro более гибка, но существенно отстаёт по зрелости и
+	    документированности</p>
+	    <p>Принято решение использовать собственную реализацию MVC (2 месяца работы по выходным, 200 строк кода)</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Nitro/Og</s:title>
+        <s:content>
+	    <p>Плюсы:</p>
+	    <ul>
+		<li>Не framework, а набор библиотек, поддерживаются
+		любые архитектуры приложений, в том числе и не MVC</li>
+	    </ul>
+	    <p>Минусы:</p>
+	    <ul>
+		<li>Компоновки (layouts) определяются в виде классов, а не
+		шаблонов</li>
+		<li>Недостаточно документации ни по использованию, ни по
+		внутреннему устройству</li>
+	    </ul>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Rails</s:title>
+        <s:content>
+	    <p>Минусы:</p>
+	    <ul>
+		<li>Слово на букву F</li>
+		<li>Настройки, основанные на соглашениях: каждый
+		следующий шаг в сторону дороже предыдущего</li>
+		<li>Фиксированная структура каталогов, интегрирующая код и
+		конфигурацию сайта в Рельсы</li>
+		<li>Сообщество (см. <a href="http://www.zedshaw.com/rants/rails_is_a_ghetto.html">Rails is a Ghetto</a>)</li>
+	    </ul>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Реализация MVC в Samizdat</s:title>
+        <s:content>
+	    <img src="samizdat_mvc.png" style="float: right"/>
+	    <p>Dispatcher: принятие HTTP-запроса, создание Request и
+	    Route</p>
+	    <p>Request: обёртка вокруг CGI (параметры, заголовки, куки),
+	    определение сайта, к которому пришёл запрос, создание
+	    Session</p>
+	    <p>Route: определение и вызов контроллера</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>А где Модель?</s:title>
+        <s:content>
+	    <p>А вот:</p>
+	    <pre>dataset = RdfDataSet.new(%{
+  SELECT ?msg
+  WHERE (s::inReplyTo ?msg #{@id})
+        (s::hidden ?msg ?hidden #{filter_hidden})
+  OPTIONAL (rdf::predicate ?stmt dc::relation)
+           (rdf::subject ?stmt ?msg)
+           (rdf::object ?stmt focus::Translation)
+           (s::rating ?stmt ?rating FILTER ?rating > 0)
+  LITERAL ?stmt IS NULL
+  ORDER BY ?msg})
+
+page = (@request['page'] or 1).to_i
+replies = dataset[page - 1].collect {|reply,|
+  Resource.new(@request, reply).short }</pre>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Прочие служебные классы</s:title>
+        <s:content>
+	    <img src="samizdat_deployment.png" style="float: right"/>
+	    <p>Session: собственно субж</p>
+	    <p>SamizdatSites: определение сайта по хосту и урлу</p>
+	    <p>ConfigHash: делегатор Hash с методом deep_update!</p>
+	    <p>SiteConfig: загрузка и кэширование конфигурации сайта</p>
+	    <p>SiteCache: обёртка вокруг Cache для добавления в ключи
+	    объектов имени сайта</p>
+	    <p>CacheSingleton: обращение к кэшу сайта, запрос к которому
+	    обрабатывается в текущий момент</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Спасибо</s:title>
+        <s:content>
+	    <p>Вопросы?</p>
+	</s:content>
+    </s:slide>
+
+</s:slideset>

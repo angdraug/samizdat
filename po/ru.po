@@ -1,0 +1,1375 @@
+# Samizdat Russian translation
+#
+#   Copyright (c) 2003  Denis Valoha <_denis@tut.by>
+#   Copyright (c) 2004-2009  Dmitry Borodaenko <angdraug@debian.org>
+#
+#   This program is free software.
+#   You can distribute/modify this program under the terms of
+#   the GNU General Public License version 3 or later.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat 0.6.1\n"
+"POT-Creation-Date: 2009-04-22 15:45+0300\n"
+"PO-Revision-Date: 2009-04-22 15:46+0300\n"
+"Last-Translator: Dmitry Borodaenko <angdraug@debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+
+#: lib/samizdat/components/resource.rb:52
+msgid "Unknown resource type '%s'"
+msgstr "Неизвестный тип ресурса - '%s'"
+
+#: lib/samizdat/components/resource.rb:68
+msgid "Uriref"
+msgstr "Ссылка"
+
+#: lib/samizdat/components/resource.rb:68
+msgid "Literal"
+msgstr "Литерал"
+
+#: lib/samizdat/components/resource.rb:68
+msgid "Member"
+msgstr "Пользователь"
+
+#: lib/samizdat/components/resource.rb:68
+#: lib/samizdat/controllers/diff_controller.rb:23
+msgid "Message"
+msgstr "Сообщение"
+
+#: lib/samizdat/components/resource.rb:68
+#: lib/samizdat/components/resource.rb:499
+msgid "Statement"
+msgstr "Утверждение"
+
+#: lib/samizdat/components/resource.rb:68
+#: lib/samizdat/components/resource.rb:532
+#: lib/samizdat/controllers/resource_controller.rb:58
+msgid "Vote"
+msgstr "Оценка"
+
+#: lib/samizdat/components/resource.rb:193
+msgid "Subtags"
+msgstr "Суб-тэги"
+
+#: lib/samizdat/components/resource.rb:287
+msgid "refers to <a href=\"%s\">external uriref</a>"
+msgstr "<a href=\"%s\">внешняя ссылка</a>"
+
+#: lib/samizdat/components/resource.rb:344
+msgid "Parts"
+msgstr "Части"
+
+#: lib/samizdat/components/resource.rb:352
+#: lib/samizdat/components/resource.rb:366
+msgid "Replies"
+msgstr "Комментарии"
+
+#: lib/samizdat/components/resource.rb:363
+msgid "show all replies"
+msgstr "показать все комментарии"
+
+#: lib/samizdat/components/resource.rb:432
+#: lib/samizdat/controllers/member_controller.rb:91
+#: lib/samizdat/controllers/member_controller.rb:177
+#: lib/samizdat/controllers/member_controller.rb:272
+msgid "Login"
+msgstr "Логин"
+
+#: lib/samizdat/components/resource.rb:453
+msgid "Account <a href=\"%s\">blocked by moderator</a>: %s."
+msgstr "Учётная запись <a href=\"%s\">заблокирована модератором</a>: %s."
+
+#: lib/samizdat/components/resource.rb:470
+msgid "Latest Messages"
+msgstr "Последние сообщения"
+
+#: lib/samizdat/components/resource.rb:480
+msgid "UNBLOCK"
+msgstr "РАЗБЛОКИРОВАТЬ"
+
+#: lib/samizdat/components/resource.rb:480
+msgid "BLOCK"
+msgstr "ЗАБЛОКИРОВАТЬ"
+
+#: lib/samizdat/components/resource.rb:508
+#: lib/samizdat/components/resource.rb:514
+msgid "Predicate"
+msgstr "Предикат"
+
+#: lib/samizdat/components/resource.rb:509
+#: lib/samizdat/components/resource.rb:514
+msgid "Subject"
+msgstr "Субъект"
+
+#: lib/samizdat/components/resource.rb:510
+#: lib/samizdat/components/resource.rb:514
+msgid "Object"
+msgstr "Объект"
+
+#: lib/samizdat/components/resource.rb:524
+msgid "Votes"
+msgstr "Оценки"
+
+#: lib/samizdat/components/resource.rb:541
+msgid "<a href=\"%s\">%s</a> gave rating %4.2f to the <a href=\"%s\">Statement %s</a> on %s."
+msgstr "<a href=\"%s\">%s</a> поставил оценку %4.2f <a href=\"%s\">утверждению %s</a>, дата %s."
+
+#: lib/samizdat/components/resource.rb:549
+msgid "Vote Proposition"
+msgstr "Обсуждаемое утверждение"
+
+#: lib/samizdat/components/resource.rb:568
+msgid "Event"
+msgstr ""
+
+#: lib/samizdat/components/resource.rb:589
+msgid "Recurrence Rules"
+msgstr ""
+
+#: lib/samizdat/components/resource.rb:597
+msgid "Description"
+msgstr "Описание"
+
+#: lib/samizdat/controllers/diff_controller.rb:21
+msgid "Bad input"
+msgstr "Неправильные входные данные"
+
+#: lib/samizdat/controllers/diff_controller.rb:24
+#: lib/samizdat/controllers/history_controller.rb:47
+msgid "Changes"
+msgstr "Изменения"
+
+#: lib/samizdat/controllers/event_controller.rb:13
+#: lib/samizdat/controllers/item_controller.rb:13
+msgid "Not Implemented"
+msgstr "Не реализовано"
+
+#: lib/samizdat/controllers/event_controller.rb:14
+msgid "Calendar is not implemented yet."
+msgstr "Календарь еще не реализован."
+
+#: lib/samizdat/controllers/event_controller.rb:29
+msgid "Create Event"
+msgstr ""
+
+#: lib/samizdat/controllers/event_controller.rb:36
+msgid "You must supply start date for an event"
+msgstr ""
+
+#: lib/samizdat/controllers/event_controller.rb:45
+msgid "Unrecognized event recurrence frequency %s"
+msgstr ""
+
+#: lib/samizdat/controllers/event_controller.rb:72
+msgid "Start date and time"
+msgstr ""
+
+#: lib/samizdat/controllers/event_controller.rb:74
+msgid "End date and time"
+msgstr ""
+
+#: lib/samizdat/controllers/event_controller.rb:76
+msgid "Recurrence frequency"
+msgstr ""
+
+#: lib/samizdat/controllers/event_controller.rb:79
+msgid "No recurrence"
+msgstr ""
+
+#: lib/samizdat/controllers/event_controller.rb:80
+msgid "Daily"
+msgstr ""
+
+#: lib/samizdat/controllers/event_controller.rb:83
+msgid "Repeat until date and time"
+msgstr ""
+
+#: lib/samizdat/controllers/event_controller.rb:87
+msgid "Repeat in specific hours"
+msgstr ""
+
+#: lib/samizdat/controllers/event_controller.rb:93
+msgid "Repeat on specific days of week"
+msgstr ""
+
+#: lib/samizdat/controllers/event_controller.rb:98
+#: lib/samizdat/controllers/member_controller.rb:453
+#: lib/samizdat/controllers/message_controller.rb:96
+#: lib/samizdat/controllers/message_controller.rb:269
+#: lib/samizdat/controllers/message_controller.rb:289
+#: lib/samizdat/controllers/message_controller.rb:518
+#: lib/samizdat/controllers/message_controller.rb:605
+msgid "Confirm"
+msgstr "Подтвердить"
+
+#: lib/samizdat/controllers/frontpage_controller.rb:20
+#: lib/samizdat/controllers/frontpage_controller.rb:48
+#: lib/samizdat/controllers/frontpage_controller.rb:64
+#: data/samizdat/templates/frontpage_index.rhtml:13
+#: data/samizdat/templates/frontpage_index.rhtml:24
+msgid "Features"
+msgstr "Тематические сообщения"
+
+#: lib/samizdat/controllers/frontpage_controller.rb:21
+#: lib/samizdat/controllers/frontpage_controller.rb:52
+#: lib/samizdat/controllers/frontpage_controller.rb:61
+#: data/samizdat/templates/frontpage_index.rhtml:14
+#: data/samizdat/templates/frontpage_index.rhtml:28
+msgid "Recent Updates"
+msgstr "Последние обновления"
+
+#: lib/samizdat/controllers/frontpage_controller.rb:124
+msgid "Show messages in all languages"
+msgstr "Показывать сообщения на всех языках"
+
+#: lib/samizdat/controllers/frontpage_controller.rb:126
+msgid "Show only messages in %s"
+msgstr "Показывать только сообщения на текущем языке (%s)"
+
+# language name
+#: lib/samizdat/controllers/frontpage_controller.rb:127
+#: lib/samizdat/helpers/application_helper.rb:371
+msgid "(name that this language calls itself)"
+msgstr "Русский"
+
+#: lib/samizdat/controllers/frontpage_controller.rb:140
+msgid " (default language)"
+msgstr " (язык по умолчанию)"
+
+#: lib/samizdat/controllers/history_controller.rb:19
+msgid "History of Changes"
+msgstr "История изменений"
+
+#: lib/samizdat/controllers/history_controller.rb:35
+msgid "compare with previous version"
+msgstr "сравнить с предыдущей версией"
+
+#: lib/samizdat/controllers/history_controller.rb:47
+msgid "Versions"
+msgstr "Версии"
+
+#: lib/samizdat/controllers/item_controller.rb:14
+msgid "Material item exchange is not implemented yet."
+msgstr "Обмен вещами еще не реализован."
+
+#: lib/samizdat/controllers/member_controller.rb:23
+msgid "Theme"
+msgstr "Тема"
+
+#: lib/samizdat/controllers/member_controller.rb:32
+msgid "Show static content on the front page"
+msgstr "Выводить статический текст на главной странице"
+
+#: lib/samizdat/controllers/member_controller.rb:33
+msgid "Hide static content from the front page"
+msgstr "Не выводить статический текст на главной страницe"
+
+#: lib/samizdat/controllers/member_controller.rb:38
+msgid "Return to basic interface"
+msgstr "Вернуться к упрощённому интерфейсу"
+
+#: lib/samizdat/controllers/member_controller.rb:39
+msgid "Enable advanced interface"
+msgstr "Показывать расширенный интерфейс"
+
+#: lib/samizdat/controllers/member_controller.rb:42
+msgid "Change Appearance"
+msgstr "Сменить внешний вид"
+
+#: lib/samizdat/controllers/member_controller.rb:45
+msgid "Moderation Facility"
+msgstr "Средства модерации"
+
+#: lib/samizdat/controllers/member_controller.rb:46
+msgid "Disable"
+msgstr "Отключить"
+
+#: lib/samizdat/controllers/member_controller.rb:47
+msgid "Enable"
+msgstr "Включить"
+
+#: lib/samizdat/controllers/member_controller.rb:50
+msgid "Interface Settings"
+msgstr "Настройки интерфейса"
+
+#: lib/samizdat/controllers/member_controller.rb:74
+#: data/samizdat/templates/page_layout.rhtml:38
+msgid "Profile"
+msgstr "Сведения о пользователе"
+
+#: lib/samizdat/controllers/member_controller.rb:81
+#: data/samizdat/templates/page_layout.rhtml:39
+msgid "Account"
+msgstr "Учётная запись"
+
+#: lib/samizdat/controllers/member_controller.rb:87
+#: lib/samizdat/controllers/member_controller.rb:181
+msgid "Create New Account"
+msgstr "Создать нового пользователя"
+
+#: lib/samizdat/controllers/member_controller.rb:129
+msgid "You didn't fill all mandatory fields"
+msgstr "Вы не заполнили все необходимые поля"
+
+#: lib/samizdat/controllers/member_controller.rb:146
+msgid "Your email address was used to create an account."
+msgstr "Ваш адрес электронной почты был использован для создания учётной записи."
+
+#: lib/samizdat/controllers/member_controller.rb:161
+msgid "Login Failed"
+msgstr "Не удалось войти войти в систему"
+
+#: lib/samizdat/controllers/member_controller.rb:164
+msgid "Wrong login name or password. Try again."
+msgstr "Неправильный логин или пароль. Попробуйте еще раз."
+
+#: lib/samizdat/controllers/member_controller.rb:171
+#: data/samizdat/templates/page_layout.rhtml:45
+msgid "Log in"
+msgstr "Войти"
+
+#: lib/samizdat/controllers/member_controller.rb:174
+msgid "Use existing account:"
+msgstr "Существующий пользователь:"
+
+#: lib/samizdat/controllers/member_controller.rb:178
+#: lib/samizdat/controllers/member_controller.rb:405
+msgid "Password"
+msgstr "Пароль"
+
+#: lib/samizdat/controllers/member_controller.rb:205
+msgid "Confirmation hash not found"
+msgstr "Указанный хэш не найден"
+
+#: lib/samizdat/controllers/member_controller.rb:207
+msgid "This confirmation hash is intended for another user"
+msgstr "Этот хэш предназначен для другого пользователя"
+
+#: lib/samizdat/controllers/member_controller.rb:226
+msgid "Account unblocked."
+msgstr "Учётная запись разблокирована."
+
+#: lib/samizdat/controllers/member_controller.rb:229
+msgid "Confirmation Accepted"
+msgstr "Подтверждение принято"
+
+#: lib/samizdat/controllers/member_controller.rb:230
+msgid "Changes confirmed."
+msgstr "Изменения подтверждены."
+
+#: lib/samizdat/controllers/member_controller.rb:246
+msgid "Sorry, password recovery not enabled on this site"
+msgstr "Извините, на этом сайте восстановление паролей не настроено"
+
+#: lib/samizdat/controllers/member_controller.rb:248
+msgid "You are already logged in"
+msgstr "Вы уже авторизованы"
+
+#: lib/samizdat/controllers/member_controller.rb:256
+msgid "Wrong login"
+msgstr "Неправильный логин"
+
+#: lib/samizdat/controllers/member_controller.rb:265
+msgid "New password was generated for your account: %s"
+msgstr "Для вашей учётной записи был создан новый пароль: %s"
+
+#: lib/samizdat/controllers/member_controller.rb:267
+msgid "New password has been sent to you."
+msgstr "Вам был выслан новый пароль."
+
+#: lib/samizdat/controllers/member_controller.rb:276
+#: lib/samizdat/controllers/member_controller.rb:365
+msgid "Recover Lost Password"
+msgstr "Восстановить утерянный пароль"
+
+#: lib/samizdat/controllers/member_controller.rb:282
+msgid "Account is already blocked"
+msgstr "Учётная запись уже заблокирована"
+
+#: lib/samizdat/controllers/member_controller.rb:284
+msgid "Moderator accounts can not be blocked"
+msgstr "Учётные записи модераторов не могут быть заблокированы"
+
+#: lib/samizdat/controllers/member_controller.rb:296
+msgid "Account is not blocked"
+msgstr "Учётная запись не заблокирована"
+
+#: lib/samizdat/controllers/member_controller.rb:297
+msgid "Can't unblock, the account has no password"
+msgstr "Невозможно разблокировать, учётная запись не имеет пароля"
+
+#: lib/samizdat/controllers/member_controller.rb:316
+msgid "You need to <a href=\"member/login\">login</a> to modify your profile or account parameters"
+msgstr "Чтобы редактировать параметры учётной записи или сведения о пользователе, надо <a href=\"member/login\">войти на сайт</a>"
+
+#: lib/samizdat/controllers/member_controller.rb:337
+#: lib/samizdat/controllers/member_controller.rb:391
+msgid "Full name"
+msgstr "Полное имя"
+
+#: lib/samizdat/controllers/member_controller.rb:351
+#: lib/samizdat/controllers/member_controller.rb:427
+msgid "Email"
+msgstr "Email (электронная почта)"
+
+#: lib/samizdat/controllers/member_controller.rb:355
+msgid "Current Password"
+msgstr "Текущий пароль"
+
+#: lib/samizdat/controllers/member_controller.rb:358
+msgid "New Password"
+msgstr "Новый пароль"
+
+#: lib/samizdat/controllers/member_controller.rb:359
+msgid "Reenter password to confirm"
+msgstr "Подтверждение пароля"
+
+#: lib/samizdat/controllers/member_controller.rb:391
+#: lib/samizdat/controllers/member_controller.rb:405
+#: lib/samizdat/controllers/member_controller.rb:427
+#: lib/samizdat/plugins/profile.rb:68
+msgid "%s updated"
+msgstr "Изменения записаны: %s"
+
+#: lib/samizdat/controllers/member_controller.rb:400
+msgid "Wrong current password"
+msgstr "Неверный текущий пароль"
+
+#: lib/samizdat/controllers/member_controller.rb:420
+msgid "Your email address was given for an account."
+msgstr "Ваш адрес электронной почты был указан для учётной записи."
+
+#: lib/samizdat/controllers/member_controller.rb:422
+msgid "Confirmation request is sent to your new email address."
+msgstr "Запрос на подтверждение выслан на ваш новый адрес электронной почты."
+
+#: lib/samizdat/controllers/member_controller.rb:449
+msgid "Change Account Status"
+msgstr "Изменение статуса учётной записи"
+
+#: lib/samizdat/controllers/member_controller.rb:451
+msgid "When account is blocked, the member cannot login. Please confirm that you want to change block status of this account."
+msgstr "Когда учётная запись заблокирована, пользователь не может войти на сайт. Пожалуйста, подтвердите, что вы хотите изменть статус этой учётной записи."
+
+#: lib/samizdat/controllers/member_controller.rb:468
+msgid "Passwords do not match"
+msgstr "Пароли не совпадают"
+
+#: lib/samizdat/controllers/member_controller.rb:473
+msgid "Login name you specified is reserved"
+msgstr "Выбранный вами логин зарезервирован"
+
+#: lib/samizdat/controllers/member_controller.rb:475
+msgid "Use only latin letters and numbers in login name"
+msgstr "Используйте только латинские буквы и цифры для логина"
+
+#: lib/samizdat/controllers/member_controller.rb:480
+#: lib/samizdat/controllers/member_controller.rb:520
+msgid "Malformed email address: '%s'"
+msgstr "Недопустимый адрес электронной почты: '%s'"
+
+#: lib/samizdat/controllers/member_controller.rb:498
+msgid "Full name you have specified is used by someone else"
+msgstr "Выбранное вами полное имя уже используется"
+
+#: lib/samizdat/controllers/member_controller.rb:505
+msgid "Email address you have specified is used by someone else"
+msgstr "Указанный вами адрес электронной почты уже используется"
+
+#: lib/samizdat/controllers/member_controller.rb:510
+msgid "Login name you specified is already used by someone else"
+msgstr "Выбранный вами логин уже используется"
+
+#: lib/samizdat/controllers/member_controller.rb:533
+msgid "Failed to send email"
+msgstr "Не удалось отправить электронную почту"
+
+#: lib/samizdat/controllers/member_controller.rb:547
+msgid "Site"
+msgstr "Сайт"
+
+#: lib/samizdat/controllers/member_controller.rb:549
+msgid "To confirm this action, visit the following web page:"
+msgstr "Чтобы подтвердить это действие, откройте следующую веб-страницу:"
+
+#: lib/samizdat/controllers/member_controller.rb:551
+msgid "To cancel this action, ignore this message."
+msgstr "Чтобы отменить это действие, игнорируйте это сообщение."
+
+#: lib/samizdat/controllers/message_controller.rb:25
+#: lib/samizdat/controllers/message_controller.rb:526
+msgid "Content"
+msgstr "Содержание"
+
+#: lib/samizdat/controllers/message_controller.rb:30
+msgid "Hide Message"
+msgstr "Скрыть сообщение"
+
+#: lib/samizdat/controllers/message_controller.rb:32
+msgid "The message will be hidden from public view."
+msgstr "Сообщение будет скрыто от общего просмотра."
+
+#: lib/samizdat/controllers/message_controller.rb:38
+msgid "Unhide Message"
+msgstr "Показывать сообщение"
+
+#: lib/samizdat/controllers/message_controller.rb:40
+msgid "The message will not be hidden from public view."
+msgstr "Сообщение будет открыто для общего просмотра."
+
+#: lib/samizdat/controllers/message_controller.rb:46
+msgid "Lock Replies"
+msgstr "Заблокировать комментарии"
+
+#: lib/samizdat/controllers/message_controller.rb:48
+msgid "Publishing of new replies to this message will be locked."
+msgstr "Публикация новых комментариев к этому сообщению будет заблокирована."
+
+#: lib/samizdat/controllers/message_controller.rb:54
+msgid "Unlock Replies"
+msgstr "Разблокировать комментарии"
+
+#: lib/samizdat/controllers/message_controller.rb:56
+msgid "Publishing of new replies to this message will be unlocked."
+msgstr "Публикация новых комментариев к этому сообщению будет разблокирована."
+
+#: lib/samizdat/controllers/message_controller.rb:68
+msgid "A reply"
+msgstr "Комментарий"
+
+#: lib/samizdat/controllers/message_controller.rb:69
+msgid "A translation"
+msgstr "Перевод"
+
+#: lib/samizdat/controllers/message_controller.rb:70
+msgid "A sub-tag"
+msgstr "Суб-тэг"
+
+#: lib/samizdat/controllers/message_controller.rb:71
+msgid "A part"
+msgstr "Часть"
+
+#: lib/samizdat/controllers/message_controller.rb:85
+msgid "Reparent Message"
+msgstr "Перевесить сообщение"
+
+#: lib/samizdat/controllers/message_controller.rb:87
+msgid "This message will be moved to new parent"
+msgstr "Это сообщение будет перевешено под новое исходное сообщение"
+
+#: lib/samizdat/controllers/message_controller.rb:90
+msgid "New Parent"
+msgstr "Новое исходное сообщение"
+
+#: lib/samizdat/controllers/message_controller.rb:92
+msgid "Select the kind of a relation to the new parent"
+msgstr "Выберите тип связи с новым исходным сообщением"
+
+#: lib/samizdat/controllers/message_controller.rb:94
+msgid "Part sequence number (in the absense of sequence numbers, parts are ordered by resource id)"
+msgstr "Порядковый номер части (в отсутсвие порядковых номеров, части сортируются по номеру ресурса"
+
+#: lib/samizdat/controllers/message_controller.rb:112
+msgid "New Message"
+msgstr "Новое сообщение"
+
+#: lib/samizdat/controllers/message_controller.rb:127
+msgid "You can't reply to this message"
+msgstr "Вам не разрешено отвечать на это сообщение"
+
+#: lib/samizdat/controllers/message_controller.rb:130
+#: lib/samizdat/helpers/message_helper.rb:133
+msgid "Reply"
+msgstr "Ответить"
+
+#: lib/samizdat/controllers/message_controller.rb:132
+msgid "Parent Message"
+msgstr "Исходное сообщение"
+
+#: lib/samizdat/controllers/message_controller.rb:148
+msgid "Please select a language that is different from the language of the original message (%s)"
+msgstr "Пожалуйста, выберите язык, отличный от языка оригинала (%s)"
+
+#: lib/samizdat/controllers/message_controller.rb:154
+#: lib/samizdat/helpers/message_helper.rb:136
+msgid "Translate"
+msgstr "Перевести"
+
+#: lib/samizdat/controllers/message_controller.rb:156
+msgid "Original Message"
+msgstr "Оригинал"
+
+#: lib/samizdat/controllers/message_controller.rb:172
+msgid "This event already has a description"
+msgstr ""
+
+#: lib/samizdat/controllers/message_controller.rb:176
+msgid "Describe Event"
+msgstr ""
+
+#: lib/samizdat/controllers/message_controller.rb:194
+msgid "You are not allowed to edit this message"
+msgstr "Вам не разрешено редактировать это сообщение"
+
+#: lib/samizdat/controllers/message_controller.rb:203
+msgid "Edit Message"
+msgstr "Редактировать сообщение"
+
+#: lib/samizdat/controllers/message_controller.rb:220
+msgid "Take Over Message"
+msgstr "Завладеть сообщением"
+
+#: lib/samizdat/controllers/message_controller.rb:226
+msgid "Edit message content and open-for-all status, message will remain attributed to the current creator."
+msgstr "Редактируйте содержание сообщения и возможность редактирования другими пользователями, автор сообщения останется прежним."
+
+#: lib/samizdat/controllers/message_controller.rb:240
+msgid "Replace Message"
+msgstr "Заменить сообщение"
+
+#: lib/samizdat/controllers/message_controller.rb:246
+msgid "MESSAGE WILL BE COMPLETELY REPLACED, NO RECOVERY WILL BE POSSIBLE. PLEASE PROVIDE DETAILED JUSTIFICATION FOR THIS ACTION."
+msgstr "СООБЩЕНИЕ БУДЕТ ПОЛНОСТЬЮ ЗАМЕНЕНО БЕЗ ВОЗМОЖНОСТИ ВОССТАНОВЛЕНИЯ. ПОЖАЛУЙСТА, ПРЕДСТАВЬТЕ ПОДРОБНОЕ ОБОСНОВАНИЕ ЭТОГО ДЕЙСТВИЯ."
+
+#: lib/samizdat/controllers/message_controller.rb:263
+#: lib/samizdat/helpers/message_helper.rb:175
+msgid "Request Moderation"
+msgstr "Запросить модерацию"
+
+#: lib/samizdat/controllers/message_controller.rb:266
+msgid "Please confirm that you want to request moderation of this message:"
+msgstr "Пожалуйста подтвердите, что вы хотите запросить модерацию этого сообщения:"
+
+#: lib/samizdat/controllers/message_controller.rb:283
+msgid "Acknowledge Moderation Request"
+msgstr "Закрыть запрос на модерацию"
+
+#: lib/samizdat/controllers/message_controller.rb:286
+msgid "Moderation request will be marked as acknowledged without moderatorial action."
+msgstr "Запрос будет закрыт без модерации."
+
+#: lib/samizdat/controllers/message_controller.rb:470
+msgid "Uploaded file not found. Your upload must have expired."
+msgstr "Закачанный файл не найден. Возможно, ваша закачка просрочена."
+
+#: lib/samizdat/controllers/message_controller.rb:477
+msgid "Message title is required for a new message"
+msgstr "Необходимо ввести заголовок нового сообщения"
+
+#: lib/samizdat/controllers/message_controller.rb:483
+msgid "Your message looks like spam"
+msgstr "Ваше сообщение выглядит как спам"
+
+#: lib/samizdat/controllers/message_controller.rb:489
+msgid "Message body is required"
+msgstr "Необходимо ввести тело сообщения"
+
+#: lib/samizdat/controllers/message_controller.rb:499
+msgid "This message was modified after you started to edit it, check the latest version to make sure you don't overwrite any recent changes"
+msgstr "Это сообщение было изменено после того, как вы начали его редактировать. Откройте новую версию, чтобы убедиться, что вы не потеряете последние изменения"
+
+#: lib/samizdat/controllers/message_controller.rb:524
+msgid "Title"
+msgstr "Заголовок"
+
+#: lib/samizdat/controllers/message_controller.rb:537
+msgid "Alternatively, upload a file (formats supported: %s; size limit: %s)"
+msgstr "Вместо содержания, закачать файл (поддерживаются форматы: %s; максимальный размер: %s)"
+
+#: lib/samizdat/controllers/message_controller.rb:554
+msgid "Language of the message"
+msgstr "Язык сообщения"
+
+#: lib/samizdat/controllers/message_controller.rb:559
+msgid "None of the above"
+msgstr "Другой"
+
+#: lib/samizdat/controllers/message_controller.rb:562
+msgid "Format"
+msgstr "Формат"
+
+#: lib/samizdat/controllers/message_controller.rb:571
+msgid "Editing is open for all members (excluding guests who can't edit anyone's messages)"
+msgstr "Редактирование открыто для всех пользователей (кроме гостей, которым не разрешается редактировать ничьи сообщения)"
+
+#: lib/samizdat/controllers/message_controller.rb:577
+msgid "Attach message parts from files"
+msgstr "Добавить части сообщения из файлов"
+
+#: lib/samizdat/controllers/message_controller.rb:586
+msgid "Preview"
+msgstr "Предварительный просмотр"
+
+#: lib/samizdat/controllers/message_controller.rb:594
+msgid "Warning: content is longer than %s characters. In some situations, it will be truncated."
+msgstr "Предупреждение: содержание сообщения длиннее %s символов. В некоторых ситуациях оно будет обрезаться."
+
+#: lib/samizdat/controllers/message_controller.rb:597
+msgid "Message Preview"
+msgstr "Предварительный просмотр сообщения"
+
+#: lib/samizdat/controllers/message_controller.rb:602
+msgid "Press 'Back' button to change the message."
+msgstr "Нажмите кнопку 'Назад' для изменения сообщения."
+
+#: lib/samizdat/controllers/moderation_controller.rb:44
+#: lib/samizdat/controllers/moderation_controller.rb:86
+msgid "Pending Moderation Requests"
+msgstr "Открытые запросы на модерацию"
+
+#: lib/samizdat/controllers/moderation_controller.rb:48
+#: lib/samizdat/controllers/moderation_controller.rb:93
+msgid "Blocked Accounts"
+msgstr "Заблокированные учётные записи"
+
+#: lib/samizdat/controllers/moderation_controller.rb:51
+#: lib/samizdat/controllers/moderation_controller.rb:97
+msgid "Moderators"
+msgstr "Модераторы"
+
+#: lib/samizdat/controllers/moderation_controller.rb:54
+#: lib/samizdat/controllers/moderation_controller.rb:80
+msgid "Date"
+msgstr "Дата"
+
+#: lib/samizdat/controllers/moderation_controller.rb:54
+msgid "Moderator"
+msgstr "Модератор"
+
+#: lib/samizdat/controllers/moderation_controller.rb:54
+msgid "Action"
+msgstr "Действие"
+
+#: lib/samizdat/controllers/moderation_controller.rb:54
+#: lib/samizdat/controllers/moderation_controller.rb:80
+msgid "Resource"
+msgstr "Ресурс"
+
+#: lib/samizdat/controllers/moderation_controller.rb:69
+#: data/samizdat/templates/frontpage_index.rhtml:31
+msgid "Links"
+msgstr "Ссылки"
+
+#: lib/samizdat/controllers/moderation_controller.rb:72
+#: data/samizdat/templates/frontpage_index.rhtml:34
+msgid "Moderation Log"
+msgstr "Журнал модерации"
+
+#: lib/samizdat/controllers/query_controller.rb:17
+#: lib/samizdat/controllers/query_controller.rb:211
+msgid "Edit Query"
+msgstr "Редактировать запрос"
+
+#: lib/samizdat/controllers/query_controller.rb:27
+#: lib/samizdat/controllers/query_controller.rb:124
+msgid "Search Result"
+msgstr "Результаты поиска"
+
+#: lib/samizdat/controllers/query_controller.rb:41
+msgid "Publish This Query"
+msgstr "Опубликовать этот запрос"
+
+#: lib/samizdat/controllers/query_controller.rb:49
+msgid "No matching resources found."
+msgstr "Подходящих ресурсов не найдено."
+
+#: lib/samizdat/controllers/query_controller.rb:143
+msgid "Error in your query: "
+msgstr "Ошибка в вашем запросе: "
+
+#: lib/samizdat/controllers/query_controller.rb:147
+msgid "Must-bind list should contain only one blank node, filters based on queries with a complex answer pattern are not implemented"
+msgstr "Список связанных узлов должен содержать только один узел-шаблон, фильтры, основанные на запросах со сложным шаблоном ответа, не реализованы"
+
+#: lib/samizdat/controllers/query_controller.rb:150
+msgid "User-defined query pattern should not be longer than %s clauses"
+msgstr "Задаваемый пользователем запрос не может содержать больше, чем %s пунктов"
+
+#: lib/samizdat/controllers/query_controller.rb:156
+msgid "Search By Substring"
+msgstr "Искать по подстроке"
+
+#: lib/samizdat/controllers/query_controller.rb:159
+#: data/samizdat/templates/page_layout.rhtml:32
+msgid "Search"
+msgstr "Поиск"
+
+#: lib/samizdat/controllers/query_controller.rb:162
+msgid "Select Target"
+msgstr "Выбрать цель запроса"
+
+#: lib/samizdat/controllers/query_controller.rb:166
+msgid "Query Pattern (predicate subject object)"
+msgstr "Шаблон запроса (предикат субъект объект)"
+
+#: lib/samizdat/controllers/query_controller.rb:177
+msgid "BLANK CLAUSE "
+msgstr "ОЧИСТИТЬ УСЛОВИЕ "
+
+#: lib/samizdat/controllers/query_controller.rb:186
+msgid "Literal Condition"
+msgstr "Буквальное условие"
+
+#: lib/samizdat/controllers/query_controller.rb:189
+msgid "Order By"
+msgstr "Упорядочить по"
+
+#: lib/samizdat/controllers/query_controller.rb:192
+msgid "Ascending"
+msgstr "По возрастанию"
+
+#: lib/samizdat/controllers/query_controller.rb:192
+msgid "Descending"
+msgstr "По убыванию"
+
+#: lib/samizdat/controllers/query_controller.rb:198
+msgid "Update"
+msgstr "Обновить"
+
+#: lib/samizdat/controllers/query_controller.rb:200
+msgid "Construct Query"
+msgstr "Сконструировать запрос"
+
+#: lib/samizdat/controllers/query_controller.rb:203
+msgid "Edit Raw Query"
+msgstr "Редактировать запрос вручную"
+
+#: lib/samizdat/controllers/query_controller.rb:207
+#: lib/samizdat/plugins/squish.rb:34
+msgid "Run"
+msgstr "Выполнить"
+
+#: lib/samizdat/controllers/resource_controller.rb:62
+#: lib/samizdat/controllers/tags_controller.rb:78
+#: lib/samizdat/helpers/application_helper.rb:171
+msgid "Submit"
+msgstr "Принять"
+
+#: lib/samizdat/controllers/tags_controller.rb:17
+#: lib/samizdat/models/tag.rb:79
+msgid "Tag"
+msgstr "Тэг"
+
+#: lib/samizdat/controllers/tags_controller.rb:17
+msgid "Related Resources"
+msgstr "Ресурсы по теме"
+
+#: lib/samizdat/controllers/tags_controller.rb:30
+msgid "subtags"
+msgstr "суб-тэги"
+
+#: lib/samizdat/controllers/tags_controller.rb:35
+msgid "add a sub-tag"
+msgstr "добавить суб-тэг"
+
+#: lib/samizdat/controllers/tags_controller.rb:47
+#: data/samizdat/templates/frontpage_index.rhtml:12
+msgid "Top Tags"
+msgstr "Основные тэги"
+
+#: lib/samizdat/controllers/tags_controller.rb:73
+msgid "Add a sub-tag"
+msgstr "Добавить тэг"
+
+#: lib/samizdat/controllers/tags_controller.rb:76
+msgid "Enter Sub-Tag ID"
+msgstr "Введите номер суб-тэга"
+
+#: lib/samizdat/engine/controller.rb:109
+msgid "Access Denied"
+msgstr "Доступ запрещён"
+
+#: lib/samizdat/engine/controller.rb:113
+msgid "Account Is Blocked"
+msgstr "Учётная запись заблокирована"
+
+#: lib/samizdat/engine/controller.rb:117
+msgid "User Error"
+msgstr "Ошибка пользователя"
+
+#: lib/samizdat/engine/controller.rb:119
+msgid "Press 'Back' button of your browser to return."
+msgstr "Нажмите кнопку 'Назад' вашего браузера, чтобы вернуться на предыдущую страницу."
+
+#: lib/samizdat/engine/controller.rb:123
+msgid "Resource Not Found"
+msgstr "Ресурс не найден"
+
+#: lib/samizdat/engine/controller.rb:124
+msgid " (looks like it was %s)"
+msgstr " (похоже, что это был %s)"
+
+#: lib/samizdat/engine/controller.rb:126
+msgid "The resource you requested (%s) was not found on this site. Please report this error back to the site you came from%s."
+msgstr "Запрашиваемый ресурс (%s) не был найден на этом сайте. Сообщите об этой ошибке на сайт, с которого вы пришли%s."
+
+#: lib/samizdat/engine/controller.rb:132
+msgid "Runtime Error"
+msgstr "Ошибка времени выполнения"
+
+#: lib/samizdat/engine/controller.rb:134
+msgid "Runtime error has occured."
+msgstr "Произошла ошибка времени выполнения."
+
+#: lib/samizdat/engine/controller.rb:135
+msgid "Please report this error to the site administrator."
+msgstr "Сообщите, пожалуйста, об этой ошибке администратору сайта."
+
+#: lib/samizdat/engine/request.rb:252 lib/samizdat/plugins/role.rb:65
+msgid "moderator"
+msgstr "модератор"
+
+#: lib/samizdat/engine/request.rb:252 lib/samizdat/plugins/role.rb:65
+msgid "member"
+msgstr "пользователь"
+
+#: lib/samizdat/engine/request.rb:252
+#: lib/samizdat/helpers/application_helper.rb:307
+#: lib/samizdat/plugins/role.rb:65
+msgid "guest"
+msgstr "гость"
+
+#: lib/samizdat/engine/request.rb:352
+msgid "Forged request detected"
+msgstr "Обнаружен поддельный запрос"
+
+#: lib/samizdat/engine/request.rb:435
+msgid "Input size exceeds content size limit"
+msgstr "Размер ввода превышает установленный предел"
+
+#: lib/samizdat/engine/session.rb:129
+msgid "Thank you for signing up for an account. A confirmation e-mail message was sent to your e-mail address. Follow the instructions in the e-mail to complete your account setup. You can then use your account to more conveniently post on this site."
+msgstr "Спасибо за регистрацию. Электронное письмо с подтверждением было выслано на ваш адрес электронной почты. Выполните инструкции в нём, чтобы завершить регистрацию. После этого публиковать сообщения на этом сайте станет удобнее."
+
+#: lib/samizdat/engine/session.rb:133
+msgid "Your account is <a href=\"%s\">blocked by moderators</a>."
+msgstr "Учётная запись <a href=\"%s\">заблокирована модераторами</a>."
+
+#: lib/samizdat/engine/session.rb:137
+msgid "Your account is broken: it has no assigned password."
+msgstr "Ваша учётная запись повреждена: она не имеет пароля."
+
+#: lib/samizdat/engine/session.rb:140
+msgid "Request <a href=\"%s\">password recovery</a> to generate new password."
+msgstr "Запросите <a href=\"%s\">восстановление пароля</a>, чтобы установить новый пароль."
+
+#: lib/samizdat/helpers/application_helper.rb:26
+msgid "Front Page"
+msgstr "Главная страница"
+
+#: lib/samizdat/helpers/application_helper.rb:52
+msgid ", page %s"
+msgstr ", страница %s"
+
+#: lib/samizdat/helpers/application_helper.rb:93
+msgid "pages: "
+msgstr "страницы: "
+
+#: lib/samizdat/helpers/application_helper.rb:98
+msgid "next page"
+msgstr "следующая страница"
+
+#: lib/samizdat/helpers/application_helper.rb:262
+msgid "SELECT TAG"
+msgstr "ВЫБРАТЬ ТЭГ"
+
+#: lib/samizdat/helpers/application_helper.rb:264
+msgid "Select a tag that this resource will be related to"
+msgstr "Выберите тэг, с которым будет связан этот ресурс"
+
+#: lib/samizdat/helpers/application_helper.rb:277
+msgid "If the tag you want is not in the list above, enter its id (a number)"
+msgstr "Если нужный вам тэг не находится в списке выше, введите его номер"
+
+#: lib/samizdat/helpers/application_helper.rb:283
+msgid "Give a rating of how strongly this resource is related to the tag that you selected"
+msgstr "Оцените, насколько этот ресурс связан с выбранным вами тэгом"
+
+#: lib/samizdat/helpers/application_helper.rb:285
+msgid "-2 (No)"
+msgstr "-2 (Нет)"
+
+#: lib/samizdat/helpers/application_helper.rb:286
+msgid "-1 (Not Likely)"
+msgstr "-1 (Вряд ли)"
+
+#: lib/samizdat/helpers/application_helper.rb:287
+msgid "0 (Uncertain)"
+msgstr "0 (Не ясно)"
+
+#: lib/samizdat/helpers/application_helper.rb:288
+msgid "1 (Likely)"
+msgstr "1 (Возможно)"
+
+#: lib/samizdat/helpers/application_helper.rb:289
+msgid "2 (Yes)"
+msgstr "2 (Да)"
+
+#: lib/samizdat/helpers/application_helper.rb:300
+msgid "Click to view the resource"
+msgstr "Нажмите, чтобы просмотреть ресурс"
+
+#: lib/samizdat/helpers/event_helper.rb:19
+msgid "recurrent"
+msgstr ""
+
+#: lib/samizdat/helpers/event_helper.rb:26
+msgid "every second"
+msgid_plural "every %s seconds"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: lib/samizdat/helpers/event_helper.rb:27
+msgid "every minute"
+msgid_plural "every %s minutes"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: lib/samizdat/helpers/event_helper.rb:28
+msgid "every hour"
+msgid_plural "every %s hours"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: lib/samizdat/helpers/event_helper.rb:29
+msgid "every day"
+msgid_plural "every %s days"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: lib/samizdat/helpers/event_helper.rb:30
+msgid "every week"
+msgid_plural "every %s weeks"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: lib/samizdat/helpers/event_helper.rb:31
+msgid "every month"
+msgid_plural "every %s months"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: lib/samizdat/helpers/event_helper.rb:32
+msgid "every year"
+msgid_plural "every %s years"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: lib/samizdat/helpers/event_helper.rb:65
+msgid "Monday"
+msgstr ""
+
+#: lib/samizdat/helpers/event_helper.rb:66
+msgid "Tuesday"
+msgstr ""
+
+#: lib/samizdat/helpers/event_helper.rb:67
+msgid "Wednesday"
+msgstr ""
+
+#: lib/samizdat/helpers/event_helper.rb:68
+msgid "Thursday"
+msgstr ""
+
+#: lib/samizdat/helpers/event_helper.rb:69
+msgid "Friday"
+msgstr ""
+
+#: lib/samizdat/helpers/event_helper.rb:70
+msgid "Saturday"
+msgstr ""
+
+#: lib/samizdat/helpers/event_helper.rb:71
+msgid "Sunday"
+msgstr ""
+
+#: lib/samizdat/helpers/event_helper.rb:78
+msgid "on "
+msgstr ""
+
+#: lib/samizdat/helpers/event_helper.rb:87
+msgid "at %s hours"
+msgstr ""
+
+#: lib/samizdat/helpers/message_helper.rb:19
+msgid "See the full message"
+msgstr "Просмотреть сообщение целиком"
+
+#: lib/samizdat/helpers/message_helper.rb:27
+msgid "related to"
+msgstr "связано с"
+
+#: lib/samizdat/helpers/message_helper.rb:50
+msgid "parent message"
+msgstr "исходное сообщение"
+
+#: lib/samizdat/helpers/message_helper.rb:52
+msgid "the original"
+msgstr "оригинал"
+
+#: lib/samizdat/helpers/message_helper.rb:54
+msgid "current version"
+msgstr "текущая версия"
+
+#: lib/samizdat/helpers/message_helper.rb:56
+msgid "parent tag"
+msgstr "родительский тэг"
+
+#: lib/samizdat/helpers/message_helper.rb:59
+msgid "previous part"
+msgstr "предыдущая часть"
+
+#: lib/samizdat/helpers/message_helper.rb:62
+msgid "next part"
+msgstr "следующая часть"
+
+#: lib/samizdat/helpers/message_helper.rb:65
+msgid "history"
+msgstr "история"
+
+#: lib/samizdat/helpers/message_helper.rb:69
+msgid "view source"
+msgstr "посмотреть исходник"
+
+#: lib/samizdat/helpers/message_helper.rb:73
+msgid "replies"
+msgstr "комментариев"
+
+#: lib/samizdat/helpers/message_helper.rb:77
+msgid "language"
+msgstr "язык"
+
+#: lib/samizdat/helpers/message_helper.rb:78
+msgid "translation"
+msgstr "перевод"
+
+#: lib/samizdat/helpers/message_helper.rb:86
+msgid "hidden"
+msgstr "скрытое"
+
+#: lib/samizdat/helpers/message_helper.rb:88
+msgid "moderation log"
+msgstr "журнал модерации"
+
+#: lib/samizdat/helpers/message_helper.rb:92
+msgid "link"
+msgstr "ссылка"
+
+#: lib/samizdat/helpers/message_helper.rb:94
+msgid "by&nbsp;%s on&nbsp;%s"
+msgstr "автор&nbsp;%s, дата&nbsp;%s"
+
+#: lib/samizdat/helpers/message_helper.rb:147
+msgid "Edit"
+msgstr "Редактировать"
+
+#: lib/samizdat/helpers/message_helper.rb:153
+msgid "UNHIDE"
+msgstr "ПОКАЗЫВАТЬ"
+
+#: lib/samizdat/helpers/message_helper.rb:154
+msgid "HIDE"
+msgstr "СКРЫТЬ"
+
+#: lib/samizdat/helpers/message_helper.rb:156
+msgid "UNLOCK"
+msgstr "РАЗБЛОКИРОВАТЬ"
+
+#: lib/samizdat/helpers/message_helper.rb:157
+msgid "LOCK"
+msgstr "ЗАБЛОКИРОВАТЬ"
+
+#: lib/samizdat/helpers/message_helper.rb:158
+msgid "REPARENT"
+msgstr "ПЕРЕВЕСИТЬ"
+
+#: lib/samizdat/helpers/message_helper.rb:159
+msgid "TAKE OVER"
+msgstr "ЗАВЛАДЕТЬ"
+
+#: lib/samizdat/helpers/message_helper.rb:167
+msgid "REPLACE"
+msgstr "ЗАМЕНИТЬ"
+
+#: lib/samizdat/helpers/message_helper.rb:170
+msgid "ACKNOWLEDGE"
+msgstr "ЗАКРЫТЬ ЗАПРОС"
+
+#: lib/samizdat/helpers/resource_helper.rb:24
+msgid "Click to vote on how this resource is related to this tag"
+msgstr "Нажмите, чтобы оценить связь этого ресурса с этим тэгом"
+
+#: lib/samizdat/helpers/resource_helper.rb:27
+#: lib/samizdat/plugins/access.rb:57
+msgid "vote"
+msgstr "голосовать"
+
+#: lib/samizdat/helpers/resource_helper.rb:47
+msgid "Click to add a tag related to this resource"
+msgstr "Нажмите, чтобы добавить тэг, связанный с этим ресурсом"
+
+#: lib/samizdat/helpers/resource_helper.rb:49
+msgid "Add a tag"
+msgstr "Добавить тэг"
+
+#: lib/samizdat/helpers/resource_helper.rb:54
+msgid "Tags"
+msgstr "Тэги"
+
+#: lib/samizdat/models/content.rb:266
+msgid "Uploaded file is larger than %s bytes limit"
+msgstr "Закачанный файл больше установленного предела (%s байт)"
+
+#: lib/samizdat/models/content.rb:290
+msgid "Failed to detect content type of the uploaded file"
+msgstr "Не удалось определить формат закачанного файла"
+
+#: lib/samizdat/models/content.rb:294
+msgid "Format '%s' is not supported"
+msgstr "Формат '%s' не поддерживается"
+
+#: lib/samizdat/models/content.rb:374
+msgid "Multimedia upload is disabled on this site"
+msgstr "Закачка мультимедиа-файлов на этом сайте отключена"
+
+#: lib/samizdat/models/member.rb:69
+msgid "Your current access level (%s) does not allow to perform this action (%s)"
+msgstr "Ваш текущий уровень доступа (%s) не позволяет выполнить это действие (%s)"
+
+#: lib/samizdat/models/message.rb:102
+msgid "Only <a href=\"%s\">current version</a> may be used for this action"
+msgstr "Данное действие можно произвести только над <a href=\"%s\">текущей версией</a> сообщения"
+
+#: lib/samizdat/models/message.rb:108
+msgid "Specified language is not supported on this site"
+msgstr "Выбранный язык не поддерживается на этом сайте"
+
+#: lib/samizdat/models/message.rb:125
+msgid "Recursive message reference not allowed"
+msgstr "Рекурсивные ссылки на сообщения запрещены"
+
+#: lib/samizdat/models/message.rb:130
+msgid "Invalid message reference"
+msgstr "Некорректная ссылка на сообщение"
+
+#: lib/samizdat/models/message.rb:143
+msgid "Invalid openForAll value"
+msgstr "Неправильное значение поля 'открыто для всех'"
+
+#: lib/samizdat/models/message.rb:223
+msgid "Set message title before reparenting"
+msgstr "Установите заголовок сообщения, прежде чем его перевешивать"
+
+#: lib/samizdat/models/message.rb:230
+msgid "Invalid new parent: message cannot be a part of its own part"
+msgstr "Неверное новое исходное сообщение: сообщение не может быть частью собственной части"
+
+#: lib/samizdat/models/message.rb:282
+msgid "Reference to previous version lost"
+msgstr "Ссылка на предыдущую версию утеряна"
+
+#: lib/samizdat/models/moderation.rb:144
+msgid "This resource has already been moderated since it was last modified"
+msgstr "Этот ресурс уже был модерирован со времени своей последней модификации"
+
+#: lib/samizdat/models/moderation.rb:148
+msgid "Moderation of this resource has already been requested"
+msgstr "Модерация этого ресурса уже была запрошена"
+
+#: lib/samizdat/models/tag.rb:156
+msgid "none"
+msgstr "нет оценок"
+
+#: lib/samizdat/models/tag.rb:166
+msgid "You can't relate resource to itself"
+msgstr "Ресурс нельзя связывать с самим собой"
+
+#: lib/samizdat/plugins/access.rb:57
+msgid "post"
+msgstr "публиковать"
+
+#: lib/samizdat/plugins/access.rb:57
+msgid "moderate"
+msgstr "модерировать"
+
+#: lib/samizdat/plugins/content_file.rb:54
+msgid "Download %s file"
+msgstr "Скачать файл %s"
+
+#: lib/samizdat/plugins/flash.rb:24 lib/samizdat/plugins/flowplayer.rb:25
+msgid "Install a Flash plugin and enable JavaScript to see this content."
+msgstr "Установите плагин Flash и включите JavaScript, чтобы увидеть это сообщение."
+
+#: lib/samizdat/plugins/flowplayer.rb:35
+msgid "View the clip online"
+msgstr "Просмотреть ролик в онлайне"
+
+#: lib/samizdat/plugins/image.rb:43
+msgid "Click to enlarge"
+msgstr "Нажмите, чтобы увеличить"
+
+#: lib/samizdat/plugins/inline_default.rb:35
+msgid "Default"
+msgstr "Без формата"
+
+#: lib/samizdat/plugins/occupation.rb:20
+msgid "Occupation"
+msgstr "Род занятий"
+
+#: lib/samizdat/plugins/plain_text.rb:24
+msgid "Verbatim plain text"
+msgstr "Текст с сохранением форматирования"
+
+#: lib/samizdat/plugins/squish.rb:38
+msgid "Squish query"
+msgstr "Запрос на языке Squish"
+
+#: lib/samizdat/plugins/tag.rb:52
+msgid "You are not allowed to vote about this tag."
+msgstr "Вам не разрешено голосовать о привязке этого тэга."
+
+#: lib/samizdat/plugins/tag.rb:54
+msgid "This tag cannot be related to this resource."
+msgstr "Этот тэг не может быть привязан к этому ресурсу."
+
+#: data/samizdat/templates/frontpage_index.rhtml:20
+msgid "more"
+msgstr "ещё"
+
+#: data/samizdat/templates/frontpage_index.rhtml:33
+msgid "All Replies"
+msgstr "Все комментарии"
+
+#: data/samizdat/templates/page_layout.rhtml:31
+msgid "Publish"
+msgstr "Новое сообщение"
+
+#: data/samizdat/templates/page_layout.rhtml:38
+msgid "View and edit your profile"
+msgstr "Просмотр и изменение сведений о себе"
+
+#: data/samizdat/templates/page_layout.rhtml:39
+msgid "Change account parameters (email and password)"
+msgstr "Изменение параметров учётной записи (электронной почты и пароля)"
+
+#: data/samizdat/templates/page_layout.rhtml:41
+msgid "Change user interface settings"
+msgstr "Изменение настроек пользовательского интерфейса"
+
+#: data/samizdat/templates/page_layout.rhtml:41
+msgid "Settings"
+msgstr "Настроить"
+
+#: data/samizdat/templates/page_layout.rhtml:43
+msgid "Log out"
+msgstr "Выйти"

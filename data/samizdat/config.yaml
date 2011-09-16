@@ -1,0 +1,198 @@
+---
+# config.yaml
+#
+# Example of Samizdat site-specific configuration
+
+# Site Setup
+#
+# This section specifies several locations and XHTML fragments that
+# define the site. All locations are relative to the web server document
+# root.
+#
+site:
+
+  # Absolute path to the directory where media uploads are stored. The
+  # engine will store the media uploads under this directory, so it
+  # should be writeable by the Samizdat CGI scripts. See also format:
+  # section in defaults.yaml.
+  #
+  content_dir: '/var/www/samizdat/content'
+
+  # Apparent location of the content directory relative to site base, as
+  # typed in the web browser. This location will be prepended to links
+  # to media uploads stored under content_dir.
+  #
+  content_base: 'content'
+
+  # Site name. This is a text string that is used in many different
+  # places across the site, including page titles, email notifications
+  # and so on.
+  #
+  name: 'Demo'
+
+  # Site logo. This can be just a text string, or any XHTML fragment
+  # that is allowed inside <a> tag. If you put something more complex
+  # than a simple <img> tag here, make sure that it fits nicely with all
+  # configured CSS themes.
+  #
+  logo: 'Samizdat Demo Site'
+
+  # XHTML fragment that is included at the top of the front page. In
+  # addition to any block-level XHTML markup, it can include SSI file
+  # include directives: <!--#include file="some-file-name" -->, with
+  # file names relative to your document root. As with site logo code,
+  # make sure that this fragment is compatible with your CSS themes.
+  #
+  # Can be single text for all languages, or a hash of translations
+  # grouped by locale name (see locale: section)
+  #
+  header:
+    en: >
+      <p>Samizdat is a generic RDF-based engine for building
+      collaboration and open publishing web sites. Samizdat intends to
+      promote values of freedom, openness, equality, and
+      cooperation.</p>
+
+      <p>For more information about Samizdat, visit the
+      <a href="http://www.nongnu.org/samizdat/">project
+      homepage</a>.</p>
+
+    de: >
+      <p>Samizdat ist eine vielseitige, RDF-basierte Plattform um
+      Webseiten zu erstellen, auf denen jedermann veröffentlichen kann.
+      Samizdat möchte dabei Werte wie Freiheit, Offenheit,
+      Gleichberechtigung und Kooperation fördern.</p>
+
+      <p>Mehr Informationen zu Samizdat gibt es auf der
+      <a href="http://www.nongnu.org/samizdat/">Projekt-Webseite</a>.
+      </p>
+
+    es: >
+      <p>Samizdat es un motor genérico en base a RDF creado para
+      construir un portal de colaboración y publicación
+      abierta. Samizdat tiene por objetivo promocionar valores como la
+      libertad, la sinceridad, la igualdad y la cooperación.</p>
+
+      <p>Para más información, visita
+      <a href="http://www.nongnu.org/samizdat/">la página principal
+      del proyecto</a>.</p>
+
+    fr: >
+      <p>Samizdat est un moteur RDF générique pour la construction
+      de sites ouaibbe de solidarité et de publication ouverte. Samizdat
+      souhaite promouvoir la liberté, la transparence, l'égalité et 
+      la coopération.</p>
+
+      <p>Pour plus d'information concernant Samizdat, veuille visiter
+      <a href="http://www.nongnu.org/samizdat/">la page d'accueil
+      du projet</a>.</p>
+
+    ### 是正は着して下さい：samizdat-devel@nongnu.org
+    # サミズダトがきょうりょく や こうぜんな ちゃく の ウェブサイト には はんよう のRDFの きかん
+    # じゆう  こうぜん  びょうどう  かち ささえる
+    #  いっぽう
+    ja: >
+      <p>サミズダトが協力や公然な着のウェブサイトには汎用のRDFの機関です。
+      自由や公然や平等や協力の価値は支えりたい。</p>
+
+      <p>サミズダトにもう一報には、
+      <a href="http://www.nongnu.org/samizdat/">プロジェクトのホウム</a>に行て下さい。</p>
+
+    pl: >
+      <p>Samizdat jest ogólny silnik na bazie RDF dla skonstruowania
+      witryny www dla współpracy i otwartej publikacji. Cel Samizdata jest
+      popieranie wolność, otwartość, równość i współpraca.</p>
+
+      <p>Dla więcej informacji dotyczącej Samizdat, proszę wejdź na
+      <a href="http://www.nongnu.org/samizdat/">stronie
+      projektu</a>.</p>
+
+
+  # XHTML fragment that is included at the bottom of the front page,
+  # similar to site header.
+  #
+  footer: >   # empty
+
+  # If message id is provided below, contents (but not title) of that message
+  # will be included in the "Links" section of the front page.
+  #
+  more_links:
+
+  # Location of the site icon. When empty, no link to site icon will be
+  # included in the generated documents, some web browsers will request
+  # /favicon.ico in that case.
+  #
+  icon:
+
+  # This string will be prepended to all cookies set by this site. If
+  # you run more that one site on a single host, make sure that this
+  # string is unique for each of these sites.
+  #
+  cookie_prefix: samizdat
+
+# Database Connection
+#
+# default assumes following PostgreSQL configuration:
+#
+# pg_hba.conf:
+#   local samizdat [all] ident samizdat
+#
+# pg_ident.conf:
+#   samizdat postgres postgres
+#   samizdat www-data samizdat
+#
+db:
+
+  # Data source name in Ruby/DBI notation: 'DBI:Driver:database:host'.
+  # For local database (on the same host as the web server), omit the
+  # ':host' part.
+  #
+  dsn: 'DBI:Pg:samizdat'
+
+  # Database user and password. If IDENT authentication method is
+  # properly configured (see doc/install.txt), omit the password.
+  #
+  user: samizdat
+  #password: secret   # ident authentication by default
+
+# HTTPS encryption
+#
+# To ensure security and privacy of your users, it is highly recommended
+# to only allow authenticated access over an encrypted HTTPS connection.
+# Refer to your web server's documentation on how to configure HTTPS. If
+# possible, avoid using self-signed certificates, if you don't already
+# have a certificate, get one from CAcert.org.
+#
+#https:
+#
+#  # Base URL of the HTTPS version of your site.
+#  #
+#  base: 'https://localhost/samizdat/'
+#
+#  # Set to 'yes' to force HTTPS for login form.
+#  #
+#  force_secure_session: yes
+
+# List of RSS feeds imported into the frontpage of your site. Feeds are
+# stored in Samizdat's dRuby cache, to update imported feeds for all
+# sites hosted on the server, run samizdat-import-feeds script (it's a
+# good idea to put it in cron).
+#
+#import_feeds:
+#
+#   # Display name of the feed
+#   'Local Samizdat':
+#
+#     # Feed URL
+#     url: 'http://localhost/samizdat/frontpage/rss'
+#
+#     # Number of entries to display (no bigger than limit:page)
+#     limit: 5
+
+# Timezone
+#
+# If site timezone is specified and is different from the system
+# timezone (defined in /etc/timezone), time values will be converted
+# into the site timezone when displayed.
+#
+#timezone: Europe/Minsk

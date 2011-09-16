@@ -1,0 +1,3033 @@
+2009-06-10 16:40  angdraug
+
+	* data/samizdat/database/triggers-pgsql.sql,
+	  data/samizdat/templates/page_layout.rhtml, doc/notes.txt,
+	  doc/diagrams/samizdat_rdf_classes.dia,
+	  lib/samizdat/controllers/query_controller.rb,
+	  lib/samizdat/plugins/textile.rb, po/be.po:
+	   * use member_link in page header
+	   * update the <del> monkey patch for RedCloth4
+	   * include subproperties in properties menu in query editor
+	   * Samizdat RDF classes diagram added
+	   * fix *_update_part triggers to react when only
+	  part_of_subproperty is changed
+	   * ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+	   * this is the last CVS commit: Samizdat switched from CVS to
+	  Monotone (mtn pull samizdat.mtn-host.prjek.net \*)
+
+2009-04-22 15:15  angdraug
+
+	* lib/samizdat/models/message.rb: another Message.new optimization:
+	  do not run queries that are expected to return empty results
+
+2009-04-22 14:49  angdraug
+
+	* lib/samizdat/controllers/message_controller.rb:
+	  brown-paper-bag-bug in timestamp-based message locking
+
+2009-04-22 13:03  angdraug
+
+	* TODO, lib/samizdat/controllers/message_controller.rb,
+	  lib/samizdat/helpers/application_helper.rb,
+	  lib/samizdat/models/message.rb, po/be.po, po/ru.po:
+	   * simple message locking via timestamps
+	   * use parametrized RDF queries instead of interpolated query
+	  strings: 30% speedup for front page and tag page generation due
+	  to better hit rate on translated RDF queries
+	   * use case insensitive sort for tag names
+	   * TODO cleanup: many of the planned items have been done
+
+2009-04-20 14:43  angdraug
+
+	* data/samizdat/defaults.yaml, data/samizdat/css/common.css,
+	  data/samizdat/css/default.css, data/samizdat/css/indy.css,
+	  data/samizdat/css/nihon.css, data/samizdat/css/savannah.css,
+	  data/samizdat/css/sky.css, data/samizdat/css/torun.css,
+	  data/samizdat/css/venezuela-centro.css,
+	  data/samizdat/templates/frontpage_index.rhtml,
+	  lib/samizdat/storage.rb, lib/samizdat/components/list.rb,
+	  lib/samizdat/controllers/frontpage_controller.rb,
+	  lib/samizdat/controllers/member_controller.rb,
+	  lib/samizdat/engine/request.rb,
+	  lib/samizdat/helpers/application_helper.rb,
+	  lib/samizdat/plugins/flowplayer.rb, po/be.po, po/ru.po:
+	   * refactored and integrated Savannah patch #6167 (monolanguage)
+	  by Boud
+	   * render Top Tags as a tag cloud instead of a list (sorted by
+	  name, font size proportional to usage), sort tags by name in tags
+	  pull-down menu
+	   * support for OpenDocument formats: odg, odp, ods, odt
+	   * minor Flowplayer rendering improvements
+
+2009-04-16 18:48  angdraug
+
+	* bin/samizdat-role, data/samizdat/rdf.yaml,
+	  data/samizdat/css/common.css, data/samizdat/css/default.css,
+	  data/samizdat/css/indy.css, data/samizdat/css/nihon.css,
+	  data/samizdat/css/savannah.css, data/samizdat/css/sky.css,
+	  data/samizdat/css/torun.css,
+	  data/samizdat/css/venezuela-centro.css,
+	  data/samizdat/database/grant-pgsql.sql, doc/man/samizdat-role.1,
+	  doc/migration/upgrade_from_v0.6.2.sql, lib/samizdat/sanitize.rb,
+	  lib/samizdat/storage.rb, lib/samizdat/components/list.rb,
+	  lib/samizdat/components/resource.rb,
+	  lib/samizdat/controllers/frontpage_controller.rb,
+	  lib/samizdat/controllers/member_controller.rb,
+	  lib/samizdat/controllers/message_controller.rb,
+	  lib/samizdat/controllers/moderation_controller.rb,
+	  lib/samizdat/controllers/query_controller.rb,
+	  lib/samizdat/controllers/resource_controller.rb,
+	  lib/samizdat/engine/controller.rb,
+	  lib/samizdat/engine/dataset.rb, lib/samizdat/engine/helpers.rb,
+	  lib/samizdat/engine/request.rb, lib/samizdat/engine/session.rb,
+	  lib/samizdat/helpers/application_helper.rb,
+	  lib/samizdat/helpers/message_helper.rb,
+	  lib/samizdat/models/content.rb, lib/samizdat/models/member.rb,
+	  lib/samizdat/models/message.rb, lib/samizdat/models/tag.rb,
+	  lib/samizdat/plugins/blog.rb,
+	  lib/samizdat/plugins/content_file.rb,
+	  lib/samizdat/plugins/content_inline.rb,
+	  lib/samizdat/plugins/image.rb, po/be.po, po/de.po, po/en.po,
+	  po/eo.po, po/es.po, po/fr.po, po/ja.po, po/pl.po, po/ru.po,
+	  po/ua.po, po/zh_CN.po, test/mock.rb, test/tc_robot.rb:
+	   * samizdat-role: command-line tool to grant and revoke moderator
+	  (and other) priviledges (addresses Savannah bug #24157)
+	   * when blog plugin is enabled, use blog location instead of
+	  resource id for a member link
+	   * RSS feed of blog messages
+	   * RDF: use parent property's transitive closure for
+	  subproperties
+	   * option to show all replies in one page, including nested;
+	  count subreplies when displaying number of replies to a message
+	   * major overhaul of message part links rewriting; Sanitize and
+	  Content API changed, Request#temporary_language introduced
+	   * fixed message cut for multibyte characters
+	   * merged i18n fixes from Boud: Savannah bugs #23687 (english
+	  user-friendliness), #23700 ('English' is a wrong msgid), patch
+	  #6560 (undetermined language)
+
+2009-04-10 15:07  angdraug
+
+	* data/samizdat/config.yaml, data/samizdat/defaults.yaml,
+	  data/samizdat/templates/frontpage_index.rhtml, doc/install.txt,
+	  lib/samizdat/controllers/frontpage_controller.rb,
+	  lib/samizdat/controllers/message_controller.rb,
+	  lib/samizdat/engine/deployment.rb,
+	  lib/samizdat/engine/helpers.rb, test/mock.rb:
+	   * Savannah patch #6278 by Boud (more_links): allow to display
+	  content of a message as part of Links on front page
+	   * Savannah patch #6467 by Boud (antispam_titles - partial):
+	  check message titles for spam, too
+	   * timezone conversion (based on Savannah patch #6505 by Boud,
+	  but using TZInfo instead of manual conversion)
+
+2009-04-09 09:35  angdraug
+
+	* po/: be.po, ru.po: translations updated: Belarusian, Russian
+
+2009-04-09 09:30  angdraug
+
+	* lib/samizdat/: components/list.rb,
+	  controllers/frontpage_controller.rb,
+	  controllers/moderation_controller.rb, engine/dataset.rb,
+	  models/member.rb, plugins/access.rb, plugins/role.rb:
+	  moderator_who patch from Boud refactored and merged (Savannah
+	  patch #6283); EmptyDataSet, ResourceList#page,
+	  AccessPlugin#find_who_can introduced
+
+2009-04-09 09:29  angdraug
+
+	* data/samizdat/defaults.yaml, lib/samizdat/engine/dispatcher.rb,
+	  lib/samizdat/engine/request.rb, lib/samizdat/plugins/blog.rb,
+	  lib/samizdat/plugins/language_prefix.rb,
+	  lib/samizdat/plugins/route.rb: Savannah patch #6171: allow to
+	  force preferred language via URL (using /lang/ route prefix)
+
+2009-04-09 09:29  angdraug
+
+	* bin/samizdat-import-feeds,
+	  lib/samizdat/helpers/syndication_helper.rb: don't send
+	  Accept-Language header when importing feeds (see i18n discussion
+	  in Savannah patch #5881); minor code duplications removed
+
+2009-04-09 09:28  angdraug
+
+	* lib/samizdat/controllers/diff_controller.rb: bugfix: don't use <<
+	  around gettextized strings
+
+2009-04-02 09:32  angdraug
+
+	* lib/samizdat/controllers/member_controller.rb: forced login
+	  downcasing removed: it turned out to be backwards-incompatible
+	  with legacy logins containing capital letters
+
+2009-04-02 08:49  angdraug
+
+	* data/samizdat/defaults.yaml, data/samizdat/css/savannah.css,
+	  data/samizdat/database/create-pgsql.sql,
+	  doc/migration/upgrade_from_v0.6.2.sql,
+	  lib/samizdat/components/resource.rb,
+	  lib/samizdat/controllers/resource_controller.rb,
+	  lib/samizdat/helpers/message_helper.rb,
+	  lib/samizdat/models/event.rb, lib/samizdat/plugins/blog.rb,
+	  po/be.po, po/ru.po:
+	   * remove traces of Tag.type from DB scripts
+	   * disable usage of TExp in Event
+	   * blog route rewriting plugin
+	   * show link from subtag to parent tag
+	   * make action links stand out more in Savannah theme
+
+2009-04-01 13:23  angdraug
+
+	* data/samizdat/defaults.yaml, data/samizdat/css/savannah.css,
+	  data/samizdat/database/create-pgsql.sql,
+	  doc/diagrams/samizdat_database.dia,
+	  doc/diagrams/samizdat_message_classes.dia,
+	  doc/migration/upgrade_from_v0.6.2.sql,
+	  lib/samizdat/controllers/member_controller.rb,
+	  lib/samizdat/controllers/message_controller.rb,
+	  lib/samizdat/helpers/message_helper.rb,
+	  lib/samizdat/models/tag.rb, lib/samizdat/plugins/image.rb,
+	  po/be.po, po/ru.po:
+	   * dropped unused Tag.type field
+	   * updated database schema and message classes diagrams
+	   * usability fixes
+	   * Belarusian and Russian translations updated
+
+2009-03-30 19:32  angdraug
+
+	* data/samizdat/defaults.yaml,
+	  lib/samizdat/controllers/message_controller.rb: make number of
+	  parts file fields configurable, increase default to 10
+
+2009-03-30 16:37  angdraug
+
+	* lib/samizdat/components/resource.rb,
+	  lib/samizdat/helpers/message_helper.rb,
+	  lib/samizdat/helpers/resource_helper.rb, po/be.po, po/ru.po:
+	  minor resource rendering improvements; Belarusian and Russian
+	  translations updated
+
+2009-03-30 14:12  angdraug
+
+	* doc/migration/upgrade_from_v0.6.2.sql: actualized DB migration
+	  script
+
+2009-03-30 11:35  angdraug
+
+	* README, TODO, data/samizdat/config.yaml,
+	  data/samizdat/defaults.yaml, data/samizdat/rdf.yaml,
+	  data/samizdat/xhtml.yaml, data/samizdat/css/default.css,
+	  data/samizdat/css/indy.css, data/samizdat/css/nihon.css,
+	  data/samizdat/css/savannah.css, data/samizdat/css/sky.css,
+	  data/samizdat/css/torun.css,
+	  data/samizdat/css/venezuela-centro.css,
+	  data/samizdat/database/create-pgsql.sql,
+	  data/samizdat/database/grant-pgsql.sql,
+	  data/samizdat/database/triggers-pgsql.sql,
+	  data/samizdat/rdf/focus.n3, data/samizdat/rdf/schema.n3,
+	  data/samizdat/rdf/tag.n3,
+	  data/samizdat/templates/frontpage_index.rhtml, doc/concepts.txt,
+	  doc/design-goals.txt, doc/install.txt, doc/notes.txt,
+	  doc/rdf-storage.txt, doc/references.txt,
+	  doc/diagrams/samizdat_message_classes.dia,
+	  doc/migration/upgrade_from_v0.6.2.sql, lib/samizdat/engine.rb,
+	  lib/samizdat/sanitize.rb, lib/samizdat/storage.rb,
+	  lib/samizdat/components/list.rb,
+	  lib/samizdat/components/resource.rb,
+	  lib/samizdat/controllers/event_controller.rb,
+	  lib/samizdat/controllers/foci_controller.rb,
+	  lib/samizdat/controllers/frontpage_controller.rb,
+	  lib/samizdat/controllers/item_controller.rb,
+	  lib/samizdat/controllers/member_controller.rb,
+	  lib/samizdat/controllers/message_controller.rb,
+	  lib/samizdat/controllers/moderation_controller.rb,
+	  lib/samizdat/controllers/query_controller.rb,
+	  lib/samizdat/controllers/resource_controller.rb,
+	  lib/samizdat/controllers/tags_controller.rb,
+	  lib/samizdat/engine/controller.rb,
+	  lib/samizdat/engine/deployment.rb,
+	  lib/samizdat/engine/dispatcher.rb,
+	  lib/samizdat/engine/helpers.rb, lib/samizdat/engine/plugins.rb,
+	  lib/samizdat/engine/preferences.rb,
+	  lib/samizdat/engine/request.rb, lib/samizdat/engine/session.rb,
+	  lib/samizdat/helpers/application_helper.rb,
+	  lib/samizdat/helpers/event_helper.rb,
+	  lib/samizdat/helpers/message_helper.rb,
+	  lib/samizdat/helpers/resource_helper.rb,
+	  lib/samizdat/models/content.rb, lib/samizdat/models/event.rb,
+	  lib/samizdat/models/focus.rb, lib/samizdat/models/member.rb,
+	  lib/samizdat/models/message.rb,
+	  lib/samizdat/models/moderation.rb, lib/samizdat/models/tag.rb,
+	  lib/samizdat/plugins/access.rb,
+	  lib/samizdat/plugins/content_inline.rb,
+	  lib/samizdat/plugins/file_default.rb,
+	  lib/samizdat/plugins/flash.rb,
+	  lib/samizdat/plugins/flowplayer.rb,
+	  lib/samizdat/plugins/image.rb, lib/samizdat/plugins/loader.rb,
+	  lib/samizdat/plugins/occupation.rb,
+	  lib/samizdat/plugins/profile.rb, lib/samizdat/plugins/role.rb,
+	  lib/samizdat/plugins/route.rb, lib/samizdat/plugins/tag.rb,
+	  lib/samizdat/plugins/tag_default.rb,
+	  lib/samizdat/plugins/virtual_tag.rb, po/be.po, po/ru.po,
+	  test/mock.rb, test/tc_application_helper.rb,
+	  test/tc_message_helper.rb, test/tc_robot.rb, test/tc_storage.rb:
+	  * RDF sub-properties, transitive closures, must-not-bind
+	  sub-patterns
+	   * focuses renamed back to tags
+	   * sub-tags may be defined by moderators
+	   * replies, versions, translations, sub-tags and other parts are
+	  generalized as transitive sub-properties of dct:isPartOf
+	   * back to PostgreSQL-only until new triggers are ported
+	   * new plugin APIs: tag, route
+	   * global API-wide plugin options
+	   * plugin dependencies
+	   * upload queue (fixes Savannah bug #20710)
+	   * upload message and its multimedia parts in one go
+	   * record original_filename
+	   * pass a block to Sanitize to programmatically filter out or
+	  rewrite HTML attribute values
+	   * manual cut-off mark for short message display
+	   * edit title of a multimedia message without re-uploading the
+	  file (fixes Savannah bug #20402)
+	   * lock message to prevent further replies
+	   * allow to recover accounts blocked due to lost confirmation
+	  email, show list of blocked accounts to moderators
+	   * login automatically on email confirmation
+	   * require old password to change password
+	   * generalized dynamic page cache out of FrontpageController
+	   * CSRF protection moved from ApplicationHelper to Request,
+	  allowing multiple secure forms per page
+	   * allow custom strings inside generated forms
+	   * use Message#load_from_rdf
+	   * ResourcesList component
+	   * frontpage template extracted from the controller
+	   * do not display redundant reply titles
+	   * do not display a setting if only one option is available
+	   * separate limit on number of tags in a list
+	   * cookie-based flash notices
+	   * calendar (incomplete)
+
+2009-02-12 12:14  angdraug
+
+	* doc/install.txt: installation instructions updated for Samizdat
+	  0.6.2
+
+2009-02-12 11:31  angdraug
+
+	* NEWS: Samizdat 0.6.2 release documented
+
+2009-02-11 19:31  angdraug
+
+	* README, TODO, bin/samizdat-create-database,
+	  bin/samizdat-drb-server, bin/samizdat-import-feeds,
+	  bin/update-indymedia-cities, cgi-bin/dispatch.rb,
+	  data/samizdat/defaults.yaml, data/samizdat/css/default.css,
+	  data/samizdat/css/savannah.css,
+	  data/samizdat/database/create-mysql.sql,
+	  data/samizdat/database/create-pgsql.sql,
+	  data/samizdat/database/create-sqlite3.sql,
+	  data/samizdat/database/grant-mysql.sql,
+	  data/samizdat/database/grant-pgsql.sql,
+	  data/samizdat/database/triggers-mysql.sql,
+	  data/samizdat/database/triggers-pgsql.sql,
+	  data/samizdat/database/triggers-sqlite3.sql,
+	  data/samizdat/js/flashembed.js, data/samizdat/rdf/focus.n3,
+	  data/samizdat/rdf/items.n3, data/samizdat/rdf/schema.n3,
+	  doc/examples/apache.conf, doc/examples/lighttpd.conf,
+	  lib/samizdat/antispam.rb, lib/samizdat/cache.rb,
+	  lib/samizdat/engine.rb, lib/samizdat/sanitize.rb,
+	  lib/samizdat/storage.rb, lib/samizdat/components/resource.rb,
+	  lib/samizdat/controllers/diff_controller.rb,
+	  lib/samizdat/controllers/foci_controller.rb,
+	  lib/samizdat/controllers/frontpage_controller.rb,
+	  lib/samizdat/controllers/history_controller.rb,
+	  lib/samizdat/controllers/item_controller.rb,
+	  lib/samizdat/controllers/member_controller.rb,
+	  lib/samizdat/controllers/message_controller.rb,
+	  lib/samizdat/controllers/moderation_controller.rb,
+	  lib/samizdat/controllers/query_controller.rb,
+	  lib/samizdat/controllers/resource_controller.rb,
+	  lib/samizdat/engine/controller.rb,
+	  lib/samizdat/engine/dataset.rb,
+	  lib/samizdat/engine/deployment.rb,
+	  lib/samizdat/engine/dispatcher.rb,
+	  lib/samizdat/engine/exceptions.rb,
+	  lib/samizdat/engine/helpers.rb, lib/samizdat/engine/password.rb,
+	  lib/samizdat/engine/preferences.rb,
+	  lib/samizdat/engine/request.rb, lib/samizdat/engine/session.rb,
+	  lib/samizdat/engine/view.rb,
+	  lib/samizdat/helpers/application_helper.rb,
+	  lib/samizdat/helpers/diff_helper.rb,
+	  lib/samizdat/helpers/message_helper.rb,
+	  lib/samizdat/helpers/resource_helper.rb,
+	  lib/samizdat/helpers/syndication_helper.rb,
+	  lib/samizdat/models/content.rb, lib/samizdat/models/focus.rb,
+	  lib/samizdat/models/member.rb, lib/samizdat/models/message.rb,
+	  lib/samizdat/models/moderation.rb,
+	  lib/samizdat/plugins/access.rb,
+	  lib/samizdat/plugins/content_file.rb,
+	  lib/samizdat/plugins/content_inline.rb,
+	  lib/samizdat/plugins/file_default.rb,
+	  lib/samizdat/plugins/flash.rb,
+	  lib/samizdat/plugins/flowplayer.rb, lib/samizdat/plugins/html.rb,
+	  lib/samizdat/plugins/image.rb,
+	  lib/samizdat/plugins/inline_default.rb,
+	  lib/samizdat/plugins/loader.rb,
+	  lib/samizdat/plugins/occupation.rb,
+	  lib/samizdat/plugins/plain_text.rb,
+	  lib/samizdat/plugins/profile.rb, lib/samizdat/plugins/role.rb,
+	  lib/samizdat/plugins/squish.rb, lib/samizdat/plugins/textile.rb,
+	  test/mock.rb, test/tc_application_helper.rb, test/tc_cache.rb,
+	  test/tc_message_helper.rb, test/tc_password.rb, test/tc_robot.rb,
+	  test/tc_storage.rb, test/tc_version.rb, test/ts_samizdat.rb,
+	  test/util.rb: added several missing CGI.escapeHTML for message
+	  title and member full name (CVS-2009-0359); escape single quote
+	  as &#39; for compatibility with IE; improved handling of REXML
+	  and Tidy errors in Sanitize; password encryption upgraded from
+	  MD5 to salted SHA-512; documentation, unit tests, copyright
+	  notices updated; Flowplayer integration updated for Flowplayer 3,
+	  flowplayer aliases removed from example web server configs; don't
+	  redirect back to login page on successful login; sort moderation
+	  log by descending date for consistency with all other lists
+
+2008-12-15 00:31  boud
+
+	* po/pl.po: again minor
+
+2008-12-15 00:28  boud
+
+	* po/pl.po: another minor change
+
+2008-12-14 22:59  boud
+
+	* po/pl.po: minor: flash-related translation corrections
+
+2008-10-28 18:49  angdraug
+
+	* lib/samizdat/plugins/textile.rb: make RedCloth <del> monkey fix
+	  forward-compatible with RedCloth4
+
+2008-10-28 18:48  angdraug
+
+	* lib/samizdat/: controllers/member_controller.rb,
+	  engine/request.rb: forced HTTPS forms fixes: handle return to
+	  frontpage as a special case (blank relative location unsets the
+	  cookie), enforce HTTPS on account creation, not only login
+
+2008-10-25 20:33  angdraug
+
+	* data/samizdat/defaults.yaml,
+	  data/samizdat/flowplayer/FlowPlayerDark.swf,
+	  lib/samizdat/plugins/flowplayer.rb: removed Flowplayer from
+	  Samizdat source code, documented where to download it from and
+	  how to configure flowplayer plugin to use it, added configuration
+	  options to change Flowplayer location and background color
+
+2008-10-25 19:35  angdraug
+
+	* data/samizdat/defaults.yaml, lib/samizdat/antispam.rb: fix for
+	  Savannah bug #24361: remove antispam sleep, it doesn't stop
+	  spambots and only uses up system resources
+
+2008-10-25 18:46  angdraug
+
+	* data/samizdat/defaults.yaml: don't link to an external URL in the
+	  default antispam configuration, default setup should be
+	  self-contained
+
+2008-10-25 17:27  angdraug
+
+	* data/samizdat/config.yaml,
+	  lib/samizdat/controllers/member_controller.rb,
+	  lib/samizdat/controllers/message_controller.rb,
+	  lib/samizdat/engine/request.rb: make sure session cookie secure
+	  flag is set when sending over HTTPS; allow to force encrypted
+	  login when HTTPS is available
+
+2008-10-22 16:51  angdraug
+
+	* lib/samizdat/engine/dataset.rb: fix for Savannah bug #24091:
+	  RdfDataSet fails to use optional parameter hash in cache key
+
+2008-10-22 16:36  angdraug
+
+	* lib/samizdat/sanitize.rb: fix for Savannah bug #23848: on ruby
+	  1.8.5 (Debian/etch), NameError is raised instead
+
+2008-09-28 19:28  angdraug
+
+	* lib/samizdat/sanitize.rb: suppress extra messages from tidy_pipe
+
+2008-09-28 19:27  angdraug
+
+	* lib/samizdat/models/content.rb: bugfix: pass StringIO uploads
+	  directly to Mahoro#buffer()
+
+2008-09-28 19:27  angdraug
+
+	* lib/samizdat/controllers/member_controller.rb: fix for Savannah
+	  bug #24185: sensible default redirect for /member/index
+
+2008-09-28 19:27  angdraug
+
+	* lib/samizdat/: engine.rb, engine/helpers.rb: make date/time
+	  handling compatible with Ruby/DBI 0.4.0
+
+2008-09-21 13:44  angdraug
+
+	* lib/samizdat/sanitize.rb: don't require tidy if we're using
+	  binary
+
+2008-09-21 13:26  angdraug
+
+	* lib/samizdat/sanitize.rb: due to Tidy/Ruby being broken by Ruby
+	  1.8.7-p72 DL taint fixes, Sanitize now prefers to use tidy binary
+	  via pipe over tidy.so via DL
+
+2008-08-31 17:59  angdraug
+
+	* data/samizdat/js/flashembed.js: flashembed updated to version
+	  0.31
+
+2008-08-31 17:08  angdraug
+
+	* data/samizdat/flowplayer/FlowPlayerDark.swf: Flowplayer updated
+	  to version 2.2.2
+
+2008-08-31 16:50  angdraug
+
+	* lib/samizdat/: components/resource.rb,
+	  controllers/frontpage_controller.rb,
+	  controllers/query_controller.rb,
+	  controllers/resource_controller.rb,
+	  helpers/application_helper.rb: RSS feeds fixed: Resource#rss is
+	  really uncacheable; ApplicationHelper#render_rss extracted to
+	  render a set of resources as RSS and cache the result
+
+2008-08-30 22:48  boud
+
+	* doc/translations.txt, po/es.po, po/fr.po, po/ja.po, po/pl.po:
+	  minor translation changes: fr + pl updated, es partially updated,
+	  ja updated to include msgid prompts and fuzzy guesses, trivial
+	  language corrections to translations.txt
+
+2008-08-30 00:09  boud
+
+	* data/samizdat/css/: nihon.css, venezuela-centro.css: two css
+	  files - nihon.css has outset button style for user action links
+
+2008-08-11 08:25  angdraug
+
+	* lib/samizdat/components/resource.rb: followup to the account
+	  creation bugfix: fix display of accounts with unset full name
+
+2008-08-07 16:17  angdraug
+
+	* data/samizdat/database/create-mysql.sql,
+	  data/samizdat/database/create-pgsql.sql,
+	  data/samizdat/database/create-sqlite3.sql,
+	  lib/samizdat/controllers/member_controller.rb,
+	  lib/samizdat/engine/session.rb, lib/samizdat/models/member.rb:
+	  bugfix: it is now possible to create account without full name,
+	  login is used as default substitute; removed code duplication
+	  between Member and Session
+
+2008-08-07 16:16  angdraug
+
+	* data/samizdat/defaults.yaml,
+	  lib/samizdat/controllers/message_controller.rb: map both x-ms-wmv
+	  and x-ms-asf to wmv extension, add support for realmedia files
+
+2008-08-07 16:16  angdraug
+
+	* doc/diagrams/samizdat_database.dia: fixed Role.role field name in
+	  the DB diagram
+
+2008-07-19 23:20  boud
+
+	* data/samizdat/defaults.yaml: improving explanation to sysadmin in
+	  defaults.yaml, so that we can close the bug
+	  https://savannah.nongnu.org/bugs/?21243
+
+2008-07-15 01:22  boud
+
+	* doc/examples/apache.conf: Closing patch #5930 - fixing ambiguous
+	  language in apache.conf comments.  The two interpretations of the
+	  old version are: # Replace the first "/samizdat" here with (your
+	  site location for all aliases) vs # (Replace the first
+	  "/samizdat" here with your site location) for all aliases See the
+	  replacement. With this, we can close patch #5930 IMHO.
+
+2008-07-03 18:15  angdraug
+
+	* test/tc_message_helper.rb: update unit tests for message_content
+	  == nil bug
+
+2008-07-03 14:48  boud
+
+	* data/samizdat/defaults.yaml, po/ja.po, po/pl.po: ja corrected by
+	  a native speaker and should be acceptable in default.yaml, ja
+	  also includes msgids and some msgstrs for recent patches, one
+	  line correction in pl, these have not yet been updated for
+	  post-070818
+
+2008-07-03 14:16  angdraug
+
+	* data/samizdat/flowplayer/FlowPlayerDark.swf: Flowplayer updated
+	  to version 2.2.1
+
+2008-07-03 14:15  angdraug
+
+	* doc/: diagrams/samizdat_database.dia,
+	  diagrams/samizdat_deployment.dia,
+	  diagrams/samizdat_message_classes.dia, diagrams/samizdat_mvc.dia,
+	  slides/lvee2008_samizdat.xml: added Dia diagrams and LVEE-2008
+	  slides
+
+2008-07-03 14:14  angdraug
+
+	* lib/samizdat/components/resource.rb: fixed VoteComponent that was
+	  broken by role-based access control changes
+
+2008-07-03 14:14  angdraug
+
+	* lib/samizdat/storage.rb: make sure mutually referencing records
+	  are inserted in the right order during RDF#assert
+
+2008-07-03 14:13  angdraug
+
+	* lib/samizdat/: helpers/message_helper.rb, models/content.rb: fix
+	  message_content == nil bug
+
+2008-07-03 14:13  angdraug
+
+	* data/samizdat/defaults.yaml, lib/samizdat/plugins/flowplayer.rb:
+	  fix flv mime type to match what Mahoro returns
+
+2008-05-25 15:50  angdraug
+
+	* lib/samizdat/models/member.rb: fixed a missing title in
+	  MemberController; localize action names in access denied error
+
+2008-05-25 15:49  angdraug
+
+	* doc/install.txt, lib/samizdat/models/content.rb: don't trust
+	  content_type coming with the request, use Mahoro library
+	  (libmagic) to detect file type instead
+
+2008-05-25 15:48  angdraug
+
+	* lib/samizdat/models/message.rb: prepend 'Message' to 404 error
+	  when raised from Message
+
+2008-05-25 15:46  angdraug
+
+	* lib/samizdat/storage.rb: added minor comment to Storage
+
+2008-05-25 15:46  angdraug
+
+	* lib/samizdat/plugins/role.rb: removed debug output
+
+2008-05-25 15:45  angdraug
+
+	* lib/samizdat/controllers/member_controller.rb, po/be.po,
+	  po/ru.po: fixed a missing title in MemberController; localize
+	  action names in access denied error
+
+2008-05-13 09:14  boud
+
+	* po/ja.po: wrong translation for 'translation' corrected in ja.po
+
+2008-05-10 17:06  angdraug
+
+	* data/samizdat/flowplayer/FlowPlayerDark.swf: Flowplayer binary
+	  included in Samizdat source, see flowplayer.org for source code
+
+2008-05-10 17:04  angdraug
+
+	* COPYING, README, bin/samizdat-create-database,
+	  bin/samizdat-drb-server, bin/samizdat-import-feeds,
+	  bin/update-indymedia-cities, cgi-bin/dispatch.rb,
+	  data/samizdat/config.yaml, data/samizdat/defaults.yaml,
+	  data/samizdat/css/default.css, data/samizdat/css/savannah.css,
+	  data/samizdat/css/sky.css,
+	  data/samizdat/database/create-mysql.sql,
+	  data/samizdat/database/create-pgsql.sql,
+	  data/samizdat/database/create-sqlite3.sql,
+	  data/samizdat/database/grant-mysql.sql,
+	  data/samizdat/database/grant-pgsql.sql,
+	  data/samizdat/database/triggers-mysql.sql,
+	  data/samizdat/database/triggers-pgsql.sql,
+	  data/samizdat/database/triggers-sqlite3.sql,
+	  data/samizdat/js/flashembed.js, data/samizdat/rdf/focus.n3,
+	  data/samizdat/rdf/items.n3, data/samizdat/rdf/schema.n3,
+	  data/samizdat/templates/page_layout.rhtml,
+	  doc/examples/apache.conf, doc/examples/lighttpd.conf,
+	  doc/man/samizdat-create-database.1,
+	  doc/man/samizdat-drb-server.1, doc/man/samizdat-import-feeds.1,
+	  doc/man/update-indymedia-cities.1, lib/samizdat/antispam.rb,
+	  lib/samizdat/cache.rb, lib/samizdat/engine.rb,
+	  lib/samizdat/sanitize.rb, lib/samizdat/storage.rb,
+	  lib/samizdat/components/resource.rb,
+	  lib/samizdat/controllers/diff_controller.rb,
+	  lib/samizdat/controllers/foci_controller.rb,
+	  lib/samizdat/controllers/frontpage_controller.rb,
+	  lib/samizdat/controllers/history_controller.rb,
+	  lib/samizdat/controllers/item_controller.rb,
+	  lib/samizdat/controllers/member_controller.rb,
+	  lib/samizdat/controllers/message_controller.rb,
+	  lib/samizdat/controllers/moderation_controller.rb,
+	  lib/samizdat/controllers/query_controller.rb,
+	  lib/samizdat/controllers/resource_controller.rb,
+	  lib/samizdat/engine/controller.rb,
+	  lib/samizdat/engine/dataset.rb,
+	  lib/samizdat/engine/deployment.rb,
+	  lib/samizdat/engine/dispatcher.rb,
+	  lib/samizdat/engine/exceptions.rb,
+	  lib/samizdat/engine/helpers.rb,
+	  lib/samizdat/engine/preferences.rb,
+	  lib/samizdat/engine/request.rb, lib/samizdat/engine/session.rb,
+	  lib/samizdat/engine/view.rb,
+	  lib/samizdat/helpers/application_helper.rb,
+	  lib/samizdat/helpers/diff_helper.rb,
+	  lib/samizdat/helpers/message_helper.rb,
+	  lib/samizdat/helpers/resource_helper.rb,
+	  lib/samizdat/helpers/syndication_helper.rb,
+	  lib/samizdat/models/content.rb, lib/samizdat/models/focus.rb,
+	  lib/samizdat/models/member.rb, lib/samizdat/models/message.rb,
+	  lib/samizdat/models/moderation.rb,
+	  lib/samizdat/plugins/access.rb,
+	  lib/samizdat/plugins/content_file.rb,
+	  lib/samizdat/plugins/content_inline.rb,
+	  lib/samizdat/plugins/file_default.rb,
+	  lib/samizdat/plugins/flash.rb,
+	  lib/samizdat/plugins/flowplayer.rb, lib/samizdat/plugins/html.rb,
+	  lib/samizdat/plugins/image.rb,
+	  lib/samizdat/plugins/inline_default.rb,
+	  lib/samizdat/plugins/loader.rb,
+	  lib/samizdat/plugins/occupation.rb,
+	  lib/samizdat/plugins/plain_text.rb,
+	  lib/samizdat/plugins/profile.rb, lib/samizdat/plugins/role.rb,
+	  lib/samizdat/plugins/squish.rb, lib/samizdat/plugins/textile.rb,
+	  po/be.po, po/eo.po, po/pl.po, po/ru.po, po/ua.po, test/mock.rb,
+	  test/tc_application_helper.rb, test/tc_cache.rb,
+	  test/tc_message_helper.rb, test/tc_robot.rb, test/tc_storage.rb,
+	  test/tc_version.rb, test/ts_samizdat.rb, test/util.rb: license
+	  upgraded to GPL 3; Flowplayer flash video player integrated (flv
+	  and mp4 files supported); member settings split into profile,
+	  account, and UI settings pages, implemented flash notices in
+	  Request; role-based access control plugin: list of moderators is
+	  now stored in db instead of config; minor UI fixes and
+	  improvements; Belarusian and Russian translations updated
+
+2008-04-11 21:14  angdraug
+
+	* lib/samizdat/: controllers/frontpage_controller.rb,
+	  controllers/member_controller.rb, engine/deployment.rb,
+	  engine/request.rb, engine/view.rb, models/content.rb,
+	  plugins/image.rb, plugins/loader.rb: untaint trusted configs
+
+2008-04-11 21:13  angdraug
+
+	* cgi-bin/dispatch.rb: make sure SAFE level is at least 1
+
+2008-04-06 22:36  angdraug
+
+	* lib/samizdat/: models/content.rb, plugins/loader.rb: several
+	  mod_ruby-specific security errors fixed
+
+2008-04-06 21:25  angdraug
+
+	* TODO, doc/design-goals.txt, po/be.po, po/ru.po: documentation,
+	  Belarusian and Russian translations updated
+
+2008-04-06 21:14  angdraug
+
+	* bin/samizdat-import-feeds, data/samizdat/defaults.yaml,
+	  data/samizdat/css/default.css, data/samizdat/css/indy.css,
+	  data/samizdat/css/savannah.css, data/samizdat/css/sky.css,
+	  lib/samizdat/engine.rb, lib/samizdat/components/resource.rb,
+	  lib/samizdat/controllers/frontpage_controller.rb,
+	  lib/samizdat/controllers/message_controller.rb,
+	  lib/samizdat/controllers/query_controller.rb,
+	  lib/samizdat/controllers/resource_controller.rb,
+	  lib/samizdat/engine/deployment.rb,
+	  lib/samizdat/engine/request.rb,
+	  lib/samizdat/helpers/diff_helper.rb,
+	  lib/samizdat/helpers/message_helper.rb,
+	  lib/samizdat/models/content.rb, lib/samizdat/models/message.rb,
+	  lib/samizdat/plugins/content_file.rb,
+	  lib/samizdat/plugins/content_inline.rb,
+	  lib/samizdat/plugins/file_default.rb,
+	  lib/samizdat/plugins/html.rb, lib/samizdat/plugins/image.rb,
+	  lib/samizdat/plugins/inline_default.rb,
+	  lib/samizdat/plugins/loader.rb,
+	  lib/samizdat/plugins/plain_text.rb,
+	  lib/samizdat/plugins/squish.rb, lib/samizdat/plugins/textile.rb,
+	  test/mock.rb, test/tc_message_helper.rb, test/tc_robot.rb,
+	  test/tc_storage.rb, test/util.rb: introduced plugins system;
+	  extracted content rendering into plugins; image plugin generates
+	  and displays reduced versions of images; Message.replace! now
+	  removes old file if it exists; extracted Resource#rss from
+	  Message and QueryController; replaced samizdat_site_name global
+	  with samizdat_current_request
+
+2008-03-22 14:38  angdraug
+
+	* doc/install.txt, lib/samizdat/storage.rb,
+	  lib/samizdat/engine/helpers.rb,
+	  lib/samizdat/helpers/message_helper.rb: documentation and error
+	  handling fixes
+
+2008-03-22 14:37  angdraug
+
+	* lib/samizdat/models/message.rb: based on patch by mend0za:
+	  include description in RSS feeds
+
+2008-03-20 21:06  mend0za
+
+	* lib/samizdat/engine/: deployment.rb, helpers.rb: configuration
+	  handling: fix for directories not tailing by /
+
+2008-03-09 11:08  angdraug
+
+	* po/be.po: fixed incorrect email for Hleb Valoshka
+
+2008-03-04 13:51  angdraug
+
+	* lib/samizdat/engine.rb: update 'all classes equal' hack for
+	  Ruby/GetText 1.90
+
+2008-03-04 13:04  angdraug
+
+	* lib/samizdat/engine.rb, test/tc_version.rb: update version to
+	  0.6.1
+
+2008-03-04 12:37  angdraug
+
+	* NEWS, README, doc/concepts.txt, doc/design-goals.txt,
+	  doc/references.txt: documentation updated for Samizdat 0.6.1
+	  release
+
+2008-02-25 14:55  angdraug
+
+	* lib/samizdat/: storage.rb, components/resource.rb,
+	  controllers/message_controller.rb,
+	  controllers/query_controller.rb, engine/exceptions.rb: replace
+	  remnants of 'skip' parameter with 'page', untie Storage from
+	  Samizdat engine so that it can be used stand-alone
+
+2008-02-24 10:39  angdraug
+
+	* data/samizdat/database/create-mysql.sql,
+	  data/samizdat/database/create-pgsql.sql,
+	  data/samizdat/database/create-sqlite3.sql,
+	  lib/samizdat/storage.rb, lib/samizdat/helpers/message_helper.rb,
+	  lib/samizdat/helpers/syndication_helper.rb,
+	  lib/samizdat/models/message.rb: fixes: more resiliense against
+	  malformed configs (from patch #5881), cripple links and images in
+	  hidden messages (patch #6372); optimizations: index on Resource
+	  (uriref), load core message parameters using single SQL query
+
+2008-02-22 23:37  angdraug
+
+	* lib/samizdat/antispam.rb, lib/samizdat/components/resource.rb,
+	  lib/samizdat/controllers/message_controller.rb,
+	  lib/samizdat/controllers/resource_controller.rb,
+	  lib/samizdat/engine/dataset.rb, lib/samizdat/engine/request.rb,
+	  lib/samizdat/helpers/message_helper.rb,
+	  lib/samizdat/models/moderation.rb, po/be.po, po/ru.po: multiple
+	  resource rendering improvements: separate :full and :page modes,
+	  use :full instead of :short where full non-translated message
+	  should be displayed, use :short instead of :list_item for
+	  messages on member page, include link to votes in statement page;
+	  bugfixes: no moderation log when previewing a new message, better
+	  fix for bug #21490; Belarusian and Russian translations updated
+
+2008-02-22 23:33  angdraug
+
+	* TODO: defined todo items for release 0.6.2
+
+2008-02-22 23:33  angdraug
+
+	* bin/samizdat-import-feeds: fail-safe feed parsing
+
+2008-02-22 00:51  boud
+
+	* po/zh_CN.po: initial rough, partial version of zh_CN.po,
+	  samizdat-0.6.0.070818-1 seems to require installing the .mo file
+	  in   zh/  and using  zh  in the config.yaml file instead of
+	  zh_CN/ and zh_CN respectively
+
+2008-02-14 19:56  angdraug
+
+	* lib/samizdat/helpers/application_helper.rb: don't << to a
+	  localized string, GetText doesn't like that
+
+2008-02-14 18:15  angdraug
+
+	* TODO, data/samizdat/database/grant-pgsql.sql,
+	  doc/rdf-storage.txt, lib/samizdat/cache.rb,
+	  lib/samizdat/engine.rb, lib/samizdat/sanitize.rb,
+	  lib/samizdat/storage.rb, lib/samizdat/components/resource.rb,
+	  lib/samizdat/controllers/foci_controller.rb,
+	  lib/samizdat/controllers/frontpage_controller.rb,
+	  lib/samizdat/controllers/history_controller.rb,
+	  lib/samizdat/controllers/member_controller.rb,
+	  lib/samizdat/controllers/moderation_controller.rb,
+	  lib/samizdat/controllers/query_controller.rb,
+	  lib/samizdat/controllers/resource_controller.rb,
+	  lib/samizdat/engine/dataset.rb, lib/samizdat/engine/helpers.rb,
+	  lib/samizdat/helpers/application_helper.rb,
+	  lib/samizdat/helpers/message_helper.rb,
+	  lib/samizdat/models/moderation.rb, po/be.po, po/ru.po,
+	  test/tc_storage.rb: major update of RDF storage: OPTIONAL
+	  sub-patterns (in SELECT only for now), per-statement FILTERs; new
+	  DataSet based pagination system; show pending moderation requests
+	  to everyone, force lowercase login names, use REXML::Formatters
+	  in Sanitize when available, documentation updated
+
+2008-01-20 16:02  angdraug
+
+	* README, TODO, doc/slides/barcampsheffield2007_samizdat.xml,
+	  lib/samizdat/engine.rb, lib/samizdat/components/resource.rb,
+	  lib/samizdat/controllers/member_controller.rb,
+	  lib/samizdat/controllers/message_controller.rb,
+	  lib/samizdat/controllers/moderation_controller.rb,
+	  lib/samizdat/engine/exceptions.rb,
+	  lib/samizdat/engine/request.rb,
+	  lib/samizdat/helpers/application_helper.rb,
+	  lib/samizdat/helpers/message_helper.rb,
+	  lib/samizdat/models/message.rb,
+	  lib/samizdat/models/moderation.rb, po/be.po, po/ru.po,
+	  test/tc_message_helper.rb: notify moderator functionality added;
+	  Moderation model introduced; bugfixes: #20678 (redirect_when_done
+	  cookie is used to always redirect back to where login process was
+	  started from), always default to parent's title, don't append new
+	  lines to the end of message body; API changes: Request#redirect
+	  now requires '' to redirect to site base, Request#set_cookie
+	  'expires' parameter defaults to non-persistent (session) cookie,
+	  #forever value now must be passed explicitly; Belarusian and
+	  Russian translations updated; documentation updated, Barcamp
+	  Sheffield 2007 slides added
+
+2007-11-12 00:12  angdraug
+
+	* TODO, bin/samizdat-drb-server, doc/install.txt,
+	  doc/examples/apache.conf, lib/samizdat/cache.rb,
+	  lib/samizdat/controllers/message_controller.rb,
+	  lib/samizdat/helpers/application_helper.rb,
+	  lib/samizdat/helpers/message_helper.rb,
+	  lib/samizdat/models/content.rb, po/be.po, po/ru.po: show
+	  non-inline message file size; rate-limit cache.flush; inform
+	  guest users that they can't edit even open-for-all messages;
+	  Belarusian and Russian translations updated; minor documentation
+	  updates
+
+2007-11-04 23:39  angdraug
+
+	* lib/samizdat/controllers/moderation_controller.rb: bugfix:
+	  models/moderation never came to be
+
+2007-11-04 21:00  angdraug
+
+	* test/: mock.rb, tc_application_helper.rb: unit tests updated
+
+2007-11-04 20:45  angdraug
+
+	* data/samizdat/config.yaml, data/samizdat/defaults.yaml,
+	  data/samizdat/database/create-mysql.sql,
+	  data/samizdat/database/create-pgsql.sql,
+	  data/samizdat/database/create-sqlite3.sql, doc/install.txt,
+	  lib/samizdat/components/resource.rb,
+	  lib/samizdat/controllers/frontpage_controller.rb,
+	  lib/samizdat/controllers/message_controller.rb,
+	  lib/samizdat/controllers/moderation_controller.rb,
+	  lib/samizdat/controllers/resource_controller.rb,
+	  lib/samizdat/engine/request.rb,
+	  lib/samizdat/helpers/message_helper.rb,
+	  lib/samizdat/models/message.rb, po/be.po, po/ru.po: reverted back
+	  to not swapping message with its preferred translation in full
+	  mode; per-resource moderation logs; more DB indexes; RSS import
+	  documented; Belarusian and Russian translations updated; store
+	  Antispam object in persistent cache; fixes for bugs #21286,
+	  #20932, #21490, #21242, setting focus during publishing of new
+	  message, pagination when mixing replies and translations
+
+2007-11-01 14:27  boud
+
+	* po/: es.po, fr.po: es+fr translation strings for a few patches
+
+2007-09-09 10:14  boud
+
+	* lib/samizdat/antispam.rb, po/pl.po: pl.po: multipublish patch,
+	  antispam.rb typo correction (/'delay'/,"'delay_limit'")
+
+2007-08-25 21:03  boud
+
+	* po/ja.po: a few strings used in patches are added here
+
+2007-08-25 04:45  boud
+
+	* po/ja.po: a few spaces
+
+2007-08-24 02:39  boud
+
+	* po/pl.po: two strings for multipublish patch 0.4
+
+2007-08-20 22:42  boud
+
+	* po/: es.po, fr.po, ja.po, pl.po: es/fr/ja/pl translations of
+	  'Alternatively, upload a file ... '
+
+2007-08-19 15:55  angdraug
+
+	* lib/samizdat/: components/resource.rb,
+	  controllers/message_controller.rb: fixed setting focus during
+	  publishing of new message
+
+2007-08-18 17:18  angdraug
+
+	* doc/man/samizdat-import-feeds.1: man page for
+	  samizdat-import-feeds
+
+2007-08-18 16:51  angdraug
+
+	* TODO, bin/samizdat-import-feeds, data/samizdat/config.yaml,
+	  data/samizdat/defaults.yaml, data/samizdat/css/default.css,
+	  data/samizdat/css/indy.css, data/samizdat/css/savannah.css,
+	  data/samizdat/css/sky.css, lib/samizdat/antispam.rb,
+	  lib/samizdat/cache.rb, lib/samizdat/engine.rb,
+	  lib/samizdat/controllers/frontpage_controller.rb,
+	  lib/samizdat/controllers/member_controller.rb,
+	  lib/samizdat/controllers/message_controller.rb,
+	  lib/samizdat/engine/antispam.rb,
+	  lib/samizdat/engine/deployment.rb,
+	  lib/samizdat/engine/helpers.rb, lib/samizdat/engine/request.rb,
+	  lib/samizdat/helpers/application_helper.rb,
+	  lib/samizdat/helpers/syndication_helper.rb,
+	  lib/samizdat/models/content.rb, po/be.po, po/ru.po: import feeds
+	  patch by Boud refactored and integrated; Cache expiry made more
+	  flexible, persistent cross-site cache added; Antipam module
+	  unbundled from engine into standalone library; bugs fixed: #19830
+	  (upload file message), #20303 (basic interface fixed and
+	  expanded), #20305 (don't display focus option without vote
+	  acess), #20678 (don't redirect to referer on login/logout),
+	  #20491 (fixed inconsistent handling of form action location by
+	  CSRF protection); documentation updated; minor refactorings and
+	  cleanups
+
+2007-08-07 22:22  boud
+
+	* doc/install.txt: clarifications: apache.conf is a samizdat file;
+	  importance of .yaml config files
+
+2007-07-06 00:30  boud
+
+	* doc/install.txt: trivial: s/default.yaml/defaults.yaml/
+
+2007-07-01 00:11  boud
+
+	* po/pl.po: minor pl language correction while waiting for fix to
+	  bug #19830
+
+2007-06-23 22:34  boud
+
+	* po/pl.po: minor: typo, antispam message
+
+2007-06-20 00:46  boud
+
+	* po/: es.po, fr.po, pl.po: minor {es/fr/pl}.po: removed disabling
+	  'fuzzy' comments
+
+2007-06-18 21:59  boud
+
+	* po/pl.po: minor pl replace of replacement string for replace
+	  action ;)
+
+2007-06-18 19:51  angdraug
+
+	* lib/samizdat/: components/resource.rb, helpers/message_helper.rb,
+	  models/focus.rb, models/message.rb: translations overhaul
+	  inspired by separate translations patch by Boud: swap preferred
+	  translation and original, don't show translations in the list of
+	  replies, don't allow to post reply to a translation
+
+2007-06-18 11:04  angdraug
+
+	* lib/samizdat/controllers/message_controller.rb: more faulty logic
+	  in message editing
+
+2007-06-17 17:55  angdraug
+
+	* data/samizdat/defaults.yaml, lib/samizdat/cache.rb,
+	  lib/samizdat/controllers/message_controller.rb,
+	  lib/samizdat/engine/antispam.rb,
+	  lib/samizdat/engine/controller.rb,
+	  lib/samizdat/engine/exceptions.rb,
+	  lib/samizdat/engine/helpers.rb: antispam module (by Boud with
+	  some refactoring); log_exception helper extracted from
+	  ErrorController; clarified that Cache#fetch_or_add is the
+	  preferred method; fixed fix for #20134
+
+2007-06-16 11:21  angdraug
+
+	* lib/samizdat/controllers/message_controller.rb: bug #20134: wrong
+	  edit message permission check
+
+2007-06-03 22:37  boud
+
+	* data/samizdat/config.yaml: ja: japanese header added for default
+	  installation
+
+2007-06-02 01:42  boud
+
+	* po/ja.po: experimental version of ja.po; deliberately not yet
+	  added to config.yaml
+
+2007-05-20 22:11  boud
+
+	* po/: es.po, fr.po, pl.po: es + fr + pl updates after major
+	  20070501 revision; Plural-Forms definitions corrected
+
+2007-05-20 13:32  angdraug
+
+	* lib/samizdat/controllers/message_controller.rb: set creator in
+	  message/edit (can be different from original when open-for-all)
+
+2007-05-19 12:54  angdraug
+
+	* lib/samizdat/components/resource.rb: don't cache
+	  MessageComponent#info
+
+2007-05-19 12:36  angdraug
+
+	* data/samizdat/config.yaml, doc/examples/apache.conf: merged in
+	  config file comments clarifications by Boud
+
+2007-05-19 12:25  angdraug
+
+	* lib/samizdat/components/resource.rb: fixed mutual recursion
+	  between MessageComponent and Focus (bug #19903)
+
+2007-05-19 12:25  angdraug
+
+	* lib/samizdat/cache.rb: monkey fixes for bugs in sync.rb
+
+2007-05-12 20:28  boud
+
+	* doc/examples/apache.conf: less ambiguity in comments in suggested
+	  apache.conf file
+
+2007-05-09 20:50  angdraug
+
+	* AUTHORS: translators list updated
+
+2007-05-09 20:21  angdraug
+
+	* lib/samizdat/: cache.rb, controllers/frontpage_controller.rb,
+	  engine/deployment.rb, helpers/application_helper.rb: Cache
+	  rewritten for better deadlock avoidance, FIFO replaced with
+	  flexible replacement policy defaulting to LRU, debugging to
+	  syslog added, has_key? removed
+
+2007-05-06 11:55  angdraug
+
+	* lib/samizdat/: engine/request.rb, helpers/application_helper.rb:
+	  use cache instead of database for CSRF protection; input
+	  validation improvement in Request
+
+2007-05-05 13:18  angdraug
+
+	* lib/samizdat/: controllers/diff_controller.rb,
+	  controllers/frontpage_controller.rb,
+	  controllers/member_controller.rb,
+	  controllers/query_controller.rb,
+	  controllers/resource_controller.rb,
+	  helpers/application_helper.rb, models/message.rb: language list
+	  restored (Boud); account creation fixed; several RSS fixes; input
+	  validation improvements in DiffController and QueryController
+
+2007-05-04 00:12  boud
+
+	* lib/samizdat/engine/controller.rb, po/be.po, po/ru.po: corrected
+	  spelling error visible to users:  s/priviledge/privilege/
+
+2007-05-01 20:31  angdraug
+
+	* lib/samizdat/helpers/message_helper.rb, po/be.po, test/mock.rb,
+	  test/tc_application_helper.rb, test/tc_message_helper.rb,
+	  test/tc_template.rb, test/ts_samizdat.rb, test/util.rb:
+	  Belarusian translation updated, unit tests updated for
+	  application and message helpers
+
+2007-04-25 21:04  angdraug
+
+	* TODO, doc/examples/lighttpd.conf,
+	  lib/samizdat/controllers/frontpage_controller.rb,
+	  lib/samizdat/controllers/member_controller.rb,
+	  lib/samizdat/controllers/message_controller.rb,
+	  lib/samizdat/controllers/moderation_controller.rb,
+	  lib/samizdat/controllers/resource_controller.rb,
+	  lib/samizdat/engine/deployment.rb,
+	  lib/samizdat/engine/helpers.rb,
+	  lib/samizdat/engine/preferences.rb,
+	  lib/samizdat/engine/request.rb, lib/samizdat/engine/session.rb,
+	  lib/samizdat/helpers/application_helper.rb,
+	  lib/samizdat/helpers/message_helper.rb,
+	  lib/samizdat/models/content.rb, po/ru.po, test/tc_robot.rb: CSRF
+	  protection for message, resource, and member controllers;
+	  translation of actions in moderation log; cache sites map
+	  configuration, ignore trailing slashes in URI prefixes;
+	  RequestSingleton reduced to ; upload location handling moved from
+	  Content to Request
+
+2007-04-22 14:05  angdraug
+
+	* data/samizdat/templates/page_layout.rhtml,
+	  doc/examples/apache.conf, doc/examples/lighttpd.conf,
+	  lib/samizdat/components/resource.rb,
+	  lib/samizdat/controllers/member_controller.rb,
+	  lib/samizdat/controllers/message_controller.rb,
+	  lib/samizdat/controllers/moderation_controller.rb,
+	  lib/samizdat/controllers/query_controller.rb,
+	  lib/samizdat/controllers/resource_controller.rb,
+	  lib/samizdat/engine/deployment.rb,
+	  lib/samizdat/engine/dispatcher.rb,
+	  lib/samizdat/engine/helpers.rb, lib/samizdat/engine/request.rb,
+	  lib/samizdat/models/content.rb, test/tc_robot.rb,
+	  test/ts_samizdat.rb, test/util.rb: unit tests fixed (except
+	  tc_template); lighttpd support added, route handling straightened
+	  (Apache config also changed)
+
+2007-04-18 19:55  angdraug
+
+	* po/: be.po, ru.po: Russian and Belarusian translations updated
+
+2007-04-17 21:08  angdraug
+
+	* data/samizdat/css/default.css, data/samizdat/css/indy.css,
+	  data/samizdat/css/savannah.css, data/samizdat/css/sky.css,
+	  doc/translations.txt,
+	  lib/samizdat/controllers/frontpage_controller.rb,
+	  lib/samizdat/controllers/member_controller.rb,
+	  lib/samizdat/controllers/message_controller.rb,
+	  lib/samizdat/helpers/message_helper.rb,
+	  lib/samizdat/helpers/resource_helper.rb: link to foci moved to
+	  top focuses as 'more'; stylesheets updated for action links; show
+	  message preview for hide/unhide; translation instructions updated
+	  for new code layout
+
+2007-04-17 17:48  angdraug
+
+	* cgi-bin/dispatch.rb, cgi-bin/foci.rb, cgi-bin/history.rb,
+	  cgi-bin/index.rb, cgi-bin/item.rb, cgi-bin/login.rb,
+	  cgi-bin/logout.rb, cgi-bin/member.rb, cgi-bin/message.rb,
+	  cgi-bin/moderation.rb, cgi-bin/query.rb, cgi-bin/resource.rb,
+	  data/samizdat/config.yaml, data/samizdat/defaults.yaml,
+	  data/samizdat/database/create-mysql.sql,
+	  data/samizdat/database/create-pgsql.sql,
+	  data/samizdat/database/create-sqlite3.sql,
+	  data/samizdat/templates/page_layout.rhtml,
+	  doc/examples/apache.conf, lib/samizdat/cache.rb,
+	  lib/samizdat/engine.rb, lib/samizdat/storage.rb,
+	  lib/samizdat/components/resource.rb,
+	  lib/samizdat/controllers/diff_controller.rb,
+	  lib/samizdat/controllers/foci_controller.rb,
+	  lib/samizdat/controllers/frontpage_controller.rb,
+	  lib/samizdat/controllers/history_controller.rb,
+	  lib/samizdat/controllers/item_controller.rb,
+	  lib/samizdat/controllers/member_controller.rb,
+	  lib/samizdat/controllers/message_controller.rb,
+	  lib/samizdat/controllers/moderation_controller.rb,
+	  lib/samizdat/controllers/query_controller.rb,
+	  lib/samizdat/controllers/resource_controller.rb,
+	  lib/samizdat/engine/controller.rb,
+	  lib/samizdat/engine/deployment.rb,
+	  lib/samizdat/engine/dispatcher.rb, lib/samizdat/engine/focus.rb,
+	  lib/samizdat/engine/helpers.rb, lib/samizdat/engine/message.rb,
+	  lib/samizdat/engine/preferences.rb,
+	  lib/samizdat/engine/request.rb, lib/samizdat/engine/resource.rb,
+	  lib/samizdat/engine/session.rb, lib/samizdat/engine/template.rb,
+	  lib/samizdat/engine/view.rb,
+	  lib/samizdat/helpers/application_helper.rb,
+	  lib/samizdat/helpers/diff_helper.rb,
+	  lib/samizdat/helpers/message_helper.rb,
+	  lib/samizdat/helpers/resource_helper.rb,
+	  lib/samizdat/models/content.rb, lib/samizdat/models/focus.rb,
+	  lib/samizdat/models/member.rb, lib/samizdat/models/message.rb:
+	  MVC refactoring (Apache config change required, todo: css, po,
+	  test); passwd renamed to password (DB change required); digest()
+	  updated for Ruby 1.8.5; diff now includes images and file links
+
+2007-02-26 03:13  angdraug
+
+	* cgi-bin/history.rb, cgi-bin/index.rb, cgi-bin/member.rb,
+	  cgi-bin/moderation.rb, cgi-bin/query.rb, cgi-bin/resource.rb,
+	  doc/install.txt, lib/samizdat/cache.rb,
+	  lib/samizdat/engine/focus.rb, lib/samizdat/engine/helpers.rb,
+	  lib/samizdat/engine/message.rb, lib/samizdat/engine/resource.rb,
+	  lib/samizdat/engine/session.rb, lib/samizdat/engine/template.rb,
+	  po/be.po, po/de.po, po/eo.po, po/es.po, po/fr.po, po/pl.po,
+	  po/ru.po, po/ua.po, test/tc_robot.rb, test/ts_samizdat.rb:
+	  Resource refactored: render*() replaced by polymorphic resource
+	  controllers; smarter locking in Samizdat::Cache to make
+	  fetch_or_add() re-enterable; option to show hidden messages
+	  removed; set defaults for environment variables required by the
+	  tests
+
+2007-02-23 23:46  boud
+
+	* data/samizdat/config.yaml: (es) front page default header -
+	  (headers in be/ru/eo/ua still missing)
+
+2007-02-18 17:57  angdraug
+
+	* TODO, cgi-bin/history.rb, data/samizdat/xhtml.yaml,
+	  doc/install.txt, lib/samizdat/engine/message.rb,
+	  lib/samizdat/engine/template.rb, po/be.po, po/ru.po:
+	  documentation update (new bug, recommended modules); inherit
+	  hidden status from current message version, reflect hidden status
+	  in a diff; fix absolute image paths starting with //;
+	  ASCII-encode ellipsis (Boud); fix to let rgettext pick up Front
+	  Page, Belarusian and Russian translations updated
+
+2007-02-14 00:51  boud
+
+	* po/: es.po, fr.po, pl.po: pl.po - several small corrections;
+	  pl+es+fr  Front Page in template.rb
+
+2007-02-12 20:21  boud
+
+	* po/pl.po: minor grammatical corrections in pl.po
+
+2007-02-02 21:52  angdraug
+
+	* cgi-bin/resource.rb, lib/samizdat/engine/focus.rb,
+	  lib/samizdat/engine/message.rb, lib/samizdat/engine/resource.rb,
+	  lib/samizdat/engine/template.rb: revert Focus#rating=
+	  refactoring, it requires too many fixes
+
+2007-02-02 20:33  angdraug
+
+	* TODO, cgi-bin/foci.rb, cgi-bin/history.rb, cgi-bin/index.rb,
+	  cgi-bin/item.rb, cgi-bin/login.rb, cgi-bin/logout.rb,
+	  cgi-bin/member.rb, cgi-bin/message.rb, cgi-bin/moderation.rb,
+	  cgi-bin/query.rb, cgi-bin/resource.rb,
+	  data/samizdat/css/common.css, doc/translations.txt,
+	  lib/samizdat/storage.rb, lib/samizdat/engine/deployment.rb,
+	  lib/samizdat/engine/focus.rb, lib/samizdat/engine/message.rb,
+	  lib/samizdat/engine/resource.rb, lib/samizdat/engine/session.rb,
+	  lib/samizdat/engine/template.rb, po/be.po, po/ru.po: apply
+	  line-through style to hidden messages; Focus#rating= refactored
+	  to Focus#vote(); request() renamed to each_request();
+	  documentation and copyrights updated
+
+2007-02-01 23:49  boud
+
+	* data/samizdat/config.yaml: config.yaml header section in (de)
+
+2007-01-31 22:23  boud
+
+	* data/samizdat/config.yaml, doc/translations.txt: example
+	  site-specific header l10n: config.yaml: +fr, +pl,  request in
+	  translations.txt
+
+2007-01-31 20:03  boud
+
+	* data/samizdat/defaults.yaml, po/de.po, po/es.po, po/fr.po,
+	  po/pl.po: adding German translation; putting Project-Id-Version
+	  to 0.6.0 in de/es/fr/pl
+
+2007-01-28 00:23  boud
+
+	* po/es.po: fixed minor formatting errors in es.po - this time
+	  msgfmt should work :)
+
+2007-01-27 16:18  boud
+
+	* data/samizdat/defaults.yaml: add castellano (es) to language list
+	  in defaults.yaml config file
+
+2007-01-27 04:34  boud
+
+	* po/es.po: castellano (a.k.a. espanol or spanish) - thanks to a
+	  local spanish-speaker :)
+
+2007-01-27 04:26  boud
+
+	* po/: fr.po, pl.po: translations for "replace" instead of
+	  "displace"; "full name" better translated
+
+2007-01-20 12:30  angdraug
+
+	* TODO, data/samizdat/database/create-mysql.sql,
+	  data/samizdat/database/create-sqlite3.sql,
+	  data/samizdat/database/grant-mysql.sql,
+	  data/samizdat/database/triggers-mysql.sql,
+	  lib/samizdat/storage.rb, lib/samizdat/engine/deployment.rb,
+	  lib/samizdat/engine/message.rb, lib/samizdat/engine/session.rb,
+	  lib/samizdat/engine/template.rb, po/be.po, po/eo.po, po/fr.po,
+	  po/pl.po, po/ru.po, po/ua.po: added MySQL and improved SQLite3
+	  support (documentation will follow), minor deployment fixes,
+	  renamed 'displace' to 'replace' as suggested by Boud, posting
+	  comment to a long thread now redirects to the right page, major
+	  improvement to error reporting: full stack trace is written to
+	  error log and referred by a hash supplied to the user
+
+2006-12-07 21:40  angdraug
+
+	* doc/examples/apache.conf, lib/samizdat/engine/message.rb,
+	  lib/samizdat/engine/resource.rb, lib/samizdat/engine/template.rb:
+	  refactoring: new MessageContent class (still more refactoring
+	  needed for things like RSS import); sort replies by id, to avoid
+	  confusion when comments are edited; send Apache error.log to
+	  /dev/null as a safe default for IP address logging prevention
+
+2006-12-04 16:35  angdraug
+
+	* data/samizdat/xhtml.yaml: Sanitize: allow ':' in URI (RFC 2396)
+	  if it's absolute and with legit scheme
+
+2006-11-29 17:38  angdraug
+
+	* bin/samizdat-drb-server, cgi-bin/foci.rb, cgi-bin/history.rb,
+	  cgi-bin/index.rb, cgi-bin/login.rb, cgi-bin/member.rb,
+	  cgi-bin/message.rb, cgi-bin/query.rb, cgi-bin/resource.rb,
+	  lib/samizdat/cache.rb, lib/samizdat/sanitize.rb,
+	  lib/samizdat/storage.rb, lib/samizdat/engine/focus.rb,
+	  lib/samizdat/engine/resource.rb, lib/samizdat/engine/session.rb,
+	  lib/samizdat/engine/template.rb, test/tc_robot.rb,
+	  test/tc_storage.rb, test/tc_template.rb, test/tc_version.rb,
+	  test/util.rb: updated copyrights
+
+2006-11-29 17:16  angdraug
+
+	* lib/samizdat/engine.rb, test/tc_version.rb: SAMIZDAT_VERSION =
+	  '0.6.0'
+
+2006-11-29 16:07  angdraug
+
+	* NEWS, TODO, doc/design-goals.txt,
+	  lib/samizdat/engine/template.rb, po/fr.po: auto-url in default
+	  message format; French translation update; documentation update
+
+2006-11-28 17:35  angdraug
+
+	* README, TODO, doc/concepts.txt, doc/design-goals.txt,
+	  doc/notes.txt: documentation update
+
+2006-11-28 14:54  angdraug
+
+	* TODO, test/tc_robot.rb, test/tc_template.rb: unit tests updated,
+	  functional test now works with focuses
+
+2006-11-27 08:28  angdraug
+
+	* bin/samizdat-create-database, doc/man/samizdat-create-database.1,
+	  doc/man/samizdat-drb-server.1, doc/man/update-indymedia-cities.1:
+	  written minimal manpages for samizdat-drb-server,
+	  samizdat-create-database, and update-indymedia-cities, print
+	  usage updated for samizdat-create-database
+
+2006-11-26 15:46  angdraug
+
+	* bin/cities.rb, bin/update-indymedia-cities, cgi-bin/query.rb,
+	  data/samizdat/defaults.yaml, lib/samizdat/storage.rb, po/fr.po,
+	  po/pl.po: login timeout increased to 4 hours; cities.rb renamed
+	  to update-indymedia-cities; fixed query UI bug with unsubstituted
+	  literals
+
+2006-11-16 04:02  angdraug
+
+	* TODO, bin/cities.rb, cgi-bin/history.rb, cgi-bin/index.rb,
+	  cgi-bin/query.rb, cgi-bin/resource.rb, doc/translations.txt,
+	  lib/samizdat/engine/template.rb, po/be.po, po/ru.po: fixed
+	  ampersand in URLs again, added cities.rb utility script,
+	  instructions on translations added, Belarusian and Russian
+	  translations updated
+
+2006-11-14 23:49  angdraug
+
+	* TODO, doc/install.txt: documentation update
+
+2006-10-29 10:58  angdraug
+
+	* cgi-bin/index.rb, data/samizdat/defaults.yaml,
+	  data/samizdat/css/default.css, data/samizdat/css/indy.css,
+	  data/samizdat/css/savannah.css, data/samizdat/css/sky.css,
+	  lib/samizdat/engine/deployment.rb,
+	  lib/samizdat/engine/message.rb, lib/samizdat/engine/session.rb,
+	  lib/samizdat/engine/template.rb: HTML diff, view source for
+	  Textile and HTML; PublishMessage cleanup; CGIEnvironment renamed
+	  to RequestSingleton and expanded to keep host and site name
+	  globals; limit:cache option removed
+
+2006-10-24 00:33  angdraug
+
+	* cgi-bin/index.rb: add uri_prefix to fragment cache key (atm
+	  relevant only for index.rb)
+
+2006-10-23 21:03  angdraug
+
+	* lib/samizdat/: sanitize.rb, engine/message.rb: fix for memory
+	  leak in Tidy.path=(), introduced Message.regenerate_html(id) to
+	  regenerate only one message
+
+2006-10-08 14:31  angdraug
+
+	* AUTHORS, cgi-bin/message.rb, data/samizdat/sites.yaml,
+	  lib/samizdat/engine.rb, lib/samizdat/engine/session.rb, po/fr.po:
+	  GetText and sites.yaml fixes by Boud, requires cleanup
+
+2006-09-24 13:34  angdraug
+
+	* AUTHORS, TODO, cgi-bin/index.rb, data/samizdat/config.yaml,
+	  data/samizdat/defaults.yaml, data/samizdat/sites.yaml,
+	  lib/samizdat/engine.rb, lib/samizdat/engine/deployment.rb,
+	  lib/samizdat/engine/message.rb, lib/samizdat/engine/session.rb,
+	  lib/samizdat/engine/template.rb, po/fr.po: deployment fixes
+	  (upload should now work everywhere), upload_enabled? moved to
+	  PublishMessage, SiteConfig#content_location introduced,
+	  documentation updated, default message size limit increased to
+	  1M, French translation and version-independent GetText wrapper
+	  (thanks Boud)
+
+2006-09-20 21:24  angdraug
+
+	* README, bin/samizdat-create-database, cgi-bin/login.rb,
+	  cgi-bin/member.rb, data/samizdat/config.yaml,
+	  data/samizdat/defaults.yaml, doc/install.txt,
+	  doc/examples/apache.conf, lib/samizdat/engine/deployment.rb,
+	  lib/samizdat/engine/message.rb, lib/samizdat/engine/session.rb,
+	  test/tc_robot.rb, test/tc_template.rb, test/util.rb: deployment
+	  cleanup: shorter default login timouts for tighter security,
+	  SiteConfig#email_enabled? and #upload_enabled? checks, restored
+	  support for single-directory installation, updated documentation
+	  and unit tests
+
+2006-09-16 21:19  angdraug
+
+	* doc/examples/apache.conf: move cgi-bin scripts to Debian policy
+	  compliant location under /usr/share
+
+2006-09-16 18:45  angdraug
+
+	* bin/samizdat-create-database,
+	  data/samizdat/database/create-pgsql.sql,
+	  data/samizdat/database/create-sqlite3.sql,
+	  data/samizdat/database/create.sql,
+	  data/samizdat/database/grant-pgsql.sql,
+	  data/samizdat/database/triggers-pgsql.sql,
+	  data/samizdat/database/triggers-sqlite3.sql,
+	  data/samizdat/database/triggers.sql, lib/samizdat/engine.rb,
+	  lib/samizdat/storage.rb, lib/samizdat/engine/deployment.rb,
+	  lib/samizdat/engine/message.rb, lib/samizdat/engine/resource.rb,
+	  lib/samizdat/engine/session.rb, test/tc_robot.rb: database
+	  generation script; experimental SQLite3 support
+
+2006-09-14 12:26  angdraug
+
+	* data/samizdat/xhtml.yaml, lib/samizdat/engine.rb,
+	  lib/samizdat/engine/deployment.rb,
+	  lib/samizdat/engine/message.rb, lib/samizdat/engine/session.rb:
+	  now works with new libgettext-ruby; cross-site images in
+	  xhtml.yaml (replace path with uri to unblock); add environment
+	  variables allowing to access Samiz dat classes from command line
+
+2006-09-13 01:35  angdraug
+
+	* bin/samizdat-site, bin/samizdat-webrick-server, cgi-bin/index.rb,
+	  data/samizdat/config.yaml, data/samizdat/defaults.yaml,
+	  data/samizdat/rdf.yaml, data/samizdat/sites.yaml,
+	  data/samizdat/xhtml.yaml, data/samizdat/css/sky.css,
+	  doc/examples/apache.conf, lib/samizdat/engine.rb,
+	  lib/samizdat/engine/deployment.rb,
+	  lib/samizdat/engine/exceptions.rb,
+	  lib/samizdat/engine/helpers.rb, lib/samizdat/engine/resource.rb,
+	  lib/samizdat/engine/session.rb, lib/samizdat/engine/template.rb,
+	  po/eo.po, test/tc_robot.rb, test/tc_storage.rb,
+	  test/tc_template.rb: deployment refactored: get configuration
+	  from /etc/samizdat/* instead of environment variables; common
+	  options loaded from shared config file; FastCGI now works
+	  correctly with multi-site setups; configs now allow to use method
+	  names instead of hash keys; universal example of Apache site
+	  config provided; first attempt to update for new libgettext-ruby;
+	  Esperanto translation updated; unit and functional tests updated;
+	  new theme from Indymedia Ukraine
+
+2006-04-17 12:54  angdraug
+
+	* cgi-bin/index.rb, lib/samizdat/cache.rb, lib/samizdat/engine.rb,
+	  lib/samizdat/engine/message.rb, po/be.po, po/eo.po, po/pl.po,
+	  po/ru.po, po/ua.po: fixed cross-site config cache corruption,
+	  selective flush implemented, only cache of the current site is
+	  flushed on updates, added 'All Replies' to Links section on the
+	  front page, updated translations
+
+2006-04-16 11:14  angdraug
+
+	* bin/samizdat-drb-server, lib/samizdat/cache.rb,
+	  lib/samizdat/engine.rb, lib/samizdat/storage.rb,
+	  lib/samizdat/engine/session.rb, lib/samizdat/engine/template.rb:
+	  many improvements in code safety and security: synchronized
+	  Cache, $SAFE = 1 in samizdat-drb-server, more HTML escaping;
+	  fixed RSS/DRbUnknown bug by rearranging requires
+
+2006-04-09 19:02  angdraug
+
+	* cgi-bin/resource.rb: fixed: previous uriref focus fix broke
+	  normal focuses
+
+2006-04-07 10:01  angdraug
+
+	* cgi-bin/resource.rb, doc/install.txt,
+	  lib/samizdat/engine/focus.rb, lib/samizdat/engine/message.rb,
+	  lib/samizdat/engine/template.rb: fixed NULL new message language
+	  bug; fixed virtual uriref focus again; stricter focus uriref
+	  validation; links update from Kirill Shutemov
+
+2006-02-28 15:36  angdraug
+
+	* cgi-bin/index.rb, cgi-bin/resource.rb,
+	  lib/samizdat/engine/focus.rb, lib/samizdat/engine/message.rb,
+	  lib/samizdat/engine/session.rb, lib/samizdat/engine/template.rb,
+	  po/be.po, po/eo.po, po/pl.po, po/ru.po, po/ua.po: butchered the
+	  l10n in the code to work with rgettext, updated and cleaned up
+	  all translations with rgettext, updated Belarusian and Russian
+	  translations
+
+2006-02-21 17:40  angdraug
+
+	* cgi-bin/resource.rb: fixed brown paper bug with 'add new focus'
+	  menu
+
+2006-02-21 15:55  angdraug
+
+	* .cvsignore: unmess changelog
+
+2006-02-21 15:46  angdraug
+
+	* TODO, cgi-bin/foci.rb, cgi-bin/history.rb, cgi-bin/index.rb,
+	  cgi-bin/member.rb, cgi-bin/message.rb, cgi-bin/pingback.rb,
+	  cgi-bin/query.rb, cgi-bin/resource.rb, data/samizdat/config.yaml,
+	  doc/install.txt, lib/samizdat/engine.rb,
+	  lib/samizdat/sanitize.rb, lib/samizdat/storage.rb,
+	  lib/samizdat/engine/focus.rb, lib/samizdat/engine/message.rb,
+	  lib/samizdat/engine/resource.rb, lib/samizdat/engine/template.rb,
+	  test/tc_robot.rb, test/tc_template.rb: new focus management
+	  interface, massive RDF update (parametrized queries, RDF#assert
+	  returns ids of new resources and should be wrapped inside
+	  transaction, PRESET NS is optional), better input validation
+	  (thanks Alster), Pingback support removed, intuitive page titles,
+	  modularized moderation logging, restored replies to focuses until
+	  Translations are done via dct:isPartOf
+
+2006-02-21 11:43  angdraug
+
+	* .cvsignore, doc/install.txt: typo in install.txt, directory
+	  structure housekeeping
+
+2006-01-17 12:23  angdraug
+
+	* lib/samizdat/sanitize.rb: make previous Sanitize fix compatible
+	  with older REXML versions
+
+2006-01-17 11:53  angdraug
+
+	* data/samizdat/xhtml.yaml, lib/samizdat/sanitize.rb,
+	  lib/samizdat/engine/template.rb: 3 XSS vulnerabilities fixed:
+	  <img src> regexp, non-whitelisted tag removal, HTML-escaping
+	  message title
+
+2006-01-11 11:51  mend0za
+
+	* .cvsignore: add tags file
+
+2006-01-09 02:01  mend0za
+
+	* doc/install.txt: Add hint for missing SetEnv directive
+
+2006-01-09 01:39  mend0za
+
+	* .cvsignore: move sample installation in single place
+
+2006-01-09 00:59  mend0za
+
+	* .cvsignore: add some ignored files for apache tuning over CVS
+	  working directory
+
+2005-12-19 14:03  angdraug
+
+	* cgi-bin/index.rb, data/samizdat/css/default.css,
+	  data/samizdat/css/indy.css, data/samizdat/css/savannah.css,
+	  doc/install.txt, lib/samizdat/engine/message.rb,
+	  lib/samizdat/engine/resource.rb, lib/samizdat/engine/template.rb,
+	  po/be.po, po/pl.po, po/ru.po: set language and format in edit
+	  form from previous message version; place buttons after comments,
+	  don't offer to post replies to focuses; count only positively
+	  rated relations in Message#nreplies; moderation log link on the
+	  front page; Polish translation updated; installation manual
+	  updated
+
+2005-12-02 15:28  angdraug
+
+	* po/pl.po: typo in Polish translation
+
+2005-12-02 11:14  angdraug
+
+	* AUTHORS, data/samizdat/config.yaml, po/pl.po: Polish translation
+	  added
+
+2005-11-10 19:32  angdraug
+
+	* lib/samizdat/sanitize.rb, lib/samizdat/engine/focus.rb,
+	  test/tc_robot.rb, test/tc_storage.rb, test/tc_template.rb,
+	  test/tc_version.rb, test/util.rb: updated unit tests
+
+2005-11-10 19:28  angdraug
+
+	* cgi-bin/index.rb, cgi-bin/query.rb, cgi-bin/resource.rb,
+	  lib/samizdat/engine/resource.rb: RSS feed of RDF query results
+	  implemented; show just messages when paginating replies, latest
+	  messages or query results
+
+2005-11-10 19:26  angdraug
+
+	* lib/samizdat/cache.rb, test/tc_cache.rb, test/ts_samizdat.rb:
+	  better fix for Cache issues; unit test for Cache added
+
+2005-11-10 19:24  angdraug
+
+	* lib/samizdat/engine/template.rb: updated links to GPL and to
+	  Samizdat engine site in page footer; replaced absolute xhtml path
+	  in Template.format_inline_content with a lookup
+
+2005-11-10 19:22  angdraug
+
+	* po/: be.po, ru.po, ua.po: Belarusian, Russian, Ukrainian
+	  translations updated
+
+2005-11-10 19:18  angdraug
+
+	* AUTHORS, README, doc/design-goals.txt, doc/install.txt: minor
+	  documentation update
+
+2005-10-27 18:38  angdraug
+
+	* COPYING: FSF address is changed in GPL
+
+2005-10-27 18:21  angdraug
+
+	* AUTHORS, NEWS, README, TODO, config.yaml, foci.rb, history.rb,
+	  index.rb, item.rb, login.rb, logout.rb, member.rb, message.rb,
+	  moderation.rb, pingback.rb, query.rb, resource.rb, samizdat.rb,
+	  setup.rb, xhtml.yaml, bin/samizdat-drb-server, bin/samizdat-site,
+	  bin/samizdat-webrick-server, cgi-bin/foci.rb, cgi-bin/history.rb,
+	  cgi-bin/index.rb, cgi-bin/item.rb, cgi-bin/login.rb,
+	  cgi-bin/logout.rb, cgi-bin/member.rb, cgi-bin/message.rb,
+	  cgi-bin/moderation.rb, cgi-bin/pingback.rb, cgi-bin/query.rb,
+	  cgi-bin/resource.rb, data/samizdat/config.yaml,
+	  data/samizdat/xhtml.yaml, data/samizdat/css/common.css,
+	  data/samizdat/css/default.css, data/samizdat/css/indy.css,
+	  data/samizdat/css/savannah.css,
+	  data/samizdat/database/create.sql,
+	  data/samizdat/database/triggers.sql, data/samizdat/rdf/focus.n3,
+	  data/samizdat/rdf/items.n3, data/samizdat/rdf/schema.n3,
+	  doc/about.txt, doc/concepts.txt, doc/design-goals.txt,
+	  doc/install.txt, doc/notes.txt, lib/samizdat/cache.rb,
+	  lib/samizdat/engine.rb, lib/samizdat/sanitize.rb,
+	  lib/samizdat/storage.rb, lib/samizdat/engine/focus.rb,
+	  lib/samizdat/engine/message.rb, lib/samizdat/engine/resource.rb,
+	  lib/samizdat/engine/session.rb, lib/samizdat/engine/template.rb,
+	  po/be.po, po/eo.po, po/ru.po, po/ua.po: update from 5-month long
+	  development in private Monotone tree. source code restructured
+	  for Minero Aoki's setup.rb, Cache, Sanitize, and Storage are
+	  separated from core engine modules, samizdat-drb-server added to
+	  the tree; hidden messages are implemented; CSS validation is
+	  implemented; major documentation update, added verbose comments
+	  to config.yaml (cookie_prefix option moved to site section along
+	  the way); Ukrainian translation added, other translations
+	  updated; minor fixes: Cache entry deletion fixed, NOT in RDF
+	  literal expressions fixed, <del> removed from RedCloth markup,
+	  flush cache when member full name is changed, Sanitized updated
+	  for Ruby Tidy 1.1.x, several RSS improvements, html_short cache
+	  corruption fixed
+
+2005-05-23 13:32  angdraug
+
+	* po/: be.po, eo.po, ru.po: fixed s:openForAll and added url
+	  parsing to reparent
+
+2005-05-23 09:51  angdraug
+
+	* config.yaml, index.rb, pingback.rb, query.rb, resource.rb,
+	  samizdat.rb, doc/install.txt: multi-site configuration fixes:
+	  SAMIZDAT_CONFIG replaced with SAMIZDAT_BASE, full path to
+	  xhtml.yaml is used, honor HTTP_X_FORWARDED_HOST when set, cleared
+	  out cross-site singletons and globals, optional dRuby
+	  cross-process cache; Cache, Sanitize, and Storage moved to
+	  Samizdat namespace and untied from Samizdat core; minor fixes and
+	  improvements
+
+2005-05-16 10:06  angdraug
+
+	* config.yaml, history.rb, index.rb, member.rb, message.rb,
+	  moderation.rb, resource.rb, samizdat.rb, doc/install.txt,
+	  po/be.po, po/eo.po, po/ru.po, test/tc_robot.rb,
+	  test/tc_template.rb: message handling severely re-organized;
+	  database cache of sanitized html rendition of inline messages is
+	  implemented; message reparent implemented; moved language
+	  selection to the front page; moderation log rendering
+	  implemented; static header and footer are now translateable; new
+	  SamizdatRDF#get_property method; Pingback disabled by default;
+	  many rendering fixes and code clean-ups
+
+2005-05-05 14:35  angdraug
+
+	* xhtml.yaml: add rss link to html head where applicable
+
+2005-05-05 14:35  angdraug
+
+	* message.rb: structured message publishing into Message class in
+	  message.rb
+
+2005-04-28 14:54  angdraug
+
+	* po/eo.po: Esperanto translation update from Antono Vasiljev
+
+2005-04-28 14:54  angdraug
+
+	* config.yaml: add .torrent to supported formats
+
+2005-04-28 14:53  angdraug
+
+	* message.rb: message parameter validation is refactored into
+	  methods; migrated from ftools to FileUtils in upload handling
+
+2005-04-28 14:52  angdraug
+
+	* test/tc_template.rb: updated unit test for new <label/> rendering
+
+2005-04-28 14:51  angdraug
+
+	* po/: be.po, ru.po: reparent button placeholder
+
+2005-04-28 14:47  angdraug
+
+	* doc/: about.txt, design-goals.txt: added feature list to
+	  about.txt, updated design-goals.txt
+
+2005-03-30 09:51  angdraug
+
+	* config.yaml, index.rb: only include message in features if its
+	  rating exceeds or equals features_threshold
+
+2005-03-28 11:52  angdraug
+
+	* foci.rb, history.rb, index.rb, item.rb, login.rb, logout.rb,
+	  member.rb, message.rb, pingback.rb, query.rb, resource.rb,
+	  samizdat.rb, test/tc_robot.rb, test/tc_storage.rb,
+	  test/tc_template.rb, test/tc_version.rb, test/ts_samizdat.rb,
+	  test/util.rb: coding style updated to Pickaxe2 recommendations;
+	  include dc:date in RSS, display links to RSS feeds; associate
+	  labels with form fields via 'for' attribute; show link to full
+	  content in truncated messages; mark focus messages in short and
+	  list modes; cache one front page per accept_language combination;
+	  refactored focus_head and Session#accept_language; take config
+	  file name from SAMIZDAT_CONFIG environment variable if set
+
+2005-03-28 11:44  angdraug
+
+	* doc/install.txt: recommend disabling cache when running tests
+
+2005-02-21 16:38  angdraug
+
+	* index.rb: do Apache's job and include files in static headers
+
+2005-02-21 16:33  angdraug
+
+	* config.yaml: add ogg, mp3, mpeg, avi, and wmv to the list of
+	  supported file formats
+
+2005-02-17 17:11  angdraug
+
+	* config.yaml, member.rb: styles configuration changed from hash to
+	  list, first style in the list is the default
+
+2005-02-17 17:09  angdraug
+
+	* index.rb: get rid of duplicates in features query
+
+2005-02-17 17:05  angdraug
+
+	* doc/install.txt: fixed Ruby/Tidy setup instructions
+
+2005-02-15 13:48  angdraug
+
+	* foci.rb, history.rb, index.rb, item.rb, login.rb, logout.rb,
+	  member.rb, message.rb, pingback.rb, query.rb, resource.rb,
+	  samizdat.rb, po/be.po, po/ru.po, test/tc_robot.rb,
+	  test/tc_storage.rb, test/tc_template.rb, test/tc_version.rb,
+	  test/ts_samizdat.rb, test/util.rb: copyright notices updated to
+	  year 2005
+
+2005-02-15 13:37  angdraug
+
+	* foci.rb, index.rb, message.rb, resource.rb, samizdat.rb,
+	  po/be.po, po/eo.po, po/ru.po, test/tc_robot.rb: new three-column
+	  front-page layout, old "main focuses" moved to foci.rb; language
+	  tags and translations, focus:Translation introduced; RSS
+	  syndication of front page features and focus updates;
+	  configurable site icon; Savannah style by Vladimir Shahov
+	  enabled; query result caching and rendered resources; "redirect
+	  to parent" usability tweak; many rendering clean-ups
+
+2005-02-15 13:34  angdraug
+
+	* config.yaml: new three-column front-page layout, old "main
+	  focuses" moved to foci.rb; language tags and translations,
+	  focus:Translation introduced; RSS syndication of front page
+	  features and focus updates; configurable site icon; Savannah
+	  style by Vladimir Shahov enabled; query result caching and
+	  rendered resources; "redirect to parent" usability tweak; many
+	  rendering clean-ups
+
+2005-02-11 13:31  angdraug
+
+	* test/tc_robot.rb: unit tests updated
+
+2005-02-11 12:59  angdraug
+
+	* po/: be.po, ru.po: Russian and Belarusian translations updated
+
+2005-02-11 12:58  angdraug
+
+	* member.rb, message.rb, query.rb: basic and advanced UI modes
+	  introduced, some options in message publishing and search
+	  interface are hidden in basic mode
+
+2005-02-11 12:54  angdraug
+
+	* doc/install.txt: updated documentation on Tidy dependence
+
+2004-12-20 15:01  angdraug
+
+	* login.rb, member.rb, message.rb, query.rb: fixed IE <label/> bug
+
+2004-12-17 13:44  angdraug
+
+	* index.rb, member.rb, po/be.po, po/eo.po, po/ru.po: implemented
+	  option to hide static header and footer from front page
+
+2004-12-17 13:43  angdraug
+
+	* doc/install.txt, test/tc_robot.rb: unit tests updated
+
+2004-12-03 17:15  angdraug
+
+	* message.rb: fixed another MSIE quirk, about PNG this time
+
+2004-12-01 18:55  angdraug
+
+	* member.rb: fixed confirmation bug caused by guest posting
+	  implementation
+
+2004-11-29 10:54  angdraug
+
+	* config.yaml, index.rb, po/be.po, po/ru.po: static header and
+	  footer, site head links clarified
+
+2004-11-26 19:53  angdraug
+
+	* po/: be.po, ru.po: got rid of "focus" term in Russian and
+	  Belarussian translation: real world hates perfection :(((
+
+2004-11-26 19:35  angdraug
+
+	* po/ru.po, resource.rb, po/be.po: access control for voting is
+	  finished
+
+2004-11-25 16:54  angdraug
+
+	* member.rb, message.rb, po/be.po, po/eo.po, po/ru.po: anonymous
+	  publishing and flexible access control (publishing only so far)
+	  implemented; untaint custom locale path for mod_ruby
+
+2004-11-25 16:51  angdraug
+
+	* doc/install.txt: stressed significance of order of pg_hba.conf
+	  lines in install.txt
+
+2004-11-24 14:19  angdraug
+
+	* config.yaml, member.rb: preparation for anonymous posting and
+	  flexible access control
+
+2004-11-23 14:03  angdraug
+
+	* history.rb, index.rb, item.rb, login.rb, logout.rb, member.rb,
+	  message.rb, pingback.rb, query.rb, resource.rb, samizdat.rb,
+	  test/tc_robot.rb, test/tc_storage.rb, test/tc_template.rb,
+	  test/tc_version.rb, test/ts_samizdat.rb, test/util.rb: added vim
+	  spacing instructions to all .rb files
+
+2004-11-23 13:32  angdraug
+
+	* config.yaml: added text/html message format, renamed
+	  application/x-textile to text/textile, added alternative filter
+	  parameter to Sanitize
+
+2004-11-15 16:47  angdraug
+
+	* test/tc_version.rb: unit tests updated
+
+2004-11-15 16:26  angdraug
+
+	* samizdat.rb, xhtml.yaml: fixed escaping of quotes in XML
+	  attributes, updated version to 0.5.5
+
+2004-11-15 16:24  angdraug
+
+	* index.rb: fixed XHTML on the front page
+
+2004-11-15 16:23  angdraug
+
+	* config.yaml, doc/install.txt, po/be.po, po/eo.po, po/ru.po:
+	  Esperanto translation added, other translations updated,
+	  documentation actualized
+
+2004-11-12 14:13  angdraug
+
+	* message.rb: bugfixes: first upload lookup_uri, render_related for
+	  empty focus
+
+2004-11-08 15:29  angdraug
+
+	* xhtml.yaml: HTML validation implemented
+
+2004-10-22 11:20  angdraug
+
+	* doc/notes.txt: Samizdat 0.5.4 release notes
+
+2004-10-22 11:18  angdraug
+
+	* index.rb: XHTML fixed on the front page
+
+2004-10-21 16:26  angdraug
+
+	* test/tc_template.rb: updated unit tests
+
+2004-10-21 16:03  angdraug
+
+	* config.yaml, po/be.po, po/ru.po: make database connection
+	  configurable to allow multiple Samizdat instances on the same
+	  host; documentation update, translations update
+
+2004-10-14 10:27  angdraug
+
+	* config.yaml, index.rb, member.rb, message.rb: stricter DB table
+	  permissions, show description in message preview, theme selection
+	  implemented
+
+2004-10-11 10:39  angdraug
+
+	* config.yaml, message.rb, samizdat.rb, po/be.po, po/ru.po: string
+	  length limits implemented for titles and short messages;
+	  translations update
+
+2004-10-04 13:13  angdraug
+
+	* resource.rb: fixed typo that broke Pingback
+
+2004-10-04 12:47  angdraug
+
+	* doc/notes.txt: minor roadmap update
+
+2004-10-04 12:38  angdraug
+
+	* config.yaml, history.rb, index.rb, query.rb, resource.rb,
+	  po/be.po, po/ru.po: new frontpage layout, Belarusian translation
+	  added, about link added, rendering fixes, crash with disabled
+	  Pingback fixed
+
+2004-10-01 12:15  angdraug
+
+	* resource.rb: fixed crash with disabled Pingback
+
+2004-10-01 11:18  angdraug
+
+	* member.rb, message.rb: moderation log implemented
+
+2004-09-27 16:41  angdraug
+
+	* message.rb: display RedCloth crashes as RuntimeError; minor code
+	  cleanups
+
+2004-09-27 09:47  angdraug
+
+	* member.rb, message.rb, samizdat.rb, po/ru.po,
+	  test/tc_template.rb, test/tc_version.rb: moderation implemented
+	  (take over message, displace message, block account); version
+	  bumped to 0.5.4
+
+2004-09-24 15:33  angdraug
+
+	* doc/about.txt: papers and link to boblycat added
+
+2004-09-24 15:11  angdraug
+
+	* config.yaml, member.rb, po/ru.po: moderation: facility settings,
+	  takeover and displacement buttons
+
+2004-09-24 15:09  angdraug
+
+	* doc/notes.txt: removed all news that are not related to Samizdat
+	  releases
+
+2004-09-20 15:54  angdraug
+
+	* message.rb, po/ru.po: closed description recursion bug
+
+2004-09-20 14:33  angdraug
+
+	* doc/notes.txt: Samizdat 0.5.3 release notes
+
+2004-09-20 14:30  angdraug
+
+	* member.rb: global patterns, proper untaint of command line for
+	  sendmail
+
+2004-09-20 13:20  angdraug
+
+	* config.yaml, history.rb, message.rb, resource.rb, po/ru.po,
+	  test/tc_robot.rb, test/tc_template.rb: dc:description
+	  implemented, added date in vote display, destination anchors for
+	  messages, link to settings even when not logged in
+
+2004-09-20 13:20  angdraug
+
+	* doc/papers/: collreif.tex, rel-rdf.tex: added papers source to
+	  documentation
+
+2004-09-14 12:24  angdraug
+
+	* member.rb, samizdat.rb, doc/install.txt, doc/notes.txt, po/ru.po,
+	  test/tc_robot.rb, test/tc_version.rb: email confirmation using
+	  preferences, account management refactored, uniform digest
+	  function, bugfixes, documentation update
+
+2004-07-14 10:18  angdraug
+
+	* config.yaml, login.rb, member.rb, message.rb, samizdat.rb,
+	  doc/install.txt, doc/notes.txt, po/ru.po: email interface to
+	  account management, lost password recovery, l10n update,
+	  documentation update
+
+2004-07-05 11:01  angdraug
+
+	* doc/notes.txt: Samizdat 0.5.2 release notes
+
+2004-07-05 10:23  angdraug
+
+	* history.rb, index.rb, login.rb, member.rb, message.rb,
+	  resource.rb, doc/concepts.txt, doc/install.txt, doc/notes.txt,
+	  po/ru.po, test/tc_robot.rb, test/tc_template.rb: major UI
+	  reorganization for better usability; documentation update
+
+2004-07-02 10:10  angdraug
+
+	* pingback.rb: older versions now can't be pingbacked and won't
+	  appear in member's latest messages
+
+2004-07-01 21:17  angdraug
+
+	* history.rb: implemented difference engine for history of changes,
+	  added more input validation cases along the way
+
+2004-07-01 21:15  angdraug
+
+	* test/tc_template.rb: updated tests for site name variable
+
+2004-07-01 21:13  angdraug
+
+	* message.rb: several input validation improvements
+
+2004-06-28 15:48  angdraug
+
+	* doc/notes.txt: another update to roadmap: added account
+	  management to 0.6.0
+
+2004-06-28 09:39  angdraug
+
+	* config.yaml, index.rb, member.rb, message.rb, resource.rb,
+	  doc/design-goals.txt, po/ru.po: Big Monday Checkin 3.
+
+	  New features: history of changes, s:openForAll message property,
+	  new focus representation, site logo setting in config.yaml.
+
+	  Minor improvements: show number of replies in message info, old
+	  versions now can't be edited or commented, form template supports
+	  disabled fields, show language box on account settings page,
+	  textarea size increased, and some bugfixes.
+
+	  Documentation: updated design goal achievements.
+
+2004-06-25 15:56  angdraug
+
+	* config.yaml, index.rb, message.rb, pingback.rb, resource.rb,
+	  po/ru.po, test/tc_storage.rb, test/tc_template.rb: basic Wiki
+	  functionality implemented: message versioning and Textile
+	  hypertext format; message.rb refactored, s:thread eliminated
+
+2004-06-25 15:51  angdraug
+
+	* doc/notes.txt: reshuffled roadmap to postpone RDF coolness in
+	  favor of features
+
+2004-06-23 12:20  angdraug
+
+	* doc/: design-goals.txt, install.txt, notes.txt: documentation
+	  update: updated design goal achievements, installation note about
+	  FastCGI, SQLite added to roadmap, comment on unnecessary aliases
+	  in storage
+
+2004-04-07 16:08  angdraug
+
+	* config.yaml: default site name is Demo
+
+2004-03-29 08:44  angdraug
+
+	* index.rb, pingback.rb, query.rb, resource.rb,
+	  doc/rdf-storage.txt, doc/storage-impl.txt, test/tc_storage.rb,
+	  test/tc_template.rb: RDF storage update:  * SamizdatRDF is
+	  Singleton again: instead of <Session#base+id>, internal resources
+	  are now <id> (local URIref)  * SamizdatRDF#assert fixed to
+	  unconditionally insert blank nodes from INSERT section  *
+	  standardized storage documentation on the 'assertion' term
+
+2004-03-29 08:41  angdraug
+
+	* test/tc_robot.rb: pingback test implemented
+
+2004-03-22 09:25  angdraug
+
+	* index.rb, item.rb, login.rb, logout.rb, member.rb, message.rb,
+	  query.rb, resource.rb: FastCGI support implemented
+
+2004-03-22 09:25  angdraug
+
+	* samizdat.rb, test/tc_version.rb: updated version to 0.5.2; read
+	  config.yaml inside block
+
+2004-03-22 09:23  angdraug
+
+	* doc/notes.txt: removed Webrick, added installer to 0.5.2 roadmap
+
+2004-03-18 17:19  angdraug
+
+	* doc/notes.txt: 0.5.1 release note
+
+2004-03-18 16:34  angdraug
+
+	* test/tc_template.rb: explicitly select 'C' locale for template
+	  tests
+
+2004-03-15 15:08  angdraug
+
+	* config.yaml: denormalized away Proposition table to double the
+	  speed of front page generation
+
+2004-03-15 15:01  angdraug
+
+	* message.rb, po/ru.po: auto-detect format of uploaded files; fixed
+	  text/uri-list validation bug
+
+2004-03-15 14:57  angdraug
+
+	* doc/notes.txt: detalized 5.x-6.0 roadmap
+
+2004-03-12 15:28  angdraug
+
+	* test/: tc_robot.rb, tc_template.rb: update to Template changes,
+	  added message rendering tests
+
+2004-03-12 15:27  angdraug
+
+	* index.rb, member.rb, message.rb, pingback.rb, query.rb,
+	  resource.rb: API change: message rendering is refactored into
+	  Template#{message,message_info,message_content} and now takes
+	  parameters in a Hash; updated to Session and SamizdatRDF API
+	  changes; add ", page #" to title of second and other pages of
+	  long listings; take advantage of count() in focus usage counting;
+	  moved set_lang to index.rb; focus threads skipping bug fixed;
+	  "Skip navigation" accessibility link and "Vote" tooltip are added
+
+2004-03-12 15:13  angdraug
+
+	* test/tc_storage.rb: updated to latest storage.rb changes
+
+2004-03-12 14:54  angdraug
+
+	* po/ru.po: Russian translation update
+
+2004-03-12 14:54  angdraug
+
+	* login.rb, logout.rb: use new Session#redirect
+
+2004-03-12 14:52  angdraug
+
+	* item.rb: throwing out some dead weight
+
+2004-03-12 14:52  angdraug
+
+	* doc/notes.txt: storage requirements for better performance and
+	  versioning
+
+2004-03-12 14:48  angdraug
+
+	* doc/install.txt: Apache setup clarifications
+
+2004-03-01 16:29  angdraug
+
+	* config.yaml, index.rb, item.rb, login.rb, logout.rb, member.rb,
+	  message.rb, pingback.rb, query.rb, resource.rb, samizdat.rb,
+	  doc/install.txt, doc/notes.txt, po/ru.po, test/tc_robot.rb,
+	  test/tc_storage.rb, test/tc_template.rb, test/tc_version.rb,
+	  test/ts_samizdat.rb, test/util.rb: Another Big Monday Checkin:
+	  gettext l10n support is implemented, Russian translation is
+	  added.
+
+	  Other changes: cookie handling refactored; copyrights updated to
+	  2004; file upload in plain CGI mode is fixed; resource rendering
+	  code cleaned up.
+
+2004-02-27 19:46  angdraug
+
+	* resource.rb: add "Recent Threads" to the focus page recent
+	  threads box
+
+2004-02-16 18:18  angdraug
+
+	* test/tc_robot.rb: generate timestamped test user to allow
+	  multiple subsequent runs
+
+2004-02-16 10:21  angdraug
+
+	* message.rb: detect image/pjpeg MIME type from MSIE; remove some
+	  dead code (Session class now handles that
+
+2004-02-16 10:14  angdraug
+
+	* doc/notes.txt: reflect nextVersionOf->dct:isVersionOf schema
+	  change; notes on sub-resources
+
+2004-02-16 10:11  angdraug
+
+	* doc/install.txt: updates from Denis Valoha: reference to
+	  Ruby/Postgres, psql-less database setup, generalize PostgreSQL
+	  config files location, reflect Database class relocation,
+	  Samizdat on Windows section
+
+2004-02-16 10:04  angdraug
+
+	* samizdat.rb, test/tc_version.rb: update version to 0.5.1; rename
+	  Config to SamizdatConfig to avoid conflict with standard class
+
+2004-02-16 09:53  angdraug
+
+	* resource.rb: code cleanup: don't request rating of not voting
+
+2004-02-16 09:51  angdraug
+
+	* doc/design-goals.txt: added admin-defined quorum to Vote features
+
+2003-12-01 13:00  angdraug
+
+	* doc/notes.txt: remove (done) labels from roadmap, as latest
+	  released version is obvious from news section
+
+2003-12-01 11:27  angdraug
+
+	* samizdat.rb, doc/notes.txt: Samizdat 0.5.0 is released
+
+2003-11-19 15:12  angdraug
+
+	* message.rb, samizdat.rb: fixed location to filename translation
+	  for content uploads to /~username style locations
+
+2003-11-18 18:45  angdraug
+
+	* message.rb: Pingback client is now working (latest Ruby CVS +
+	  cgi.rb multipart fix required)
+
+2003-11-18 14:45  angdraug
+
+	* doc/: notes.txt, about.txt: demo site is available
+
+2003-11-10 10:49  angdraug
+
+	* doc/design-goals.txt: marked finished (+) and in-progress (~)
+	  design goals; added spam filtering and Mixmaster anon-publishing
+
+2003-11-10 10:47  angdraug
+
+	* message.rb, pingback.rb: URI::REGEXP::URI_REF -> URI::URI_REF
+
+2003-11-06 18:32  angdraug
+
+	* message.rb, pingback.rb, test/tc_robot.rb: replaced === with
+	  kind_of? invocations for readability
+
+2003-11-03 20:25  angdraug
+
+	* resource.rb: don't allow to focus resource on itself; clean-up
+	  message content padding
+
+2003-11-03 20:14  angdraug
+
+	* test/tc_robot.rb: mass-message stress test added
+
+2003-11-03 20:13  angdraug
+
+	* message.rb: non-functional Pingback client
+
+2003-11-03 20:11  angdraug
+
+	* doc/design-goals.txt: added some ideas from blog discussion on
+	  active2-dev
+
+2003-10-26 20:44  angdraug
+
+	* doc/notes.txt: upgrade forthcoming 0.0.5 to 0.5.0 and call it a
+	  beta release
+
+2003-10-26 20:44  angdraug
+
+	* focus.rb, index.rb, resource.rb: focus management implemented:
+	  store current focus in a cookie, render table of site focuses on
+	  front page, show related threads in focus resource page, show
+	  current, standard, and related focuses in focus box on resource
+	  page; more paging with nav link
+
+2003-10-26 20:42  angdraug
+
+	* samizdat.rb: define 5 year expire timeout for permanent cookie as
+	  #forever
+
+2003-10-26 20:41  angdraug
+
+	* doc/install.txt: to avoid spam, only first URI in text/uri-list
+	  should be pingbacked
+
+2003-10-26 20:41  angdraug
+
+	* doc/concepts.txt: reflect availability of non-existent standard
+	  focuses
+
+2003-10-26 20:38  angdraug
+
+	* query.rb: paging with nav link
+
+2003-10-26 20:37  angdraug
+
+	* message.rb, test/tc_robot.rb: resource list, resource table,
+	  navigation link; message rendering clean-up; make focus name in
+	  focus info clickable
+
+2003-10-24 15:51  angdraug
+
+	* test/tc_robot.rb: new focus handling
+
+2003-10-24 15:48  angdraug
+
+	* resource.rb: placeholder focus management
+
+2003-10-24 15:48  angdraug
+
+	* config.yaml: focus cookie, s:id property
+
+2003-10-24 15:46  angdraug
+
+	* test/tc_storage.rb: s:id universal property implemented (however,
+	  with a redundant self-join on Resource)
+
+2003-10-22 15:24  angdraug
+
+	* doc/notes.txt: added news item on samizdat-devel ML creation
+
+2003-10-20 17:49  angdraug
+
+	* pingback.rb: Pingback server
+
+2003-10-20 17:18  angdraug
+
+	* config.yaml, focus.rb, index.rb, login.rb, member.rb, message.rb,
+	  query.rb, resource.rb, samizdat.rb, tag.rb, doc/about.txt,
+	  doc/concepts.txt, doc/design-goals.txt, doc/install.txt,
+	  doc/notes.txt, doc/rdf-storage.txt, doc/references.txt,
+	  test/tc_robot.rb, test/tc_storage.rb, test/tc_template.rb: Big
+	  Monday Checkin. Content storage rewritten again: store inline
+	  text content in the table, write multimedia uploads to files in
+	  content/ directory; database schema changed, Upload table
+	  removed. Tags are renamed to Focuses (kudos to Mike McMillan and
+	  Anton Andreasson for coinage). Pingback server implemented,
+	  text/uri-list MIME type added to support it.
+
+	  Lesser changes: detect host name for base URI from HTTP_HOST
+	  instead of config.yaml and propagate it through session to RDF
+	  storage; renamed Storage to SamizdatRDF and Query to SquishQuery,
+	  reshuffled both a bit; added NOT NULL constraints to mandatory
+	  property fields to honour new dangling blank node behaviour;
+	  changed MIME class aliasing from should to may in concepts.txt;
+	  added instructions on enabling PL/pgSQL; added USING PRESET NS
+	  Squish extension; use case-insensitive substring search in
+	  query.rb; moved vote_box() to Template; more XHTML fixes.
+
+2003-10-17 16:12  angdraug
+
+	* test/tc_robot.rb: many XHTML fixes: Samizdat output now passes
+	  W3C validator
+
+2003-10-16 13:40  angdraug
+
+	* test/tc_robot.rb: major update, use REXML to parse Samizdat
+	  output, more strict checks for HTTP error codes
+
+2003-10-16 13:38  angdraug
+
+	* test/tc_template.rb: moved REXML utility methods to test/util.rb,
+	  refactored parse() to return instead of yield doc.root, completed
+	  coverage (except tag-depended templates which need to access the
+	  database)
+
+2003-10-16 13:37  angdraug
+
+	* test/util.rb: moved REXML utility methods to test/util.rb
+
+2003-10-16 13:35  angdraug
+
+	* samizdat.rb: version updated
+
+2003-10-16 13:32  angdraug
+
+	* item.rb, login.rb, logout.rb, message.rb, query.rb, tag.rb:
+	  copyright information updated (2002-2003), code polish (multiline
+	  bracket spacing)
+
+2003-10-16 13:31  angdraug
+
+	* doc/notes.txt: added static publishing task
+
+2003-10-14 18:45  angdraug
+
+	* test/tc_template.rb: use shortcut methods to extract XML elements
+	  texts
+
+2003-10-14 18:40  angdraug
+
+	* doc/install.txt: unit tests now use REXML to parse Samizdat
+	  output
+
+2003-10-14 17:51  angdraug
+
+	* doc/: install.txt, rdf-storage.txt, storage-impl.txt:
+	  acknowledged changes to config.yaml
+
+2003-10-14 17:41  angdraug
+
+	* config.yaml: acknowledged publishing of Samizdat RDF schema;
+	  moved default base location from personal /~angdraug/samizdat to
+	  a more generic http://localhost/samizdat
+
+2003-10-13 19:07  angdraug
+
+	* query.rb: code consistency fix
+
+2003-10-13 19:05  angdraug
+
+	* test/: tc_storage.rb, ts_samizdat.rb, tc_template.rb: more tests:
+	  test Template with REXML, update tc_storage.rb
+
+2003-10-13 08:43  angdraug
+
+	* query.rb: fix substring search query indentation
+
+2003-10-13 08:42  angdraug
+
+	* query.rb, samizdat.rb, test/tc_storage.rb: expand and polish code
+	  comments for RDoc; make unstring a Query instance method; move
+	  login_form template code to member_box since it is no longer used
+	  elsewhere
+
+2003-10-13 08:30  angdraug
+
+	* tag.rb: display tags usage
+
+2003-10-13 08:25  angdraug
+
+	* query.rb: many usability fixes: select query target, show clause
+	  numbers, don't offer BLANK CLAUSE when limit_pattern is reached,
+	  explanatory labels for ASC/DESC, auto-rerun query on any
+	  modification
+
+2003-10-13 08:17  angdraug
+
+	* samizdat.rb: SAMIZDAT_VERSION constant
+
+2003-10-13 08:16  angdraug
+
+	* message.rb: code consistency fix
+
+2003-10-13 08:15  angdraug
+
+	* doc/notes.txt: testing framework marked as in proress; minor
+	  polish
+
+2003-10-13 08:14  angdraug
+
+	* doc/install.txt: Running Tests section
+
+2003-10-13 08:13  angdraug
+
+	* test/: tc_robot.rb, tc_storage.rb, tc_version.rb, ts_samizdat.rb:
+	  testing framework added
+
+2003-10-13 08:11  angdraug
+
+	* README: put reference to doc/about.txt to the obligatory README
+
+2003-10-13 08:10  angdraug
+
+	* config.yaml: comments fixup
+
+2003-10-07 18:03  angdraug
+
+	* doc/install.txt: add libyaml-ruby1.8 to the note about
+	  Debian/woody; removed comment about apt_preferences
+
+2003-10-07 14:52  angdraug
+
+	* doc/install.txt: reference to backported packages on
+	  http://people.debian.org/~angdraug/
+
+2003-10-06 08:30  angdraug
+
+	* member.rb, message.rb, query.rb: changed handling of submit in
+	  forms to allow l10n of submit button texts
+
+2003-10-04 15:38  angdraug
+
+	* tag.rb: fixed for new resource rendering
+
+2003-10-04 15:33  angdraug
+
+	* login.rb: fixed cornercase bug with base->ns['base'] replacement
+
+2003-10-03 18:11  angdraug
+
+	* config.yaml, index.rb, login.rb, logout.rb, member.rb,
+	  message.rb, query.rb, resource.rb, samizdat.rb, tag.rb: proper
+	  error reporting implemented around yield from Session#out;
+	  resource rendering (esp. listing) seriously improved; major code
+	  clean-up; rudimentary tag management implementation started
+
+2003-10-03 18:04  angdraug
+
+	* doc/: design-goals.txt, notes.txt: updated development plans:
+	  calendar, trackback, testing framework, vocabulary entailment
+
+2003-10-03 18:01  angdraug
+
+	* doc/about.txt: expanded project description on examples of
+	  supported activities
+
+2003-09-11 17:02  angdraug
+
+	* query.rb: fixed bug caused by config change: switch from expanded
+	  to prefixed urirefs
+
+2003-09-11 17:01  angdraug
+
+	* doc/rdf-impl-report.txt: link to web archive of www-rdf-interest
+	  mailing list
+
+2003-09-11 10:45  angdraug
+
+	* doc/rdf-impl-report.txt: added RDF Implementation Report sent to
+	  www-rdf-interest
+
+2003-09-11 10:41  angdraug
+
+	* index.rb, item.rb, message.rb, query.rb, resource.rb,
+	  samizdat.rb: reflect changes in config.yaml; initiate GC in
+	  Session before exit; detect undefined namespace in Query; cache
+	  internal property map with expanded namespaces in Storage; minor
+	  code clean-ups
+
+2003-09-11 10:40  angdraug
+
+	* doc/: concepts.txt, design-goals.txt, notes.txt, rdf-storage.txt:
+	  Major documentation and schema update: - "tag" property replaced
+	  with "dc::relation"; - "friend" property removed in favor of
+	  relating members to tags,   "Friend" tag added; - private
+	  messages removed; - material item exchange split into separate
+	  namespace; - reflected the split of text messages into default
+	  and verbatim,   removal of vote comments, and implementation of
+	  assumed reification	for external properties and subjects; -
+	  updated Design Goals priorities on advanced calendar (down) and
+	  member   grouping (up); - updated terminology throughout the
+	  documentation
+
+2003-09-11 10:39  angdraug
+
+	* config.yaml: major config dust-up: reorganized and lowercased
+	  keys; added formats, namespaces, and input size limit; urirefs
+	  are abbreviated using namespaces
+
+2003-09-08 09:20  angdraug
+
+	* index.rb, item.rb, login.rb, logout.rb, member.rb, message.rb,
+	  query.rb, resource.rb, samizdat.rb, tag.rb: CGI and Template are
+	  consolidated under Session; input size limit implemented; on
+	  message confirm uploader id is checked; "%" substring search
+	  fixed; "%" -> "%{}"; template <link/> XHTML fix
+
+2003-09-08 08:39  angdraug
+
+	* doc/concepts.txt: mime -> MIME
+
+2003-09-08 08:17  angdraug
+
+	* doc/: about.txt, notes.txt, references.txt: RDF Implementation
+	  Report added; notes and references are polished
+
+2003-09-01 16:46  angdraug
+
+	* doc/: about.txt, notes.txt: added News section to notes.txt and
+	  retitled it to "News and Roadmap"
+
+2003-09-01 14:19  angdraug
+
+	* message.rb, query.rb, resource.rb: multimedia messages and query
+	  publishing is complete
+
+2003-09-01 14:11  angdraug
+
+	* doc/notes.txt: removed outdated Dublin Core and Active2 items,
+	  added storage todo on blob literals
+
+2003-09-01 14:08  angdraug
+
+	* samizdat.rb: reordered requires
+
+2003-08-23 14:29  angdraug
+
+	* doc/install.txt: enable PL/pgSQL in PostgreSQL and install
+	  StringIO from Ruby Shim for Ruby 1.6
+
+2003-08-23 14:18  angdraug
+
+	* item.rb, login.rb, member.rb, query.rb, resource.rb: minor code
+	  style cleanup
+
+2003-08-23 14:17  angdraug
+
+	* message.rb, samizdat.rb: file upload finished: requires StringIO
+	  from Ruby 1.8 or Ruby Shim
+
+2003-08-20 17:51  angdraug
+
+	* samizdat.rb: workaround for yaml.rb/StringIO#binmode problem
+
+2003-08-18 09:51  angdraug
+
+	* config.yaml: removed vote comment
+
+2003-08-18 09:43  angdraug
+
+	* message.rb: message format wasn't quite complete: forgot to add
+	  it in couple more places
+
+2003-08-18 09:22  angdraug
+
+	* message.rb: added message dc:format (MIME type) property support
+	  (file upload doesn't work due to what seems to be a bug in
+	  cgi.rb); some naming consistency fixes (render format->mode;
+	  message body->content)
+
+2003-08-18 09:18  angdraug
+
+	* member.rb: don't allow duplicate full names; use passwd1 field
+	  name in account settings to fool browsers that remember user
+	  passwords and produce inconvenient password mismatch
+
+2003-08-18 09:14  angdraug
+
+	* doc/notes.txt: updated storage tasks
+
+2003-08-18 09:08  angdraug
+
+	* doc/: euruko2003_samizdat.xml, oscom3_samizdat.xml,
+	  slides/euruko2003_samizdat.xml, slides/oscom3_samizdat.xml: moved
+	  slides into separate directory
+
+2003-08-12 14:27  angdraug
+
+	* doc/notes.txt: minor error
+
+2003-08-08 15:04  angdraug
+
+	* doc/notes.txt: version 3.0.0 is done
+
+2003-08-08 15:03  angdraug
+
+	* query.rb: improved help messages
+
+2003-08-08 12:29  angdraug
+
+	* query.rb: sort property labels in select; NEW CLAUSE -> BLANK
+	  CLAUSE
+
+2003-08-08 12:19  angdraug
+
+	* index.rb, item.rb, member.rb, message.rb, query.rb, resource.rb:
+	  always use UTF-8 encoding
+
+2003-08-08 12:17  angdraug
+
+	* tag.rb: placeholder to give meaningful error message until tag
+	  management is implemented
+
+2003-08-06 19:14  angdraug
+
+	* query.rb: finished namespace management in query construction UI;
+	  added NEW CLAUSE to query pattern form
+
+2003-08-05 10:03  angdraug
+
+	* doc/install.txt: rewritten Apache configuration instructions to
+	  set everything from .htaccess instead of httpd.conf
+
+2003-08-05 08:05  angdraug
+
+	* doc/references.txt: updated reference to DQL
+
+2003-08-05 08:04  angdraug
+
+	* doc/notes.txt: storage task: parametrized queries
+
+2003-08-05 08:02  angdraug
+
+	* query.rb: Update button now works; reorganized form parameters
+	  processing; minor construction UI enhancements
+
+2003-08-05 08:01  angdraug
+
+	* doc/rdf-storage.txt: ORDER BY can include ASC or DESC order
+	  direction
+
+2003-08-01 19:15  angdraug
+
+	* doc/notes.txt: added aggregation and material item exchange to
+	  release roadmap
+
+2003-07-30 09:45  angdraug
+
+	* index.rb, member.rb, message.rb, query.rb: query construction UI:
+	  form rendering refactored, query construction form is rendered,
+	  but not yet updated; resource rendering improvements; in RDF
+	  storage, query parsing and translation is separated to Query
+	  class
+
+2003-07-30 09:38  angdraug
+
+	* doc/: notes.txt, rdf-storage.txt: cleaned up terminology in
+	  Squish section descriptions (needs yet more syncronization with
+	  DAML Query Language)
+
+2003-07-14 19:17  angdraug
+
+	* samizdat.rb: minor changes
+
+2003-07-14 19:16  angdraug
+
+	* resource.rb: tag handling is refactored
+
+2003-07-14 19:14  angdraug
+
+	* query.rb: report no matching resources
+
+2003-07-14 19:13  angdraug
+
+	* doc/: install.txt, notes.txt, rdf-storage.txt: documentation
+	  update
+
+2003-07-14 19:12  angdraug
+
+	* config.yaml: Site Name parameter introduced; tags are moved to a
+	  separate namespace
+
+2003-07-14 14:06  angdraug
+
+	* query.rb: fixed bug with displaying non-unstringed query parts
+
+2003-07-14 10:02  angdraug
+
+	* member.rb: fix stupid bug in session handling
+
+2003-07-14 07:10  angdraug
+
+	* index.rb, item.rb, login.rb, logout.rb, member.rb, message.rb,
+	  query.rb, resource.rb: queries updated to Dublin Core
+	  integration; access to utility classes is reorganized; fetch_many
+	  is used to reduce size of transfer from database; resource
+	  rendering is separated into a class, search result display is
+	  enhanced
+
+2003-07-14 07:05  angdraug
+
+	* config.yaml: Dublin Core integration; tags namespace; page
+	  lengths and query pattern limits introduced
+
+2003-07-14 07:00  angdraug
+
+	* samizdat.rb: access to utility classes is reorganized
+
+2003-07-14 06:56  angdraug
+
+	* doc/: concepts.txt, design-goals.txt, notes.txt, rdf-storage.txt,
+	  storage-impl.txt: documentation update; Dublin Core integration,
+	  terminology fixes
+
+2003-06-24 14:45  angdraug
+
+	* samizdat.rb: ProgrammingError exception class
+
+2003-06-24 14:43  angdraug
+
+	* query.rb: form submit=nil handling changed in template.rb
+
+2003-06-24 14:42  angdraug
+
+	* member.rb: fixed bug: changes never accepted because of exit
+	  before transaction commit
+
+2003-06-24 14:36  angdraug
+
+	* doc/: about.txt, euruko2003_samizdat.xml, notes.txt,
+	  oscom3_samizdat.xml: euruko2003 slides and minor documentation
+	  update
+
+2003-06-18 15:50  angdraug
+
+	* doc/install.txt: clarifications on required software
+
+2003-06-18 14:58  angdraug
+
+	* doc/notes.txt: roadmap for versions 0.0.1 to 0.0.5
+
+2003-06-18 14:57  angdraug
+
+	* doc/about.txt: removed reference to samizdat.tar.gz
+
+2003-06-09 15:50  angdraug
+
+	* query.rb: first cut at RDF query construction UI
+
+2003-06-07 21:21  angdraug
+
+	* doc/: about.txt, design-goals.txt, notes.txt: major documentation
+	  update
+
+2003-06-06 16:38  angdraug
+
+	* doc/install.txt: Installation manual, first version.
+
+2003-05-24 21:10  angdraug
+
+	* doc/oscom3_samizdat.xml: text comments for slides 6-8
+
+2003-05-23 17:40  angdraug
+
+	* doc/oscom3_samizdat.xml: text comments update, comment for slide
+	  5
+
+2003-05-22 21:07  angdraug
+
+	* doc/oscom3_samizdat.xml: text comments for first 4 slides
+
+2003-05-17 19:24  angdraug
+
+	* doc/oscom3_samizdat.xml: cleanup; reification in Samizdat
+	  features
+
+2003-05-14 16:33  angdraug
+
+	* doc/oscom3_samizdat.xml: comments from active2-dev
+
+2003-05-14 16:32  angdraug
+
+	* doc/concepts.txt: mp3->MP3
+
+2003-05-05 12:23  angdraug
+
+	* doc/oscom3_samizdat.xml: last minute polish
+
+2003-05-05 12:23  angdraug
+
+	* doc/concepts.txt: removed 'private' property: postpone
+	  conceptualization of access model
+
+2003-05-03 18:38  angdraug
+
+	* doc/oscom3_samizdat.xml: ready for oscom
+
+2003-04-26 19:47  angdraug
+
+	* doc/oscom3_samizdat.xml: First draft of slides for Oscom3,
+	  unfinished.
+
+2003-04-26 18:32  angdraug
+
+	* doc/about.txt: more typos
+
+2003-04-26 18:05  angdraug
+
+	* doc/about.txt: typo
+
+2003-03-10 08:59  angdraug
+
+	* member.rb, message.rb, samizdat.rb: Change database AutoCommit to
+	  off by default; minor comments cleanup
+
+2003-03-10 08:55  angdraug
+
+	* config.yaml, item.rb, resource.rb, doc/concepts.txt: Beginning of
+	  item exchange implementation; replaced Instance with Item, and
+	  Item with Message
+
+2003-01-13 09:34  angdraug
+
+	* doc/: about.txt, concepts.txt, design-goals.txt, rdf-storage.txt,
+	  references.txt, storage-impl.txt, storage.txt: Documentation
+	  update: storage rehaul, terminology cleanup, minor fixes
+
+2003-01-08 19:07  angdraug
+
+	* config.yaml, message.rb, resource.rb, samizdat.rb: first working
+	  prototype, produced on christmas holidays - new files
+
+2003-01-08 19:01  angdraug
+
+	* index.rb, login.rb, logout.rb, member.rb, doc/about.txt,
+	  doc/concepts.txt, doc/design-goals.txt, doc/storage.txt: first
+	  working prototype, produced on christmas holidays
+
+2002-12-20 13:17  angdraug
+
+	* COPYING, index.rb, login.rb, logout.rb, member.rb, doc/about.txt,
+	  doc/concepts.txt, doc/design-goals.txt, doc/references.txt,
+	  doc/storage.txt: Initial checkin.
+

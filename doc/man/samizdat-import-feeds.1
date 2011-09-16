@@ -1,0 +1,30 @@
+.TH "SAMIZDAT-IMPORT-FEEDS" "1" 
+.SH "NAME" 
+samizdat-import-feeds - update RSS feeds imported by hosted Samizdat sites
+.SH "SYNOPSIS" 
+.PP 
+\fBsamizdat-import-feeds\fP
+.SH "DESCRIPTION" 
+.PP 
+\fBsamizdat-import-feeds\fP 
+Fetches all RSS feeds configured for all Samizdat sites specified under
+/etc/samizdat. Uses standard Ruby RSS library to parse the feeds,
+results are stored in persistent DRb cache in a form usable by Samizdat
+engine.
+
+.SH "OPTIONS" 
+.PP
+Accepts no options, operates based on configuration files under
+/etc/samizdat.
+
+.SH "FILES"
+.PP
+/etc/samizdat/sites.yaml
+
+/etc/samizdat/sites/*.yaml
+
+.SH "AUTHOR" 
+.PP 
+This manual page was written by Dmitry Borodaenko <angdraug@debian.org>.
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU GPL version 3 or later.

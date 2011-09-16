@@ -1,0 +1,1187 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat 0.6.0\n"
+"POT-Creation-Date: 2008-08-30 19:15+0200\n"
+"PO-Revision-Date: 2008-06-24 06:47+0900\n"
+"Last-Translator: kz <sagrada@rootless.org>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+#: lib/samizdat/components/resource.rb:54
+msgid "Unknown resource type '%s'"
+msgstr " %s は認識できないリソースタイプです。"
+
+# 引合 [ひきあい]
+#: lib/samizdat/components/resource.rb:70
+msgid "Uriref"
+msgstr "URI"
+
+#: lib/samizdat/components/resource.rb:70
+msgid "Literal"
+msgstr "リテラル"
+
+# was fuzzy OK
+#: lib/samizdat/components/resource.rb:70
+#: lib/samizdat/controllers/moderation_controller.rb:76
+#: lib/samizdat/controllers/moderation_controller.rb:91
+msgid "Member"
+msgstr "メンバー"
+
+#: lib/samizdat/components/resource.rb:70
+#: lib/samizdat/controllers/diff_controller.rb:23
+msgid "Message"
+msgstr "メッセージ"
+
+#: lib/samizdat/components/resource.rb:70
+#: lib/samizdat/components/resource.rb:413
+msgid "Statement"
+msgstr "ステートメント"
+
+#: lib/samizdat/components/resource.rb:70
+#: lib/samizdat/components/resource.rb:446
+#: lib/samizdat/controllers/resource_controller.rb:58
+#: lib/samizdat/controllers/resource_controller.rb:59
+#: lib/samizdat/controllers/resource_controller.rb:151
+#: lib/samizdat/controllers/resource_controller.rb:152
+msgid "Vote"
+msgstr "投票"
+
+#: lib/samizdat/components/resource.rb:226
+msgid "refers to <a href=\"%s\">external uriref</a>"
+msgstr "<a href=\"%s\">外部URI</a>を参照"
+
+# was fuzzy
+#: lib/samizdat/components/resource.rb:296
+msgid "Replies"
+msgstr "コメント"
+
+#: lib/samizdat/components/resource.rb:340
+#: lib/samizdat/controllers/member_controller.rb:82
+#: lib/samizdat/controllers/member_controller.rb:163
+#: lib/samizdat/controllers/member_controller.rb:245
+#: lib/samizdat/controllers/moderation_controller.rb:76
+msgid "Login"
+msgstr "ログイン"
+
+#: lib/samizdat/components/resource.rb:358
+msgid "Account blocked by moderator: %s."
+msgstr "このアカウントはモデレータによりブロックされました: %s."
+
+#: lib/samizdat/components/resource.rb:383
+msgid "Latest Messages"
+msgstr "最新メッセージ"
+
+#: lib/samizdat/components/resource.rb:395
+msgid "UNBLOCK"
+msgstr "ブロック解除"
+
+#: lib/samizdat/components/resource.rb:395
+msgid "BLOCK"
+msgstr "ブロック"
+
+#: lib/samizdat/components/resource.rb:402
+msgid "Disable moderator status"
+msgstr ""
+
+#: lib/samizdat/components/resource.rb:402
+msgid "Enable moderator status"
+msgstr ""
+
+#: lib/samizdat/components/resource.rb:422
+#: lib/samizdat/components/resource.rb:428
+msgid "Predicate"
+msgstr "述部"
+
+#: lib/samizdat/components/resource.rb:423
+#: lib/samizdat/components/resource.rb:428
+msgid "Subject"
+msgstr "主語"
+
+#: lib/samizdat/components/resource.rb:424
+#: lib/samizdat/components/resource.rb:428
+msgid "Object"
+msgstr "目的語"
+
+#: lib/samizdat/components/resource.rb:438
+#, fuzzy
+msgid "Votes"
+msgstr "投票"
+
+#: lib/samizdat/components/resource.rb:455
+msgid "<a href=\"%s\">%s</a> gave rating %4.2f to the <a href=\"%s\">Statement %s</a> on %s."
+msgstr "<a href=\"%s\">%s</a>が %4.2f のポイントを<a href=\"%s\">ステートメント %s</a>を %s に上げました"
+
+#: lib/samizdat/components/resource.rb:463
+msgid "Vote Proposition"
+msgstr "提案に投票する"
+
+#: lib/samizdat/controllers/diff_controller.rb:21
+#: lib/samizdat/models/message.rb:98
+msgid "Bad input"
+msgstr "入力エラー"
+
+# #: cgi-bin/history.rb:49 cgi-bin/history.rb:62
+#: lib/samizdat/controllers/diff_controller.rb:24
+#: lib/samizdat/controllers/history_controller.rb:47
+msgid "Changes"
+msgstr "変更"
+
+# #: lib/samizdat/engine/focus.rb:60
+#: lib/samizdat/controllers/foci_controller.rb:33
+#: lib/samizdat/models/focus.rb:64
+msgid "Focus"
+msgstr "フォーカス"
+
+#: lib/samizdat/controllers/foci_controller.rb:33
+msgid "Related Resources"
+msgstr "関連するリソース"
+
+#: lib/samizdat/controllers/foci_controller.rb:42
+#: lib/samizdat/controllers/frontpage_controller.rb:48
+msgid "Top Focuses"
+msgstr "注目フォーカス"
+
+# TODO: https://savannah.nongnu.org/bugs/index.php?23687 
+# msgid stays the same, maybe new msgstr?
+# msgid "Top Focuses"
+# msgstr "Hot Topics"
+#
+# #: cgi-bin/index.rb:90 cgi-bin/index.rb:134 cgi-bin/index.rb:157
+#: lib/samizdat/controllers/frontpage_controller.rb:33
+#: lib/samizdat/controllers/frontpage_controller.rb:122
+#: lib/samizdat/controllers/frontpage_controller.rb:219
+msgid "Features"
+msgstr "フィーチャー"
+
+# #: cgi-bin/index.rb:90 cgi-bin/index.rb:134 cgi-bin/index.rb:167
+#: lib/samizdat/controllers/frontpage_controller.rb:33
+#: lib/samizdat/controllers/frontpage_controller.rb:145
+#: lib/samizdat/controllers/frontpage_controller.rb:216
+msgid "Recent Updates"
+msgstr "最近の更新情報"
+
+#: lib/samizdat/controllers/frontpage_controller.rb:96
+msgid "more"
+msgstr "もっと"
+
+# 一環 [いっかん]
+# was fuzzy prob OK
+#: lib/samizdat/controllers/frontpage_controller.rb:176
+msgid "Links"
+msgstr "リンク"
+
+# たんぴょう
+# was fuzzy prob OK
+#: lib/samizdat/controllers/frontpage_controller.rb:178
+msgid "All Replies"
+msgstr "すべてのコメント"
+
+#: lib/samizdat/controllers/frontpage_controller.rb:179
+#: lib/samizdat/controllers/moderation_controller.rb:39
+msgid "Moderation Log"
+msgstr "モデレート履歴"
+
+# へんしゅう
+# #: lib/samizdat/engine/template.rb:553
+#: lib/samizdat/controllers/frontpage_controller.rb:382
+#: lib/samizdat/controllers/message_controller.rb:878
+msgid "(name that this language calls itself)"
+msgstr "日本語"
+
+# #: lib/samizdat/engine/template.rb:556
+#: lib/samizdat/controllers/frontpage_controller.rb:385
+msgid " (default language)"
+msgstr " （デフォルト言語）"
+
+# #: cgi-bin/history.rb:23
+#: lib/samizdat/controllers/history_controller.rb:19
+msgid "History of Changes"
+msgstr "変更履歴"
+
+#: lib/samizdat/controllers/history_controller.rb:35
+msgid "compare with previous version"
+msgstr "前のヴァージョンと比較"
+
+#: lib/samizdat/controllers/history_controller.rb:47
+msgid "Versions"
+msgstr "ヴァージョン"
+
+#: lib/samizdat/controllers/item_controller.rb:13
+msgid "Not Implemented"
+msgstr "実装されていません"
+
+#: lib/samizdat/controllers/item_controller.rb:14
+msgid "<p>Material item exchange is not implemented yet.</p>"
+msgstr "<p>ファイル交換機能はまだ実装されていません。</p>"
+
+# #: cgi-bin/member.rb:287
+#: lib/samizdat/controllers/member_controller.rb:19
+msgid "Theme"
+msgstr "テーマ"
+
+#: lib/samizdat/controllers/member_controller.rb:25
+msgid "Show static content on the front page"
+msgstr "静的コンテンツをホームに表示する"
+
+#: lib/samizdat/controllers/member_controller.rb:26
+msgid "Hide static content from the front page"
+msgstr "静的コンテンツをホームに表示しない"
+
+#: lib/samizdat/controllers/member_controller.rb:30
+msgid "Return to basic interface"
+msgstr "簡易版に切り替える"
+
+#: lib/samizdat/controllers/member_controller.rb:31
+msgid "Enable advanced interface"
+msgstr "詳細版に切り替える"
+
+#: lib/samizdat/controllers/member_controller.rb:33
+msgid "Change Appearance"
+msgstr "アピアランスを変更する"
+
+#: lib/samizdat/controllers/member_controller.rb:36
+msgid "Moderation Facility"
+msgstr "モデレーション"
+
+# けす
+#: lib/samizdat/controllers/member_controller.rb:37
+msgid "Disable"
+msgstr "無効にする"
+
+# ともす
+#: lib/samizdat/controllers/member_controller.rb:38
+msgid "Enable"
+msgstr "有効にする"
+
+#: lib/samizdat/controllers/member_controller.rb:41
+#, fuzzy
+msgid "Interface Settings"
+msgstr "メンバー設定"
+
+#: lib/samizdat/controllers/member_controller.rb:65
+#: data/samizdat/templates/page_layout.rhtml:38
+msgid "Profile"
+msgstr ""
+
+#: lib/samizdat/controllers/member_controller.rb:72
+#: data/samizdat/templates/page_layout.rhtml:39
+#, fuzzy
+msgid "Account"
+msgstr "活動"
+
+# #: cgi-bin/login.rb:27 cgi-bin/member.rb:314
+#: lib/samizdat/controllers/member_controller.rb:78
+#: lib/samizdat/controllers/member_controller.rb:167
+msgid "Create New Account"
+msgstr "新規アカウントを作成する"
+
+#: lib/samizdat/controllers/member_controller.rb:113
+msgid "You didn't fill all mandatory fields"
+msgstr "必須項目をすべて記入してください"
+
+#: lib/samizdat/controllers/member_controller.rb:128
+msgid "Your email address was used to create an account."
+msgstr ""
+
+#: lib/samizdat/controllers/member_controller.rb:136
+msgid "Login error: failed to open session for new account"
+msgstr "ログインエラー: 新規アカウントのセッション開始に失敗しました"
+
+#: lib/samizdat/controllers/member_controller.rb:148
+msgid "Login Failed"
+msgstr "ログイン失敗"
+
+#: lib/samizdat/controllers/member_controller.rb:150
+msgid "Wrong login name or password. Try again."
+msgstr "ログイン名またはパスワードがまちがいです。もう一度ご確認ください。"
+
+# #: cgi-bin/login.rb:22 lib/samizdat/engine/template.rb:113
+#: lib/samizdat/controllers/member_controller.rb:158
+#: data/samizdat/templates/page_layout.rhtml:45
+msgid "Log in"
+msgstr "ログイン"
+
+#: lib/samizdat/controllers/member_controller.rb:160
+msgid "Use existing account:"
+msgstr "既存アカウントを使う: "
+
+# #: cgi-bin/login.rb:25 cgi-bin/member.rb:279
+#: lib/samizdat/controllers/member_controller.rb:164
+#: lib/samizdat/controllers/member_controller.rb:323
+#: lib/samizdat/controllers/member_controller.rb:361
+msgid "Password"
+msgstr "パスワード"
+
+#: lib/samizdat/controllers/member_controller.rb:169
+#: lib/samizdat/controllers/member_controller.rb:249
+msgid "Recover Lost Password"
+msgstr "忘れたパスワードをとりもどす"
+
+#: lib/samizdat/controllers/member_controller.rb:193
+msgid "Confirmation hash not found"
+msgstr "確認ハッシュがみつかりません"
+
+#: lib/samizdat/controllers/member_controller.rb:195
+msgid "This confirmation hash is intended for another user"
+msgstr "この確認ハッシュは他のユーザのものです"
+
+#: lib/samizdat/controllers/member_controller.rb:211
+msgid "Confirmation Accepted"
+msgstr "確認が承認されました"
+
+#: lib/samizdat/controllers/member_controller.rb:212
+msgid "Changes confirmed."
+msgstr "変更は確認されました。"
+
+#: lib/samizdat/controllers/member_controller.rb:219
+msgid "Sorry, password recovery not enabled on this site"
+msgstr "申し訳ございません、本サイトではパスワードをとりもどすことができません。"
+
+#: lib/samizdat/controllers/member_controller.rb:221
+msgid "You are already logged in"
+msgstr "既にログインしています"
+
+#: lib/samizdat/controllers/member_controller.rb:229
+msgid "Wrong login"
+msgstr "ログインがまちがいです。"
+
+#: lib/samizdat/controllers/member_controller.rb:240
+msgid "New password has been sent to you."
+msgstr "新しいパスワードが送信されました。"
+
+#: lib/samizdat/controllers/member_controller.rb:255
+msgid "Account is already blocked"
+msgstr "アカウントはブロックされています"
+
+#: lib/samizdat/controllers/member_controller.rb:257
+msgid "Moderator accounts can not be blocked"
+msgstr "モデレータのアカウントをブロックすることはできません"
+
+#: lib/samizdat/controllers/member_controller.rb:269
+msgid "Account is not blocked"
+msgstr "アカウントはブロックされていません"
+
+#: lib/samizdat/controllers/member_controller.rb:270
+msgid "Can't unblock, the account is broken"
+msgstr "アカウントが壊れているため、ブロック解除できません"
+
+#: lib/samizdat/controllers/member_controller.rb:307
+#: lib/samizdat/controllers/member_controller.rb:353
+msgid "Full name"
+msgstr "氏名"
+
+#: lib/samizdat/controllers/member_controller.rb:322
+#: lib/samizdat/controllers/member_controller.rb:383
+msgid "Email"
+msgstr "メールアドレス"
+
+#: lib/samizdat/controllers/member_controller.rb:324
+msgid "Reenter password to confirm"
+msgstr "パスワードをもう一度入力してください"
+
+# #: cgi-bin/index.rb:90 cgi-bin/index.rb:134 cgi-bin/index.rb:167
+# was fuzzy  prob ok
+#: lib/samizdat/controllers/member_controller.rb:353
+#: lib/samizdat/controllers/member_controller.rb:361
+#: lib/samizdat/controllers/member_controller.rb:383
+#: lib/samizdat/plugins/profile.rb:63
+#, fuzzy
+msgid "%s updated"
+msgstr "更新"
+
+#: lib/samizdat/controllers/member_controller.rb:376
+msgid "Your email address was specified for an account."
+msgstr ""
+
+#: lib/samizdat/controllers/member_controller.rb:378
+msgid "Confirmation request is sent to your new email address."
+msgstr "新しいメールアドレスに確認のメールを送りました"
+
+#: lib/samizdat/controllers/member_controller.rb:404
+msgid "Change Account Status"
+msgstr "アカウント状態を変更する"
+
+#: lib/samizdat/controllers/member_controller.rb:406
+msgid "When account is blocked, the member cannot login. Please confirm that you want to change block status of this account."
+msgstr "アカウントがブロックされていると、メンバーはログインすることができません。このアカウントのブロック状態を変更することをご確認ください。"
+
+#: lib/samizdat/controllers/member_controller.rb:408
+#: lib/samizdat/controllers/message_controller.rb:46
+#: lib/samizdat/controllers/message_controller.rb:66
+#: lib/samizdat/controllers/message_controller.rb:93
+#: lib/samizdat/controllers/message_controller.rb:428
+#: lib/samizdat/controllers/message_controller.rb:450
+#: lib/samizdat/controllers/message_controller.rb:805
+msgid "Confirm"
+msgstr "確認"
+
+#: lib/samizdat/controllers/member_controller.rb:436
+msgid "Passwords do not match"
+msgstr "パスワードが一致しません"
+
+#: lib/samizdat/controllers/member_controller.rb:441
+msgid "Login name you specified is reserved"
+msgstr "このログイン名は既に使われています"
+
+#: lib/samizdat/controllers/member_controller.rb:443
+msgid "Use only latin letters and numbers in login name"
+msgstr "ログイン名には半角英数字のみを使ってください"
+
+#: lib/samizdat/controllers/member_controller.rb:448
+#: lib/samizdat/controllers/member_controller.rb:488
+msgid "Malformed email address: '%s'"
+msgstr "メールアドレスの書式がおかしいです: '%s'"
+
+#: lib/samizdat/controllers/member_controller.rb:466
+msgid "Full name you have specified is used by someone else"
+msgstr "この氏名は既に使われています"
+
+#: lib/samizdat/controllers/member_controller.rb:473
+msgid "Email address you have specified is used by someone else"
+msgstr "このメールアドレスは既に使われています"
+
+#: lib/samizdat/controllers/member_controller.rb:478
+msgid "Login name you specified is already used by someone else"
+msgstr "このログイン名が既に使われています"
+
+#: lib/samizdat/controllers/member_controller.rb:501
+msgid "Failed to send email"
+msgstr "メール送信に失敗しました"
+
+#: lib/samizdat/controllers/member_controller.rb:518
+msgid "To confirm this action, visit the following web page:"
+msgstr ""
+
+#: lib/samizdat/controllers/member_controller.rb:522
+#, fuzzy
+msgid "To cancel this action, ignore this message."
+msgstr "このメッセージの編集権限がありません"
+
+#: lib/samizdat/controllers/message_controller.rb:26
+#: lib/samizdat/controllers/message_controller.rb:713
+msgid "Content"
+msgstr "コンテンツ"
+
+#: lib/samizdat/controllers/message_controller.rb:42
+msgid "Hide Message"
+msgstr "メッセージを非表示にする"
+
+#: lib/samizdat/controllers/message_controller.rb:44
+msgid "The message will be hidden from public view."
+msgstr "このメッセージは公開されていません"
+
+#: lib/samizdat/controllers/message_controller.rb:62
+msgid "Unhide Message"
+msgstr "メッセージを表示する"
+
+#: lib/samizdat/controllers/message_controller.rb:64
+msgid "The message will not be hidden from public view."
+msgstr "このメッセージは公開されています"
+
+#: lib/samizdat/controllers/message_controller.rb:86
+msgid "Reparent Message"
+msgstr "メッセージツリーを変更します"
+
+#: lib/samizdat/controllers/message_controller.rb:88
+msgid "This message will be moved to new parent"
+msgstr "このメッセージはツリーを移動しています"
+
+#: lib/samizdat/controllers/message_controller.rb:91
+msgid "New Parent"
+msgstr "新しいツリー"
+
+#: lib/samizdat/controllers/message_controller.rb:124
+#: lib/samizdat/controllers/message_controller.rb:215
+msgid "New Message"
+msgstr "新しいメッセージ"
+
+#: lib/samizdat/controllers/message_controller.rb:243
+#: lib/samizdat/helpers/message_helper.rb:123
+msgid "Reply"
+msgstr "コメントする"
+
+#: lib/samizdat/controllers/message_controller.rb:245
+#: lib/samizdat/controllers/message_controller.rb:280
+#: lib/samizdat/controllers/message_controller.rb:316
+msgid "Parent Message"
+msgstr "親メッセージ"
+
+# #: lib/samizdat/engine/template.rb:385
+#: lib/samizdat/controllers/message_controller.rb:277
+#: lib/samizdat/controllers/message_controller.rb:313
+#: lib/samizdat/helpers/message_helper.rb:125
+#, fuzzy
+msgid "Add translation"
+msgstr "翻訳"
+
+#: lib/samizdat/controllers/message_controller.rb:328
+msgid "You are not allowed to edit this message"
+msgstr "このメッセージの編集権限がありません"
+
+# 言伝て ことづて  へんしゅう
+#: lib/samizdat/controllers/message_controller.rb:347
+msgid "Edit Message"
+msgstr "メッセージを編集する"
+
+#: lib/samizdat/controllers/message_controller.rb:373
+msgid "Take Over Message"
+msgstr "メッセージを引継ぐ"
+
+#: lib/samizdat/controllers/message_controller.rb:376
+msgid "Edit message content and open-for-all status, message will remain attributed to the current creator."
+msgstr ""
+
+#: lib/samizdat/controllers/message_controller.rb:401
+msgid "Replace Message"
+msgstr "メッセージを置き換える"
+
+#: lib/samizdat/controllers/message_controller.rb:404
+msgid "MESSAGE WILL BE COMPLETELY REPLACED, NO RECOVERY WILL BE POSSIBLE. PLEASE PROVIDE DETAILED JUSTIFICATION FOR THIS ACTION."
+msgstr "<strong>メッセージが完全に置き換えられると、復旧することはできません。そうするための正当な理由を示して下さい。</strong>"
+
+#: lib/samizdat/controllers/message_controller.rb:422
+#: lib/samizdat/helpers/message_helper.rb:166
+#, fuzzy
+msgid "Request Moderation"
+msgstr "モデレート履歴"
+
+#: lib/samizdat/controllers/message_controller.rb:425
+msgid "Please confirm that you want to request moderation of this message:"
+msgstr ""
+
+#: lib/samizdat/controllers/message_controller.rb:444
+msgid "Acknowledge Moderation Request"
+msgstr ""
+
+#: lib/samizdat/controllers/message_controller.rb:447
+msgid "Moderation request will be marked as acknowledged without moderatorial action."
+msgstr ""
+
+#: lib/samizdat/controllers/message_controller.rb:642
+msgid "Multimedia upload is disabled on this site"
+msgstr "このウェブサイトに複合媒体をアップロードできません"
+
+#: lib/samizdat/controllers/message_controller.rb:689
+msgid "Message title is required"
+msgstr "メッセージにタイトルをつけてください"
+
+# にる
+#: lib/samizdat/controllers/message_controller.rb:696
+msgid "Your message looks like spam"
+msgstr "済みません、あなたの言伝てに似っています"
+
+#: lib/samizdat/controllers/message_controller.rb:704
+msgid "Message body is required"
+msgstr "メッセージ本文を書いてください"
+
+#: lib/samizdat/controllers/message_controller.rb:711
+msgid "Title"
+msgstr "件名"
+
+#: lib/samizdat/controllers/message_controller.rb:727
+msgid "(formats supported: %s)"
+msgstr "（サポートされているフォーマットは: %s）"
+
+# multi-publish-0.4 patch
+#: lib/samizdat/controllers/message_controller.rb:728
+msgid "Upload content from file"
+msgstr "ファイルから含量（写真やヴィデオや。。。）がアップロードする"
+
+#: lib/samizdat/controllers/message_controller.rb:734
+msgid "Alternatively, upload a file"
+msgstr "あるいはファイルをアップロードする"
+
+# DEPRECATED by 080830_multi_publish-0.7.2.patch 
+#: lib/samizdat/controllers/message_controller.rb:734
+msgid "Alternatively, upload a file (formats supported: %s)"
+msgstr "あるいはファイルをアップロードする（サポートされているフォーマットは: %s）"
+
+#: lib/samizdat/controllers/message_controller.rb:753
+msgid "All translations have already been made"
+msgstr ""
+
+#: lib/samizdat/controllers/message_controller.rb:764
+msgid "Language of the message"
+msgstr "メッセージの言語"
+
+#: lib/samizdat/controllers/message_controller.rb:767
+msgid "Format"
+msgstr "フォーマット"
+
+#: lib/samizdat/controllers/message_controller.rb:773
+msgid "Editing is open for all members (excluding guests who can't edit anyone's messages)"
+msgstr ""
+
+#: lib/samizdat/controllers/message_controller.rb:784
+msgid "Reference to description (ID or URL of another message on this site)"
+msgstr "名状の引合（このウェブサイトの他言伝てのIDやURL）"
+
+#: lib/samizdat/controllers/message_controller.rb:789
+msgid "Preview"
+msgstr "予告篇"
+
+#: lib/samizdat/controllers/message_controller.rb:800
+msgid "Warning: content is longer than %s characters. In some situations, it will be truncated."
+msgstr "警告：%sバイトは含量より超過です。時々、切り捨っています。"
+
+#: lib/samizdat/controllers/message_controller.rb:803
+msgid "Message Preview"
+msgstr "言伝ての予告篇"
+
+#: lib/samizdat/controllers/message_controller.rb:840
+msgid "Press 'Back' button to change the message."
+msgstr "言伝ては違うには、返るの撮みを押す"
+
+#: lib/samizdat/controllers/message_controller.rb:883
+msgid "Warning: you said that your text is in %s, but it seems to be in another language."
+msgstr ""
+
+#: lib/samizdat/controllers/moderation_controller.rb:25
+#: lib/samizdat/controllers/moderation_controller.rb:54
+#, fuzzy
+msgid "Pending Moderation Requests"
+msgstr "確認してください"
+
+#: lib/samizdat/controllers/moderation_controller.rb:28
+#: lib/samizdat/controllers/moderation_controller.rb:48
+msgid "Date"
+msgstr "月日"
+
+#: lib/samizdat/controllers/moderation_controller.rb:28
+#: lib/samizdat/controllers/moderation_controller.rb:85
+msgid "Moderator"
+msgstr "中保者"
+
+#: lib/samizdat/controllers/moderation_controller.rb:28
+msgid "Action"
+msgstr "活動"
+
+#: lib/samizdat/controllers/moderation_controller.rb:28
+#: lib/samizdat/controllers/moderation_controller.rb:48
+msgid "Resource"
+msgstr "資源"
+
+#: lib/samizdat/controllers/query_controller.rb:17
+#: lib/samizdat/controllers/query_controller.rb:231
+msgid "Edit Query"
+msgstr "問を編集"
+
+#: lib/samizdat/controllers/query_controller.rb:29
+#: lib/samizdat/controllers/query_controller.rb:132
+msgid "Search Result"
+msgstr "探究の産物"
+
+#: lib/samizdat/controllers/query_controller.rb:44
+msgid "Publish This Query"
+msgstr "問は着す"
+
+#: lib/samizdat/controllers/query_controller.rb:53
+msgid "No matching resources found."
+msgstr "合いっての資源見あたるませんでした。"
+
+#: lib/samizdat/controllers/query_controller.rb:163
+msgid "Error in your query: "
+msgstr "問に誤差："
+
+#: lib/samizdat/controllers/query_controller.rb:167
+msgid "Must-bind list should contain only one blank node, filters based on queries with a complex answer pattern are not implemented"
+msgstr "must-bindの列記に虚ろなせってんは一つだけできます"
+
+#: lib/samizdat/controllers/query_controller.rb:170
+msgid "User-defined query pattern should not be longer than %s clauses"
+msgstr "%s個条は使い手の問より長いできません"
+
+#: lib/samizdat/controllers/query_controller.rb:176
+msgid "Search By Substring"
+msgstr "サブストリングで探す"
+
+#: lib/samizdat/controllers/query_controller.rb:179
+#: data/samizdat/templates/page_layout.rhtml:32
+msgid "Search"
+msgstr "探す下さい"
+
+#: lib/samizdat/controllers/query_controller.rb:182
+msgid "Select Target"
+msgstr "的は選ぶ"
+
+#: lib/samizdat/controllers/query_controller.rb:186
+msgid "Query Pattern (predicate subject object)"
+msgstr "問の絵柄（ 述部 主語 目的語 ）"
+
+#: lib/samizdat/controllers/query_controller.rb:197
+msgid "BLANK CLAUSE "
+msgstr "虚ろな箇条"
+
+#: lib/samizdat/controllers/query_controller.rb:206
+msgid "Literal Condition"
+msgstr "リテラルの判別式"
+
+#: lib/samizdat/controllers/query_controller.rb:209
+msgid "Order By"
+msgstr "順"
+
+#: lib/samizdat/controllers/query_controller.rb:212
+msgid "Ascending"
+msgstr "降順"
+
+#: lib/samizdat/controllers/query_controller.rb:212
+msgid "Descending"
+msgstr "昇順"
+
+# #: cgi-bin/index.rb:90 cgi-bin/index.rb:134 cgi-bin/index.rb:167
+# was fuzzy  prob ok
+#: lib/samizdat/controllers/query_controller.rb:218
+msgid "Update"
+msgstr "更新"
+
+#: lib/samizdat/controllers/query_controller.rb:220
+msgid "Construct Query"
+msgstr "問が作る"
+
+#: lib/samizdat/controllers/query_controller.rb:223
+msgid "Edit Raw Query"
+msgstr "生な問が編集"
+
+#: lib/samizdat/controllers/query_controller.rb:227
+#: lib/samizdat/plugins/squish.rb:34
+msgid "Run"
+msgstr "する"
+
+#: lib/samizdat/controllers/resource_controller.rb:56
+#: lib/samizdat/controllers/resource_controller.rb:149
+#: lib/samizdat/helpers/application_helper.rb:173
+msgid "Submit"
+msgstr "指し出す"
+
+#: lib/samizdat/engine/controller.rb:88
+msgid "Access Denied"
+msgstr "できません"
+
+#: lib/samizdat/engine/controller.rb:92
+msgid "Account Is Blocked"
+msgstr "口座は塞ぎました"
+
+#: lib/samizdat/engine/controller.rb:94
+msgid "Your account is blocked until the email address you have specified is confirmed. Confirmation message with instructions was sent to that address."
+msgstr "あなたのメルアドは引き換えすまだから、口座は塞ぎです。引き換えしての訓示の手紙が、このメルに寄越した。"
+
+# TODO: https://savannah.nongnu.org/bugs/index.php?23687
+# msgid stays the same, msgstr should become more user-friendly, like the
+# new english msgstr:
+# msgid "Your account is blocked until the email address you have specified is confirmed. Confirmation message with instructions was sent to that address."
+# msgstr "Thank you for signing up for an account. A confirmation e-mail message was sent to your e-mail address. Follow the instructions in the e-mail to complete your account setup. You can then use your account to more conveniently post on %s."
+#: lib/samizdat/engine/controller.rb:96
+msgid "User Error"
+msgstr "使いての誤差"
+
+#: lib/samizdat/engine/controller.rb:98
+msgid "Press 'Back' button of your browser to return."
+msgstr "もどるにはブラウザの「戻る」ボタンを押して下さい"
+
+#: lib/samizdat/engine/controller.rb:102
+msgid "Resource Not Found"
+msgstr "資源は見あたるませんでした"
+
+#: lib/samizdat/engine/controller.rb:103
+msgid " (looks like it was %s)"
+msgstr "（多分%sしました）"
+
+#: lib/samizdat/engine/controller.rb:105
+msgid "The resource you requested (%s) was not found on this site. Please report this error back to the site you came from%s."
+msgstr "資源は (%s) このウェブサイトに見あたるませんでした。以前のウェブサイトに%sこの誤差を伝えって下さい。"
+
+#: lib/samizdat/engine/controller.rb:111
+msgid "Runtime Error"
+msgstr "ランタイムの誤差"
+
+#: lib/samizdat/engine/controller.rb:113
+msgid "Runtime error has occured."
+msgstr "ランタイムの誤差が有りました。"
+
+#: lib/samizdat/engine/controller.rb:114
+msgid "Please report this error to the site administrator."
+msgstr "ウェブサイトのシスアドにこの誤差を伝えって下さい。"
+
+#: lib/samizdat/engine/request.rb:230 lib/samizdat/plugins/role.rb:79
+msgid "moderator"
+msgstr "中保者"
+
+#: lib/samizdat/engine/request.rb:230 lib/samizdat/plugins/role.rb:79
+msgid "member"
+msgstr "会員"
+
+# #: lib/samizdat/engine/session.rb:185 lib/samizdat/engine/template.rb:369
+#: lib/samizdat/engine/request.rb:230
+#: lib/samizdat/helpers/message_helper.rb:42 lib/samizdat/plugins/role.rb:79
+msgid "guest"
+msgstr "客人"
+
+#: lib/samizdat/engine/request.rb:337
+msgid "Input size exceeds content size limit"
+msgstr "入力線の大小は含量の大小の限界より大きいです"
+
+# #: lib/samizdat/engine/template.rb:81
+#: lib/samizdat/helpers/application_helper.rb:26
+msgid "Front Page"
+msgstr "ホーム"
+
+#: lib/samizdat/helpers/application_helper.rb:44
+msgid ", page %s"
+msgstr ", %s ページめ"
+
+#: lib/samizdat/helpers/application_helper.rb:93
+#, fuzzy
+msgid "pages: "
+msgstr ", %s ページめ"
+
+# つぎの  誌面  しめん
+# was fuzzy
+#: lib/samizdat/helpers/application_helper.rb:98
+msgid "next page"
+msgstr "次の誌面"
+
+#: lib/samizdat/helpers/application_helper.rb:263
+msgid "SELECT FOCUS"
+msgstr "論題を選びって"
+
+#: lib/samizdat/helpers/application_helper.rb:269
+msgid "this message"
+msgstr "このメッセージ"
+
+# TODO: is this OK?   https://savannah.nongnu.org/bugs/index.php?23687
+#: lib/samizdat/helpers/application_helper.rb:272
+msgid "Select focus that this resource will be related to"
+msgstr "%sには関係の論題を選びって下さい"
+
+#: lib/samizdat/helpers/application_helper.rb:295
+msgid "Select the date at which this event is planned for"
+msgstr "イベントの月日は選って下さい"
+
+#: lib/samizdat/helpers/application_helper.rb:312
+msgid "Enter focus id if it's not in the list"
+msgstr "もし論題は列記にありません、論題のIDはどうですか"
+
+#: lib/samizdat/helpers/application_helper.rb:321
+msgid "this resource"
+msgstr "この資源"
+
+# TODO: is this OK? Is は still needed after %s?  https://savannah.nongnu.org/bugs/index.php?23687
+#: lib/samizdat/helpers/application_helper.rb:324
+msgid "Give a rating of how strongly this resource is related to selected focus"
+msgstr "%sは見立ていって論題の関係の強さの考課贈る下さい"
+
+#: lib/samizdat/helpers/application_helper.rb:329
+msgid "-2 (No)"
+msgstr "-2 （いいえ）"
+
+#: lib/samizdat/helpers/application_helper.rb:330
+msgid "-1 (Not Likely)"
+msgstr "-1 （有りえりません）"
+
+#: lib/samizdat/helpers/application_helper.rb:331
+msgid "0 (Uncertain)"
+msgstr "0 （不確定）"
+
+#: lib/samizdat/helpers/application_helper.rb:332
+msgid "1 (Likely)"
+msgstr "1 （有りえります）"
+
+#: lib/samizdat/helpers/application_helper.rb:333
+msgid "2 (Yes)"
+msgstr "2 （はい）"
+
+#: lib/samizdat/helpers/application_helper.rb:357
+msgid "Click to view the resource"
+msgstr "資源を見るにはクリックする"
+
+#: lib/samizdat/helpers/message_helper.rb:19
+msgid "See the full message"
+msgstr "たっぷりな言伝てを見る"
+
+# #: lib/samizdat/engine/template.rb:286
+#: lib/samizdat/helpers/message_helper.rb:25
+msgid "related to"
+msgstr "関係"
+
+#: lib/samizdat/helpers/message_helper.rb:47
+msgid "parent message"
+msgstr "子持ち的な言伝て"
+
+#: lib/samizdat/helpers/message_helper.rb:48
+msgid "current version"
+msgstr "現在ヴァージャン"
+
+# #: lib/samizdat/engine/template.rb:376
+#: lib/samizdat/helpers/message_helper.rb:50
+msgid "history"
+msgstr "歴史"
+
+#: lib/samizdat/helpers/message_helper.rb:54
+msgid "view source"
+msgstr "源を見る"
+
+#: lib/samizdat/helpers/message_helper.rb:58
+msgid "replies"
+msgstr "短評"
+
+# #: lib/samizdat/engine/template.rb:385
+#: lib/samizdat/helpers/message_helper.rb:61
+msgid "translation"
+msgstr "翻訳"
+
+#: lib/samizdat/helpers/message_helper.rb:72
+msgid "hidden"
+msgstr "隠しました"
+
+#: lib/samizdat/helpers/message_helper.rb:74
+#, fuzzy
+msgid "moderation log"
+msgstr "モデレート履歴"
+
+#: lib/samizdat/helpers/message_helper.rb:78
+msgid "by&nbsp;%s on&nbsp;%s"
+msgstr "%s で %s に"
+
+#: lib/samizdat/helpers/message_helper.rb:119
+#, fuzzy
+msgid "Reply to original message"
+msgstr "メッセージを置き換える"
+
+#: lib/samizdat/helpers/message_helper.rb:137
+msgid "Edit"
+msgstr "編集"
+
+#: lib/samizdat/helpers/message_helper.rb:146
+msgid "UNHIDE"
+msgstr "現ずる"
+
+#: lib/samizdat/helpers/message_helper.rb:146
+msgid "HIDE"
+msgstr "押し隠す"
+
+#: lib/samizdat/helpers/message_helper.rb:149
+msgid "REPARENT"
+msgstr "子持ちは違う"
+
+#: lib/samizdat/helpers/message_helper.rb:150
+msgid "TAKE OVER"
+msgstr "引継ぐ"
+
+#: lib/samizdat/helpers/message_helper.rb:158
+msgid "REPLACE"
+msgstr "差し替える"
+
+#: lib/samizdat/helpers/message_helper.rb:161
+msgid "ACKNOWLEDGE"
+msgstr ""
+
+#: lib/samizdat/helpers/message_helper.rb:201
+msgid "Description"
+msgstr "名状"
+
+#: lib/samizdat/helpers/resource_helper.rb:25
+msgid "Click to vote on how this resource is related to this focus"
+msgstr "この資源には関係の論題の決議するには、クリックしって下さい"
+
+#: lib/samizdat/helpers/resource_helper.rb:28
+#: lib/samizdat/plugins/access.rb:49
+msgid "vote"
+msgstr "決議"
+
+# #: lib/samizdat/engine/template.rb:286
+# was fuzzy prob OK
+#: lib/samizdat/helpers/resource_helper.rb:39
+msgid "Related Focuses"
+msgstr "関係の論題"
+
+#: lib/samizdat/helpers/resource_helper.rb:48
+msgid "Click to relate this resource to another focus"
+msgstr "この資源には関係の論題するには、クリックしって下さい"
+
+#: lib/samizdat/helpers/resource_helper.rb:50
+msgid "Add another focus"
+msgstr "他論題を書き足しって"
+
+#: lib/samizdat/helpers/resource_helper.rb:56
+#, fuzzy
+msgid "Click to put this resource in the calendar"
+msgstr "この資源には関係の論題するには、クリックしって下さい"
+
+# PATCHES
+# こよみ  さひいれる
+#: lib/samizdat/helpers/resource_helper.rb:58
+msgid "Put this in the calendar"
+msgstr "暦に差し入れって"
+
+#: lib/samizdat/models/content.rb:198
+msgid "Uploaded file is larger than %s bytes limit"
+msgstr "ファイルは%sバイトの限界より大きいです"
+
+#: lib/samizdat/models/content.rb:214
+msgid "Too many files have recently been uploaded to the preview stage without being confirmed. Please wait and try again later"
+msgstr ""
+
+#: lib/samizdat/models/content.rb:321
+#, fuzzy
+msgid "Failed to detect content type of the uploaded file"
+msgstr "ファイルの含量の類はどうですか"
+
+#: lib/samizdat/models/content.rb:325
+msgid "Format '%s' is not supported"
+msgstr "フォーマット %s はできません"
+
+#: lib/samizdat/models/focus.rb:51
+msgid "Translation"
+msgstr "翻訳"
+
+#: lib/samizdat/models/focus.rb:108
+msgid "none"
+msgstr "有ません"
+
+#: lib/samizdat/models/focus.rb:119
+msgid "You can't relate resource to itself"
+msgstr "論題は自体に関係するできませ"
+
+#: lib/samizdat/models/focus.rb:120
+msgid "Translations should be published as replies to the original message"
+msgstr "短評は、原の言伝てには返事を着べき"
+
+#: lib/samizdat/models/member.rb:65
+#, fuzzy
+msgid "Your current access level (%s) does not allow to perform this action (%s)"
+msgstr "あなたのアクセスは%sです、決議できない"
+
+#: lib/samizdat/models/message.rb:91
+msgid "Only <a href=\"%s\">current version</a> may be used for this action"
+msgstr "この活動には<a href=\"%s\">現在ヴァージャン</a>だけ使うできます"
+
+#: lib/samizdat/models/message.rb:103
+msgid "Specified language is not supported on this site"
+msgstr "国語はこのウェブサイトに援助有ません"
+
+#: lib/samizdat/models/message.rb:118
+msgid "Recursive message reference not allowed"
+msgstr "言伝ての帰納的な引合できません"
+
+#: lib/samizdat/models/message.rb:123
+msgid "Invalid message reference"
+msgstr "言伝ての引合は無効です"
+
+#: lib/samizdat/models/message.rb:140
+msgid "Invalid openForAll value"
+msgstr "openForAllの価格は無効です"
+
+#: lib/samizdat/models/message.rb:207
+msgid "Reference to previous version lost"
+msgstr "以前ヴァージョンの引合は無くした"
+
+#: lib/samizdat/models/moderation.rb:145
+msgid "This resource has already been moderated since it was last modified"
+msgstr ""
+
+#: lib/samizdat/models/moderation.rb:149
+msgid "Moderation of this resource has already been requested"
+msgstr ""
+
+#: lib/samizdat/plugins/access.rb:49
+msgid "post"
+msgstr ""
+
+#: lib/samizdat/plugins/access.rb:49
+#, fuzzy
+msgid "moderate"
+msgstr "中保者"
+
+#: lib/samizdat/plugins/content_file.rb:47
+msgid "Download %s file"
+msgstr ""
+
+#: lib/samizdat/plugins/flash.rb:24 lib/samizdat/plugins/flowplayer.rb:25
+msgid "Install a Flash plugin and enable JavaScript to see this content."
+msgstr ""
+
+#: lib/samizdat/plugins/flowplayer.rb:37
+msgid "View the clip online"
+msgstr ""
+
+#: lib/samizdat/plugins/image.rb:46
+msgid "Click to enlarge"
+msgstr ""
+
+#: lib/samizdat/plugins/inline_default.rb:35
+msgid "Default"
+msgstr "デフォルト"
+
+#: lib/samizdat/plugins/occupation.rb:20
+#, fuzzy
+msgid "Occupation"
+msgstr "活動"
+
+#: lib/samizdat/plugins/plain_text.rb:24
+msgid "Verbatim plain text"
+msgstr ""
+
+#: lib/samizdat/plugins/squish.rb:38
+#, fuzzy
+msgid "Squish query"
+msgstr "問は着す"
+
+# #: lib/samizdat/engine/template.rb:82
+#: data/samizdat/templates/page_layout.rhtml:31
+msgid "Publish"
+msgstr "著す下さい"
+
+#: data/samizdat/templates/page_layout.rhtml:38
+msgid "View and edit your profile"
+msgstr ""
+
+#: data/samizdat/templates/page_layout.rhtml:39
+msgid "Change account parameters (email and password)"
+msgstr ""
+
+#: data/samizdat/templates/page_layout.rhtml:41
+#, fuzzy
+msgid "Change user interface settings"
+msgstr "アカウントの設定を変更する"
+
+#: data/samizdat/templates/page_layout.rhtml:41
+msgid "Settings"
+msgstr "選択権"
+
+# #: cgi-bin/login.rb:22 lib/samizdat/engine/template.rb:113
+# was fuzzy
+#: data/samizdat/templates/page_layout.rhtml:43
+msgid "Log out"
+msgstr "ログアウトする"
+
+# へんこう
+# was fuzzy
+#~ msgid "Changes Accepted"
+#~ msgstr "変更が承認されました"
+
+#~ msgid "The message will be attributed to you after takeover."
+#~ msgstr "このメッセージを引継ぐと権限があなたに移ります"
+
+#~ msgid "Your current access level (%s) does not allow to publish messages"
+#~ msgstr "あなたのアクセスレベル（%s）では、メッセージを公開することはできません"
+
+#~ msgid "Editing is open for all members"
+#~ msgstr "編集は皆会員には開く"
+
+#~ msgid "Moderator access privilege is required"
+#~ msgstr "中保者だけできます"
+
+#~ msgid "%s content"
+#~ msgstr "%s 含量"
+
+#~ msgid "Share"
+#~ msgstr "分け合って下さい"
+
+#~ msgid "Account settings, interface language, theme"
+#~ msgstr "口座の選択権,インタフェイスの国語、テーマ"
+
+#~ msgid "WARNING: This is only a preview - it has <em>not</em> yet been saved. Press the \"confirm\" button to save it."
+#~ msgstr "警告：予告篇だけです、まだ着しませんでした！着すには、「見定める」をしって下さい。"

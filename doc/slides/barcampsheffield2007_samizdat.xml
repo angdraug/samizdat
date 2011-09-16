@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- http://www.slideml.org/specification/slideml_1.0/ -->
+<s:slideset xmlns:s="http://www.oscom.org/2003/SlideML/1.0/"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:dc="http://purl.org/dc/elements/1.1"
+    xmlns:dct="http://purl.org/dc/terms/"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+    <s:metadata>
+	<s:title>Samizdat</s:title>
+	<s:subtitle>It's good to be small in the dangerous world</s:subtitle>
+	<s:author>
+	    <s:givenname>Dmitry</s:givenname>
+	    <s:familyname>Borodaenko</s:familyname>
+	    <s:orgname href="http://www.plus.net/">PlusNet</s:orgname>
+	    <s:email>dborodaenko@plus.net</s:email>
+        </s:author>
+
+        <s:confgroup>
+            <s:confdates>
+                <s:start>2007-05-26</s:start>
+                <s:end>2007-05-27</s:end>
+            </s:confdates>
+	    <s:conftitle href="http://barcamp.org/BarCampSheffield">Barcamp Sheffield 2007</s:conftitle>
+            <s:address>PlusNet</s:address>
+        </s:confgroup>
+
+        <dc:subject>Samizdat, Ruby, RDF, PostgreSQL, Security</dc:subject>
+        <dc:date>2007-05-26</dc:date>
+        <dc:rights>Dmitry Borodaenko</dc:rights>
+
+        <s:abstract>
+	    <p><a href="http://samizdat.nongnu.org/">Samizdat</a> is an open
+	    publishing and collaboration engine based on RDF model, written in
+	    Ruby, and using Apache mod_ruby (or any other web server with
+	    FastCGI support), PostgreSQL with Ruby/DBI, and YAML. Samizdat
+	    allows everyone to publish, view, comment, and edit text and
+	    multimedia resources, vote on ratings and classifications, and
+	    filter published resources by flexible sets of criteria.</p>
+
+	    <p>The talk introduces the concept of open publishing, the RDF data
+	    model, distinguishing features of Samizdat, and goes on to discuss
+	    in detail the features that help Samizdat sites to survive in the
+	    hostile environment of the Internet.</p>
+	</s:abstract>
+    </s:metadata>
+
+    <s:slide>
+        <s:title>Open Publishing</s:title>
+        <s:content>
+	    <p>An answer to corporate bias in mass-media</p>
+	    <p>Process of creating content is transparent to readers</p>
+	    <p>Readers' contributions are immediately available</p>
+	    <p>Content can be freely redistributed</p>
+	    <p>Content is structured and categorized</p>
+	    <p>Open editing: readers can see and participate in editorial
+	    decisions</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Resource Description Framework</s:title>
+        <s:content>
+	    <p>Language for representing information about resources on the
+	    Web</p>
+	    <p>RDF resource is identified by a uriref</p>
+	    <p>RDF knowledge base (KB) is a directed labeled graph without
+	    forced referential integrity</p>
+	    <p>RDF statement is a triple</p>
+	    <pre>  (property subject object)</pre>
+	    <p>Higher-order logic: statement can be reified into a resource</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Samizdat Features</s:title>
+        <s:content>
+	    <p>Open Editing: folksonomy of foci</p>
+            <p>RDF Search: what exactly were you looking for?</p>
+            <p>Message Translations: in your second-best language</p>
+            <p>Cache: beyond memcached</p>
+	    <p>Sanitize HTML: none shall pass!</p>
+	    <p>Deployment: one code to run them all</p>
+	    <p>SLOC: 3941 line</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Cache</s:title>
+        <s:content>
+	    <p>Cache: a thread-safe delegator to Hash served via Distributed
+	    Ruby</p>
+	    <p>Size and time limits</p>
+	    <p>Overridable replacement policy (LRU by default)</p>
+	    <p>Synchronized access to data:</p>
+	    <pre>  cache.fetch_or_add(key) { do_heavy_lifting }</pre>
+	    <p>SLOC: 126 lines</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Sanitize</s:title>
+        <s:content>
+	    <p>Whitelist of tags, attributes, and CSS keywords is loaded from a
+	    YAML file</p>
+	    <p>HTML rendering of a message is parsed with REXML into a DOM tree</p>
+	    <p>Anything that is not in the whitelist is dropped from the DOM
+	    tree</p>
+	    <p>Cleansed DOM tree is serialized back into XHTML and cached in the
+	    database</p>
+	    <p>SLOC: 78</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Deployment</s:title>
+        <s:content>
+	    <p>Installed from a Debian package</p>
+	    <p>/usr/share/samizdat/cgi-bin/dispatch.rb</p>
+	    <p>/usr/lib/ruby/1.8/samizdat</p>
+	    <p>/etc/samizdat/sites.yaml</p>
+	    <p>/etc/samizdat/defaults.yaml</p>
+	    <p>/etc/samizdat/sites/*.yaml</p>
+	    <p>/etc/apache2/sites-available/*</p>
+	    <p>SLOC: 183</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>MVC</s:title>
+        <s:content>
+	    <p>Rails: no multi-site deployment, and have to rewrite too many
+	    parts that don't fit into the frame</p>
+	    <p>Nitro/Og: layouts are Ruby classes instead of templates</p>
+	    <p>Dispatcher, Controller, View</p>
+	    <p>Model classes: nothing to see here, move along</p>
+	    <p>SLOC: 198</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Thank you</s:title>
+        <s:content>
+	    <p>Questions?</p>
+	</s:content>
+    </s:slide>
+
+</s:slideset>

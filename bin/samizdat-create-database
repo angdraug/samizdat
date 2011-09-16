@@ -1,0 +1,81 @@
+#!/bin/bash
+#
+# Samizdat database generation script
+#
+#   Copyright (c) 2002-2009  Dmitry Borodaenko <angdraug@debian.org>
+#
+#   This program is free software.
+#   You can distribute/modify this program under the terms of
+#   the GNU General Public License version 3 or later.
+#
+
+print_usage()
+{
+	echo "Usage: samizdat-create-database site [ driver ]"
+	echo
+	echo "Supported drivers:"
+	echo "    pgsql (default)"
+	echo "    sqlite3"
+	echo
+	echo "Requires root priviledges to run"
+}
+
+if [ -z "$1" ]; then
+	print_usage
+	exit 1
+fi
+
+SITE="$1"
+DRIVER="$2"
+[ -z "$DRIVER" ] && DRIVER="pgsql"
+
+PACKAGE=samizdat
+SQLDIR=/usr/share/$PACKAGE/database
+DATADIR=/var/lib/$PACKAGE
+SQL=`cat $SQLDIR/{create,triggers}-${DRIVER}.sql 2>/dev/null`
+if [ -r "$SQLDIR/grant-${DRIVER}.sql" ]; then
+	SQL=$SQL`sed "s/samizdat/$SITE/g" $SQLDIR/grant-${DRIVER}.sql`
+fi
+
+case "$DRIVER" in
+	pgsql)
+		su -c "echo '' | psql -q '$SITE' 2>/dev/null" - postgres
+		if [ "$?" = "0" ]; then
+			echo "Error: database '$SITE' already exists."
+			exit 3
+		fi
+		echo "Creating database and user..."
+		su -c "createdb --encoding UNICODE '$SITE' && createlang plpgsql '$SITE' && createuser -SDR '$SITE'" - postgres
+		echo "Generating database schema..."
+		echo "$SQL" | su -c "psql -q '$SITE' 2>/dev/null" - postgres
+		echo
+		echo "Please configure IDENT access as described in install.txt, or provide"
+		echo "other means for Samizdat to log in to PostrgreSQL database '$SITE'."
+		echo
+		echo "Data source: 'DBI:Pg:${SITE}'"
+		;;
+	sqlite3)
+		SQLITE_DIR=$DATADIR/$SITE
+		SQLITE_FILE=$SQLITE_DIR/${SITE}-sqlite.db
+		if [ -e "$SQLITE_FILE" ]; then
+			echo "Error: SQLite3 database file for site '$SITE' already exists."
+			exit 3
+		fi
+		echo "Creating database..."
+		mkdir -p $SQLITE_DIR
+		sqlite3 $SQLITE_FILE "$SQL"
+		echo "Granting write access to the database to group 'www-data'..."
+		chgrp -R www-data $SQLITE_DIR
+		chmod 775 $SQLITE_DIR
+		chmod 664 $SQLITE_FILE
+		echo
+		echo "Data source: 'DBI:SQLite3:$SQLITE_FILE'"
+		echo "User: '$SITE'"
+		;;
+	*)
+		echo "Error: database '$DRIVER' is not supported."
+		exit 2
+		;;
+esac
+
+echo "Database generation completed."

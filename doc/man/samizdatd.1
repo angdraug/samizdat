@@ -1,0 +1,36 @@
+.TH "SAMIZDATD" "1" 
+.SH "NAME" 
+samizdatd - Samizdat application server based on Mongrel
+.SH "SYNOPSIS" 
+.PP 
+\fBsamizdatd\fP [ \fBoptions\fP ]
+.SH "DESCRIPTION" 
+.PP 
+\fBsamizdatd\fP starts a daemon that spawns one or more Mongrel
+processes, one per specified port number. Child processes are respawned
+if they die unexpectedly.
+.SH "OPTIONS" 
+.IP "\fB--help\fP" 4
+Display usage information and quit.
+.IP "\fB-H\fP, \fB--host\fP SECONDS" 4
+Hostname or IP address to bind to. Default is localhost.
+.IP "\fB-P\fP, \fB--ports\fP ENTRIES" 4
+Comma-separated list of ports to bind to, one process per port.
+For optimal performance, start at least one process per CPU core.
+Default is 3000.
+.IP "\fB-u\fP, \fB--user\fP USER" 4
+Run as USER if started as root. Default is nobody.
+.IP "\fB-e\fP, \fB--error-log\fP ERROR_LOG_PATH" 4
+File to write errors to. Default is /dev/null. When run as root,
+the file is chowned to USER:adm.
+.IP "\fB--pidfile\fP PATH" 4
+Path to pidfile. By default, pidfile is created under /var/run/samizdat/
+when run as root, or under $TMPDIR otherwise. Location should be
+writeable by USER.
+
+.SH "AUTHOR" 
+.PP 
+This manual page was written by Dmitry Borodaenko <angdraug@debian.org>.
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU GPL version 3 or later.
+

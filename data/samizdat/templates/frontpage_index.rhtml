@@ -1,0 +1,42 @@
+<% unless @language_list.empty? %>
+<div id="languages"><%= @language_list %></div>
+<% end %>
+
+<% unless @header.empty? %>
+<div id="front-header"><%= @header %></div>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= _('Top Tags') %></th>
+      <th><%= _('Features') %></th>
+      <th><%= _('Recent Updates') %></th>
+    </tr>
+  </thead>
+  <tr>
+    <td class="tags">
+      <%= tag_cloud %>
+      <div class="foot"><div class="nav"><a href="tags"><%= _('more') %></a></div></div>
+    </td>
+    <td class="features" rowspan="3">
+      <%= FeaturesList.new(@request) %>
+      <div class="foot"><%= nav_rss(@feeds[ _('Features') ]) %></div>
+    </td>
+    <td class="updates" rowspan="3">
+      <%= UpdatesList.new(@request) %>
+      <div class="foot"><%= nav_rss(@feeds[ _('Recent Updates') ]) %></div>
+    </td>
+  </tr>
+  <tr><td class="links-head"><%= _('Links') %></td></tr>
+  <tr><td class="links">
+    <p><a href="query/run?q=<%= @all_replies_query %>"><%= _('All Replies') %></a></p>
+    <p><a href="moderation"><%= _('Moderation Log') %></a></p>
+    <%= @more_links %>
+    <%= @imported_feeds %>
+  </td></tr>
+</table>
+
+<% unless @footer.empty? %>
+<div id="front-footer"><%= @footer %></div>
+<% end %>

@@ -1,0 +1,50 @@
+# Samizdat RDF Material Items Exchange Subschema, N3 notation
+# 
+#   Copyright (c) 2002-2009 Dmitry Borodaenko <angdraug@debian.org>
+#
+#   This program is free software.
+#   You can distribute/modify this program under the terms of
+#   the GNU General Public License version 3 or later.
+#
+
+@prefix : <#> .
+@prefix s: <http://www.nongnu.org/samizdat/rdf/schema#> .
+
+# RDF Namespaces
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Material Item
+:Item
+	rdfs:subClassOf rdfs:Resource ;
+	rdfs:comment "One instance of a material item." .
+
+:description
+	rdfs:domain :Item ;
+	rdfs:range s:Message .
+
+:contributor
+	rdfs:domain :Item ;
+	rdfs:range s:Member .
+
+:possessor
+	rdfs:domain :Item ;
+	rdfs:range s:Member .
+
+# Possession Record
+:Possession
+	rdfs:subClassOf rdfs:Resource ;
+	rdfs:comment "Record of item transfer from one member to another." .
+
+:item
+	rdfs:domain :Possession ;
+	rdfs:range :Item .
+
+:takenFrom
+	rdfs:domain :Possession ;
+	rdfs:range s:Member .
+
+:givenTo
+	rdfs:domain :Possession ;
+	rdfs:range s:Member .
+

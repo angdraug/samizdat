@@ -1,0 +1,70 @@
+Samizdat Translations
+=====================
+
+Generate .pot template
+----------------------
+
+First of all, install gettext command line utilities and the latest
+Ruby/GetText (see installation manual). Early versions of rgettext
+(including the one in Debian/sarge) failed to parse some Ruby
+constructs, causing messages to be missed out during template
+generation.
+
+Run this command line from Samizdat source root:
+
+   rgettext cgi-bin/*.rb lib/samizdat/*.rb lib/samizdat/*/*.rb \
+      data/samizdat/templates/*.rhtml -o po/samizdat.pot
+
+
+New translation
+---------------
+
+Copy samizdat.pot to <language>.po, where <language> is a two-letter
+code of your language as recognized by libc locales. Replace placeholder
+values in the header with your details, find the string "English" and
+replace it with the name of your language, in your language (this string
+will be displayed for your language in the list of available
+translations).
+
+Translate the messages. Use UTF-8 encoding, or at least make sure that
+the charset you use matches your header. Don't forget to check the
+context of the strings you translate.
+
+
+Install translation manually
+----------------------------
+
+Run the following to compile the .po file and put the translation where
+GetText libraries can find it:
+
+   msgfmt po/<language>.po \
+      -o /usr/local/share/locale/<language>/LC_MESSAGES/samizdat.mo
+
+
+Update old translation
+----------------------
+
+Run the following to merge an old translation with the freshly
+generated template:
+
+   msgmerge --no-wrap <language>.po samizdat.pot -o <language>.new.po
+
+Track down and check all fuzzy matches (grep for 'fuzzy'), translate
+untranslated messages (grep for 'msgstr ""').
+
+
+Front page header in example configuration
+------------------------------------------
+
+Open data/samizdat/config.yaml and find a section starting with:
+
+   site:
+     header:
+       en: >
+
+and followed by translations to some other languages.
+
+To make the default Samizdat setup give a proper welcome to speakers
+of your language, add a translation in your language, using UTF-8
+encoding and the same HTML markup.
+

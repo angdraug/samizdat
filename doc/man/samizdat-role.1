@@ -1,0 +1,44 @@
+.TH "SAMIZDAT-ROLE" "1" 
+.SH "NAME" 
+samizdat-role - Samizdat role management
+.SH "SYNOPSIS" 
+.PP 
+\fBsamizdat-role\fP [ \fBOPTIONS\fP ] --list
+.PP 
+\fBsamizdat-role\fP [ \fBOPTIONS\fP ] --grant \fBMEMBER\fP
+.PP 
+\fBsamizdat-role\fP [ \fBOPTIONS\fP ] --revoke \fBMEMBER\fP
+.SH "DESCRIPTION" 
+.PP 
+\fBsamizdat-role\fP 
+Allows to view, grant, and revoke member access to priviledged roles on a
+Samizdat site.
+.SH "OPTIONS" 
+.IP "--site \fBSITE\fP" 4
+Name of the Samizdat site (overrides \fBSAMIZDAT_SITE\fP environment variable).
+.IP "--role \fBROLE\fP" 4
+Name of a role, default is \fBmoderator\fP.
+.IP "--grant \fBMEMBER\fP" 4
+Grant \fBROLE\fP priviledges to \fBMEMBER\fP. \fBMEMBER\fP may be specified as
+resource id or login name.
+.IP
+NB: To grant or revoke priviledges using this command, you must use
+database superuser priviledges (in PostgreSQL, this is 'postgres').
+.IP "--revoke \fBMEMBER\fP" 4
+Revoke \fBROLE\fP priviledges from \fBMEMBER\fP. \fBMEMBER\fP may be specified
+as resource id or login name.
+.IP
+NB: To grant or revoke priviledges using this command, you must use
+database superuser priviledges (in PostgreSQL, this is 'postgres').
+.SH "EXAMPLE"
+.nf
+su postgres -c 'samizdat-role --site s1 --grant joe --role moderator --list'
+.fi
+.PP
+Grant moderator priviledges to the member 'joe' of site 's1' and list all
+moderators.
+.SH "AUTHOR" 
+.PP 
+This manual page was written by Dmitry Borodaenko <angdraug@debian.org>.
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU GPL version 3 or later.

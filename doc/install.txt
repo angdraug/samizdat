@@ -1,0 +1,415 @@
+Samizdat Installation
+=====================
+
+- Get the Required Software
+- Install Samizdat Engine
+- One Code To Run Them All
+- Samizdat in a Home Directory
+- Uploads and Other Site-specific Content
+- Object Cache
+- Create Database
+- Connect to the Database
+- Apache Configuration
+- Email Interface
+- Syndication
+- Samizdat on Windows
+- Running Tests
+
+
+Get the Required Software
+-------------------------
+
+You need the following software to run Samizdat: Ruby programming
+language environment, Apache or Lighttpd web server, PostgreSQL database
+with enabled PL/pgSQL procedural language (MySQL and SQLite3 are also
+supported), Ruby/Postgres bindings, Ruby/DBI interface, Ruby/Tidy,
+Mahoro, and RMagick libraries.
+
+For better performance, you should run Samizdat with mod_ruby or FastCGI
+module.
+
+Other recommended modules are: Ruby/GetText for translation of user
+interface to different languages, Ruby algorithm/diff for version
+comparison, RedCloth for Textile hypertext markup, TZInfo for timezone
+conversions. Samizdat will still work if the recommended modules are not
+present, but the corresponding parts of functionality will not be there.
+
+   http://ruby-lang.org/
+   http://httpd.apache.org/
+   http://www.postgresql.org/
+   http://ruby.scripting.ca/postgres/
+   http://rubyforge.org/projects/ruby-dbi/
+   http://www.modruby.net/
+   http://raa.ruby-lang.org/list.rhtml?name=fcgi
+   http://www.yotabanana.com/hiki/ruby-gettext.html?ruby-gettext
+   http://packages.qa.debian.org/liba/libalgorithm-diff-ruby.html
+   http://rubyforge.org/projects/redcloth/
+   http://tidy.sf.net/
+   http://rubyforge.org/projects/tidy/
+   http://rubyforge.org/projects/mahoro/
+   http://rubyforge.org/projects/rmagick/
+   http://rubyforge.org/projects/tzinfo/
+
+On Debian, just install samizdat package (you may also want to check for
+a newest version in the experimental archive), and follow the
+instructions there.
+
+
+Install Samizdat Engine
+-----------------------
+
+If you can't use the Debian package of Samizdat, use Minero Aoki's
+setup.rb script supplied with Samizdat source:
+
+   ruby setup.rb all
+
+Check --help if you want to change default paths, use --no-harm option
+to check where the files will go. Make sure that *.yaml files go to
+/usr/local/share/samizdat, or put it in a place where Samizdat can find
+it (see SiteConfig::CONFIG_DIRS in engine/deployment.rb).
+
+Unfortunately, setup.rb doesn't do all the job: it doesn't know anything
+about CGI scripts and PO localization files, so these have to be
+installed manually. Copy cgi-bin directory to /usr/local/share/samizdat,
+generate .mo files from po/*.po (using msgfmt from GNU gettext or
+rmsgfmt from Ruby/GetText) and place them where gettext can find them:
+
+   cp -R cgi-bin /usr/local/share/samizdat/
+   mkdir -p /usr/local/share/locale/$LANG/LC_MESSAGES
+   msgfmt po/$LANG.po -o /usr/local/share/locale/$LANG/LC_MESSAGES/samizdat.mo
+
+If you are not able to place your MO-files in a standard location, you
+will have to specify your own locale path in /etc/samizdat/defaults.yaml
+or in your site-specific config file.
+
+
+One Code To Run Them All
+------------------------
+
+The preferred way to run Samizdat is to have all sites share the same
+code installed under /usr, and have site configurations under
+/etc/samizdat. To achieve that, copy sites.yaml and defaults.yaml to
+/etc/samizdat and create the /etc/samizdat/sites directory. For each
+of your sites, create <site-name>.yaml in /etc/samizdat/sites/, using
+config.yaml as a template:
+
+   mkdir -p /etc/samizdat/sites
+   cp data/samizdat/{sites,defaults}.yaml /etc/samizdat
+   cp data/samizdat/config.yaml /etc/samizdat/sites/samizdat.yaml
+
+This is the way the Debian package of Samizdat sets things up.
+
+Later on you should customise <site-name>.yaml as the main
+configuration file for your Samizdat site. You may transfer parts of
+defaults.yaml to each <site-name>.yaml if your separate sites require
+more specialisation of configuration parameters.
+
+
+
+Samizdat in a Home Directory
+----------------------------
+
+If your hosting doesn't allow you to install anything outside your home
+directory, you can still run Samizdat from there:
+
+   MY_SITE=$HOME/public_html/samizdat
+   mkdir -p $MY_SITE
+   cp -R cgi-bin/*.rb lib/samizdat data/samizdat/{css,*.yaml} $MY_SITE
+
+When Samizdat can't determine your site from /etc/samizdat/sites.yaml,
+it falls back to looking for config.yaml in script's current directory.
+
+Make sure that you block access to your *.yaml config files from
+outside, especially if you put database passwords there.
+
+
+Uploads and Other Site-specific Content
+---------------------------------------
+
+Wherever you put standard Samizdat files and configs, every site needs a
+bit of its own room, some place that will be served directly by your web
+server, without involvement of Samizdat scripts.
+
+At the very least, you need some directory to store the files uploaded
+by your users. By default, these files go to "content" subdirectory of
+your site base directory, this location is specified in site:content_dir
+option in your site-specific config file, you can also comment this
+option out to disable file upload on your site. Wherever you place this
+directory, make sure it is writeable by the CGI scripts user (www-data
+user and group on Debian) and served by your Web server from the
+location you specify in site config.
+
+Other things that are served from site base directory may include site
+logo, favicon, and static fragments included from the front page. There
+are no restrictions on how you set these up, just don't put them inside
+the writable content directory.
+
+
+Object Cache
+------------
+
+If at all possible, configure your site to use Samizdat's dRuby object
+cache server. It provides syncronized object cache for multiple web
+server processes, improving cache consistency and overall performance.
+In addition to caching, dRuby cache syncronizes the database access, so
+that identical queries only hit the database server once, and the result
+is then propagated to all processes that requested this data.
+
+The server is initiated by samizdat-drb-server script, it is a good idea
+to run it via init script on each system reboot. On Debian, you can
+enable start of samizdat-drb-server on system boot by setting ENABLED=1
+in /etc/default/samizdat.
+
+
+Create Database
+---------------
+
+If you're in a hurry, just run as root (replace "samizdat" with the name
+of your site):
+
+   samizdat-create-database samizdat pgsql
+
+This script will generate a database with empty tables and triggers,
+create a user with the same name, and grant that user all necessary
+access rights.
+
+You can do the same things manually, this will give you a better idea of
+how things are organized and how to fix when they break. Run the
+following as postgres superuser:
+
+   createdb --encoding UNICODE samizdat
+   createlang plpgsql samizdat
+   createuser -SDR samizdat
+
+   cd /usr/local/share/samizdat/database
+   psql samizdat -f create-pgsql.sql
+   psql samizdat -f triggers-pgsql.sql
+   psql samizdat -f grant-pgsql.sql
+
+If you use non-default database and user name (for example, if you have
+more than one site on the same machine), replace "samizdat" with your
+database and user name in the above examples, and run grant-pgsql.sql
+through sed before feeding it to psql:
+
+   sed -e 's/samizdat/username/g' grant-pgsql.sql | psql dbname
+
+
+Connect to the Database
+-----------------------
+
+To let Samizdat know how to connect to the database you've just created,
+you should specify DSN (data source name), user name and password in the
+"db" section of your site-specific config file. Make sure this file
+cannot be retrieved by your users: if someone gains direct access to
+your database, they can do whatever they want to your site without you
+ever knowing it.
+
+Luckily, PostgreSQL's IDENT authentication mechanism allows you to avoid
+storing database passwords anywhere: if you have full control over
+PostgreSQL configuration and run it on the same host as your web server,
+you can allow your web server connect to your database without password,
+using underlying Unix system's authentication instead.
+
+Read below on how to configure PostgreSQL for IDENT. If you can't have
+this luxury, use pwgen to generate a secure password and move on to the
+next session.
+
+First, create a separate database user for yourself, so that you don't
+have to switch to postgres superuser to do maintainance of your
+database. Replace "angdraug" with your login name in the following
+command and later on:
+
+   createuser angdraug
+
+Allow yourself and "postgres" database superuser to connect under the
+same name using IDENT authentication, and allow web server ("www-data")
+to connect as user "samizdat". To achieve that, put following lines into
+pg_ident.conf (on Debian, config files are located under
+/etc/postgresql, on some systems they are located in PostgreSQL data
+directory instead):
+
+   # MAP     IDENT    PGUSERNAME
+   samizdat  angdraug angdraug
+   samizdat  www-data samizdat
+
+Tell PostgreSQL to use the above mapping and to reject remote
+connections. Make pg_hba.conf look like below (if you're running
+PostgreSQL version older than 8.4, format of this file will be slightly
+different, check your PostgreSQL documentation):
+
+   # TYPE  DATABASE  USER     CIDR-ADDRESS  METHOD
+   local   all       postgres               ident
+
+   local   samizdat  all                    ident map=samizdat
+
+   local   all       all                    ident
+   host    all       all      127.0.0.1/32  md5
+   host    all       all      ::1/128       md5
+
+Since order of the lines in pg_hba.conf is important, make sure that
+Samizdat line appears before any other lines that might match, but not
+above the line that ensures that postgres superuser can always login.
+
+Restart PostgreSQL, try to connect:
+
+   psql samizdat
+
+Now comment out the "password" option in the "db" section of the site
+configuration file to let PostgreSQL know that you want to use IDENT
+authentication.
+
+If you want a more complicated database connection scheme, replace the
+#db() method in samizdat/engine/deployment.rb to connect to any
+databases in whichever way you like.
+
+
+Apache Configuration
+--------------------
+
+While Samizdat's dRuby object cache makes Samizdat run with reasonable
+speed even in plain CGI mode, you can speed it up substantially by using
+mod_ruby Apache module or one of FastCGI protocol implementations. My
+unscientific benchmarks show that running Samizdat with mod_ruby has a
+slightly better performance and smaller memory footprint than FastCGI.
+There are situations where it may be undesirable to have Ruby
+interpreter share the same process with the rest of Apache, In that
+case, use whatever FastCGI implementation is available for your web
+server. With Apache2, I found mod_fcgid to be just a little slower, but
+much more conservative about memory usage.
+
+Enable mod_ruby by putting the following line in Apache configuration
+file (/etc/apache/httpd.conf on Debian) and restarting the Apache:
+
+   LoadModule ruby_module /usr/lib/apache/1.3/mod_ruby.so
+
+Depending on how your Apache is configured, path to mod_ruby.so can be
+different, check where other LoadModule directives in your httpd.conf
+point to.
+
+On Debian 3.1 (sarge), the proper way to enable mod_ruby in Apache 1.3
+is to run:
+
+   apache-modconf apache enable mod_ruby
+
+For Apache2, run:
+
+   ln -s /etc/apache2/mods-available/ruby.* /etc/apache2/mods-enabled/
+
+You can find an example demonstrating setting up both a virtual host and
+a directory-based site for Apache in doc/examples/apache.conf provided
+by the samizdat package. It assumes that you're running Samizdat from a
+Debian package, if you've installed Samizdat under /usr/local, you will
+need to amend some paths in that file accordingly.
+
+If you have installed Samizdat engine in a non-standard location, make
+sure that Ruby interpreter can load the Samizdat libraries. If it can't,
+you will see something like the following in the error log:
+
+   [error] mod_ruby: /my/site/samizdat/cgi-bin/dispatch.rb:13:in
+   `require': no such file to load -- samizdat (LoadError)
+
+The solution for mod_ruby is to add the following to your Apache
+configuration:
+
+   <IfModule mod_ruby.c>
+       RubyAddPath /my/site/samizdat/lib
+   </IfModule>
+
+For a production site, you will also need to change ServerName and
+ServerAdmin to real values, and replace "samizdat" with the name of your
+the site in the paths starting with /var (not the ones starting with
+/usr, these lead to the Samizdat engine itself). You may also need to
+enable additional Apache modules (such as mod_rewrite) for this example
+to work.
+
+
+Email Interface
+---------------
+
+Samizdat can verify users' emails (this gives some protection from
+automated mass-registration of fake identities) and recover accounts
+with lost passwords. To enable these features, uncomment the email
+section of defaults.yaml, or configure it differently for each of your
+sites. Make sure that the sendmail program you specify is able to send
+emails to the outside world, and provide a valid email address on the
+same domain as the webserver, so that Samizdat's emails are not blocked
+by spam filters.
+
+
+Syndication
+-----------
+
+Samizdat supports both export and import of RSS feeds. You can subscribe
+to a feed of featured articles, recent updates, updates in a particular
+tag, or even a feed composed by results of an arbitrary RDF query. Pages
+that have RSS versions will have "rss 1.0" link at the bottom and may
+also be highlighted in your browser.
+
+To have several RSS feeds imported by Samizdat, uncomment and edit
+"import_feeds" section of your site's config file, and schedule
+samizdat-import-feeds script run at regular intervals on same server
+that runs your site. Do not make it run more often than absolutely
+necessary, to avoid overloading the servers where you will be importing
+feeds from.
+
+The imported feeds will be sorted alphabetically by name and displayed
+on the front page in the "Links" section.
+
+
+Samizdat on Windows
+-------------------
+
+Samizdat was successfully set up on Windows 98 with Cygwin (thanks to
+Denis Valoha for details). In addition to default Cygwin components, you
+will also need postgresql, gcc, make, perl, ruby, cygipc, and apache
+packages. Ruby/Postgres and Ruby/DBI are not included in Cygwin, but can
+be compiled from source according to installation instructions supplied
+with these packages.
+
+To initialize and start PostgreSQL under Cygwin, you will need to add
+'ipc-daemon2.exe' invocation to your cygwin.bat, and then run from
+Cygwin command line:
+
+   initdb -D /var/postgres
+   pg_ctl -D /var/postgres start
+
+
+Running Tests
+-------------
+
+Samizdat test suite includes basic unit tests that check integrity of
+the Samizdat code, and a more advanced robot that performs thorough
+functional testing of a Samizdat installation.
+
+By default, tests run for 'samizdat' site defined in the configuration
+examples. If you don't have such site configured or want to run the
+tests for a different site specified in your sites.yaml, you will need
+to set environment variables SAMIZDAT_SITE, SAMIZDAT_URI, and
+SAMIZDAT_HOST (see defaults as set in test/tc_robot.rb).
+
+Basic unit test suite is invoked by the following command:
+
+   ruby test/ts_samizdat.rb
+
+Functional test uses Net::HTTP module to interact with a working
+Samizdat installation, located from the base URL of your config.yaml.
+This test is intended for a fresh install of Samizdat engine; make
+ABSOLUTELY sure that you don't direct this robot to a production site!
+
+The test makes several assumptions about the configuration of the site.
+Email interface should be disabled (this is necessary because the test
+uses fake email addresses for account creation and can't respond to
+confirmation requests), post access for guests should be denied, and
+vote access for members should be allowed.
+
+After you have made sure that you can connect directly to your web
+server, and double-checked your configuration, fire up the robot:
+
+   ruby test/tc_robot.rb
+
+If any of the tests report failure, please send us output of the failed
+test (including errors reported in web server error log in case of
+functional test), accompanied by description of your system and versions
+of software packages required by Samizdat (listed in Required Software
+section).
+

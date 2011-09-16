@@ -1,0 +1,226 @@
+Samizdat Concepts
+=================
+
+Member
+------
+
+Member is a registered user of a Samizdat site (synonyms: poster,
+visitor, reader, author, creator). Members can:
+
+- post and edit messages, create tags, relate messages to tags (see Tag
+  section), and vote on relations (see Proposition and Vote section);
+- view messages, use and publish filters based on relations between
+  messages and tags.
+
+Group of members called "moderators" with access to site moderation
+interface can be defined. Moderation interface allows to hide, takeover,
+replace and reparent messages and disable non-moderator member accounts.
+
+A member can declare trust or distrust to another member by registering
+a vote on a relation between another member and an appropriate tag,
+which can range from overall frienship to a trust rating in some
+specific area of endeavor. Filtering adjustments can be applied to
+messages posted by trusted members.
+
+Note that such trust relation is unidirectional, when member A marks
+member B as his friend, site won't assume that A should be treated as
+B's friend as well.
+
+There is exlicit design decision behind absense of more strictly defined
+member groups. Aside from sheer complexity that this feature would add
+to the design, power relationships involved in decision making about
+group membership and group responsibility are inappropriate for
+cooperative open publishing system.
+
+
+Message
+-------
+
+Message represents basic unit of information inside of Samizdat site
+(synonyms: article, post). Messages can be used to represent other
+classes of Samizdat resources, such as filters, tags, material items,
+etc. Following MIME classes should be supported:
+
+- none (default): sequence of paragraphs stored as is;
+
+  restricted to plain text, blank lines separate paragraphs, (HTTP) URLs
+  on a line by itself may be rendered as hyperlinks;
+
+- text/plain: verbatim plain text;
+
+- text/textile: hypertext in Textile format;
+
+- text/html: hypertext in HTML format;
+
+- application/x-squish: site filter in form of a user-defined Squish RDF
+  query;
+
+- image/*: jpeg, png, gif [, tiff, svg, jpeg2000];
+
+  when referenced from within text message, may be rendered as inline
+  image or thumbnail;
+
+- audio/*: Ogg Vorbis, mp3 [, RealAudio];
+
+- video/*: avi, Ogg Tarkin, wmv, [ mpeg, RealVideo, QuickTime].
+
+Content types that belong to the supported MIME classes but are
+classified under application/* MIME class (e.g. application/x-ogg), may
+be aliased into more appropriate MIME class (audio/ogg-vorbis) for
+cleaner classification.
+
+Threads can be used to group messages into discussions: follow-up
+messages should have "inReplyTo" property pointing to the original
+message, with the first message in a thread determined by having no
+value to the "inReplyTo" property.
+
+
+Tag
+---
+
+RDF statements are used as a generic mechanism for structuring the
+Samizdat site content. Any statement is a resource that represents a
+triple of {subject, predicate, object}, where subject is a resource
+being described, predicate is a property name, and object is a literal
+value or reference to another resource (see http://w3.org/RDF/ for more
+details).
+
+Samizdat bases its structure on the concept of a Tag. Tag is a kind of
+resource that, when related by an RDF statement to other resources,
+allows to group similar resources together and to evaluate resources
+against different criteria. In other words, content classification
+metadata concentrates around tags.
+
+Any resource can become a tag, but it is recommended to use messages
+that carry concise and informative textual content. Being a resource,
+tag itself can be related to another tag in the same way as any message.
+This allows to create complex structures of related tags, which can then
+be used to categorize, filter, and sort large amounts of information
+with arbitrary precision.
+
+When presenting user with a list of available tags, site should order
+them by usage (number of related resources) to encourage further use of
+well-known, popular tags and to reduce role of less popular tags to more
+specific resource classification. Site can also offer an option to
+classify and filter tags by other criteria, e.g. by relation to some
+other tags.
+
+Following general tags may be available at the site setup time:
+
+- Quality: overall quality of the resource;
+- Priority: importance of the resource to site members;
+- Relevance: how much content of the resource is related to the encasing
+  aggregate resource (negative Relevance marks off-topic resources).
+
+Each site can create its own custom tags, representing different topics
+of interest, site sections, or rating criteria. In addition to the
+general tags, following optional rating criteria are suggested:
+
+- Fairness: whether resource fairly represents all sides of the story;
+- Representation: readability, quality of prose, cinematics, etc.;
+- Factuality: extent of sources usage vs. speculation;
+- Novelty: whether resource adds anything new to the body of
+  information (low Novelty highlights redundant resources);
+- FrontPage: whether resource is worthy of adding to the site's default
+  front page.
+
+Special tag "Friendship" can be used to establish relations of overall
+friendship between site members (see Member section).
+
+It is recommended that, instead of the suggested generic tags, resources
+of high priority and relevance to the site membership are used as tags
+that highlight topics that are of interest to site audience.
+
+
+Proposition and Vote
+--------------------
+
+Proposition is a subclass of RDF statements which can be approved or
+disapproved by votes of site members. Vote is a record of vote cast for
+particular proposition by particular site member.
+
+Default rating system should let voter select from ratings "-2" (no),
+"-1" (not likely), "0" (uncertain), "1" (likely), "2" (yes). Total
+rating of proposition is equal to the average value of all votes cast
+for the proposition; resources with rating below "-1" may be hidden from
+site's default front page.
+
+Exact mechanism of rating calculation and filtering thresholds can be
+determined by each site at run time; following considerations should be
+taken into account by alternative voting and filtering schemes:
+
+- messages with lower rating but higher absolute number of votes are
+  probably more important and relevant than higher rated messages with
+  small absolute number of votes (e.g. quorum threshold);
+- vote weight can be adjusted according to relative voting activity of
+  the voter, or other voter quality determination heuristics;
+- default filtering threshold should be adjusted according to the site
+  activity level and average quality;
+- reader should be presented with amount of information that can be
+  reasonably expected to be comprehensible in a given time scope.
+
+
+Aggregation
+-----------
+
+In addition to filtering by community-approved propositions, site
+content can be aggregated, versioned, or otherwise grouped using
+following properties, available to the message author.
+
+dct:isVersionOf
+
+Next version of the message, written either by author or by any other
+site member. Several new versions of the same message may represent fork
+or alternative edit of a message, in that case message with several
+"dct:isVersionOf" properties would represent merge of respective
+messages.
+
+For further clarification, following versioning-specific tags can be
+related to a "dct:isVersionOf" statement by author:
+
+- Correction: minor correction that doesn't change structure or meaning;
+- Rewrite: full rewrite of the message;
+- Summary: short digest or summary of this and possibly other messages;
+- Translation: translation to a different language;
+- Mirror: alternative location of the message.
+
+   Comment: Proper handling of alternative locations requires web of
+   trust and message signing to ensure that all alternatives point to
+   exact copies of the message.
+
+dct:tableOfContents, dct:isPartOf
+
+"dct:tableOfContents" property contains RDF sequence of next-level parts
+of the message. Each resource in the sequence should have "isPartOf"
+property pointing to the parent message.
+
+
+Real-world Resource Sharing
+---------------------------
+
+Following resource classes can be used to facilitate sharing of
+real-world resources between site members:
+
+- Item: an instance of an item; all identical items share the same
+  "description" property, referring to the message with an item
+  description, such as table of contents, review, picture, etc.;
+- Possession: record of transfer of item instance from one member to
+  another; "givenTo" property of the last Possession record in the
+  database constitutes "possessor" property of Item resource.
+
+   Comment: Possession record should be created by the item receiver;
+   care should be taken to avoid fraud in situations when acts of actual
+   transfer and its registration are separated in time and space.
+
+Service can be registered as an item description too, with individual
+items corresponding to points of service, and with no Possession
+records. As a non-obvious but useful application of this mechanism,
+service item "GnuPG Key Exchange" can be used to publish intent to and
+arrange PGP/GnuPG public key exchange (key-signing parties).
+
+
+Calendar
+--------
+
+todo: calendar and collaboration tools knowledge is needed.
+

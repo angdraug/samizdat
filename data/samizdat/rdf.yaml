@@ -1,0 +1,95 @@
+---
+# rdf.yaml
+#
+# Defines essential parts of RDF model of a Samizdat site. Don't touch
+# it unless you know what you're doing.
+
+# Namespaces
+#
+ns:
+  s: 'http://www.nongnu.org/samizdat/rdf/schema#'
+  tag: 'http://www.nongnu.org/samizdat/rdf/tag#'
+  items: 'http://www.nongnu.org/samizdat/rdf/items#'
+  rdf: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+  dc: 'http://purl.org/dc/elements/1.1/'
+  dct: 'http://purl.org/dc/terms/'
+  ical: 'http://www.w3.org/2002/12/cal#'
+
+# Mapping of internal RDF properties to tables and fields. Statements
+# over properties not listed here or in 'subproperty:' section below are
+# reified using standard rdf::subject, rdf::predicate, and rdf::object
+# properties, so at least these three and s::id must be mapped.
+#
+map:
+  's::id': {Resource: id}
+  'dc::date': {Resource: published_date}
+  'dct::isPartOf': {Resource: part_of}
+  's::isPartOfSubProperty': {Resource: part_of_subproperty}
+  's::partSequenceNumber': {Resource: part_sequence_number}
+
+  'rdf::subject': {Statement: subject}
+  'rdf::predicate': {Statement: predicate}
+  'rdf::object': {Statement: object}
+
+  's::login': {Member: login}
+  's::fullName': {Member: full_name}
+  's::email': {Member: email}
+
+  'dc::title': {Message: title}
+  'dc::creator': {Message: creator}
+  'dc::format': {Message: format}
+  'dc::language': {Message: language}
+  's::openForAll': {Message: open}
+  's::hidden': {Message: hidden}
+  's::locked': {Message: locked}
+  's::content': {Message: content}
+  's::htmlFull': {Message: html_full}
+  's::htmlShort': {Message: html_short}
+
+  's::rating': {Statement: rating}
+
+  's::voteProposition': {Vote: proposition}
+  's::voteMember': {Vote: member}
+  's::voteRating': {Vote: rating}
+
+  'items::description': {Item: description}
+  'items::contributor': {Item: contributor}
+  'items::possessor': {Item: possessor}
+
+  'items::item': {Possession: item}
+  'items::takenFrom': {Possession: taken_from}
+  'items::givenTo': {Possession: given_to}
+
+  'dc::description': {Event: description}
+  'ical::dtstart': {Event: dtstart}
+  'ical::dtend': {Event: dtend}
+  's::rruleEvent': {Recurrence: event}
+  'ical::freq': {Recurrence: freq}
+  'ical::interval': {Recurrence: interval}
+  'ical::until': {Recurrence: until}
+  'ical::byhour': {Recurrence: byhour}
+  'ical::byday': {Recurrence: byday}
+
+# Map of properties into lists of their subproperties. For each property
+# listed here, an additional qualifier field named <field>_subproperty
+# is defined in the same table (as defined under 'map:' above) referring
+# to resource id identifying the subproperty (normally a uriref resource
+# holding uriref of the subproperty). Only one level of subproperty
+# relation is supported, all subsubproperties must be listed directly
+# under root property.
+#
+subproperties:
+  'dct::isPartOf': [ 's::inReplyTo', 'dct::isVersionOf',
+  's::isTranslationOf', 's::subTagOf' ]
+
+# Map of transitive RDF properties into tables that hold their
+# transitive closures. The format of the table is as follows: 'resource'
+# field refers to the subject resource id, property field (and qualifier
+# field in case of subproperty) has the same name as in the main table
+# (as defined under 'map:' above) and holds reference to predicate
+# object, and 'distance' field holds the distance from subject to object
+# in the RDF graph.
+#
+transitive_closure:
+  'dct::isPartOf': Part
+

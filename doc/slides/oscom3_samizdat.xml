@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- http://www.slideml.org/specification/slideml_1.0/ -->
+<s:slideset xmlns:s="http://www.oscom.org/2003/SlideML/1.0/"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:dc="http://purl.org/dc/elements/1.1"
+    xmlns:dct="http://purl.org/dc/terms/"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+    <s:metadata>
+	<s:title>Samizdat</s:title>
+	<s:subtitle>RDF model for an open publishing and cooperation engine</s:subtitle>
+	<s:author>
+	    <s:givenname>Dmitry</s:givenname>
+	    <s:familyname>Borodaenko</s:familyname>
+	    <s:email>d.borodaenko@sam-solutions.net</s:email>
+        </s:author>
+
+        <s:confgroup>
+            <s:confdates>
+                <s:start>2003-05-28</s:start>
+                <s:end>2003-05-30</s:end>
+            </s:confdates>
+	    <s:conftitle href="http://oscom.org/Conferences/Cambridge/">Third International OSCOM Conference</s:conftitle>
+            <s:address>Berkman Center for Internet and Society, Harvard Law School
+            </s:address>
+        </s:confgroup>
+
+        <dc:subject>Samizdat, Open Publishing, RDF, Squish, Ruby</dc:subject>
+        <dc:date>2003-05-30</dc:date>
+        <dc:rights>Dmitry Borodaenko</dc:rights>
+
+        <s:abstract>
+	    <!--
+		Since you were supposed to come prepared, I will not
+		read this slide for you. Instead, today I will try to
+		explain the things about Samizdat that you probably
+		didn't understand. I also hope that after I've explained
+		that, you will have more questions than you had before.
+
+		The questions I want to cover first of all are: What
+		Samizdat is for? Why is it needed? What is novel in it?
+		Where else can this be used? Once we're done with that,
+		we will discuss other questions you may have.
+	    -->
+	    <p><a href="http://www.nongnu.org/samizdat/">Samizdat</a> is a
+	    generic RDF-based engine for building collaboration and open
+	    publishing web sites. Samizdat will let everyone publish, view,
+	    comment, edit, and aggregate text and multimedia resources, vote on
+	    ratings and classifications, filter resources by flexible sets of
+	    criteria, cooperate and coordinate on all kinds of activities.</p>
+
+	    <p>The talk gives perspective on open publishing systems, their
+	    advantages and limitations, explains design goals of the Samizdat
+	    project, and describes an RDF model that provides transparent and
+	    extensible mapping of open publishing site resources into RDF
+	    semantics.</p>
+        </s:abstract>
+    </s:metadata>
+
+    <s:slide>
+        <s:title>Open Publishing</s:title>
+        <s:content>
+	    <!--
+		Ok, let's start with the easy part. What all this open
+		publishing is about? First of all, it is about trust.
+	    -->
+	    <p>An answer to corporate bias in mass-media</p>
+	    <!--
+		You may think that the most important value of openness
+		is cooperation: after all, where would free software be
+		without people all around the world working on it all
+		together? Well, when it comes to publishing and media,
+		especially mass media, cooperation is not enough.
+
+		I think most of you agree that we already have enough
+		information, thank you very much. The problem with this
+		ocean of information is filtering out reliable
+		information that you can trust. And the problem with
+		traditional corporate mass-media is that they do not
+		represent their readers, they represent interests of
+		their owners and advertisers, and that is not the same
+		thing.
+
+		So, how can you trust that your information is not
+		biased by interests of it's source? That is what open
+		publishing is about.
+	    -->
+	    <p>Process of creating content is transparent to the readers</p>
+	    <!--
+		First principle of open publishing is transparency. To
+		believe something, you should be able to check where the
+		information comes from, who made which modifications to
+		it, and how other decisions about it were made.
+	    -->
+	    <p>Readers' contributions are immediately available</p>
+	    <!--
+		Equally important is the principle of open
+		participation. Any reader should be able to submit
+		information and see that it is immediately available to
+		others. That way, you can be sure when you receive some
+		information that if it were false it could immediately
+		be refuted, or at least openly discussed from different
+		positions.
+	    -->
+	    <p>Readers can see and participate in editorial decisions</p>
+	    <!--
+		Another key principle of open publishing, that is not
+		fully implemented in existing open publishing software,
+		is open editing. As is shown by experience of
+		Independent Media Centers, even open media can not exist
+		without editing: it is relatively easy to overflow open
+		site with low-quality or downright offtopic content,
+		especially when you really intend to render it unusable.
+		Absense of open editing mechanisms forces editors to
+		manually moderate comments, thus undermining the whole
+		idea of openness with a censorship.
+	    -->
+	    <p>Content can be freely redistributed</p>
+	    <!--
+		The last one is free redistribution. Well, there are
+		several nice talks about exactly that on the Track Two,
+		so it is not necessary to discuss this one here.
+	    -->
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Engine: Active</s:title>
+        <s:content>
+	    <!--
+	        Ok, enough with theory, let's look at what software we
+		can use to solve the problem of open publishing.
+	    -->
+	    <p>First and most popular engine on IndyMedia.org network</p>
+	    <!--
+		It all started with the Active engine used in the first
+		Independent Media Center in Seattle. At the time it
+		first appeared in 1999, it did its job, and still does,
+		on most sites of the IndyMedia network. Although it
+		wasn't the first engine to allow transparent and open
+		participation, it was the first engine to explicitly
+		focus on idea of open publishing.
+	    -->
+	    <p>Implemented in PHP</p>
+	    <p>Publish images and multimedia</p>
+	    <!--
+		What was new and very important at the time, was the
+		ability to publish images and multimedia files. Then,
+		ability to share live experience of protests with all
+		the world played important role in popularization of the
+		movement against corporate globalization.
+	    -->
+	    <p>Focus on simplicity</p>
+	    <!--
+		Another reason for Active popularity was its simplicity:
+		it was easy to set up and extremely easy to use.
+	    -->
+	    <p>No open moderation or open editing</p>
+	    <!--
+		However, with growth of the IndyMedia network Active
+		started to show its weaknesses. Some of them were just
+		implementational problem, but some, such as lack of open
+		editing, were fundamental enough to be impossible to
+		solve by patching the old code.
+	    -->
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>The need for better open publishing engine</s:title>
+        <s:content>
+	    <p>IMC tech meeting, January 2002</p>
+	    <!--
+		The problems of the Active didn't go unnoticed. Some IMC
+		sites started to adopt other web engines, such us Slash,
+		some started to develop their own, such as MirCode. In
+		January 2002, several IndyMedia developers gathered to
+		discuss their problems and produced a list of
+		requirements to a new open publishing engine.
+	    -->
+	    <p>Better design</p>
+	    <!--
+		It's not hard to guess that the item that was stressed
+		the most was design and documentation of a new engine:
+		after 3 years of development, or, rather, patching in
+		new features here and there, Active code grown into a
+		sizeable ball of mud, and became difficult to
+		understand, and thus not likely to attract new
+		developers.
+	    -->
+	    <p>Internationalization</p>
+	    <!--
+		Another problem with Active was poor support for
+		different languages: another the kind of problem that
+		you don't usually pay attention to until it bites you,
+		especially when English is your mother tongue.
+	    -->
+	    <p>Distributed storage</p>
+	    <!--
+		From smaller and more obvious problems, to bigger and
+		more important ones, such as distributed storage.
+
+		First and most important application of open publishing
+		is political speech, you know, that inconvinient kind of
+		speech that often gets suppressed. I think now you can
+		see the problem: it is very easy to shut down one
+		central site, and much more difficult to track down and
+		shut down all members of a peer-to-peer network. Thus,
+		to resist suppression, open publishing has to go P2P.
+	    -->
+	    <p>Content categorization</p>
+	    <!--
+		Finally, here are the reasons I have started the
+		Samizdat project: the need for content categorization
+		and open editing.
+
+		As I've said before, with growth of the open publishing
+		network, the amount of available information also grows.
+		To manage this flow reader should be able to match the
+		content against his areas of interest, and to narrow
+		down to the most relevant and high-quality information.
+	    -->
+	    <p>Open editing</p>
+	    <!--
+		Now that is where we come back to the question of trust:
+		all readers should be given equal power in making
+		editorial decisions. That is, do be able to categorize
+		open content properly, editing process should be open as
+		well.
+
+		In the following slides, we will see how more advanced
+		open publishing engines fit these requirements. I
+		analyzed main directions of development in that area and
+		selected what I considered best engines of each kind.
+		If you've already looked at my slides, you may have
+		noticed that each engine that I present here is
+		implemented in yet another programming language. Believe
+		me, that is not intentional, rather a coincidence that
+		makes some sense if you think about it.
+	    -->
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Engine: MirCode</s:title>
+        <s:content>
+	    <!--
+		See, Active was coded in PHP, and this one is in Java.
+
+	        Mir engine was developed by the collective of IndyMedia
+		Germany, and addressed some of the deficiencies of
+		Active. It doesn't attack more fundamental problems of
+		open publishing, instead it does the ordinary thing, but
+		does it really well, with all the bells and whistles.
+	    -->
+	    <p>Implemented in Java</p>
+	    <p>Internationalization</p>
+	    <!--
+		First of all, internationalization in Mir finally
+		allowed to convinently publish content in different
+		languages, and to localize site interface.
+	    -->
+	    <p>Static publishing</p>
+	    <!--
+		Although Mir doesn't provide P2P publishing, it made one
+		step in that direction: static publishing. Mir produces
+		static HTML pages that can be easily mirrored and cached.
+	    -->
+	    <p>Media abstraction layer</p>
+	    <!--
+		Mir also generalized Active's multimedia content
+		publishing into a media abstraction layer that allows to
+		add and handle different media formats.
+	    -->
+	    <p>Static categorization</p>
+	    <!--
+	        Another good thing about Mir is that it allows to
+		categorize content into topics, features, newswires, and
+		so on.
+	    -->
+	    <p>Dublin Core metadata</p>
+	    <!--
+	        And on top of it, it uses Dublin Core metadata for all
+		of this.
+	    -->
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Engine: Scoop</s:title>
+        <s:content>
+	    <p>Powers Rusty's Kuro5hin.org</p>
+	    <!--
+		Another engine I'd like to draw your attention to is
+		Scoop that was originally developed for the
+		Kuro5hin.org. It doesn't have all the bells and whistles
+		of MirCode, it doesn't even call itself an open
+		publishing engine, but it has something that MirCode so
+		badly misses: open moderation.
+	    -->
+	    <p>Implemented in Perl</p>
+	    <p>Focus on discussions</p>
+	    <!--
+		Since Kuro5hin's original purpose was creation of online
+		community, the engine was focused on maintaining
+		high-quality discussions rather than on feeding
+		up-to-date news.
+	    -->
+	    <p>Excellent open moderation</p>
+	    <!--
+		Idea behind Kuro5hin's open moderation is simple: site
+		users are allowed to select ratings for the comments
+		they like or dislike, comments with higher average
+		rating appear at the top and receive more attention from
+		readers. Simple as it is, this system produces very good
+		results, especially with large user communities.
+	    -->
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Engine: Active2</s:title>
+        <s:content>
+	    <!--
+		Now that I've described what I deem the most advanced of
+		existing IndyMedia engines and the most effective open
+		moderation system to date, the third engine I'd like to
+		mention is the Active2, the project that was started to
+		satisfy the requirements set forth by the IMC tech
+		meeting in 2002.
+	    -->
+	    <p>Young and ambitious project</p>
+	    <!--
+	        That is relatively young and very ambitious project that
+		hasn't yet reached its alpha release. Instead of
+		rounding up Active's rough edges, it attacks more
+		fundamental problems: distributed peer-to-peer storage
+		and open editing.
+	    -->
+	    <p>Implemented in Python</p>
+	    <p>Heavy usage of frameworks (Crusader, Cheetah)</p>
+	    <p>Distributed P2P sharing</p>
+	    <!--
+	        It is probably too early to say what will come out in
+		the end, but right now the main focus of the project
+		seems to be P2P.
+	    -->
+	    <p>Dynamic RDF metadata</p>
+	    <!--
+		They are also paying attention to the content
+		categorization problem: they support dynamic RDF
+		metadata based on the Dublic Core.
+	    -->
+	    <p>Signed content</p>
+	    <!--
+		All content in Active2 is supposed to be signed: this is
+		required both by P2P and by open editing considerations.
+	    -->
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Engine: Samizdat</s:title>
+        <s:content>
+	    <!--
+	        Now that we've seen what is out there, you may have
+		already guessed why I decided to start a new project
+		instead of trying to enhance on of these. No ideas?
+	    -->
+	    <p>Implemented in Ruby</p>
+	    <!--
+		Right! The reason is that none of the engines I've tried
+		was written in my language of choice, Ruby ;-)
+
+		In addition, each of them solves its own problem, at the
+		expense of everything else: MirCode successfully tries
+		to be a better Active than Active, but fails to become
+		something new; Scoop doesn't even try to apply its
+		excellent moderation to the area of open publishing;
+		Active2 project doesn't pay enough attention to the open
+		editing part of the story, and it managed to produce a
+		lot of code and even integrate some of those F-things
+		(frameworks) with almost non-existent design
+		documentation and has good chances of becoming
+		unmanageble before it gets finished.
+	    -->
+	    <p>Focus on clean abstract design</p>
+	    <!--
+	        And this last one is why I put the main focus on design
+		and documentation. Without documenting what is done and
+		what is to be done, you are acting blindly: you don't
+		know neither were you are, nor where you are going to.
+	    -->
+	    <p>RDF model for site structure and metadata</p>
+	    <!--
+	        I've been following on Semantic Web development for the
+		last two years, so at the time I've started the Samizdat
+		project, it was obvious to me that RDF provides
+		excellent basis for an open editing solution.
+
+		Open editing is about readers making statements about
+		resources, and making statements about resources is what
+		RDF is for. RDF allows anyone to make statements about
+		anything, without having to maintain referential
+		integrity.
+	    -->
+	    <p>Open editing via statement reification</p>
+	    <!--
+		What is even better, RDF allows to make statements about
+		statements. That means, readers are not only allowed to
+		make editing decisions, such as categorizing content,
+		but also to make statements about how they agree or
+		disagree with editorial decisions made by others.
+	    -->
+	    <p>Relational RDF storage</p>
+	    <!--
+		Once it was decided to build Samizdat model around RDF,
+		it was only reasonable to store all the site data as
+		RDF, and to access it with RDF queries: this way, one
+		more layer of complexity is gone.
+
+		Well, not completely gone, because I had to implement my
+		own RDF storage layer out of performance and flexibility
+		considerations, but at least, this layer is cleanly
+		separated from the rest of the Samizdat.
+	    -->
+	    <p>More than publishing: material items exchange</p>
+	    <!--
+		If you start thinking about requirements for a site that
+		supports some community, you will soon come up with many
+		ideas beyond mere publishing: community exists not only
+		to exchange information, it also exists to cooperate on
+		common projects, and to share resources. The design of
+		the Material Items Exchange section of Samizdat shows
+		how it can be extended with such collaboration modules.
+	    -->
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Samizdat design goals</s:title>
+        <s:content>
+	    <p>Publish: open, multimedia, editing, aggregation, trust</p>
+	    <p>Vote: visibility, content organization</p>
+	    <p>Search and filter: quality, category, relation</p>
+	    <p>Cooperate: calendar, material item exchange, time management</p>
+	    <p>View: internationalization, accessibility, email interface</p>
+	    <p>Develop: modular architecture, documentation, security</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Samizdat concepts</s:title>
+        <s:content>
+	    <p>Member</p>
+	    <p>Message</p>
+	    <p>Tag</p>
+	    <p>Proposition and Vote</p>
+	    <p>Aggregation</p>
+	    <p>Item and Possession</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Concept: Member</s:title>
+        <s:content>
+	    <p>Add messages, tags, propositions and votes</p>
+	    <p>View messages, use and publish filters</p>
+	    <p>Associate with friends</p>
+	    <p>Pool material items</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Concept: Message</s:title>
+        <s:content>
+	    <p>Basic unit of information</p>
+	    <p>Subject of most metadata</p>
+	    <p>Multimedia</p>
+	    <p>Threaded</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Concept: Tag</s:title>
+        <s:content>
+	    <p>Content structure metadata glue</p>
+	    <p>RDF statement (s::tag resource-uri tag-uri)</p>
+	    <p>Tag is resource, any resource is a valid tag</p>
+	    <p>Standard tags: Quality, Priority, Relevance</p>
+	    <p>Custom tags: Fairness, Representation, Factuality,
+	    Novelty, FrontPage, whatever...</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Concept: Proposition and Vote</s:title>
+        <s:content>
+	    <p>RDF statement that can be approved with votes</p>
+	    <p>Tag rating, content clustering</p>
+	    <p>Reification allows for meta-moderation</p>
+	    <p>Pluggable rating and threshold calculation</p>
+	    <p>Accountable and recallable</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Concept: Aggregation</s:title>
+        <s:content>
+	    <p>nextVersionOf: Correction, Rewrite, Summary, Translation,
+	    Mirror</p>
+	    <p>parts, partOf</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Concept: Material Item Exchange</s:title>
+        <s:content>
+	    <p>Item: description and instance</p>
+	    <p>Possession: givenTo, possessor</p>
+	    <p>Service items with no possession records</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>RDF storage</s:title>
+        <s:content>
+	    <p>Extended Squish query language</p>
+	    <p>Graph-to-relational translation layer</p>
+	    <p>PostgreSQL RDBMS</p>
+	    <p>Resource (id, published_date, literal, uriref, label)</p>
+	    <p>Statement (id, subject, predicate, object)</p>
+	    <p>Resource tables: Member, Message, Proposition, Vote, Item,
+	    Possession, whatever...</p>
+	</s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Thank you</s:title>
+        <s:content>
+	    <p>Questions?</p>
+	</s:content>
+    </s:slide>
+
+</s:slideset>

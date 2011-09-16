@@ -1,0 +1,98 @@
+Samizdat Developer's Notes
+==========================
+
+RDF Aggregates
+--------------
+
+Application:
+- Version Tracking
+- Structured Documents
+- Stored Queries
+
+Requirements
+- Tree Walking
+- Sequence
+
+Version Tracking: dct:isVersionOf
+
+problem: how to extract n-th version of a document in a relational RDF
+store without n-way join? - add special construct to Squish to express
+repetitive RDF arcs (repetitive property grounding)
+
+Example of 4th Item Extraction:
+
+SELECT ?fourth
+WHERE (s:next ex:head ?second)
+      (s:next ?second ?third)
+      (s:next ?third ?fourth)
+
+SELECT s3.subject AS fourth
+FROM Statement s1, Statement s2, Statement s3,
+     Resource r1, Resource r2
+WHERE s1.property = r1.id AND r1.label = 's:next'
+  AND s1.subject = r2.id AND r2.label = 'ex:head'
+  AND s2.property = r1.id
+  AND s1.object = s2.subject
+  AND s2.property = r1.id
+  AND s2.subject = s3.object
+
+SELECT ?fourth
+WHERE (s:next*3 ex:head ?fourth)
+
+CREATE FUNCTION property_chain_counted(property, head, count) RETURNS int AS
+DECLARE
+  i int;
+  next int;
+BEGIN
+  i := 1; next := head;
+  WHILE i <= count AND next IS NOT NULL DO BEGIN
+    SELECT INTO :next s.object FROM Statement s
+      WHERE s.property = property AND s.subject = next;
+    i := i + 1;
+  END;
+  RETURN :head;
+END;
+
+CREATE FUNCTION property_chain_match(property, head, tail) RETURNS int AS
+DECLARE
+  i int;
+  next int;
+BEGIN
+  i := 0; next := head;
+  WHILE next <> tail AND next IS NOT NULL DO BEGIN
+    SELECT INTO :next s.object FROM Statement s
+      WHERE s.property = property AND s.subject = next;
+    i := i + 1;
+  END;
+  RETURN i;
+END;
+
+(ns:property * ?count ?head ?tail)
+
+2 cases: 1) property is mapped to a table; 2) generic property.
+
+SELECT field FROM table WHERE id =
+
+
+Transparent Query Storage
+-------------------------
+
+Argument for transparent (structured) query storage: ability to analyze,
+find similar, merge, etc.
+
+Separate Schema namespace: http://.../samizdat/query.
+   sq:mustBind
+   sq:triples
+   sq:literalCondition
+   sq:orderBy
+   sq:cache
+
+Can rdf:Statement.rdf:subject contain a blank node name?
+
+In relational storage, Statement.subject refers to Resource.id, so it
+looks like the trick is to add a blank_node boolean field.
+
+If uriref in Squish query is already stored in the site KB,
+Query.triples.li.Statement should refer to the Resource.id. This means,
+each uriref in a query text should be looked up for id.
+

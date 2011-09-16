@@ -1,0 +1,1306 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat 0.6.0\n"
+"POT-Creation-Date: 2006-11-26 00:48-0000\n"
+"PO-Revision-Date: 2008-02-22 01:00+0100\n"
+"Last-Translator: Zh Friend Of Boud <boud@riseup.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+# #: cgi-bin/foci.rb:20 cgi-bin/index.rb:147
+# msgid "Top Focuses"
+# msgstr "Th猫mes Principaux"
+
+#: cgi-bin/foci.rb:21 cgi-bin/history.rb:24 cgi-bin/index.rb:158
+# cgi-bin/index.rb:168
+#: cgi-bin/moderation.rb:20 cgi-bin/query.rb:149 cgi-bin/resource.rb:124
+#: lib/samizdat/engine/resource.rb:194 lib/samizdat/engine/resource.rb:235
+msgid ", page %s"
+msgstr ", 页 %s"
+
+#: cgi-bin/history.rb:23
+msgid "History of Changes"
+msgstr "变史记录"
+
+#: cgi-bin/history.rb:40
+msgid "compare with previous version"
+msgstr "比较前版"
+
+#: cgi-bin/history.rb:49
+msgid "Versions"
+msgstr "版本"
+
+#: cgi-bin/history.rb:49 cgi-bin/history.rb:62
+msgid "Changes"
+msgstr "变史"
+
+#: cgi-bin/history.rb:54 cgi-bin/history.rb:60
+# lib/samizdat/engine/message.rb:537
+msgid "Bad input"
+msgstr "坏输入"
+
+#: cgi-bin/index.rb:90 cgi-bin/index.rb:134 cgi-bin/index.rb:157
+msgid "Features"
+msgstr "特写"
+
+#: cgi-bin/index.rb:90 cgi-bin/index.rb:134 cgi-bin/index.rb:167
+msgid "Recent Updates"
+msgstr "最近更新"
+
+#: cgi-bin/index.rb:186
+msgid "Links"
+msgstr "连接"
+
+#: cgi-bin/index.rb:188
+msgid "All Replies"
+msgstr "全部回复"
+
+#: cgi-bin/index.rb:189
+msgid "All Focuses (verbose)"
+msgstr "全部题目（详细）"
+
+#: cgi-bin/index.rb:190 cgi-bin/moderation.rb:20
+msgid "Moderation Log"
+msgstr "仲裁记录"
+
+#: cgi-bin/item.rb:17
+msgid "Not Implemented"
+msgstr "不工具"
+
+#: cgi-bin/item.rb:18
+msgid "<p>Material item exchange is not implemented yet.</p>"
+msgstr "<p>物质东西交换还不工具。</p>"
+
+#: cgi-bin/login.rb:22 lib/samizdat/engine/template.rb:113
+msgid "Log in"
+msgstr "注册"
+
+#: cgi-bin/login.rb:23
+msgid "Use existing account:"
+msgstr "用现有的帐户： "
+
+#: cgi-bin/login.rb:24 cgi-bin/member.rb:103 cgi-bin/member.rb:273
+#: lib/samizdat/engine/resource.rb:157
+msgid "Login"
+msgstr "用户"
+
+#: cgi-bin/login.rb:25 cgi-bin/member.rb:279
+msgid "Password"
+msgstr "密码"
+
+#: cgi-bin/login.rb:27 cgi-bin/member.rb:314
+msgid "Create New Account"
+msgstr "创造新帐户"
+
+#: cgi-bin/login.rb:29 cgi-bin/member.rb:99 cgi-bin/member.rb:102
+msgid "Recover Lost Password"
+msgstr "恢复失去的密码"
+
+#: cgi-bin/member.rb:24 cgi-bin/member.rb:257
+msgid "Malformed email address: '%s'"
+msgstr "畸形的电子地址：'%s'"
+
+#: cgi-bin/member.rb:37
+# msgid "Failed to send email"
+# msgstr " "
+
+
+#: cgi-bin/member.rb:68
+# msgid "Confirmation hash not found"
+# msgstr "Le code de hachage de la confirmation n'a pas 茅t茅 trouv茅"
+# 
+# hash=无用信息
+# confirmation=证实,or,确认
+# 
+# #: cgi-bin/member.rb:70
+# msgid "This confirmation hash is intended for another user"
+# msgstr "Ce code de hachage de confirmation est pour un-e autre utilisateur-ice"
+
+# #: cgi-bin/member.rb:79
+# msgid "Confirmation Accepted"
+# msgstr "Confirmation Accept茅e"
+
+#: cgi-bin/member.rb:80
+msgid "Changes confirmed."
+msgstr "改变确认了。"
+
+#: cgi-bin/member.rb:91
+msgid "Wrong login"
+msgstr "坏用户"
+
+#: cgi-bin/member.rb:100
+msgid "New password has been sent to you."
+msgstr "新密码被送了。"
+
+# #: cgi-bin/member.rb:115
+# msgid "Full name you have specified is used by someone else"
+# msgstr "Le nom et pr茅nom que tu as donn茅s sont utilis茅s par quelqu'un d'autre"
+# 
+# #: cgi-bin/member.rb:120
+# msgid "Email address you have specified is used by someone else"
+# msgstr "Le m茅l que tu as donn茅 est utilis茅 par quelqu'un d'autre"
+
+#: cgi-bin/member.rb:148
+msgid "Confirmation Requested"
+msgstr "请求确认"
+
+#: cgi-bin/member.rb:149
+msgid "Confirmation request is sent to your new email address."
+msgstr "确认的请求被送了你新电子地址。"
+
+#: cgi-bin/member.rb:155
+msgid "Changes Accepted"
+msgstr "改变接受了"
+
+# #: cgi-bin/member.rb:156 lib/samizdat/engine/session.rb:312
+# msgid "Press 'Back' button of your browser to return."
+# msgstr "Pousser sur le bouton 'Retour' de ton browseur pour retourner."
+# 
+# #: cgi-bin/member.rb:167
+# msgid "You didn't fill all mandatory fields"
+# msgstr "Tu n'as pas rempli les champs obligatoires"
+# 
+# #: cgi-bin/member.rb:169
+# msgid "Login name you specified is reserved"
+# msgstr "Le nom d'utilisateur que tu as donn茅 est r茅serv茅"
+# 
+# #: cgi-bin/member.rb:171
+# msgid "Use only latin letters and numbers in login name"
+# msgstr "Utiliser uniquement des lettres romaines et les chiffres dans
+# ton nom d'utilisateur"
+
+#: cgi-bin/member.rb:174
+# msgid "Login name you specified is already used by someone else"
+# msgstr "TODO"
+
+# #: cgi-bin/member.rb:190
+# msgid "Login error: failed to open session for new account"
+# msgstr "Erreur de login : l'ouverture de s茅ance pour le nouveau compte a 茅chou茅"
+# 
+# #: cgi-bin/member.rb:221
+# msgid "Moderator accounts can not be blocked"
+# msgstr "Le compte d'un mod茅rateur ne peut pas 锚tre bloqu茅"
+
+#: cgi-bin/member.rb:253
+msgid "Passwords do not match"
+msgstr "密码不匹配"
+
+#: cgi-bin/member.rb:277
+msgid "Full name"
+msgstr "姓名"
+
+#: cgi-bin/member.rb:278
+msgid "Email"
+msgstr "电子信函"
+
+# #: cgi-bin/member.rb:280
+# msgid "Reenter password to confirm"
+# msgstr "Retaper le mot de passe afin de le confirmer"
+
+#: cgi-bin/member.rb:287
+msgid "Theme"
+msgstr "题目"
+
+# #: cgi-bin/member.rb:298
+# msgid "Show static content on the front page"
+# msgstr "Montrer le contenu statique sur la page principale"
+# 
+# #: cgi-bin/member.rb:299
+# msgid "Hide static content from the front page"
+# msgstr "Cacher le contenu statique de la page d'accueil"
+
+#: cgi-bin/member.rb:303
+#msgid "Return to basic interface"
+# msgstr "TODO"
+
+# interface=界面
+
+# #: cgi-bin/member.rb:304
+# msgid "Enable advanced interface"
+# msgstr "Activer l'interface avanc茅e"
+# 
+# #: cgi-bin/member.rb:306
+# msgid "Change Appearance"
+# msgstr "Modifier l'Apparence"
+# 
+# #: cgi-bin/member.rb:309
+# msgid "Moderation Facility"
+# msgstr "Outil de Mod茅ration"
+# 
+# #: cgi-bin/member.rb:310
+# msgid "Disable"
+# msgstr "D茅sactiver"
+
+#: cgi-bin/member.rb:311
+msgid "Enable"
+msgstr "使能够"
+
+#: cgi-bin/member.rb:314
+msgid "Change Account Settings"
+msgstr "兑换帐户设置"
+
+#: cgi-bin/member.rb:315
+msgid "Member Settings"
+msgstr "成员设置"
+
+# #: cgi-bin/message.rb:17
+# msgid "Your current access level (%s) does not allow to publish messages"
+# msgstr "Ton niveau d'acc猫s actuel (%s) ne permet pas de publier des messages"
+
+#: cgi-bin/moderation.rb:34
+msgid "Date"
+msgstr "日期"
+
+#: cgi-bin/moderation.rb:34
+msgid "Moderator"
+msgstr "缓和剂"
+
+#: cgi-bin/moderation.rb:34
+msgid "Action"
+msgstr "动作"
+
+#: cgi-bin/moderation.rb:34
+msgid "Resource"
+msgstr "资源"
+
+# #: cgi-bin/query.rb:22
+# msgid "Error in your query: "
+# msgstr "Erreur dans ta requ锚te&nbsp;:"
+
+# #: cgi-bin/query.rb:26
+# msgid "Must-bind list should contain only one blank node, filters
+# based on queries with a complex answer pattern are not implemented"
+# msgstr "La liste must-bind devrait avoir une seule noeud vide, les
+# filtres bas茅s sur un sch茅ma complexe de r茅ponse ne sont pas
+# impl茅ment茅s"
+
+# #: cgi-bin/query.rb:29
+# msgid "User-defined query pattern should not be longer than %s clauses"
+# msgstr "Le sch茅ma d茅fini par l'utilisateur ne devrait pas 锚tre plus
+# long que %s clauses"
+# 
+# #: cgi-bin/query.rb:53 cgi-bin/query.rb:148
+# msgid "Search Result"
+# msgstr "R茅sultat de la Recherche"
+
+#: cgi-bin/query.rb:160
+msgid "Publish This Query"
+msgstr "出版这询问"
+
+# 查询？
+
+#: cgi-bin/query.rb:165
+# msgid "No matching resources found."
+# msgstr "Aucune ressource ne correspond."
+
+#: cgi-bin/query.rb:174
+# msgid "Select Target"
+# msgstr "Choisir le But"
+
+#: cgi-bin/query.rb:178
+msgid "Query Pattern (predicate subject object)"
+msgstr "询问形 (predicate subjet object)"
+
+# #: cgi-bin/query.rb:188
+# msgid "BLANK CLAUSE "
+# msgstr "CLAUSE VIDE "
+# 
+# #: cgi-bin/query.rb:197
+# msgid "Literal Condition"
+# msgstr "Condition Litt茅rale"
+# 
+# #: cgi-bin/query.rb:200
+# msgid "Order By"
+# msgstr "Mettre en Ordre Selon"
+
+#: cgi-bin/query.rb:204
+msgid "Ascending"
+msgstr "上升排序"
+
+#: cgi-bin/query.rb:204
+msgid "Descending"
+msgstr "递减排序"
+
+#: cgi-bin/query.rb:211
+msgid "Search By Substring"
+msgstr "子串查找"
+
+#: cgi-bin/query.rb:213 lib/samizdat/engine/template.rb:84
+msgid "Search"
+msgstr "查找"
+
+# #: cgi-bin/query.rb:216
+# msgid "Construct Query"
+# msgstr "Construire une Requ锚te"
+
+#: cgi-bin/query.rb:217
+msgid "Update"
+msgstr "更新"
+
+#: cgi-bin/query.rb:218
+msgid "Edit Raw Query"
+msgstr "编辑原始询问"
+
+#: cgi-bin/query.rb:221 lib/samizdat/engine/template.rb:455
+msgid "Run"
+msgstr "运行"
+
+#: cgi-bin/query.rb:227
+msgid "Edit Query"
+msgstr "编辑询问"
+
+# #: cgi-bin/resource.rb:68
+# msgid "Incorrect resource id '%s'"
+# msgstr "Mauvaise num茅ro d'identit茅 de la ressource '%s'"
+
+#: cgi-bin/resource.rb:78
+msgid "Uriref"
+msgstr "URI参考"
+
+#: cgi-bin/resource.rb:78
+msgid "Literal"
+msgstr "文字"
+
+#: cgi-bin/resource.rb:78
+msgid "Member"
+msgstr "成员"
+
+#: cgi-bin/resource.rb:78 lib/samizdat/engine/resource.rb:251
+msgid "Statement"
+msgstr "陈述"
+
+#: cgi-bin/resource.rb:78 cgi-bin/resource.rb:106 cgi-bin/resource.rb:107
+#: lib/samizdat/engine/resource.rb:273
+msgid "Vote"
+msgstr "投票"
+
+#: cgi-bin/resource.rb:79
+msgid "Item"
+msgstr "项目"
+
+# #: cgi-bin/resource.rb:86
+# msgid "Your current access level (%s) does not allow to vote"
+# msgstr "Ton niveau actuel d'acc猫s (%s) ne permet pas de voter"
+
+#: cgi-bin/resource.rb:104 lib/samizdat/engine/template.rb:225
+msgid "Submit"
+msgstr "提交"
+
+#: lib/samizdat/engine/focus.rb:39
+msgid "Translation"
+msgstr "翻译"
+
+#: lib/samizdat/engine/focus.rb:60
+msgid "Focus"
+msgstr "题目"
+
+# aucune grade
+#: lib/samizdat/engine/focus.rb:95
+msgid "none"
+msgstr "毫无"
+
+#: lib/samizdat/engine/focus.rb:106
+# msgid "You can't relate resource to itself"
+# msgstr "TODO"
+
+# #: lib/samizdat/engine/focus.rb:108
+# msgid "Translations should be published as replies to the original message"
+# msgstr "Les traductions devraient 锚tre publi茅es en tant que r茅ponses
+# au message original"
+# 
+# #: lib/samizdat/engine/message.rb:30
+# msgid "Can't derive message format and creator login name"
+# msgstr "Ne peux pas trouver le format du message et le nom de login du
+# cr茅ateur-ice"
+
+#: lib/samizdat/engine/message.rb:256
+# msgid "Reference to previous version lost"
+# msgstr "TODO"
+
+# #: lib/samizdat/engine/message.rb:360
+# msgid "Warning: content is longer than %s characters. In some
+# situations, it will be truncated."
+# msgstr "Attention : le contenu est plus long que %s caract猫res. Dans
+# certaines situations, il sera abr茅g茅."
+
+# #: lib/samizdat/engine/message.rb:361
+# msgid "Message Preview"
+# msgstr "Pr茅visualiser le Message"
+# 
+# #: lib/samizdat/engine/message.rb:364
+# msgid "Press 'Back' button to change the message."
+# msgstr "Pousser sur le bouton 'Retour' pour modifier le message."
+
+#: lib/samizdat/engine/message.rb:366 lib/samizdat/engine/message.rb:440
+#: lib/samizdat/engine/message.rb:448
+msgid "Confirm"
+msgstr "证实"
+
+# or 确认?
+
+#: lib/samizdat/engine/message.rb:395 lib/samizdat/engine/template.rb:473
+#: lib/samizdat/engine/template.rb:475
+msgid "Reply"
+msgstr "回复"
+
+#: lib/samizdat/engine/message.rb:397
+msgid "Edit Message"
+msgstr "编辑报文"
+
+# message= 信息？ 消息?
+
+# #: lib/samizdat/engine/message.rb:399
+# msgid "Hide Message"
+# msgstr "Cacher Message"
+
+#: lib/samizdat/engine/message.rb:401
+# msgid "Unhide Message"
+# msgstr "D茅-cacher le Message"
+# 
+# #: lib/samizdat/engine/message.rb:403
+# msgid "Take Over Message"
+# msgstr "Reprendre le Message"
+# 
+# #: lib/samizdat/engine/message.rb:405
+# msgid "Replace Message"
+# msgstr "Remplacer le Message"
+# 
+# #: lib/samizdat/engine/message.rb:407
+# msgid "Reparent Message"
+# msgstr "Re-parenter le Message"
+ 
+#: lib/samizdat/engine/message.rb:409
+msgid "New Message"
+msgstr "新消息"
+
+#: lib/samizdat/engine/message.rb:414
+# msgid "The message will be hidden from public view."
+# msgstr "Le message sera cach茅 d'acc猫s public."
+# 
+# #: lib/samizdat/engine/message.rb:416
+# msgid "The message will not be hidden from public view."
+# msgstr "Le message ne sera plus cach茅 d'acc猫s public."
+# 
+# #: lib/samizdat/engine/message.rb:418
+# msgid "The message will be attributed to you after takeover."
+# msgstr "Le message te sera attribu茅 apr猫s sa reprise."
+# 
+# #: lib/samizdat/engine/message.rb:420
+# msgid "MESSAGE WILL BE COMPLETELY REPLACED, NO RECOVERY WILL BE
+# POSSIBLE. PLEASE PROVIDE DETAILED JUSTIFICATION FOR THIS ACTION."
+# msgstr "LE MESSAGE SERA COMPL摸HTEMENT REMPLAC摸I, AUCUNE R摸ICUP摸IRATION
+# SERA POSSIBLE.VEUILLEZ FOURNIR UNE JUSTIFICATION D摸ITAILL摸IE POUR CETTE
+# ACTION."
+
+#: lib/samizdat/engine/message.rb:422
+# msgid "This message will be moved to new parent"
+# msgstr "TODO"
+ 
+#: lib/samizdat/engine/message.rb:428
+msgid "Parent Message"
+msgstr "父消息"
+
+ 
+# #: lib/samizdat/engine/message.rb:436 lib/samizdat/engine/message.rb:455
+# msgid "Content"
+# msgstr "Contenu"
+
+#: lib/samizdat/engine/message.rb:446
+msgid "New Parent"
+msgstr "新根式"
+
+#: lib/samizdat/engine/message.rb:454
+msgid "Title"
+msgstr "名称"
+
+#: lib/samizdat/engine/message.rb:456
+# msgid "Upload content from file"
+# msgstr "T茅l茅charger le contenu d'un fichier"
+
+#: lib/samizdat/engine/message.rb:468
+msgid "Language of the message"
+msgstr "消息的言语"
+
+#: lib/samizdat/engine/message.rb:471
+# msgid "Format"
+# msgstr "Format"
+
+#: lib/samizdat/engine/message.rb:472
+msgid "Default"
+msgstr "默认"
+
+#: lib/samizdat/engine/message.rb:475
+# msgid "Reference to description (ID or URL of another message on this site)"
+# msgstr "TODO"
+
+#: lib/samizdat/engine/message.rb:477
+# msgid "Editing is open for all members"
+# msgstr "TODO"
+
+#: lib/samizdat/engine/message.rb:482
+msgid "Preview"
+msgstr "预览"
+
+# #: lib/samizdat/engine/message.rb:562
+# msgid "Use only <a href=\"%s\">current version</a> for replies and edits"
+# msgstr "Utiliser uniquement <a href=\"%s\">la version actuelle</a>
+# pour des r茅ponses et des 茅ditions"
+
+#: lib/samizdat/engine/message.rb:567
+# msgid "You are not allowed to edit this message"
+# msgstr "TODO"
+
+# #: lib/samizdat/engine/message.rb:584
+# msgid "Specified language is not supported on this site"
+# msgstr "La langue sp茅cifi茅e n'est pas disponible sur ce site"
+
+#: lib/samizdat/engine/message.rb:595
+# msgid "Invalid message reference"
+# msgstr "R茅f茅rence du message invalide"
+
+#: lib/samizdat/engine/message.rb:598
+# msgid "Message reference should refer to an existing message"
+# msgstr "TODO"
+
+# #: lib/samizdat/engine/message.rb:610
+# msgid "Format '%s' is not supported"
+# msgstr "Il n'y a pas de soutien pour le format '%s'"
+# 
+# #: lib/samizdat/engine/message.rb:624
+# msgid "It is not possible to upload a file without specifying format"
+# msgstr "Ce n'est pas possible de t茅l茅charger vers l'amont sans
+# sp茅cifier le format"
+# 
+# #: lib/samizdat/engine/message.rb:627
+# msgid "Uploaded file is larger than %s bytes limit"
+# msgstr "Le fichier t茅l茅charg茅 est plus grand que la limite de %s octets"
+
+# #: lib/samizdat/engine/message.rb:639
+# msgid "Multimedia upload is disabled on this site"
+# msgstr "Le t茅l茅chargement multim茅dia est d茅sactiv茅 sur ce site"
+# 
+# #: lib/samizdat/engine/message.rb:661
+# msgid "You should upload %s content from file"
+# msgstr "Tu devrais t茅l茅charger %s contenu du fichier"
+
+#: lib/samizdat/engine/resource.rb:64
+# msgid "refers to <a href=\"%s\">external uriref</a>"
+# msgstr "TODO"
+
+# #: lib/samizdat/engine/resource.rb:80
+# msgid "Unknown resource type '%s'"
+# msgstr "Ressource de type inconnu '%s'"
+
+#: lib/samizdat/engine/resource.rb:116
+# msgid "Also related to this focus: "
+# msgstr "TODO"
+
+# #: lib/samizdat/engine/resource.rb:121
+# msgid "Recent updates in focus: "
+# msgstr "Mises au jour r茅centes dans le th猫me : "
+# 
+# #: lib/samizdat/engine/resource.rb:179
+# msgid "Account blocked by moderator: %s."
+# msgstr "Le compte est bloqu茅 par le mod茅rateur&nbsp;: %s."
+# 
+# #: lib/samizdat/engine/resource.rb:188
+# msgid "UNBLOCK"
+# msgstr "D摸IBLOQUER"
+# 
+# #: lib/samizdat/engine/resource.rb:189
+# msgid "BLOCK"
+# msgstr "BLOQUER"
+# 
+# #: lib/samizdat/engine/resource.rb:193
+# msgid "Latest Messages"
+# msgstr "Messages les Plus R茅centes"
+# 
+# #: lib/samizdat/engine/resource.rb:235
+# msgid "Replies"
+# msgstr "R茅ponses"
+# 
+# #: lib/samizdat/engine/resource.rb:258
+# msgid "Predicate"
+# msgstr "Pr茅dicat"
+# 
+# #: lib/samizdat/engine/resource.rb:258
+# msgid "Subject"
+# msgstr "Sujet"
+# 
+# #: lib/samizdat/engine/resource.rb:258
+# msgid "Object"
+# msgstr "Objet"
+
+#: lib/samizdat/engine/resource.rb:282
+# msgid "<a href=\"%s\">%s</a> gave rating %4.2f to the <a href=\"%s\">Statement %s</a> on %s."
+# msgstr "TODO"
+
+#: lib/samizdat/engine/resource.rb:286
+# msgid "Vote Proposition"
+# msgstr "Voter la Proposition"
+# 
+# #: lib/samizdat/engine/resource.rb:325
+# msgid "Similar Items"
+# msgstr "Objets Similaires"
+# 
+# #: lib/samizdat/engine/resource.rb:326
+# msgid "<p><b>Possessed by:</b></p>"
+# msgstr "<p><b>Poss茅d茅 par&nbsp;:</b></p>"
+# 
+# #: lib/samizdat/engine/session.rb:185
+# msgid "moderator"
+# msgstr "moderateur"
+# 
+# #: lib/samizdat/engine/session.rb:185
+# msgid "member"
+# msgstr "membre"
+# 
+# #: lib/samizdat/engine/session.rb:185 lib/samizdat/engine/template.rb:369
+# msgid "guest"
+# msgstr "invit茅-e"
+# 
+# #: lib/samizdat/engine/session.rb:230
+# msgid "Login Failed"
+# msgstr "Login 摸Ichou茅"
+# 
+# #: lib/samizdat/engine/session.rb:231
+# # msgid "Wrong login name or password. Try again."
+# # msgstr "TODO"
+# 
+# #: lib/samizdat/engine/session.rb:271
+# # msgid "Input size exceeds content size limit"
+# # msgstr "TODO"
+# 
+# #: lib/samizdat/engine/session.rb:306
+# msgid "Access Denied"
+# msgstr "Acc猫s Refus茅"
+# 
+# #: lib/samizdat/engine/session.rb:308
+# msgid "Account Is Blocked"
+# msgstr "Le Compte est Bloqu茅"
+# 
+# #: lib/samizdat/engine/session.rb:309
+# # msgid "Your account is blocked until the email address you have specified is confirmed. Confirmation message with instructions was sent to that address."
+# # msgstr "TODO"
+
+#: lib/samizdat/engine/session.rb:311
+msgid "User Error"
+msgstr "用户错误"
+
+# #: lib/samizdat/engine/session.rb:315
+# msgid "looks like it was"
+# msgstr "il para卯t qu'il ait 茅t茅"
+
+#: lib/samizdat/engine/session.rb:316
+msgid "Resource Not Found"
+msgstr "资源未找到。"
+
+# #: lib/samizdat/engine/session.rb:317
+# msgid "The resource you requested was not found on this site. Please
+# report this error back to the site you came from"
+# msgstr "La ressource que tu as demand茅 n'a pas 茅t茅 trouv茅 sur ce site.
+# Veuille informer le site d'o霉 tu viens de cette erreur"
+
+#: lib/samizdat/engine/session.rb:319
+msgid "Runtime Error"
+msgstr "运行时错误"
+
+#: lib/samizdat/engine/session.rb:320
+msgid "Runtime error has occured."
+msgstr "出现运行时错误。"
+
+# #: lib/samizdat/engine/session.rb:322
+# msgid "Please report this error to the site administrator."
+# msgstr "Veuille informer l'administrateur du site de cette erreur."
+
+#: lib/samizdat/engine/template.rb:81
+msgid "Front Page"
+msgstr "主页"
+
+#: lib/samizdat/engine/template.rb:82
+msgid "Publish"
+msgstr "出版"
+
+#: lib/samizdat/engine/template.rb:83
+msgid "Share"
+msgstr "共享"
+
+#: lib/samizdat/engine/template.rb:108
+msgid "Account settings, interface language, theme"
+msgstr "账户设置，界面言语，题目"
+
+#: lib/samizdat/engine/template.rb:108
+msgid "Settings"
+msgstr "设置"
+
+#: lib/samizdat/engine/template.rb:111
+msgid "Log out"
+msgstr "退出"
+
+#: lib/samizdat/engine/template.rb:156
+msgid "next page"
+msgstr "下一页"
+
+#: lib/samizdat/engine/template.rb:256
+# msgid "Click to vote on how this resource is related to this focus"
+# msgstr "TODO"
+
+#: lib/samizdat/engine/template.rb:259
+msgid "vote"
+msgstr "投票"
+
+# #: lib/samizdat/engine/template.rb:269
+# msgid "Related Focuses"
+# msgstr "Th猫me li茅"
+
+#: lib/samizdat/engine/template.rb:277
+# msgid "Click to relate this resource to another focus"
+# msgstr "TODO"
+
+#: lib/samizdat/engine/template.rb:277
+msgid "Add another focus"
+msgstr "加另外的题目"
+
+#: lib/samizdat/engine/template.rb:286
+# msgid "related to"
+# msgstr "TODO"
+
+#: lib/samizdat/engine/template.rb:301
+msgid "SELECT FOCUS"
+msgstr "选择题目"
+
+# #: lib/samizdat/engine/template.rb:304
+# msgid "Select focus that this resource will be related to"
+# msgstr "Choisir le th猫me auquel cette ressource sera li茅"
+
+# #: lib/samizdat/engine/template.rb:308
+# msgid "Enter focus id if it's not in the list"
+# msgstr "Donne le num茅ro d'identit茅 (id) s'il n'est pas dans la liste"
+# 
+# #: lib/samizdat/engine/template.rb:310
+# msgid "Give a rating of how strongly this resource is related to selected focus"
+# msgstr ""
+# "Donne une grade repr茅sentant jusqu'au quel degr茅 cette ressource est "
+# "li茅e au th猫me s茅lectionn茅 "
+
+#: lib/samizdat/engine/template.rb:312
+msgid "-2 (No)"
+msgstr "-2 （不是）"
+
+#: lib/samizdat/engine/template.rb:313
+msgid "-1 (Not Likely)"
+msgstr "-1 （不可能）"
+
+#: lib/samizdat/engine/template.rb:314
+msgid "0 (Uncertain)"
+msgstr "0 （不确定）"
+
+#: lib/samizdat/engine/template.rb:315
+msgid "1 (Likely)"
+msgstr "1 （很可能）"
+
+#: lib/samizdat/engine/template.rb:316
+msgid "2 (Yes)"
+msgstr "2 （是）"
+
+#: lib/samizdat/engine/template.rb:338
+msgid "Click to view the resource"
+msgstr "为了观看全资源，以便双击这边"
+
+#: lib/samizdat/engine/template.rb:344
+msgid "See the full message"
+msgstr "看全消息"
+
+#: lib/samizdat/engine/template.rb:373
+msgid "parent message"
+msgstr "父消息"
+
+#: lib/samizdat/engine/template.rb:374
+msgid "current version"
+msgstr "现代版"
+
+#: lib/samizdat/engine/template.rb:376
+msgid "history"
+msgstr "历史"
+
+#: lib/samizdat/engine/template.rb:380
+msgid "view source"
+msgstr "查看源码"
+
+#: lib/samizdat/engine/template.rb:383
+msgid "replies"
+msgstr "答复"
+
+#: lib/samizdat/engine/template.rb:385
+msgid "translation"
+msgstr "翻译"
+
+#: lib/samizdat/engine/template.rb:393
+msgid "hidden"
+msgstr "隐藏的"
+
+# #: lib/samizdat/engine/template.rb:394
+# msgid "by&nbsp;%s on&nbsp;%s"
+# msgstr "par&nbsp;%s, le&nbsp;%s"
+
+#: lib/samizdat/engine/template.rb:460
+msgid "%s content"
+msgstr "%s 内容"
+
+#: lib/samizdat/engine/template.rb:485
+msgid "Edit"
+msgstr "编辑"
+
+#: lib/samizdat/engine/template.rb:487
+msgid "UNHIDE"
+msgstr "取消隐藏"
+
+#: lib/samizdat/engine/template.rb:488
+msgid "HIDE"
+msgstr "隐藏"
+
+#: lib/samizdat/engine/template.rb:490
+msgid "TAKE OVER"
+msgstr "接管"
+
+#: lib/samizdat/engine/template.rb:491 lib/samizdat/engine/template.rb:495
+msgid "REPLACE"
+msgstr "替换"
+
+#: lib/samizdat/engine/template.rb:492
+msgid "REPARENT"
+msgstr "再父文章"
+
+#: lib/samizdat/engine/template.rb:533
+msgid "Description"
+msgstr "描述"
+
+#: lib/samizdat/engine/template.rb:553
+msgid "(name that this language calls itself)"
+msgstr "中文简体"
+
+#: lib/samizdat/engine/template.rb:556
+msgid " (default language)"
+msgstr " (默认言语)"
+
+
+# query=查询问
+# =查询
+
+
+#: cgi-bin/foci.rb:20 cgi-bin/index.rb:147
+msgid "Top Focuses"
+msgstr "顶部题目"
+
+#: cgi-bin/member.rb:37
+msgid "Failed to send email"
+msgstr "不能发送电子邮件了"
+
+#: cgi-bin/member.rb:68
+msgid "Confirmation hash not found"
+msgstr "证实的无用信息找不到了。"
+
+# hash=证实的
+# 无用信息
+# confirmation=证实,确认
+
+
+
+#: cgi-bin/member.rb:70
+msgid "This confirmation hash is intended for another user"
+msgstr "被这证实的无用信息打算了其他用户。"
+
+#: cgi-bin/member.rb:79
+msgid "Confirmation Accepted"
+msgstr "确认接受了"
+
+#: cgi-bin/member.rb:115
+msgid "Full name you have specified is used by someone else"
+msgstr "你的全名被借用给其他用户"
+
+#: cgi-bin/member.rb:120
+msgid "Email address you have specified is used by someone else"
+msgstr "你的电子邮箱地址被借用给其他用户"
+
+#: cgi-bin/member.rb:156 lib/samizdat/engine/session.rb:312
+msgid "Press 'Back' button of your browser to return."
+msgstr "压浏览器的转到按钮为了回去。"
+
+#: cgi-bin/member.rb:167
+msgid "You didn't fill all mandatory fields"
+msgstr "你没填写了全必须填写"
+
+#: cgi-bin/member.rb:169
+msgid "Login name you specified is reserved"
+msgstr "确定了地注册名被保留了"
+
+#: cgi-bin/member.rb:171
+msgid "Use only latin letters and numbers in login name"
+msgstr "注册名里就用拉丁字"
+
+#: cgi-bin/member.rb:174
+msgid "Login name you specified is already used by someone else"
+msgstr "确定了地注册名被其他人在用"
+
+#: cgi-bin/member.rb:190
+msgid "Login error: failed to open session for new account"
+msgstr "登录错误：开新帐户的会话失败了"
+
+#: cgi-bin/member.rb:221
+# msgid "Moderator accounts can not be blocked"
+# msgstr "
+# "
+
+#: cgi-bin/member.rb:280
+msgid "Reenter password to confirm"
+msgstr "为了确定，再来入密码"
+
+#: cgi-bin/member.rb:298
+# msgid "Show static content on the front page"
+# msgstr "
+# "
+
+#: cgi-bin/member.rb:299
+# msgid "Hide static content from the front page"
+# msgstr "
+# "
+
+#: cgi-bin/member.rb:303
+msgid "Return to basic interface"
+msgstr "回基本界面"
+
+# interface=界面
+
+#: cgi-bin/member.rb:304
+msgid "Enable advanced interface"
+msgstr "使能够先进界面"
+
+#: cgi-bin/member.rb:306
+msgid "Change Appearance"
+msgstr "改变出现"
+
+# #: cgi-bin/member.rb:309
+# msgid "Moderation Facility"
+# msgstr "
+# "
+
+#: cgi-bin/member.rb:310
+msgid "Disable"
+msgstr "禁用"
+
+# disable this command on your computer.
+# 把电脑命令设为不可用。
+
+# #: cgi-bin/message.rb:17
+# msgid "Your current access level (%s) does not allow to publish messages"
+# msgstr "
+# "
+
+
+
+# #: cgi-bin/query.rb:216
+# msgid "Construct Query"
+# msgstr "Construire une Requ锚te"
+# 
+# #: cgi-bin/resource.rb:68
+# msgid "Incorrect resource id '%s'"
+# msgstr "Mauvaise num茅ro d'identit茅 de la ressource '%s'"
+# 
+# #: cgi-bin/resource.rb:86
+# msgid "Your current access level (%s) does not allow to vote"
+# msgstr "Ton niveau actuel d'acc猫s (%s) ne permet pas de voter"
+
+#: lib/samizdat/engine/focus.rb:106
+# msgid "You can't relate resource to itself"
+# msgstr "TODO"
+
+# #: lib/samizdat/engine/focus.rb:108
+# msgid "Translations should be published as replies to the original message"
+# msgstr "Les traductions devraient 锚tre publi茅es en tant que r茅ponses
+# au message original"
+
+#: lib/samizdat/engine/message.rb:30
+# msgid "Can't derive message format and creator login name"
+# msgstr "Ne peux pas trouver le format du message et le nom de login du
+# cr茅ateur-ice"
+
+#: lib/samizdat/engine/message.rb:256
+# msgid "Reference to previous version lost"
+# msgstr "TODO"
+
+#: lib/samizdat/engine/message.rb:360
+# msgid "Warning: content is longer than %s characters. In some
+# situations, it will be truncated."
+# msgstr "Attention : le contenu est plus long que %s caract猫res. Dans
+# certaines situations, il sera abr茅g茅."
+# 
+# #: lib/samizdat/engine/message.rb:361
+# msgid "Message Preview"
+# msgstr "Pr茅visualiser le Message"
+# 
+# #: lib/samizdat/engine/message.rb:364
+# msgid "Press 'Back' button to change the message."
+# msgstr "Pousser sur le bouton 'Retour' pour modifier le message."
+# 
+# #: lib/samizdat/engine/message.rb:399
+# msgid "Hide Message"
+# msgstr "Cacher Message"
+# 
+# #: lib/samizdat/engine/message.rb:401
+# msgid "Unhide Message"
+# msgstr "D茅-cacher le Message"
+# 
+# #: lib/samizdat/engine/message.rb:403
+# msgid "Take Over Message"
+# msgstr "Reprendre le Message"
+# 
+# #: lib/samizdat/engine/message.rb:405
+# msgid "Replace Message"
+# msgstr "Remplacer le Message"
+# 
+# #: lib/samizdat/engine/message.rb:407
+# msgid "Reparent Message"
+# msgstr "Re-parenter le Message"
+# 
+# #: lib/samizdat/engine/message.rb:414
+# msgid "The message will be hidden from public view."
+# msgstr "Le message sera cach茅 d'acc猫s public."
+# 
+# #: lib/samizdat/engine/message.rb:416
+# msgid "The message will not be hidden from public view."
+# msgstr "Le message ne sera plus cach茅 d'acc猫s public."
+# 
+# #: lib/samizdat/engine/message.rb:418
+# msgid "The message will be attributed to you after takeover."
+# msgstr "Le message te sera attribu茅 apr猫s sa reprise."
+# 
+# #: lib/samizdat/engine/message.rb:420
+# msgid "MESSAGE WILL BE COMPLETELY REPLACED, NO RECOVERY WILL BE
+# POSSIBLE. PLEASE PROVIDE DETAILED JUSTIFICATION FOR THIS ACTION."
+# msgstr "LE MESSAGE SERA COMPL摸HTEMENT REMPLAC摸I, AUCUNE R摸ICUP摸IRATION
+# SERA POSSIBLE.VEUILLEZ FOURNIR UNE JUSTIFICATION D摸ITAILL摸IE POUR CETTE
+# ACTION."
+# 
+# #: lib/samizdat/engine/message.rb:422
+# # msgid "This message will be moved to new parent"
+# # msgstr "TODO"
+# 
+# #: lib/samizdat/engine/message.rb:428
+# msgid "Parent Message"
+# msgstr "Message Parent"
+# 
+# #: lib/samizdat/engine/message.rb:436 lib/samizdat/engine/message.rb:455
+# msgid "Content"
+# msgstr "Contenu"
+# 
+# #: lib/samizdat/engine/message.rb:456
+# msgid "Upload content from file"
+# msgstr "T茅l茅charger le contenu d'un fichier"
+# 
+# #: lib/samizdat/engine/message.rb:471
+# msgid "Format"
+# msgstr "Format"
+# 
+# #: lib/samizdat/engine/message.rb:475
+# # msgid "Reference to description (ID or URL of another message on this site)"
+# # msgstr "TODO"
+# 
+# #: lib/samizdat/engine/message.rb:477
+# # msgid "Editing is open for all members"
+# # msgstr "TODO"
+# 
+# #: lib/samizdat/engine/message.rb:562
+# msgid "Use only <a href=\"%s\">current version</a> for replies and edits"
+# msgstr "Utiliser uniquement <a href=\"%s\">la version actuelle</a>
+# pour des r茅ponses et des 茅ditions"
+# 
+# #: lib/samizdat/engine/message.rb:567
+# # msgid "You are not allowed to edit this message"
+# # msgstr "TODO"
+# 
+# #: lib/samizdat/engine/message.rb:584
+# msgid "Specified language is not supported on this site"
+# msgstr "La langue sp茅cifi茅e n'est pas disponible sur ce site"
+# 
+# #: lib/samizdat/engine/message.rb:595
+# msgid "Invalid message reference"
+# msgstr "R茅f茅rence du message invalide"
+# 
+# #: lib/samizdat/engine/message.rb:598
+# # msgid "Message reference should refer to an existing message"
+# # msgstr "TODO"
+# 
+# #: lib/samizdat/engine/message.rb:610
+# msgid "Format '%s' is not supported"
+# msgstr "Il n'y a pas de soutien pour le format '%s'"
+# 
+# #: lib/samizdat/engine/message.rb:624
+# msgid "It is not possible to upload a file without specifying format"
+# msgstr "Ce n'est pas possible de t茅l茅charger vers l'amont sans
+# sp茅cifier le format"
+# 
+# #: lib/samizdat/engine/message.rb:627
+# msgid "Uploaded file is larger than %s bytes limit"
+# msgstr "Le fichier t茅l茅charg茅 est plus grand que la limite de %s octets"
+# 
+# #: lib/samizdat/engine/message.rb:639
+# msgid "Multimedia upload is disabled on this site"
+# msgstr "Le t茅l茅chargement multim茅dia est d茅sactiv茅 sur ce site"
+# 
+# #: lib/samizdat/engine/message.rb:661
+# msgid "You should upload %s content from file"
+# msgstr "Tu devrais t茅l茅charger %s contenu du fichier"
+# 
+# #: lib/samizdat/engine/resource.rb:64
+# # msgid "refers to <a href=\"%s\">external uriref</a>"
+# # msgstr "TODO"
+# 
+# #: lib/samizdat/engine/resource.rb:80
+# msgid "Unknown resource type '%s'"
+# msgstr "Ressource de type inconnu '%s'"
+# 
+# #: lib/samizdat/engine/resource.rb:116
+# # msgid "Also related to this focus: "
+# # msgstr "TODO"
+# 
+# #: lib/samizdat/engine/resource.rb:121
+# msgid "Recent updates in focus: "
+# msgstr "Mises au jour r茅centes dans le th猫me : "
+# 
+# #: lib/samizdat/engine/resource.rb:179
+# msgid "Account blocked by moderator: %s."
+# msgstr "Le compte est bloqu茅 par le mod茅rateur&nbsp;: %s."
+# 
+# #: lib/samizdat/engine/resource.rb:188
+# msgid "UNBLOCK"
+# msgstr "D摸IBLOQUER"
+# 
+# #: lib/samizdat/engine/resource.rb:189
+# msgid "BLOCK"
+# msgstr "BLOQUER"
+# 
+# #: lib/samizdat/engine/resource.rb:193
+# msgid "Latest Messages"
+# msgstr "Messages les Plus R茅centes"
+# 
+# #: lib/samizdat/engine/resource.rb:235
+# msgid "Replies"
+# msgstr "R茅ponses"
+# 
+# #: lib/samizdat/engine/resource.rb:258
+# msgid "Predicate"
+# msgstr "Pr茅dicat"
+# 
+# #: lib/samizdat/engine/resource.rb:258
+# msgid "Subject"
+# msgstr "Sujet"
+# 
+# #: lib/samizdat/engine/resource.rb:258
+# msgid "Object"
+# msgstr "Objet"
+# 
+# #: lib/samizdat/engine/resource.rb:282
+# # msgid "<a href=\"%s\">%s</a> gave rating %4.2f to the <a href=\"%s\">Statement %s</a> on %s."
+# # msgstr "TODO"
+# 
+# #: lib/samizdat/engine/resource.rb:286
+# msgid "Vote Proposition"
+# msgstr "Voter la Proposition"
+# 
+# #: lib/samizdat/engine/resource.rb:325
+# msgid "Similar Items"
+# msgstr "Objets Similaires"
+# 
+# #: lib/samizdat/engine/resource.rb:326
+# msgid "<p><b>Possessed by:</b></p>"
+# msgstr "<p><b>Poss茅d茅 par&nbsp;:</b></p>"
+# 
+# #: lib/samizdat/engine/session.rb:185
+# msgid "moderator"
+# msgstr "moderateur"
+# 
+# #: lib/samizdat/engine/session.rb:185
+# msgid "member"
+# msgstr "membre"
+
+#: lib/samizdat/engine/session.rb:185 lib/samizdat/engine/template.rb:369
+msgid "guest"
+msgstr "客户"
+
+#: lib/samizdat/engine/session.rb:230
+msgid "Login Failed"
+msgstr "登录失败了"
+
+#: lib/samizdat/engine/session.rb:231
+# msgid "Wrong login name or password. Try again."
+# msgstr "TODO"
+
+#: lib/samizdat/engine/session.rb:271
+# msgid "Input size exceeds content size limit"
+# msgstr "TODO"
+
+#: lib/samizdat/engine/session.rb:306
+msgid "Access Denied"
+msgstr "存取否认了"
+
+#: lib/samizdat/engine/session.rb:308
+msgid "Account Is Blocked"
+msgstr "帐目被阻塞被了"
+
+#: lib/samizdat/engine/session.rb:309
+# msgid "Your account is blocked until the email address you have specified is confirmed. Confirmation message with instructions was sent to that address."
+# msgstr "TODO"
+
+#: lib/samizdat/engine/session.rb:315
+# msgid "looks like it was"
+# msgstr "il para卯t qu'il ait 茅t茅"
+# 
+# #: lib/samizdat/engine/session.rb:317
+# msgid "The resource you requested was not found on this site. Please
+# report this error back to the site you came from"
+# msgstr "La ressource que tu as demand茅 n'a pas 茅t茅 trouv茅 sur ce site.
+# Veuille informer le site d'o霉 tu viens de cette erreur"
+# 
+# #: lib/samizdat/engine/session.rb:322
+# msgid "Please report this error to the site administrator."
+# msgstr "Veuille informer l'administrateur du site de cette erreur."
+
+#: lib/samizdat/engine/template.rb:256
+# msgid "Click to vote on how this resource is related to this focus"
+# msgstr "TODO"
+
+#: lib/samizdat/engine/template.rb:269
+msgid "Related Focuses"
+msgstr "叙述的题目"
+
+#: lib/samizdat/engine/template.rb:277
+# msgid "Click to relate this resource to another focus"
+# msgstr "TODO"
+
+#: lib/samizdat/engine/template.rb:286
+msgid "related to"
+msgstr "涉及"
+
+#: lib/samizdat/engine/template.rb:304
+# msgid "Select focus that this resource will be related to"
+# msgstr "Choisir le th猫me auquel cette ressource sera li茅"
+# 
+# #: lib/samizdat/engine/template.rb:308
+# msgid "Enter focus id if it's not in the list"
+# msgstr "Donne le num茅ro d'identit茅 (id) s'il n'est pas dans la liste"
+# 
+# #: lib/samizdat/engine/template.rb:310
+# msgid "Give a rating of how strongly this resource is related to selected focus"
+# msgstr ""
+# "Donne une grade repr茅sentant jusqu'au quel degr茅 cette ressource est "
+# "li茅e au th猫me s茅lectionn茅 "
+
+# #: lib/samizdat/engine/template.rb:394
+# msgid "by&nbsp;%s on&nbsp;%s"
+# msgstr "par&nbsp;%s, le&nbsp;%s"
+
+# translator's comment
+# query=查询问
+# =查询

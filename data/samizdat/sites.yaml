@@ -1,0 +1,24 @@
+---
+# sites.yaml
+#
+# Mapping of server names and URI prefixes to Samizdat site names:
+#
+# server name: { URI prefix: site name, ... }
+#
+#
+# For directory based site, write something like this:
+#
+# 'www.example.com': { '/example-site': example, '/example2': example2 }
+# 
+# Same sites served from vhosts should be configured this way:
+#
+# 'www.example-site.com': { '': example }
+# 'www.example2.com': { '': example2 }
+#
+# Site-specific configuration goes to sites/<site-name>.yaml
+
+# Default Samizdat site
+#
+localhost:
+  '/samizdat': samizdat
+

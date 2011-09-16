@@ -1,0 +1,1147 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat 0.6.0\n"
+"POT-Creation-Date: 2008-08-30 19:15+0200\n"
+"PO-Revision-Date: 2007-08-21 0:30+0200\n"
+"Last-Translator: Boud <boud@riseup.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=2; plural=(n > 1)\n"
+
+#: lib/samizdat/components/resource.rb:54
+msgid "Unknown resource type '%s'"
+msgstr "Ressource de type inconnu '%s'"
+
+#: lib/samizdat/components/resource.rb:70
+msgid "Uriref"
+msgstr "Référence URI"
+
+#: lib/samizdat/components/resource.rb:70
+msgid "Literal"
+msgstr "Littéral"
+
+#: lib/samizdat/components/resource.rb:70
+#: lib/samizdat/controllers/moderation_controller.rb:76
+#: lib/samizdat/controllers/moderation_controller.rb:91
+msgid "Member"
+msgstr "Membre"
+
+#: lib/samizdat/components/resource.rb:70
+#: lib/samizdat/controllers/diff_controller.rb:23
+msgid "Message"
+msgstr "Message"
+
+#: lib/samizdat/components/resource.rb:70
+#: lib/samizdat/components/resource.rb:413
+msgid "Statement"
+msgstr "Affirmation"
+
+#: lib/samizdat/components/resource.rb:70
+#: lib/samizdat/components/resource.rb:446
+#: lib/samizdat/controllers/resource_controller.rb:58
+#: lib/samizdat/controllers/resource_controller.rb:59
+#: lib/samizdat/controllers/resource_controller.rb:151
+#: lib/samizdat/controllers/resource_controller.rb:152
+msgid "Vote"
+msgstr "Voter"
+
+#: lib/samizdat/components/resource.rb:226
+msgid "refers to <a href=\"%s\">external uriref</a>"
+msgstr "se réfère à <a href=\"%s\">la référence URI externe</a>"
+
+#: lib/samizdat/components/resource.rb:296
+msgid "Replies"
+msgstr "Réponses"
+
+#: lib/samizdat/components/resource.rb:340
+#: lib/samizdat/controllers/member_controller.rb:82
+#: lib/samizdat/controllers/member_controller.rb:163
+#: lib/samizdat/controllers/member_controller.rb:245
+#: lib/samizdat/controllers/moderation_controller.rb:76
+msgid "Login"
+msgstr "Login"
+
+#: lib/samizdat/components/resource.rb:358
+msgid "Account blocked by moderator: %s."
+msgstr "Le compte est bloqué par le modérateur&nbsp;: %s."
+
+#: lib/samizdat/components/resource.rb:383
+msgid "Latest Messages"
+msgstr "Messages les Plus Récentes"
+
+#: lib/samizdat/components/resource.rb:395
+msgid "UNBLOCK"
+msgstr "DÉBLOQUER"
+
+#: lib/samizdat/components/resource.rb:395
+msgid "BLOCK"
+msgstr "BLOQUER"
+
+#: lib/samizdat/components/resource.rb:402
+msgid "Disable moderator status"
+msgstr "Enlever le statut de modérateur"
+
+#: lib/samizdat/components/resource.rb:402
+msgid "Enable moderator status"
+msgstr "Donner le statut de modérateur"
+
+#: lib/samizdat/components/resource.rb:422
+#: lib/samizdat/components/resource.rb:428
+msgid "Predicate"
+msgstr "Prédicat"
+
+#: lib/samizdat/components/resource.rb:423
+#: lib/samizdat/components/resource.rb:428
+msgid "Subject"
+msgstr "Sujet"
+
+#: lib/samizdat/components/resource.rb:424
+#: lib/samizdat/components/resource.rb:428
+msgid "Object"
+msgstr "Objet"
+
+#: lib/samizdat/components/resource.rb:438
+msgid "Votes"
+msgstr "Votes"
+
+#: lib/samizdat/components/resource.rb:455
+msgid "<a href=\"%s\">%s</a> gave rating %4.2f to the <a href=\"%s\">Statement %s</a> on %s."
+msgstr "<a href=\"%s\">%s</a> a donné une grade de %4.2f à l'<a href=\"%s\">affirmation %s</a>, datée le %s."
+
+#: lib/samizdat/components/resource.rb:463
+msgid "Vote Proposition"
+msgstr "Voter la Proposition"
+
+#: lib/samizdat/controllers/diff_controller.rb:21
+#: lib/samizdat/models/message.rb:98
+msgid "Bad input"
+msgstr "Mauvaise entrée"
+
+#: lib/samizdat/controllers/diff_controller.rb:24
+#: lib/samizdat/controllers/history_controller.rb:47
+msgid "Changes"
+msgstr "Modifications"
+
+#: lib/samizdat/controllers/foci_controller.rb:33
+#: lib/samizdat/models/focus.rb:64
+msgid "Focus"
+msgstr "Thème"
+
+#: lib/samizdat/controllers/foci_controller.rb:33
+msgid "Related Resources"
+msgstr "Ressources Liées"
+
+#: lib/samizdat/controllers/foci_controller.rb:42
+#: lib/samizdat/controllers/frontpage_controller.rb:48
+msgid "Top Focuses"
+msgstr "Thèmes Principaux"
+
+#: lib/samizdat/controllers/frontpage_controller.rb:33
+#: lib/samizdat/controllers/frontpage_controller.rb:122
+#: lib/samizdat/controllers/frontpage_controller.rb:219
+msgid "Features"
+msgstr "Articles thématiques"
+
+#: lib/samizdat/controllers/frontpage_controller.rb:33
+#: lib/samizdat/controllers/frontpage_controller.rb:145
+#: lib/samizdat/controllers/frontpage_controller.rb:216
+msgid "Recent Updates"
+msgstr "Mises au Jour Récentes"
+
+#: lib/samizdat/controllers/frontpage_controller.rb:96
+msgid "more"
+msgstr "davantage"
+
+#: lib/samizdat/controllers/frontpage_controller.rb:176
+msgid "Links"
+msgstr "Liens"
+
+#: lib/samizdat/controllers/frontpage_controller.rb:178
+msgid "All Replies"
+msgstr "Toutes les Réponses"
+
+#: lib/samizdat/controllers/frontpage_controller.rb:179
+#: lib/samizdat/controllers/moderation_controller.rb:39
+msgid "Moderation Log"
+msgstr "Log de Modération"
+
+#: lib/samizdat/controllers/frontpage_controller.rb:382
+#: lib/samizdat/controllers/message_controller.rb:878
+msgid "(name that this language calls itself)"
+msgstr "Français"
+
+#: lib/samizdat/controllers/frontpage_controller.rb:385
+msgid " (default language)"
+msgstr " (langue par défaut)"
+
+#: lib/samizdat/controllers/history_controller.rb:19
+msgid "History of Changes"
+msgstr "Histoire des Modifications"
+
+#: lib/samizdat/controllers/history_controller.rb:35
+msgid "compare with previous version"
+msgstr "comparer avec la version précédente"
+
+#: lib/samizdat/controllers/history_controller.rb:47
+msgid "Versions"
+msgstr "Versions"
+
+#: lib/samizdat/controllers/item_controller.rb:13
+msgid "Not Implemented"
+msgstr "Pas implémenté"
+
+#: lib/samizdat/controllers/item_controller.rb:14
+msgid "<p>Material item exchange is not implemented yet.</p>"
+msgstr "<p>L'échange d'objets matériaux n'est pas encore implémenté.</p>"
+
+#: lib/samizdat/controllers/member_controller.rb:19
+msgid "Theme"
+msgstr "Thème"
+
+#: lib/samizdat/controllers/member_controller.rb:25
+msgid "Show static content on the front page"
+msgstr "Montrer le contenu statique sur la page principale"
+
+#: lib/samizdat/controllers/member_controller.rb:26
+msgid "Hide static content from the front page"
+msgstr "Cacher le contenu statique de la page d'accueil"
+
+#: lib/samizdat/controllers/member_controller.rb:30
+msgid "Return to basic interface"
+msgstr "Retour à l'interface de base"
+
+#: lib/samizdat/controllers/member_controller.rb:31
+msgid "Enable advanced interface"
+msgstr "Activer l'interface avancée"
+
+#: lib/samizdat/controllers/member_controller.rb:33
+msgid "Change Appearance"
+msgstr "Modifier l'Apparence"
+
+#: lib/samizdat/controllers/member_controller.rb:36
+msgid "Moderation Facility"
+msgstr "Outil de Modération"
+
+#: lib/samizdat/controllers/member_controller.rb:37
+msgid "Disable"
+msgstr "Désactiver"
+
+#: lib/samizdat/controllers/member_controller.rb:38
+msgid "Enable"
+msgstr "Activer"
+
+#: lib/samizdat/controllers/member_controller.rb:41
+msgid "Interface Settings"
+msgstr "Préférences"
+
+#: lib/samizdat/controllers/member_controller.rb:65
+#: data/samizdat/templates/page_layout.rhtml:38
+msgid "Profile"
+msgstr "Profil"
+
+#: lib/samizdat/controllers/member_controller.rb:72
+#: data/samizdat/templates/page_layout.rhtml:39
+msgid "Account"
+msgstr "Compte"
+
+#: lib/samizdat/controllers/member_controller.rb:78
+#: lib/samizdat/controllers/member_controller.rb:167
+msgid "Create New Account"
+msgstr "Créer un Nouveau Compte"
+
+#: lib/samizdat/controllers/member_controller.rb:113
+msgid "You didn't fill all mandatory fields"
+msgstr "Tu n'as pas rempli les champs obligatoires"
+
+#: lib/samizdat/controllers/member_controller.rb:128
+msgid "Your email address was used to create an account."
+msgstr "Ton adresse mél a été utilisée pour créer un compte."
+
+#: lib/samizdat/controllers/member_controller.rb:136
+msgid "Login error: failed to open session for new account"
+msgstr "Erreur de login : l'ouverture de séance pour le nouveau compte a échoué"
+
+#: lib/samizdat/controllers/member_controller.rb:148
+msgid "Login Failed"
+msgstr "Login Échoué"
+
+#: lib/samizdat/controllers/member_controller.rb:150
+msgid "Wrong login name or password. Try again."
+msgstr "Mauvais nom d'utilisateur ou mot de passe. Essai à nouveau."
+
+#: lib/samizdat/controllers/member_controller.rb:158
+#: data/samizdat/templates/page_layout.rhtml:45
+msgid "Log in"
+msgstr "Se loguer"
+
+#: lib/samizdat/controllers/member_controller.rb:160
+msgid "Use existing account:"
+msgstr "Utiliser un compte existant : "
+
+#: lib/samizdat/controllers/member_controller.rb:164
+#: lib/samizdat/controllers/member_controller.rb:323
+#: lib/samizdat/controllers/member_controller.rb:361
+msgid "Password"
+msgstr "Mot de passe"
+
+#: lib/samizdat/controllers/member_controller.rb:169
+#: lib/samizdat/controllers/member_controller.rb:249
+msgid "Recover Lost Password"
+msgstr "Récupérer Mot de Passe Perdu"
+
+#: lib/samizdat/controllers/member_controller.rb:193
+msgid "Confirmation hash not found"
+msgstr "Le code de hachage de la confirmation n'a pas été trouvé"
+
+#: lib/samizdat/controllers/member_controller.rb:195
+msgid "This confirmation hash is intended for another user"
+msgstr "Ce code de hachage de confirmation est pour un-e autre utilisateur-ice"
+
+#: lib/samizdat/controllers/member_controller.rb:211
+msgid "Confirmation Accepted"
+msgstr "Confirmation Acceptée"
+
+#: lib/samizdat/controllers/member_controller.rb:212
+msgid "Changes confirmed."
+msgstr "Modifications confirmées."
+
+#: lib/samizdat/controllers/member_controller.rb:219
+msgid "Sorry, password recovery not enabled on this site"
+msgstr "Désolé, la récupération du mot de passe n'est pas possible sur ce site"
+
+#: lib/samizdat/controllers/member_controller.rb:221
+msgid "You are already logged in"
+msgstr "Tu es déjà logué."
+
+#: lib/samizdat/controllers/member_controller.rb:229
+msgid "Wrong login"
+msgstr "Mauvais login"
+
+#: lib/samizdat/controllers/member_controller.rb:240
+msgid "New password has been sent to you."
+msgstr "Un nouveau mot de passe t'a été envoyé."
+
+#: lib/samizdat/controllers/member_controller.rb:255
+msgid "Account is already blocked"
+msgstr "Le compte est déjà bloqué"
+
+#: lib/samizdat/controllers/member_controller.rb:257
+msgid "Moderator accounts can not be blocked"
+msgstr "Le compte d'un modérateur ne peut pas être bloqué"
+
+#: lib/samizdat/controllers/member_controller.rb:269
+msgid "Account is not blocked"
+msgstr "Le compte n'est pas bloqué"
+
+#: lib/samizdat/controllers/member_controller.rb:270
+msgid "Can't unblock, the account is broken"
+msgstr "Ne peut pas débloquer, le compte est cassé"
+
+#: lib/samizdat/controllers/member_controller.rb:307
+#: lib/samizdat/controllers/member_controller.rb:353
+msgid "Full name"
+msgstr "Nom et prénom"
+
+#: lib/samizdat/controllers/member_controller.rb:322
+#: lib/samizdat/controllers/member_controller.rb:383
+msgid "Email"
+msgstr "Mél"
+
+#: lib/samizdat/controllers/member_controller.rb:324
+msgid "Reenter password to confirm"
+msgstr "Retaper le mot de passe afin de le confirmer"
+
+#: lib/samizdat/controllers/member_controller.rb:353
+#: lib/samizdat/controllers/member_controller.rb:361
+#: lib/samizdat/controllers/member_controller.rb:383
+#: lib/samizdat/plugins/profile.rb:63
+msgid "%s updated"
+msgstr "%s mis(e) à jour"
+
+#: lib/samizdat/controllers/member_controller.rb:376
+msgid "Your email address was specified for an account."
+msgstr "Ton adresse mél a été indiquée pour un compte."
+
+#: lib/samizdat/controllers/member_controller.rb:378
+msgid "Confirmation request is sent to your new email address."
+msgstr "Une demande de confirmation a été envoyée à ton nouveau mél."
+
+#: lib/samizdat/controllers/member_controller.rb:404
+msgid "Change Account Status"
+msgstr "Modifier l'État du Compte"
+
+#: lib/samizdat/controllers/member_controller.rb:406
+msgid "When account is blocked, the member cannot login. Please confirm that you want to change block status of this account."
+msgstr "Lorsque le compte est bloqué, le membre ne peut pas se loguer. Veuille confirmer que tu souhaites changer l'état de blocage de ce compte."
+
+#: lib/samizdat/controllers/member_controller.rb:408
+#: lib/samizdat/controllers/message_controller.rb:46
+#: lib/samizdat/controllers/message_controller.rb:66
+#: lib/samizdat/controllers/message_controller.rb:93
+#: lib/samizdat/controllers/message_controller.rb:428
+#: lib/samizdat/controllers/message_controller.rb:450
+#: lib/samizdat/controllers/message_controller.rb:805
+msgid "Confirm"
+msgstr "Confirmer"
+
+#: lib/samizdat/controllers/member_controller.rb:436
+msgid "Passwords do not match"
+msgstr "Les mots de passe ne correspondent pas"
+
+#: lib/samizdat/controllers/member_controller.rb:441
+msgid "Login name you specified is reserved"
+msgstr "Le nom d'utilisateur que tu as donné est réservé"
+
+#: lib/samizdat/controllers/member_controller.rb:443
+msgid "Use only latin letters and numbers in login name"
+msgstr "Utiliser uniquement des lettres romaines et les chiffres dans ton nom d'utilisateur"
+
+#: lib/samizdat/controllers/member_controller.rb:448
+#: lib/samizdat/controllers/member_controller.rb:488
+msgid "Malformed email address: '%s'"
+msgstr "Adresse mél mal construite&nbsp;: '%s'"
+
+#: lib/samizdat/controllers/member_controller.rb:466
+msgid "Full name you have specified is used by someone else"
+msgstr "Le nom et prénom que tu as donnés sont utilisés par quelqu'un d'autre"
+
+#: lib/samizdat/controllers/member_controller.rb:473
+msgid "Email address you have specified is used by someone else"
+msgstr "Le mél que tu as donné est utilisé par quelqu'un d'autre"
+
+#: lib/samizdat/controllers/member_controller.rb:478
+msgid "Login name you specified is already used by someone else"
+msgstr "Le nom d'utilisateur que tu as donné est utilisé déjà par quelqu'un d'autre"
+
+#: lib/samizdat/controllers/member_controller.rb:501
+msgid "Failed to send email"
+msgstr "Envoi de mél échoué"
+
+#: lib/samizdat/controllers/member_controller.rb:518
+msgid "To confirm this action, visit the following web page:"
+msgstr "Afin de confirmer cette action, veuille visiter la page ouaibbe suivante&nbsp;:"
+
+#: lib/samizdat/controllers/member_controller.rb:522
+msgid "To cancel this action, ignore this message."
+msgstr "Afin d'annuler cette action, ignore ce message."
+
+#: lib/samizdat/controllers/message_controller.rb:26
+#: lib/samizdat/controllers/message_controller.rb:713
+msgid "Content"
+msgstr "Contenu"
+
+#: lib/samizdat/controllers/message_controller.rb:42
+msgid "Hide Message"
+msgstr "Cacher Message"
+
+#: lib/samizdat/controllers/message_controller.rb:44
+msgid "The message will be hidden from public view."
+msgstr "Le message sera caché d'accès public."
+
+#: lib/samizdat/controllers/message_controller.rb:62
+msgid "Unhide Message"
+msgstr "Dé-cacher le Message"
+
+#: lib/samizdat/controllers/message_controller.rb:64
+msgid "The message will not be hidden from public view."
+msgstr "Le message ne sera plus caché d'accès public."
+
+#: lib/samizdat/controllers/message_controller.rb:86
+msgid "Reparent Message"
+msgstr "Re-parenter le Message"
+
+#: lib/samizdat/controllers/message_controller.rb:88
+msgid "This message will be moved to new parent"
+msgstr "Ce message sera déplacé à un nouveau parent"
+
+#: lib/samizdat/controllers/message_controller.rb:91
+msgid "New Parent"
+msgstr "Nouveau Parent"
+
+#: lib/samizdat/controllers/message_controller.rb:124
+#: lib/samizdat/controllers/message_controller.rb:215
+msgid "New Message"
+msgstr "Nouveau Message"
+
+#: lib/samizdat/controllers/message_controller.rb:243
+#: lib/samizdat/helpers/message_helper.rb:123
+msgid "Reply"
+msgstr "Répondre"
+
+#: lib/samizdat/controllers/message_controller.rb:245
+#: lib/samizdat/controllers/message_controller.rb:280
+#: lib/samizdat/controllers/message_controller.rb:316
+msgid "Parent Message"
+msgstr "Message Parent"
+
+#: lib/samizdat/controllers/message_controller.rb:277
+#: lib/samizdat/controllers/message_controller.rb:313
+#: lib/samizdat/helpers/message_helper.rb:125
+msgid "Add translation"
+msgstr "Ajouter une traduction"
+
+#: lib/samizdat/controllers/message_controller.rb:328
+msgid "You are not allowed to edit this message"
+msgstr "Tu n'es pas autorisé-e à éditer ce message"
+
+#: lib/samizdat/controllers/message_controller.rb:347
+msgid "Edit Message"
+msgstr "Éditer le Message"
+
+#: lib/samizdat/controllers/message_controller.rb:373
+msgid "Take Over Message"
+msgstr "Reprendre le Message"
+
+#: lib/samizdat/controllers/message_controller.rb:376
+msgid "Edit message content and open-for-all status, message will remain attributed to the current creator."
+msgstr "Editer le contenu du message et son statut ouvert-à-l'édition, le message restera attribué à l'auteur actuel."
+
+#: lib/samizdat/controllers/message_controller.rb:401
+msgid "Replace Message"
+msgstr "Remplacer le Message"
+
+#: lib/samizdat/controllers/message_controller.rb:404
+msgid "MESSAGE WILL BE COMPLETELY REPLACED, NO RECOVERY WILL BE POSSIBLE. PLEASE PROVIDE DETAILED JUSTIFICATION FOR THIS ACTION."
+msgstr "LE MESSAGE SERA COMPLÈTEMENT REMPLACÉ, AUCUNE RÉCUPÉRATION SERA POSSIBLE.VEUILLEZ FOURNIR UNE JUSTIFICATION DÉTAILLÉE POUR CETTE ACTION."
+
+#: lib/samizdat/controllers/message_controller.rb:422
+#: lib/samizdat/helpers/message_helper.rb:166
+msgid "Request Moderation"
+msgstr "Demander une Modération"
+
+#: lib/samizdat/controllers/message_controller.rb:425
+msgid "Please confirm that you want to request moderation of this message:"
+msgstr "Veuille confirmer que tu souhaites demander que ce message soit modéré&nbsp;:"
+
+#: lib/samizdat/controllers/message_controller.rb:444
+msgid "Acknowledge Moderation Request"
+msgstr "Accusé de Réception d'une Demande de Modération"
+
+#: lib/samizdat/controllers/message_controller.rb:447
+msgid "Moderation request will be marked as acknowledged without moderatorial action."
+msgstr "La demande de modération sera reconnue, sans action modératoriale."
+
+#: lib/samizdat/controllers/message_controller.rb:642
+msgid "Multimedia upload is disabled on this site"
+msgstr "Le téléchargement multimédia est désactivé sur ce site"
+
+#: lib/samizdat/controllers/message_controller.rb:689
+msgid "Message title is required"
+msgstr "Il faut fournir le titre du message"
+
+#: lib/samizdat/controllers/message_controller.rb:696
+msgid "Your message looks like spam"
+msgstr "Ton message se ressemble au spam"
+
+#: lib/samizdat/controllers/message_controller.rb:704
+msgid "Message body is required"
+msgstr "Il faut fournir le corps du message"
+
+#: lib/samizdat/controllers/message_controller.rb:711
+msgid "Title"
+msgstr "Titre"
+
+#: lib/samizdat/controllers/message_controller.rb:727
+msgid "(formats supported: %s)"
+msgstr "(formats reconnus&nbsp;: %s)"
+
+# multi-publish-0.4 patch
+#: lib/samizdat/controllers/message_controller.rb:728
+msgid "Upload content from file"
+msgstr "Télécharger le contenu d'un fichier"
+
+#: lib/samizdat/controllers/message_controller.rb:734
+msgid "Alternatively, upload a file"
+msgstr "Ou plutôt, télécharger le contenu d'un fichier"
+
+# DEPRECATED by 080830_multi_publish-0.7.2.patch 
+#: lib/samizdat/controllers/message_controller.rb:734
+msgid "Alternatively, upload a file (formats supported: %s)"
+msgstr "Ou plutôt, télécharger le contenu d'un fichier (formats reconnus : %s)"
+
+#: lib/samizdat/controllers/message_controller.rb:753
+msgid "All translations have already been made"
+msgstr "Toutes les traductions ont déjà été faites"
+
+#: lib/samizdat/controllers/message_controller.rb:764
+msgid "Language of the message"
+msgstr "Langue du message"
+
+#: lib/samizdat/controllers/message_controller.rb:767
+msgid "Format"
+msgstr "Format"
+
+#: lib/samizdat/controllers/message_controller.rb:773
+msgid "Editing is open for all members (excluding guests who can't edit anyone's messages)"
+msgstr "L'édition est ouverte à tou-te-s les membres (les invité-e-s ne peuvent pas éditer aucun message)"
+
+#: lib/samizdat/controllers/message_controller.rb:784
+msgid "Reference to description (ID or URL of another message on this site)"
+msgstr "Référence à une description (ID ou URL d'un autre message sur ce site)"
+
+#: lib/samizdat/controllers/message_controller.rb:789
+msgid "Preview"
+msgstr "Prévisualiser"
+
+#: lib/samizdat/controllers/message_controller.rb:800
+msgid "Warning: content is longer than %s characters. In some situations, it will be truncated."
+msgstr "Attention : le contenu est plus long que %s caractères. Dans certaines situations, il sera abrégé."
+
+#: lib/samizdat/controllers/message_controller.rb:803
+msgid "Message Preview"
+msgstr "Prévisualiser le Message"
+
+#: lib/samizdat/controllers/message_controller.rb:840
+msgid "Press 'Back' button to change the message."
+msgstr "Pousser sur le bouton 'Retour' pour modifier le message."
+
+#: lib/samizdat/controllers/message_controller.rb:883
+msgid "Warning: you said that your text is in %s, but it seems to be in another language."
+msgstr "Attention&nbsp;: tu as dit que ton texte est en %s, mais il paraît qu'il soit dans une autre langue." 
+
+#: lib/samizdat/controllers/moderation_controller.rb:25
+#: lib/samizdat/controllers/moderation_controller.rb:54
+msgid "Pending Moderation Requests"
+msgstr "Demandes de Modération en Attente"
+
+#: lib/samizdat/controllers/moderation_controller.rb:28
+#: lib/samizdat/controllers/moderation_controller.rb:48
+msgid "Date"
+msgstr "Date"
+
+#: lib/samizdat/controllers/moderation_controller.rb:28
+#: lib/samizdat/controllers/moderation_controller.rb:85
+msgid "Moderator"
+msgstr "Modérateur"
+
+#: lib/samizdat/controllers/moderation_controller.rb:28
+msgid "Action"
+msgstr "Action"
+
+#: lib/samizdat/controllers/moderation_controller.rb:28
+#: lib/samizdat/controllers/moderation_controller.rb:48
+msgid "Resource"
+msgstr "Ressource"
+
+#: lib/samizdat/controllers/query_controller.rb:17
+#: lib/samizdat/controllers/query_controller.rb:231
+msgid "Edit Query"
+msgstr "Éditer la Requête"
+
+#: lib/samizdat/controllers/query_controller.rb:29
+#: lib/samizdat/controllers/query_controller.rb:132
+msgid "Search Result"
+msgstr "Résultat de la Recherche"
+
+#: lib/samizdat/controllers/query_controller.rb:44
+msgid "Publish This Query"
+msgstr "Publier Cette Requête"
+
+#: lib/samizdat/controllers/query_controller.rb:53
+msgid "No matching resources found."
+msgstr "Aucune ressource ne correspond."
+
+#: lib/samizdat/controllers/query_controller.rb:163
+msgid "Error in your query: "
+msgstr "Erreur dans ta requête&nbsp;:"
+
+#: lib/samizdat/controllers/query_controller.rb:167
+msgid "Must-bind list should contain only one blank node, filters based on queries with a complex answer pattern are not implemented"
+msgstr "La liste must-bind devrait avoir une seule noeud vide, les filtres basés sur un schéma complexe de réponse ne sont pas implémentés"
+
+#: lib/samizdat/controllers/query_controller.rb:170
+msgid "User-defined query pattern should not be longer than %s clauses"
+msgstr "Le schéma défini par l'utilisateur ne devrait pas être plus long que %s clauses"
+
+#: lib/samizdat/controllers/query_controller.rb:176
+msgid "Search By Substring"
+msgstr "Chercher Par Sous-chaîne de caractères"
+
+#: lib/samizdat/controllers/query_controller.rb:179
+#: data/samizdat/templates/page_layout.rhtml:32
+msgid "Search"
+msgstr "Chercher"
+
+#: lib/samizdat/controllers/query_controller.rb:182
+msgid "Select Target"
+msgstr "Choisir le But"
+
+#: lib/samizdat/controllers/query_controller.rb:186
+msgid "Query Pattern (predicate subject object)"
+msgstr "Schéma de Requête (prédicat sujet objet)"
+
+#: lib/samizdat/controllers/query_controller.rb:197
+msgid "BLANK CLAUSE "
+msgstr "CLAUSE VIDE "
+
+#: lib/samizdat/controllers/query_controller.rb:206
+msgid "Literal Condition"
+msgstr "Condition Littérale"
+
+#: lib/samizdat/controllers/query_controller.rb:209
+msgid "Order By"
+msgstr "Mettre en Ordre Selon"
+
+#: lib/samizdat/controllers/query_controller.rb:212
+msgid "Ascending"
+msgstr "Ascendant"
+
+#: lib/samizdat/controllers/query_controller.rb:212
+msgid "Descending"
+msgstr "Descendant"
+
+#: lib/samizdat/controllers/query_controller.rb:218
+msgid "Update"
+msgstr "Remettre à jour"
+
+#: lib/samizdat/controllers/query_controller.rb:220
+msgid "Construct Query"
+msgstr "Construire une Requête"
+
+#: lib/samizdat/controllers/query_controller.rb:223
+msgid "Edit Raw Query"
+msgstr "Éditer la Requête Crue"
+
+#: lib/samizdat/controllers/query_controller.rb:227
+#: lib/samizdat/plugins/squish.rb:34
+msgid "Run"
+msgstr "Lancer"
+
+#: lib/samizdat/controllers/resource_controller.rb:56
+#: lib/samizdat/controllers/resource_controller.rb:149
+#: lib/samizdat/helpers/application_helper.rb:173
+msgid "Submit"
+msgstr "Envoyer"
+
+#: lib/samizdat/engine/controller.rb:88
+msgid "Access Denied"
+msgstr "Accès Refusé"
+
+#: lib/samizdat/engine/controller.rb:92
+msgid "Account Is Blocked"
+msgstr "Le Compte est Bloqué"
+
+#: lib/samizdat/engine/controller.rb:94
+msgid "Your account is blocked until the email address you have specified is confirmed. Confirmation message with instructions was sent to that address."
+msgstr "Ton compte est bloqué jusqu'à ce que l'adresse mél que tu as donné soit confirmée. Un message expliquant comment confirmer a été envoyé à cette adresse."
+
+#: lib/samizdat/engine/controller.rb:96
+msgid "User Error"
+msgstr "Erreur d'Utilisateur"
+
+#: lib/samizdat/engine/controller.rb:98
+msgid "Press 'Back' button of your browser to return."
+msgstr "Pousser sur le bouton 'Retour' de ton browseur pour retourner."
+
+#: lib/samizdat/engine/controller.rb:102
+msgid "Resource Not Found"
+msgstr "Ressource Pas Trouvée"
+
+#: lib/samizdat/engine/controller.rb:103
+msgid " (looks like it was %s)"
+msgstr "(il paraît qu'il ait été %s)"
+
+#: lib/samizdat/engine/controller.rb:105
+msgid "The resource you requested (%s) was not found on this site. Please report this error back to the site you came from%s."
+msgstr "La ressource que tu as demandé (%s) n'a pas été trouvé sur ce site. Veuille informer le site d'où tu viens%s de cette erreur."
+
+#: lib/samizdat/engine/controller.rb:111
+msgid "Runtime Error"
+msgstr "Erreur Runtime"
+
+#: lib/samizdat/engine/controller.rb:113
+msgid "Runtime error has occured."
+msgstr "Il y a eu une erreur du runtime."
+
+#: lib/samizdat/engine/controller.rb:114
+msgid "Please report this error to the site administrator."
+msgstr "Veuille informer l'administrateur du site de cette erreur."
+
+#: lib/samizdat/engine/request.rb:230 lib/samizdat/plugins/role.rb:79
+msgid "moderator"
+msgstr "moderateur"
+
+#: lib/samizdat/engine/request.rb:230 lib/samizdat/plugins/role.rb:79
+msgid "member"
+msgstr "membre"
+
+#: lib/samizdat/engine/request.rb:230
+#: lib/samizdat/helpers/message_helper.rb:42 lib/samizdat/plugins/role.rb:79
+msgid "guest"
+msgstr "invité-e"
+
+#: lib/samizdat/engine/request.rb:337
+msgid "Input size exceeds content size limit"
+msgstr "La taille de l'entrée est au-delà de la limite sur la taille du contenu"
+
+#: lib/samizdat/helpers/application_helper.rb:26
+msgid "Front Page"
+msgstr "Page d'Accueil"
+
+#: lib/samizdat/helpers/application_helper.rb:44
+msgid ", page %s"
+msgstr ", page %s"
+
+#: lib/samizdat/helpers/application_helper.rb:93
+msgid "pages: "
+msgstr "pages&nbsp;:"
+
+#: lib/samizdat/helpers/application_helper.rb:98
+msgid "next page"
+msgstr "page suivante"
+
+#: lib/samizdat/helpers/application_helper.rb:263
+msgid "SELECT FOCUS"
+msgstr "CHOISIR LE THÈME"
+
+#: lib/samizdat/helpers/application_helper.rb:269
+msgid "this message"
+msgstr "ce message"
+
+#: lib/samizdat/helpers/application_helper.rb:272
+msgid "Select focus that this resource will be related to"
+msgstr "Choisir le thème auquel cette ressource sera lié"
+
+#: lib/samizdat/helpers/application_helper.rb:295
+msgid "Select the date at which this event is planned for"
+msgstr "Choisis la date à laquelle est prévu cet événement"
+
+#: lib/samizdat/helpers/application_helper.rb:312
+msgid "Enter focus id if it's not in the list"
+msgstr "Donne le numéro d'identité (id) s'il n'est pas dans la liste"
+
+#: lib/samizdat/helpers/application_helper.rb:321
+msgid "this resource"
+msgstr "cette ressource"
+
+#: lib/samizdat/helpers/application_helper.rb:324
+msgid "Give a rating of how strongly this resource is related to selected focus"
+msgstr "Donne une grade représentant jusqu'au quel degré cette ressource est liée au thème sélectionné "
+
+#: lib/samizdat/helpers/application_helper.rb:329
+msgid "-2 (No)"
+msgstr "-2 (Non)"
+
+#: lib/samizdat/helpers/application_helper.rb:330
+msgid "-1 (Not Likely)"
+msgstr "-1 (Peu Probable)"
+
+#: lib/samizdat/helpers/application_helper.rb:331
+msgid "0 (Uncertain)"
+msgstr "0 (Incertain)"
+
+#: lib/samizdat/helpers/application_helper.rb:332
+msgid "1 (Likely)"
+msgstr "1 (Probable)"
+
+#: lib/samizdat/helpers/application_helper.rb:333
+msgid "2 (Yes)"
+msgstr "2 (Oui)"
+
+#: lib/samizdat/helpers/application_helper.rb:357
+msgid "Click to view the resource"
+msgstr "Cliquer pour voir la ressource"
+
+#: lib/samizdat/helpers/message_helper.rb:19
+msgid "See the full message"
+msgstr "Voir le message entier"
+
+#: lib/samizdat/helpers/message_helper.rb:25
+msgid "related to"
+msgstr "lié-e à"
+
+#: lib/samizdat/helpers/message_helper.rb:47
+msgid "parent message"
+msgstr "message parent"
+
+#: lib/samizdat/helpers/message_helper.rb:48
+msgid "current version"
+msgstr "version actuelle"
+
+#: lib/samizdat/helpers/message_helper.rb:50
+msgid "history"
+msgstr "histoire"
+
+#: lib/samizdat/helpers/message_helper.rb:54
+msgid "view source"
+msgstr "voir la source"
+
+#: lib/samizdat/helpers/message_helper.rb:58
+msgid "replies"
+msgstr "réponses"
+
+#: lib/samizdat/helpers/message_helper.rb:61
+msgid "translation"
+msgstr "traduction"
+
+#: lib/samizdat/helpers/message_helper.rb:72
+msgid "hidden"
+msgstr "caché"
+
+#: lib/samizdat/helpers/message_helper.rb:74
+msgid "moderation log"
+msgstr "log de modération"
+
+#: lib/samizdat/helpers/message_helper.rb:78
+msgid "by&nbsp;%s on&nbsp;%s"
+msgstr "par&nbsp;%s, le&nbsp;%s"
+
+#: lib/samizdat/helpers/message_helper.rb:119
+msgid "Reply to original message"
+msgstr "Répondre au message original"
+
+#: lib/samizdat/helpers/message_helper.rb:137
+msgid "Edit"
+msgstr "Éditer"
+
+#: lib/samizdat/helpers/message_helper.rb:146
+msgid "UNHIDE"
+msgstr "DÉ-CACHER"
+
+#: lib/samizdat/helpers/message_helper.rb:146
+msgid "HIDE"
+msgstr "CACHER"
+
+#: lib/samizdat/helpers/message_helper.rb:149
+msgid "REPARENT"
+msgstr "RE-PARENTER"
+
+#: lib/samizdat/helpers/message_helper.rb:150
+msgid "TAKE OVER"
+msgstr "REPRENDRE"
+
+#: lib/samizdat/helpers/message_helper.rb:158
+msgid "REPLACE"
+msgstr "REMPLACER"
+
+#: lib/samizdat/helpers/message_helper.rb:161
+msgid "ACKNOWLEDGE"
+msgstr "ACCUSER RÉCEPTION"
+
+#: lib/samizdat/helpers/message_helper.rb:201
+msgid "Description"
+msgstr "Description"
+
+#: lib/samizdat/helpers/resource_helper.rb:25
+msgid "Click to vote on how this resource is related to this focus"
+msgstr "Cliquer pour voter sur le degré auquel cette ressource est liée à ce thème"
+
+#: lib/samizdat/helpers/resource_helper.rb:28
+#: lib/samizdat/plugins/access.rb:49
+msgid "vote"
+msgstr "vote"
+
+#: lib/samizdat/helpers/resource_helper.rb:39
+msgid "Related Focuses"
+msgstr "Thème lié"
+
+#: lib/samizdat/helpers/resource_helper.rb:48
+msgid "Click to relate this resource to another focus"
+msgstr "Cliquer pour lier cette ressource à un autre thème"
+
+#: lib/samizdat/helpers/resource_helper.rb:50
+msgid "Add another focus"
+msgstr "Ajouter un autre thème"
+
+#: lib/samizdat/helpers/resource_helper.rb:56
+msgid "Click to put this resource in the calendar"
+msgstr "Cliquer afin de mettre cette ressource dans le calendrier"
+
+# patches
+#: lib/samizdat/helpers/resource_helper.rb:58
+msgid "Put this in the calendar"
+msgstr "Mettre dans le calendrier"
+
+#: lib/samizdat/models/content.rb:198
+msgid "Uploaded file is larger than %s bytes limit"
+msgstr "Le fichier téléchargé est plus grand que la limite de %s octets"
+
+#: lib/samizdat/models/content.rb:214
+msgid "Too many files have recently been uploaded to the preview stage without being confirmed. Please wait and try again later"
+msgstr "Trop de fichiers ont récemment été téléchargés à l'étape de prévisualisation sans être confirmés. Veuille attendre et essayer plus tard"
+
+#: lib/samizdat/models/content.rb:321
+msgid "Failed to detect content type of the uploaded file"
+msgstr "Le type de contenu du fichier téléchargé n'a pas été détecté"
+
+#: lib/samizdat/models/content.rb:325
+msgid "Format '%s' is not supported"
+msgstr "Il n'y a pas de soutien pour le format '%s'"
+
+#: lib/samizdat/models/focus.rb:51
+msgid "Translation"
+msgstr "Traduction"
+
+# aucune grade 
+#: lib/samizdat/models/focus.rb:108
+msgid "none"
+msgstr "aucune"
+
+#: lib/samizdat/models/focus.rb:119
+msgid "You can't relate resource to itself"
+msgstr "On ne peut pas lier une ressource à elle-même"
+
+#: lib/samizdat/models/focus.rb:120
+msgid "Translations should be published as replies to the original message"
+msgstr "Les traductions devraient être publiées en tant que réponses au message original"
+
+#: lib/samizdat/models/member.rb:65
+msgid "Your current access level (%s) does not allow to perform this action (%s)"
+msgstr "Ton niveau actuel d'accès (%s) ne permet pas de faire cette action (%s)"
+
+#: lib/samizdat/models/message.rb:91
+msgid "Only <a href=\"%s\">current version</a> may be used for this action"
+msgstr "Uniquement <a href=\"%s\">la version actuelle</a> peut être utilisée pour cette action."
+
+#: lib/samizdat/models/message.rb:103
+msgid "Specified language is not supported on this site"
+msgstr "La langue spécifiée n'est pas disponible sur ce site"
+
+#: lib/samizdat/models/message.rb:118
+msgid "Recursive message reference not allowed"
+msgstr "Les références des messages ne peuvent pas être recursives"
+
+#: lib/samizdat/models/message.rb:123
+msgid "Invalid message reference"
+msgstr "Référence du message invalide"
+
+#: lib/samizdat/models/message.rb:140
+msgid "Invalid openForAll value"
+msgstr "Valeur openForAll invalide"
+
+#: lib/samizdat/models/message.rb:207
+msgid "Reference to previous version lost"
+msgstr "La référence à l'ancienne version a été perdue"
+
+#: lib/samizdat/models/moderation.rb:145
+msgid "This resource has already been moderated since it was last modified"
+msgstr "Cette ressource a été modéré depuis sa dernière modification"
+
+#: lib/samizdat/models/moderation.rb:149
+msgid "Moderation of this resource has already been requested"
+msgstr "Modération de cette ressource a déjà été demandée"
+
+#: lib/samizdat/plugins/access.rb:49
+msgid "post"
+msgstr "publier"
+
+#: lib/samizdat/plugins/access.rb:49
+msgid "moderate"
+msgstr "modérer"
+
+#: lib/samizdat/plugins/content_file.rb:47
+msgid "Download %s file"
+msgstr "Télécharger un fichier %s"
+
+#: lib/samizdat/plugins/flash.rb:24 lib/samizdat/plugins/flowplayer.rb:25
+msgid "Install a Flash plugin and enable JavaScript to see this content."
+msgstr "Installer un plugin Flash et activer JavaScript afin de voir ce contenu."
+
+#: lib/samizdat/plugins/flowplayer.rb:37
+msgid "View the clip online"
+msgstr "Voir le vidéo en ligne"
+
+#: lib/samizdat/plugins/image.rb:46
+msgid "Click to enlarge"
+msgstr "Cliquer afin d'agrandir"
+
+#: lib/samizdat/plugins/inline_default.rb:35
+msgid "Default"
+msgstr "Valeur par défaut"
+
+#: lib/samizdat/plugins/occupation.rb:20
+msgid "Occupation"
+msgstr "Métier"
+
+#: lib/samizdat/plugins/plain_text.rb:24
+msgid "Verbatim plain text"
+msgstr "Texte brut"
+
+#: lib/samizdat/plugins/squish.rb:38
+msgid "Squish query"
+msgstr "Requête squish"
+
+#: data/samizdat/templates/page_layout.rhtml:31
+msgid "Publish"
+msgstr "Publier"
+
+#: data/samizdat/templates/page_layout.rhtml:38
+msgid "View and edit your profile"
+msgstr "Voir et éditer ton profil"
+
+#: data/samizdat/templates/page_layout.rhtml:39
+msgid "Change account parameters (email and password)"
+msgstr "Changer les paramètres de ton compte (mél et mot de passe)"
+
+#: data/samizdat/templates/page_layout.rhtml:41
+msgid "Change user interface settings"
+msgstr "Modifier les préférences de l'interface"
+
+#: data/samizdat/templates/page_layout.rhtml:41
+msgid "Settings"
+msgstr "Préférences"
+
+#: data/samizdat/templates/page_layout.rhtml:43
+msgid "Log out"
+msgstr "Se déloguer"
+
+#~ msgid "Changes Accepted"
+#~ msgstr "Modifications Acceptées"
+
+#~ msgid "The message will be attributed to you after takeover."
+#~ msgstr "Le message te sera attribué après sa reprise."
+
+#~ msgid "Your current access level (%s) does not allow to publish messages"
+#~ msgstr "Ton niveau d'accès actuel (%s) ne permet pas de publier des messages"
+
+#~ msgid "Editing is open for all members"
+#~ msgstr "L'édition est ouverte à tous les membres"
+
+#~ msgid "Moderator access privilege is required"
+#~ msgstr "Le droit d'accès d'un modérateur est nécessaire"
+
+#~ msgid "%s content"
+#~ msgstr "%s contenu"
+
+#~ msgid "Share"
+#~ msgstr "Partager"
+
+#~ msgid "Account settings, interface language, theme"
+#~ msgstr "Préférences du compte, langue d'interface, thème"
+
+#~ msgid "WARNING: This is only a preview - it has <em>not</em> yet been saved. Press the \"confirm\" button to save it."
+#~ msgstr "ATTENTION : Ceci n'est qu'une prévisualisation - ce message <em>n'a pas</em> encore été sauvegardé. Appuies sur le bouton « confirmer » afin de le sauvegarder."
+
+#~ msgid "All Focuses (verbose)"
+#~ msgstr "Tous les Thèmes (bavard)"
+
+#~ msgid "Incorrect resource id '%s'"
+#~ msgstr "Mauvaise numéro d'identité de la ressource '%s'"
+
+#~ msgid "Item"
+#~ msgstr "Objet"
+
+#~ msgid "Can't derive message format and creator login name"
+#~ msgstr "Ne peux pas trouver le format du message et le nom de login du créateur-ice"
+
+#~ msgid "Message reference should refer to an existing message"
+#~ msgstr "La référence à un message devrait indiquer un message existant"
+
+#~ msgid "It is not possible to upload a file without specifying format"
+#~ msgstr "Ce n'est pas possible de télécharger vers l'amont sans spécifier le format"
+
+#~ msgid "You should upload %s content from file"
+#~ msgstr "Tu devrais télécharger %s contenu du fichier"
+
+#~ msgid "Also related to this focus: "
+#~ msgstr "Lié(s) aussi à ce thème&nbsp;:"
+
+#~ msgid "Recent updates in focus: "
+#~ msgstr "Mises au jour récentes dans le thème : "
+
+#~ msgid "Similar Items"
+#~ msgstr "Objets Similaires"
+
+#~ msgid "<p><b>Possessed by:</b></p>"
+#~ msgstr "<p><b>Possédé par&nbsp;:</b></p>"

@@ -1,0 +1,855 @@
+# Samizdat Ukrainian translation
+#
+#   Copyright (c) 2005  Leftist
+#
+#   This program is free software.
+#   You can distribute/modify this program under the terms of
+#   the GNU General Public License version 3 or later.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat 0.5.5\n"
+"POT-Creation-Date: 2006-04-16 16:20+0300\n"
+"PO-Revision-Date: 2005-06-13 19:03+0300\n"
+"Last-Translator: Leftist\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+
+#: cgi-bin/foci.rb:20 cgi-bin/index.rb:147
+msgid "Top Focuses"
+msgstr "Головні теми"
+
+#: cgi-bin/foci.rb:21 cgi-bin/history.rb:24 cgi-bin/index.rb:158
+#: cgi-bin/index.rb:168 cgi-bin/moderation.rb:20 cgi-bin/query.rb:149
+#: cgi-bin/resource.rb:124 lib/samizdat/engine/resource.rb:192
+#: lib/samizdat/engine/resource.rb:233
+msgid ", page %s"
+msgstr ", сторінка %s"
+
+#: cgi-bin/history.rb:23
+msgid "History of Changes"
+msgstr "Історія змін"
+
+#: cgi-bin/history.rb:40
+msgid "compare with previous version"
+msgstr "порівняти з попередньою версією"
+
+#: cgi-bin/history.rb:49 cgi-bin/history.rb:62
+msgid "Changes"
+msgstr "Зміни"
+
+#: cgi-bin/history.rb:49
+msgid "Versions"
+msgstr "Версії"
+
+#: cgi-bin/history.rb:54 cgi-bin/history.rb:60
+#: lib/samizdat/engine/message.rb:485
+msgid "Bad input"
+msgstr "Неправильні вихідні дані"
+
+#: cgi-bin/index.rb:90 cgi-bin/index.rb:134 cgi-bin/index.rb:157
+msgid "Features"
+msgstr "Тематичні повідомлення"
+
+#: cgi-bin/index.rb:90 cgi-bin/index.rb:134 cgi-bin/index.rb:167
+msgid "Recent Updates"
+msgstr "Останні оновлення"
+
+#: cgi-bin/index.rb:186
+msgid "Links"
+msgstr ""
+
+#: cgi-bin/index.rb:188
+msgid "All Replies"
+msgstr "Всі коментарі"
+
+#: cgi-bin/index.rb:189
+msgid "All Focuses (verbose)"
+msgstr "Всі теми (verbose)"
+
+#: cgi-bin/index.rb:190 cgi-bin/moderation.rb:20
+msgid "Moderation Log"
+msgstr "Журнал модерування"
+
+#: cgi-bin/item.rb:17
+msgid "Not Implemented"
+msgstr "Не реалізовано"
+
+#: cgi-bin/item.rb:18
+msgid "<p>Material item exchange is not implemented yet.</p>"
+msgstr "<p>Обмін речами ще не реалізований.</p>"
+
+#: cgi-bin/login.rb:22 lib/samizdat/engine/template.rb:113
+msgid "Log in"
+msgstr "Ввійти"
+
+#: cgi-bin/login.rb:23
+msgid "Use existing account:"
+msgstr "Існуючий користувач:"
+
+#: cgi-bin/login.rb:24 cgi-bin/member.rb:103 cgi-bin/member.rb:273
+#: lib/samizdat/engine/resource.rb:155
+msgid "Login"
+msgstr "Логін"
+
+#: cgi-bin/login.rb:25 cgi-bin/member.rb:279
+msgid "Password"
+msgstr "Пароль"
+
+#: cgi-bin/login.rb:27 cgi-bin/member.rb:314
+msgid "Create New Account"
+msgstr "Створити нового користувача"
+
+#: cgi-bin/login.rb:29 cgi-bin/member.rb:99 cgi-bin/member.rb:102
+msgid "Recover Lost Password"
+msgstr "Відновити втрачений пароль"
+
+#: cgi-bin/member.rb:24 cgi-bin/member.rb:257
+msgid "Malformed email address: '%s'"
+msgstr "Неприпустима адреса електронної пошти: &apos;%s&apos;"
+
+#: cgi-bin/member.rb:37
+msgid "Failed to send email"
+msgstr ""
+
+#: cgi-bin/member.rb:68
+msgid "Confirmation hash not found"
+msgstr "Вказаний хеш не знайдено"
+
+#: cgi-bin/member.rb:70
+msgid "This confirmation hash is intended for another user"
+msgstr "Цей хеш призначений для іншого користувача"
+
+#: cgi-bin/member.rb:79
+msgid "Confirmation Accepted"
+msgstr "Підтвердження прийняте"
+
+#: cgi-bin/member.rb:80
+msgid "Changes confirmed."
+msgstr "Зміни підтверджені."
+
+#: cgi-bin/member.rb:91
+msgid "Wrong login"
+msgstr "Неправильний логін"
+
+#: cgi-bin/member.rb:100
+msgid "New password has been sent to you."
+msgstr "Вам висланий новий пароль."
+
+#: cgi-bin/member.rb:115
+msgid "Full name you have specified is used by someone else"
+msgstr "Обране Вами повне ім’я вже використовується "
+
+#: cgi-bin/member.rb:120
+msgid "Email address you have specified is used by someone else"
+msgstr "Вказана Вами адреса електроної пошти вже використовується"
+
+#: cgi-bin/member.rb:148
+msgid "Confirmation Requested"
+msgstr "Зроблений запит на підтвердження"
+
+#: cgi-bin/member.rb:149
+msgid "Confirmation request is sent to your new email address."
+msgstr "Запит на підтвердження висланий на Вашу нову адресу електронної пошти."
+
+#: cgi-bin/member.rb:155
+msgid "Changes Accepted"
+msgstr "Зміни прийняті"
+
+#: cgi-bin/member.rb:156 lib/samizdat/engine/session.rb:302
+msgid "Press 'Back' button of your browser to return."
+msgstr "Натисніть кнопку &apos;Назад&apos; Вашого браузера, щоб повернутися на попередню сторінку."
+
+#: cgi-bin/member.rb:167
+msgid "You didn't fill all mandatory fields"
+msgstr "Ви не заповнили всі необхідні поля"
+
+#: cgi-bin/member.rb:169
+msgid "Login name you specified is reserved"
+msgstr "Обраний Вами логін зарезервований"
+
+#: cgi-bin/member.rb:171
+msgid "Use only latin letters and numbers in login name"
+msgstr "Використовуйте тільки латинські літери й цифри для логіна"
+
+#: cgi-bin/member.rb:174
+msgid "Login name you specified is already used by someone else"
+msgstr "Обраний Вами логін уже використовується"
+
+#: cgi-bin/member.rb:190
+msgid "Login error: failed to open session for new account"
+msgstr "Помилка входу в систему: не можу відкрити сесію для нового користувача"
+
+#: cgi-bin/member.rb:221
+msgid "Moderator accounts can not be blocked"
+msgstr "Модератори не можуть бути заблоковані"
+
+#: cgi-bin/member.rb:253
+msgid "Passwords do not match"
+msgstr "Паролі не збігаються"
+
+#: cgi-bin/member.rb:277
+msgid "Full name"
+msgstr "Повне ім’я"
+
+#: cgi-bin/member.rb:278
+msgid "Email"
+msgstr "Email (електронна пошта)"
+
+#: cgi-bin/member.rb:280
+msgid "Reenter password to confirm"
+msgstr "Підтвердження пароля"
+
+#: cgi-bin/member.rb:287
+msgid "Theme"
+msgstr "Тема"
+
+#: cgi-bin/member.rb:298
+msgid "Show static content on the front page"
+msgstr "Виводити статичний текст на головній сторінці"
+
+#: cgi-bin/member.rb:299
+msgid "Hide static content from the front page"
+msgstr "Не виводити статичний текст на головній сторінці"
+
+#: cgi-bin/member.rb:303
+msgid "Return to basic interface"
+msgstr "Повернутися до спрощеного інтерфейсу"
+
+#: cgi-bin/member.rb:304
+msgid "Enable advanced interface"
+msgstr "Ввімкнути розширений інтерфейс"
+
+#: cgi-bin/member.rb:306
+msgid "Change Appearance"
+msgstr "Змінити зовнішній вигляд"
+
+#: cgi-bin/member.rb:309
+msgid "Moderation Facility"
+msgstr "Засоби модерування"
+
+#: cgi-bin/member.rb:310
+msgid "Disable"
+msgstr "Вимкнути"
+
+#: cgi-bin/member.rb:311
+msgid "Enable"
+msgstr "Ввімкнути"
+
+#: cgi-bin/member.rb:314
+msgid "Change Account Settings"
+msgstr "Зміна налаштувань користувача"
+
+#: cgi-bin/member.rb:315
+msgid "Member Settings"
+msgstr "Налаштування користувача"
+
+#: cgi-bin/message.rb:18
+msgid "Your current access level (%s) does not allow to publish messages"
+msgstr "Ваш поточний рівень доступу (%s) не дозволяє публікувати повідомлення"
+
+#: cgi-bin/moderation.rb:34
+msgid "Action"
+msgstr "Дія"
+
+#: cgi-bin/moderation.rb:34
+msgid "Date"
+msgstr "Дата"
+
+#: cgi-bin/moderation.rb:34
+msgid "Moderator"
+msgstr "Модератор"
+
+#: cgi-bin/moderation.rb:34
+msgid "Resource"
+msgstr "Ресурс"
+
+#: cgi-bin/query.rb:22
+msgid "Error in your query: "
+msgstr "Помилка в Вашому запиті: "
+
+#: cgi-bin/query.rb:26
+msgid "Must-bind list should contain only one blank node, filters based on queries with a complex answer pattern are not implemented"
+msgstr ""
+
+#: cgi-bin/query.rb:29
+msgid "User-defined query pattern should not be longer than %s clauses"
+msgstr ""
+
+#: cgi-bin/query.rb:53 cgi-bin/query.rb:148
+msgid "Search Result"
+msgstr "Результати пошуку"
+
+#: cgi-bin/query.rb:160
+msgid "Publish This Query"
+msgstr "Опублікувати цей запит"
+
+#: cgi-bin/query.rb:165
+msgid "No matching resources found."
+msgstr ""
+
+#: cgi-bin/query.rb:174
+msgid "Select Target"
+msgstr "Обрати мету запиту"
+
+#: cgi-bin/query.rb:178
+msgid "Query Pattern (predicate subject object)"
+msgstr "Шаблон запиту (предикат суб’єкт об’єкт)"
+
+#: cgi-bin/query.rb:188
+msgid "BLANK CLAUSE "
+msgstr "ОЧИСТИТИ УМОВУ "
+
+#: cgi-bin/query.rb:197
+msgid "Literal Condition"
+msgstr "Буквальна умова"
+
+#: cgi-bin/query.rb:200
+msgid "Order By"
+msgstr "Впорядкувати за"
+
+#: cgi-bin/query.rb:204
+msgid "Ascending"
+msgstr "За зростанням"
+
+#: cgi-bin/query.rb:204
+msgid "Descending"
+msgstr "За спаданням"
+
+#: cgi-bin/query.rb:211
+msgid "Search By Substring"
+msgstr "Шукати за підстрокою"
+
+#: cgi-bin/query.rb:213 lib/samizdat/engine/template.rb:84
+msgid "Search"
+msgstr "Пошук"
+
+#: cgi-bin/query.rb:216
+msgid "Construct Query"
+msgstr "Задати запит"
+
+#: cgi-bin/query.rb:217
+msgid "Update"
+msgstr "Оновити"
+
+#: cgi-bin/query.rb:218
+msgid "Edit Raw Query"
+msgstr "Редагувати запит вручну"
+
+#: cgi-bin/query.rb:221 lib/samizdat/engine/template.rb:459
+msgid "Run"
+msgstr "Виконати"
+
+#: cgi-bin/query.rb:227
+msgid "Edit Query"
+msgstr "Редагувати запит"
+
+#: cgi-bin/resource.rb:68
+msgid "Incorrect resource id '%s'"
+msgstr "Неправильний ідентифікатор ресурсу - %s"
+
+#: cgi-bin/resource.rb:78
+msgid "Literal"
+msgstr ""
+
+#: cgi-bin/resource.rb:78
+msgid "Member"
+msgstr "Користувач"
+
+#: cgi-bin/resource.rb:78 lib/samizdat/engine/resource.rb:249
+msgid "Statement"
+msgstr "Твердження"
+
+#: cgi-bin/resource.rb:78
+msgid "Uriref"
+msgstr "Посилання"
+
+#: cgi-bin/resource.rb:78 cgi-bin/resource.rb:106 cgi-bin/resource.rb:107
+#: lib/samizdat/engine/resource.rb:271
+msgid "Vote"
+msgstr "Оцінка"
+
+#: cgi-bin/resource.rb:79
+msgid "Item"
+msgstr "Елемент"
+
+#: cgi-bin/resource.rb:86
+msgid "Your current access level (%s) does not allow to vote"
+msgstr "Ваш поточний рівень доступу (%s) не дозволяє голосувати"
+
+#: cgi-bin/resource.rb:104 lib/samizdat/engine/template.rb:225
+msgid "Submit"
+msgstr "Прийняти"
+
+#: lib/samizdat/engine/focus.rb:39
+msgid "Translation"
+msgstr "Переклад"
+
+#: lib/samizdat/engine/focus.rb:60
+msgid "Focus"
+msgstr "Тема"
+
+#: lib/samizdat/engine/focus.rb:95
+msgid "none"
+msgstr "немає оцінок"
+
+#: lib/samizdat/engine/focus.rb:106
+msgid "You can't relate resource to itself"
+msgstr "Ресурс не можна пов’язувати з самим собою"
+
+#: lib/samizdat/engine/focus.rb:108
+msgid "Translations should be published as replies to the original message"
+msgstr "Переклади потрібно публікувати як коментарі до вихідного повідомлення"
+
+#: lib/samizdat/engine/message.rb:30
+msgid "Can't derive message format and creator login name"
+msgstr "Не можу встановити формат повідомлення та ім’я автора"
+
+#: lib/samizdat/engine/message.rb:236
+msgid "Reference to previous version lost"
+msgstr "Посилання на попередню версію втрачене"
+
+#: lib/samizdat/engine/message.rb:340
+msgid "Warning: content is longer than %s characters. In some situations, it will be truncated."
+msgstr "Попередження: зміст повідомлення довше %s символів. У деяких ситуаціях воно буде обрізатися."
+
+#: lib/samizdat/engine/message.rb:341
+msgid "Message Preview"
+msgstr "Попередній перегляд повідомлення"
+
+#: lib/samizdat/engine/message.rb:344
+msgid "Press 'Back' button to change the message."
+msgstr "Натисніть кнопку &apos;Назад&apos; для попереднього повідомлення"
+
+#: lib/samizdat/engine/message.rb:346 lib/samizdat/engine/message.rb:408
+#: lib/samizdat/engine/message.rb:416
+msgid "Confirm"
+msgstr "Підтвердити"
+
+#: lib/samizdat/engine/message.rb:373 lib/samizdat/engine/template.rb:477
+#: lib/samizdat/engine/template.rb:479
+msgid "Reply"
+msgstr "Відповісти"
+
+#: lib/samizdat/engine/message.rb:375
+msgid "Edit Message"
+msgstr "Редагувати повідомлення"
+
+#: lib/samizdat/engine/message.rb:377
+msgid "Hide Message"
+msgstr "Сховати повідомлення"
+
+#: lib/samizdat/engine/message.rb:379
+msgid "Unhide Message"
+msgstr "Виявляти повідомлення"
+
+#: lib/samizdat/engine/message.rb:381
+msgid "Take Over Message"
+msgstr "Заволодіти повідомленням"
+
+#: lib/samizdat/engine/message.rb:383
+msgid "Replace Message"
+msgstr "Замінити повідомлення"
+
+#: lib/samizdat/engine/message.rb:385
+msgid "Reparent Message"
+msgstr "Перевісити повідомлення"
+
+#: lib/samizdat/engine/message.rb:387
+msgid "New Message"
+msgstr "Нове повідомлення"
+
+#: lib/samizdat/engine/message.rb:392
+msgid "Parent Message"
+msgstr "Вихідне повідомлення"
+
+#: lib/samizdat/engine/message.rb:395
+msgid "The message will be hidden from public view."
+msgstr "Повідомлення буде сховане."
+
+#: lib/samizdat/engine/message.rb:397
+msgid "The message will not be hidden from public view."
+msgstr "Повідомлення буде виявлено."
+
+#: lib/samizdat/engine/message.rb:399
+msgid "The message will be attributed to you after takeover."
+msgstr "Після того, як Ви заволодієте цим повідомленням, Ви будете вважатися його автором."
+
+#: lib/samizdat/engine/message.rb:401
+msgid "MESSAGE WILL BE COMPLETELY REPLACED, NO RECOVERY WILL BE POSSIBLE. PLEASE PROVIDE DETAILED JUSTIFICATION FOR THIS ACTION."
+msgstr "ПОВІДОМЛЕННЯ БУДЕ ПОВНІСТЮ ЗАМІНЕНЕ БЕЗ МОЖЛИВОСТІ ВІДНОВЛЕННЯ. БУДЬ-ЛАСКА, НАДАЙТЕ ДЕТАЛЬНЕ ОБГРУНТУВАННЯ ЦІЄЇ ДІЇ."
+
+#: lib/samizdat/engine/message.rb:403
+msgid "This message will be moved to new parent"
+msgstr "Це повідомлення буде перевішене під нове вихідне повідомлення"
+
+#: lib/samizdat/engine/message.rb:414
+msgid "New Parent"
+msgstr "Нове вихідне повідомлення"
+
+#: lib/samizdat/engine/message.rb:422
+msgid "Title"
+msgstr "Заголовок"
+
+#: lib/samizdat/engine/message.rb:423
+msgid "Content"
+msgstr "Зміст"
+
+#: lib/samizdat/engine/message.rb:424
+msgid "Upload content from file"
+msgstr "Закачати повідомлення у вигляді файла"
+
+#: lib/samizdat/engine/message.rb:436
+msgid "Language of the message"
+msgstr "Мова повідомлення"
+
+#: lib/samizdat/engine/message.rb:439
+msgid "Format"
+msgstr "Формат"
+
+#: lib/samizdat/engine/message.rb:440
+msgid "Default"
+msgstr "Без формату"
+
+#: lib/samizdat/engine/message.rb:444
+msgid "Reference to description (ID or URL of another message on this site)"
+msgstr "Посилання на опис (номер або URL іншого повідомлення на цьому сайті)"
+
+#: lib/samizdat/engine/message.rb:446
+msgid "Editing is open for all members"
+msgstr "Редагування відкрите для всіх користувачів"
+
+#: lib/samizdat/engine/message.rb:451
+msgid "Preview"
+msgstr "Попередній перегляд"
+
+#: lib/samizdat/engine/message.rb:512
+msgid "Use only <a href=\"%s\">current version</a> for replies and edits"
+msgstr "Редагуйте і коментуйте тільки <a href=\"%s\">поточну версію</a>"
+
+#: lib/samizdat/engine/message.rb:517
+msgid "You are not allowed to edit this message"
+msgstr "У Вас немає дозволу редагувати це повідомлення"
+
+#: lib/samizdat/engine/message.rb:534
+msgid "Specified language is not supported on this site"
+msgstr ""
+
+#: lib/samizdat/engine/message.rb:545
+msgid "Invalid message reference"
+msgstr "Некоректне посилання на повідомлення"
+
+#: lib/samizdat/engine/message.rb:548
+msgid "Message reference should refer to an existing message"
+msgstr "Посилання має посилатися на існуюче повідомлення"
+
+#: lib/samizdat/engine/message.rb:560
+msgid "Format '%s' is not supported"
+msgstr "Формат &apos;%s&apos; не підтримується"
+
+#: lib/samizdat/engine/message.rb:572
+msgid "It is not possible to upload a file without specifying format"
+msgstr "Неможливо закачати файл без визначення формату"
+
+#: lib/samizdat/engine/message.rb:575
+msgid "Uploaded file is larger than %s bytes limit"
+msgstr "Закачаний файл більше встановленого ліміту (%s байт)"
+
+#: lib/samizdat/engine/message.rb:587
+msgid "Multimedia upload is disabled on this site"
+msgstr "Закачка мультімедіа-файлів на цьому сайті вимкнена"
+
+#: lib/samizdat/engine/message.rb:609
+msgid "You should upload %s content from file"
+msgstr "Повідомлення типу %s слід закачувати у вигляді файла"
+
+#: lib/samizdat/engine/resource.rb:63
+msgid "refers to <a href=\"%s\">external uriref</a>"
+msgstr "<a href=\"%s\">зовнішнє посилання</a>"
+
+#: lib/samizdat/engine/resource.rb:79
+msgid "Unknown resource type '%s'"
+msgstr "Невідомий тип ресурсу '%s'"
+
+#: lib/samizdat/engine/resource.rb:114
+msgid "Also related to this focus: "
+msgstr "Також стосується цієї теми: "
+
+#: lib/samizdat/engine/resource.rb:119
+msgid "Recent updates in focus: "
+msgstr "Останні повідомлення на тему: "
+
+#: lib/samizdat/engine/resource.rb:177
+msgid "Account blocked by moderator: %s."
+msgstr "Користувач заблокований модератором: %s."
+
+#: lib/samizdat/engine/resource.rb:186
+msgid "UNBLOCK"
+msgstr "РОЗБЛОКУВАТИ"
+
+#: lib/samizdat/engine/resource.rb:187
+msgid "BLOCK"
+msgstr "ЗАБЛОКУВАТИ"
+
+#: lib/samizdat/engine/resource.rb:191
+msgid "Latest Messages"
+msgstr "Останні повідомлення"
+
+#: lib/samizdat/engine/resource.rb:233
+msgid "Replies"
+msgstr "Коментарі"
+
+#: lib/samizdat/engine/resource.rb:256
+msgid "Object"
+msgstr "Об’єкт"
+
+#: lib/samizdat/engine/resource.rb:256
+msgid "Predicate"
+msgstr "Предикат"
+
+#: lib/samizdat/engine/resource.rb:256
+msgid "Subject"
+msgstr "Суб’єкт"
+
+#: lib/samizdat/engine/resource.rb:280
+msgid "<a href=\"%s\">%s</a> gave rating %4.2f to the <a href=\"%s\">Statement %s</a> on %s."
+msgstr "<a href=\"%s\">%s</a> поставив оцінку %4.2f <a href=\"%s\">твердженню %s</a>, дата %s."
+
+#: lib/samizdat/engine/resource.rb:284
+msgid "Vote Proposition"
+msgstr "Твердження, що обговорюється"
+
+#: lib/samizdat/engine/resource.rb:323
+msgid "Similar Items"
+msgstr "Схожі елементи"
+
+#: lib/samizdat/engine/resource.rb:324
+msgid "<p><b>Possessed by:</b></p>"
+msgstr "Належить:"
+
+#: lib/samizdat/engine/session.rb:179 lib/samizdat/engine/template.rb:362
+msgid "guest"
+msgstr "гість"
+
+#: lib/samizdat/engine/session.rb:179
+msgid "member"
+msgstr "користувач"
+
+#: lib/samizdat/engine/session.rb:179
+msgid "moderator"
+msgstr "модератор"
+
+#: lib/samizdat/engine/session.rb:220
+msgid "Login Failed"
+msgstr "Не вдалося ввійти до системи"
+
+#: lib/samizdat/engine/session.rb:221
+msgid "Wrong login name or password. Try again."
+msgstr "Неправильний логін чи пароль. Спробуйте ще раз."
+
+#: lib/samizdat/engine/session.rb:261
+msgid "Input size exceeds content size limit"
+msgstr "Обсяг вводу перевищує встановлений ліміт"
+
+#: lib/samizdat/engine/session.rb:296
+msgid "Access Denied"
+msgstr "Доступ заборонено"
+
+#: lib/samizdat/engine/session.rb:298
+msgid "Account Is Blocked"
+msgstr "Користувач заблокований"
+
+#: lib/samizdat/engine/session.rb:299
+msgid "Your account is blocked until the email address you have specified is confirmed. Confirmation message with instructions was sent to that address."
+msgstr "Ваш запис користувача заблоковано, доки не буде підтверджено вказана Вами адреса електронної пошти. На цю адресу було вислано повідомлення з інструкціями."
+
+#: lib/samizdat/engine/session.rb:301
+msgid "User Error"
+msgstr "Помилка користувача"
+
+#: lib/samizdat/engine/session.rb:305
+msgid "looks like it was"
+msgstr "схоже, що це був"
+
+#: lib/samizdat/engine/session.rb:306
+msgid "Resource Not Found"
+msgstr "Ресурс не знайдений"
+
+#: lib/samizdat/engine/session.rb:307
+msgid "The resource you requested was not found on this site. Please report this error back to the site you came from"
+msgstr "Ресурс, щодо якого Ви робили запит, не був знайдений на цьому сайті. Повідомте про цю помилку на сайт, з якого Ви прийшли"
+
+#: lib/samizdat/engine/session.rb:309
+msgid "Runtime Error"
+msgstr "Помилка часу виконання"
+
+#: lib/samizdat/engine/session.rb:310
+msgid "Runtime error has occured."
+msgstr "Трапилася помилка часу виконання."
+
+#: lib/samizdat/engine/session.rb:312
+msgid "Please report this error to the site administrator."
+msgstr "Повідомте, будь-ласка, про цю помилку адміністратору сайта."
+
+#: lib/samizdat/engine/template.rb:82
+msgid "Publish"
+msgstr "Нове повідомлення"
+
+#: lib/samizdat/engine/template.rb:83
+msgid "Share"
+msgstr "Обмін"
+
+#: lib/samizdat/engine/template.rb:108
+msgid "Account settings, interface language, theme"
+msgstr "Налаштування користувача, мова інтерфейсу, зовнішній вигляд"
+
+#: lib/samizdat/engine/template.rb:108
+msgid "Settings"
+msgstr "Налаштувати"
+
+#: lib/samizdat/engine/template.rb:111
+msgid "Log out"
+msgstr "Вийти"
+
+#: lib/samizdat/engine/template.rb:156
+msgid "next page"
+msgstr "наступна сторінка"
+
+#: lib/samizdat/engine/template.rb:256
+msgid "Click to vote on how this resource is related to this focus"
+msgstr "Натисніть, щоб оцінити зв’язок цього ресурсу с цією темою"
+
+#: lib/samizdat/engine/template.rb:259
+msgid "vote"
+msgstr "оцінити"
+
+#: lib/samizdat/engine/template.rb:269
+msgid "Related Focuses"
+msgstr "Пов’язані теми"
+
+#: lib/samizdat/engine/template.rb:277
+msgid "Add another focus"
+msgstr ""
+
+#: lib/samizdat/engine/template.rb:277
+msgid "Click to relate this resource to another focus"
+msgstr "Натисніть, щоб оцінити зв’язок цього ресурсу с іншою темою"
+
+#: lib/samizdat/engine/template.rb:286
+msgid "related to"
+msgstr "пов’язано з"
+
+#: lib/samizdat/engine/template.rb:301
+msgid "SELECT FOCUS"
+msgstr "ОБРАТИ ТЕМУ"
+
+#: lib/samizdat/engine/template.rb:304
+msgid "Select focus that this resource will be related to"
+msgstr ""
+
+#: lib/samizdat/engine/template.rb:308
+msgid "Enter focus id if it's not in the list"
+msgstr ""
+
+#: lib/samizdat/engine/template.rb:310
+msgid "Give a rating of how strongly this resource is related to selected focus"
+msgstr "Оцінить, наскільки цей ресурс пов’язаний з обраною темою"
+
+#: lib/samizdat/engine/template.rb:312
+msgid "-2 (No)"
+msgstr "-2 (Ні)"
+
+#: lib/samizdat/engine/template.rb:313
+msgid "-1 (Not Likely)"
+msgstr "-1 (Наврядчи)"
+
+#: lib/samizdat/engine/template.rb:314
+msgid "0 (Uncertain)"
+msgstr "0 (Не ясно)"
+
+#: lib/samizdat/engine/template.rb:315
+msgid "1 (Likely)"
+msgstr "1 (Можливо)"
+
+#: lib/samizdat/engine/template.rb:316
+msgid "2 (Yes)"
+msgstr "2 (Так)"
+
+#: lib/samizdat/engine/template.rb:338
+msgid "Click to view the resource"
+msgstr "Натисніть, щоб передивитися ресурс"
+
+#: lib/samizdat/engine/template.rb:344
+msgid "See the full message"
+msgstr "Продивитися повідомлення повністю"
+
+#: lib/samizdat/engine/template.rb:366
+msgid "parent message"
+msgstr "вихідне повідомлення"
+
+#: lib/samizdat/engine/template.rb:367
+msgid "current version"
+msgstr "поточна версія"
+
+#: lib/samizdat/engine/template.rb:369
+msgid "history"
+msgstr "історія"
+
+#: lib/samizdat/engine/template.rb:372
+msgid "replies"
+msgstr "коментарів"
+
+#: lib/samizdat/engine/template.rb:374
+msgid "translation"
+msgstr "переклад"
+
+#: lib/samizdat/engine/template.rb:382
+msgid "hidden"
+msgstr "сховане"
+
+#: lib/samizdat/engine/template.rb:383
+msgid "by&nbsp;%s on&nbsp;%s"
+msgstr "автор&nbsp;%s, дата&nbsp;%s"
+
+#: lib/samizdat/engine/template.rb:464
+msgid "%s content"
+msgstr "файл у форматі %s"
+
+#: lib/samizdat/engine/template.rb:489
+msgid "Edit"
+msgstr "Редагувати"
+
+#: lib/samizdat/engine/template.rb:491
+msgid "UNHIDE"
+msgstr "ВИЯВЛЯТИ"
+
+#: lib/samizdat/engine/template.rb:492
+msgid "HIDE"
+msgstr "СХОВАТИ"
+
+#: lib/samizdat/engine/template.rb:494
+msgid "TAKE OVER"
+msgstr "ЗАВОЛОДІТИ"
+
+#: lib/samizdat/engine/template.rb:495 lib/samizdat/engine/template.rb:499
+msgid "REPLACE"
+msgstr "ЗАМІНИТИ"
+
+#: lib/samizdat/engine/template.rb:496
+msgid "REPARENT"
+msgstr "ПЕРЕВІСИТИ"
+
+#: lib/samizdat/engine/template.rb:537
+msgid "Description"
+msgstr "Опис"
+
+# language name
+#: lib/samizdat/engine/template.rb:557
+msgid "(name that this language calls itself)"
+msgstr "Українська"
+
+#: lib/samizdat/engine/template.rb:560
+msgid " (default language)"
+msgstr " (мова “по дефолту”)"

@@ -1,0 +1,746 @@
+----------------------------------------------------------------------
+Revision: 4e8d793aa4fcecee35a4286dfcdb806278e164a7
+Parent:   574b5c8a218555c84b9aba2e4e77e3d94d56b3df
+Author:   angdraug@debian.org
+Date:     19/01/11 16:42:31
+Branch:   samizdat-head
+
+Changelog: 
+
+no longer have to set default_type for nginx, default config now does that
+
+Changes against parent 574b5c8a218555c84b9aba2e4e77e3d94d56b3df
+
+  patched  doc/examples/nginx/conf.d/samizdat.conf
+
+----------------------------------------------------------------------
+Revision: 574b5c8a218555c84b9aba2e4e77e3d94d56b3df
+Parent:   9f02e657b76bcae1d46cb6f52a7a26a810c4bcc8
+Author:   angdraug@debian.org
+Date:     15/03/10 12:37:08
+Branch:   samizdat-head
+
+Changelog: 
+
+fix SecurityError with pidfile name
+
+Changes against parent 9f02e657b76bcae1d46cb6f52a7a26a810c4bcc8
+
+  patched  bin/samizdatd
+
+----------------------------------------------------------------------
+Revision: 9f02e657b76bcae1d46cb6f52a7a26a810c4bcc8
+Parent:   97d7b74594346f34adb821dc076db3be833aa4d8
+Author:   angdraug@debian.org
+Date:     15/03/10 12:36:39
+Branch:   samizdat-head
+
+Changelog: 
+
+extracted Request#normalize_language()
+
+Changes against parent 97d7b74594346f34adb821dc076db3be833aa4d8
+
+  patched  lib/samizdat/engine/request.rb
+
+----------------------------------------------------------------------
+Revision: 97d7b74594346f34adb821dc076db3be833aa4d8
+Parent:   3be6aac55c161503e55ed535f400ccb124174c50
+Author:   angdraug@debian.org
+Date:     13/01/10 16:45:06
+Branch:   samizdat-head
+
+Changelog: 
+
+bugfix: handle empty tag cloud
+
+Changes against parent 3be6aac55c161503e55ed535f400ccb124174c50
+
+  patched  lib/samizdat/helpers/application_helper.rb
+
+----------------------------------------------------------------------
+Revision: 3be6aac55c161503e55ed535f400ccb124174c50
+Parent:   7262de296b263262acd4c2731e0002babbbfd92a
+Author:   angdraug@debian.org
+Date:     13/01/10 16:39:21
+Branch:   samizdat-head
+
+Changelog: 
+
+disable nginx error logging by default
+
+Changes against parent 7262de296b263262acd4c2731e0002babbbfd92a
+
+  patched  doc/examples/nginx/include/samizdat-site.conf
+
+----------------------------------------------------------------------
+Revision: 7262de296b263262acd4c2731e0002babbbfd92a
+Parent:   e5d93bcf2377679afecb7ffb4c6ec3f0e85f815e
+Author:   angdraug@debian.org
+Date:     26/12/09 01:12:44
+Branch:   samizdat-head
+
+Changelog: 
+
+samizdat-mongrel-server renamed to samizdatd
+
+Changes against parent e5d93bcf2377679afecb7ffb4c6ec3f0e85f815e
+
+  renamed  bin/samizdat-mongrel-server
+       to  bin/samizdatd
+  renamed  doc/man/samizdat-mongrel-server.1
+       to  doc/man/samizdatd.1
+  patched  bin/samizdatd
+  patched  doc/man/samizdatd.1
+
+----------------------------------------------------------------------
+Revision: e5d93bcf2377679afecb7ffb4c6ec3f0e85f815e
+Parent:   898dbcbdb92f44e4f73f10c1844e3d6fb5873f27
+Author:   angdraug@debian.org
+Date:     26/12/09 00:03:20
+Branch:   samizdat-head
+
+Changelog: 
+
+example configuration for nginx as a frontend for samizdat-mongrel-server
+
+Changes against parent 898dbcbdb92f44e4f73f10c1844e3d6fb5873f27
+
+  added    doc/examples/nginx
+  added    doc/examples/nginx/conf.d
+  added    doc/examples/nginx/include
+  added    doc/examples/nginx/sites-available
+  added    doc/examples/nginx/conf.d/samizdat.conf
+  added    doc/examples/nginx/include/samizdat-site.conf
+  added    doc/examples/nginx/sites-available/samizdat
+
+----------------------------------------------------------------------
+Revision: 898dbcbdb92f44e4f73f10c1844e3d6fb5873f27
+Parent:   436105a4a19c3934bf3850ba2a7dd6facec995b0
+Author:   angdraug@debian.org
+Date:     25/12/09 23:50:50
+Branch:   samizdat-head
+
+Changelog: 
+
+samizdat-mongrel-server.1 manpage added
+
+Changes against parent 436105a4a19c3934bf3850ba2a7dd6facec995b0
+
+  added    doc/man/samizdat-mongrel-server.1
+  patched  bin/samizdat-mongrel-server
+
+----------------------------------------------------------------------
+Revision: 436105a4a19c3934bf3850ba2a7dd6facec995b0
+Parent:   961b0b13390e8eba2ada229ab88b6b404eacb4d2
+Author:   angdraug@debian.org
+Date:     25/12/09 19:30:59
+Branch:   samizdat-head
+
+Changelog: 
+
+minor whitespace fixes
+
+Changes against parent 961b0b13390e8eba2ada229ab88b6b404eacb4d2
+
+  patched  bin/samizdat-mongrel-server
+
+----------------------------------------------------------------------
+Revision: 961b0b13390e8eba2ada229ab88b6b404eacb4d2
+Parent:   2c4c3498a1d2043c086b9482669526816f867b0d
+Author:   angdraug@debian.org
+Date:     25/12/09 17:49:21
+Branch:   samizdat-head
+
+Changelog: 
+
+Pack of daemonized Mongrels
+
+ * samizdat-mongrel-server turned into a configurable daemon that spawns
+   one Mongrel process per specified port number and restarts child
+   processes when they die unexpectedly.
+ * flush stderr in log()
+ * include site name in error reports
+
+Changes against parent 2c4c3498a1d2043c086b9482669526816f867b0d
+
+  patched  bin/samizdat-mongrel-server
+  patched  lib/samizdat/engine/dispatcher.rb
+  patched  lib/samizdat/engine/helpers.rb
+
+----------------------------------------------------------------------
+Revision: 2c4c3498a1d2043c086b9482669526816f867b0d
+Parent:   19c5fc57fd697ac470ed42eeb1cf019e4039bbdf
+Author:   angdraug@debian.org
+Date:     24/12/09 22:11:18
+Branch:   samizdat-head
+
+Changelog: 
+
+cache-flushing fixes in samizat-import-feeds
+
+Changes against parent 19c5fc57fd697ac470ed42eeb1cf019e4039bbdf
+
+  patched  bin/samizdat-import-feeds
+
+----------------------------------------------------------------------
+Revision: 19c5fc57fd697ac470ed42eeb1cf019e4039bbdf
+Parent:   b8aa55803fa0f36e7a249ec72ccb1ffbefe23c39
+Author:   angdraug@debian.org
+Date:     23/12/09 22:15:10
+Branch:   samizdat-head
+
+Changelog: 
+
+Several Mongrel-inspired fixes
+
+ * fix detection of absolute paths in fronpage header/footer include
+   directives (Mongrel has no concept of document root)
+ * use RFC HTTP status headers instead of cgi.rb specific constants
+   (Mongrel doesn't understand those)
+ * instead of stopping local DRb service after request completion, start
+   one service per configured cache_callback value and keep it alive for
+   the lifetime of the process (should help with the lost DRb connection
+   error)
+
+Changes against parent b8aa55803fa0f36e7a249ec72ccb1ffbefe23c39
+
+  patched  lib/samizdat/controllers/frontpage_controller.rb
+  patched  lib/samizdat/engine/controller.rb
+  patched  lib/samizdat/engine/request.rb
+  patched  lib/samizdat/engine/site.rb
+
+----------------------------------------------------------------------
+Revision: b8aa55803fa0f36e7a249ec72ccb1ffbefe23c39
+Parent:   ef01e4cc994b788ae39b26bb994f6291c345540c
+Author:   angdraug@debian.org
+Date:     23/12/09 10:56:35
+Branch:   samizdat-head
+
+Changelog: 
+
+one more way a reverse proxy can forward the http/https scheme is X-Forwarded-Proto
+
+Changes against parent ef01e4cc994b788ae39b26bb994f6291c345540c
+
+  patched  lib/samizdat/engine/request.rb
+
+----------------------------------------------------------------------
+Revision: ef01e4cc994b788ae39b26bb994f6291c345540c
+Parent:   ce0eb21e57120eb1229cdb3be0565c1b8983088d
+Author:   angdraug@debian.org
+Date:     23/12/09 10:54:40
+Branch:   samizdat-head
+
+Changelog: 
+
+don't print the header, Mongrel doesn't like it
+
+Changes against parent ce0eb21e57120eb1229cdb3be0565c1b8983088d
+
+  patched  lib/samizdat/engine/request.rb
+
+----------------------------------------------------------------------
+Revision: ce0eb21e57120eb1229cdb3be0565c1b8983088d
+Parent:   8fb0d664739852a925becedf7cac8b11d740c8ad
+Author:   angdraug@debian.org
+Date:     23/12/09 10:04:59
+Branch:   samizdat-head
+
+Changelog: 
+
+support both X-Forwarded-* (Apache2 style) and X-* (Lighttpd style) for proxied Host, Port, and Scheme headers
+
+Changes against parent 8fb0d664739852a925becedf7cac8b11d740c8ad
+
+  patched  lib/samizdat/engine/request.rb
+
+----------------------------------------------------------------------
+Revision: 8fb0d664739852a925becedf7cac8b11d740c8ad
+Parent:   1a512120ce606d7918a67c4689eade8a1117e67f
+Author:   angdraug@debian.org
+Date:     23/12/09 09:51:05
+Branch:   samizdat-head
+
+Changelog: 
+
+don't allow RMagic to second-guess ld.so (see Debian bug #557778)
+
+Changes against parent 1a512120ce606d7918a67c4689eade8a1117e67f
+
+  patched  lib/samizdat/plugins/image.rb
+
+----------------------------------------------------------------------
+Revision: 1a512120ce606d7918a67c4689eade8a1117e67f
+Parent:   2e0526bc04ff5f39da97949b23b1896cf00a5453
+Author:   angdraug@debian.org
+Date:     19/10/09 11:55:04
+Branch:   samizdat-head
+
+Changelog: 
+
+use X-Scheme and X-Port headers when behind a reverse proxy
+
+Changes against parent 2e0526bc04ff5f39da97949b23b1896cf00a5453
+
+  patched  lib/samizdat/engine/request.rb
+
+----------------------------------------------------------------------
+Revision: 2e0526bc04ff5f39da97949b23b1896cf00a5453
+Parent:   4bf71dc6a7be02b9b9be1831193692f7780c0478
+Author:   angdraug@debian.org
+Date:     17/10/09 16:31:18
+Branch:   samizdat-head
+
+Changelog: 
+
+fixed couple leftovers from the ->Site transition
+
+Changes against parent 4bf71dc6a7be02b9b9be1831193692f7780c0478
+
+  patched  bin/samizdat-import-feeds
+  patched  lib/samizdat/controllers/moderation_controller.rb
+
+----------------------------------------------------------------------
+Revision: 4bf71dc6a7be02b9b9be1831193692f7780c0478
+Parent:   ac89f09e64193f411c52c1cbaf30be3b757aeec1
+Author:   angdraug@debian.org
+Date:     11/10/09 14:11:48
+Branch:   samizdat-head
+
+Changelog: 
+
+poison_field spam protection plugin
+
+Changes against parent ac89f09e64193f411c52c1cbaf30be3b757aeec1
+
+  added    lib/samizdat/plugins/poison_field.rb
+  patched  data/samizdat/defaults.yaml
+  patched  lib/samizdat/controllers/message_controller.rb
+  patched  lib/samizdat/plugins/spam.rb
+  patched  lib/samizdat/plugins/spam_merge.rb
+
+----------------------------------------------------------------------
+Revision: ac89f09e64193f411c52c1cbaf30be3b757aeec1
+Parent:   ca4512461736ca1a7b4422071c028e7279dbdf05
+Author:   angdraug@debian.org
+Date:     11/10/09 03:28:08
+Branch:   samizdat-head
+
+Changelog: 
+
+email:blacklist refactored into email_blacklist plugin
+
+Changes against parent ca4512461736ca1a7b4422071c028e7279dbdf05
+
+  added    lib/samizdat/plugins/email_blacklist.rb
+  patched  data/samizdat/defaults.yaml
+  patched  lib/samizdat/controllers/member_controller.rb
+  patched  lib/samizdat/controllers/message_controller.rb
+
+----------------------------------------------------------------------
+Revision: ca4512461736ca1a7b4422071c028e7279dbdf05
+Parent:   452ad77c7a776d9447b67c30d8519526b5369029
+Author:   angdraug@debian.org
+Date:     11/10/09 02:26:37
+Branch:   samizdat-head
+
+Changelog: 
+
+Antispam module refactored into spam_merge plugin
+
+Changes against parent 452ad77c7a776d9447b67c30d8519526b5369029
+
+  dropped  lib/samizdat/antispam.rb
+  added    lib/samizdat/plugins/spam.rb
+  added    lib/samizdat/plugins/spam_merge.rb
+  patched  data/samizdat/defaults.yaml
+  patched  lib/samizdat/controllers/message_controller.rb
+  patched  lib/samizdat/engine/exceptions.rb
+  patched  lib/samizdat/engine/helpers.rb
+  patched  lib/samizdat/engine/plugins.rb
+  patched  lib/samizdat/engine.rb
+
+----------------------------------------------------------------------
+Revision: 452ad77c7a776d9447b67c30d8519526b5369029
+Parent:   a3e1550af0bc5970a8fe38b54f958f9c8b97aa60
+Author:   angdraug@debian.org
+Date:     05/09/09 19:01:51
+Branch:   samizdat-head
+
+Changelog: 
+
+first attempt at Mongrel server (still leaks memory and mongrel workers on concurrent connections)
+
+Changes against parent a3e1550af0bc5970a8fe38b54f958f9c8b97aa60
+
+  added    bin/samizdat-mongrel-server
+  patched  cgi-bin/dispatch.rb
+  patched  lib/samizdat/engine/dispatcher.rb
+  patched  lib/samizdat/engine/request.rb
+
+----------------------------------------------------------------------
+Revision: a3e1550af0bc5970a8fe38b54f958f9c8b97aa60
+Parent:   0fea324bab0666549d5c2d25546f0b74d362be4b
+Author:   angdraug@debian.org
+Date:     22/08/09 18:25:14
+Branch:   samizdat-head
+
+Changelog: 
+
+rewrite of deployment classes to replace $samizdat_current_request with thread-safe Site class
+
+* Site class introduced to keep track of site configuration, database
+  connections etc.
+* all objects that need access to Site set @site instance variable and
+  include SiteHelper module
+* ApplicationHelper includes SiteHelper and provides self.request=()
+  method to initialize all instance variables used in ApplicationHelper
+  and its subclasses
+* site-dependent helpers moved into ApplicationHelper or SiteHelper
+* Model class introduced, providing Model.validate_id(), Model.cached(),
+  and access to Site
+* persistent_cache renamed to shared_cache
+* site:content config option split into site:content_base and
+  site:content_dir to spare Samizdat the guessing
+* cache_callback configuration option makes it really possible to move
+  SynCache DRb process to a remote server
+* View refactored: those instance_eval's weren't really necessary, and
+  all you need to do to replace ERB with another templating system is
+  override set_renderer() and render()
+* SiteNotFoundError and UnknownFormatError exceptions introduced
+* detect_format moved into MahoroSingleton
+* plugin initialization simplified: merging of api and plugin options
+  moved from Plugin#initialize() into Plugins#load_plugin()
+* Session.start() is now an instance method Session#start()
+* method_missing chain in ConfigHash and SiteConfig now works as
+  intended, config['foo']['bar'] now is the same as config.foo.bar
+
+Changes against parent 0fea324bab0666549d5c2d25546f0b74d362be4b
+
+  renamed  lib/samizdat/engine/deployment.rb
+       to  lib/samizdat/engine/site.rb
+  added    lib/samizdat/engine/model.rb
+  patched  bin/samizdat-import-feeds
+  patched  data/samizdat/config.yaml
+  patched  data/samizdat/defaults.yaml
+  patched  doc/install.txt
+  patched  lib/samizdat/components/list.rb
+  patched  lib/samizdat/components/resource.rb
+  patched  lib/samizdat/controllers/diff_controller.rb
+  patched  lib/samizdat/controllers/event_controller.rb
+  patched  lib/samizdat/controllers/frontpage_controller.rb
+  patched  lib/samizdat/controllers/history_controller.rb
+  patched  lib/samizdat/controllers/member_controller.rb
+  patched  lib/samizdat/controllers/message_controller.rb
+  patched  lib/samizdat/controllers/moderation_controller.rb
+  patched  lib/samizdat/controllers/query_controller.rb
+  patched  lib/samizdat/controllers/resource_controller.rb
+  patched  lib/samizdat/controllers/tags_controller.rb
+  patched  lib/samizdat/engine/controller.rb
+  patched  lib/samizdat/engine/dataset.rb
+  patched  lib/samizdat/engine/dispatcher.rb
+  patched  lib/samizdat/engine/exceptions.rb
+  patched  lib/samizdat/engine/globals.rb
+  patched  lib/samizdat/engine/helpers.rb
+  patched  lib/samizdat/engine/plugins.rb
+  patched  lib/samizdat/engine/request.rb
+  patched  lib/samizdat/engine/session.rb
+  patched  lib/samizdat/engine/site.rb
+  patched  lib/samizdat/engine/view.rb
+  patched  lib/samizdat/engine.rb
+  patched  lib/samizdat/helpers/application_helper.rb
+  patched  lib/samizdat/helpers/message_helper.rb
+  patched  lib/samizdat/helpers/syndication_helper.rb
+  patched  lib/samizdat/models/content.rb
+  patched  lib/samizdat/models/event.rb
+  patched  lib/samizdat/models/member.rb
+  patched  lib/samizdat/models/message.rb
+  patched  lib/samizdat/models/moderation.rb
+  patched  lib/samizdat/models/tag.rb
+  patched  lib/samizdat/plugins/content_file.rb
+  patched  lib/samizdat/plugins/content_inline.rb
+  patched  lib/samizdat/plugins/image.rb
+  patched  lib/samizdat/plugins/squish.rb
+  patched  lib/samizdat/plugins/tag_default.rb
+  patched  test/mock.rb
+  patched  test/tc_message_helper.rb
+  patched  test/tc_robot.rb
+  patched  test/util.rb
+
+----------------------------------------------------------------------
+Revision: 0fea324bab0666549d5c2d25546f0b74d362be4b
+Parent:   98fc93c05a98bea93e1439b329dc4205ee377ac1
+Author:   angdraug@debian.org
+Date:     15/08/09 13:07:49
+Branch:   samizdat-head
+
+Changelog: 
+
+put all YAML helpers in engine/helpers
+
+Changes against parent 98fc93c05a98bea93e1439b329dc4205ee377ac1
+
+  patched  lib/samizdat/engine/deployment.rb
+  patched  lib/samizdat/engine/helpers.rb
+  patched  lib/samizdat/engine.rb
+
+----------------------------------------------------------------------
+Revision: 98fc93c05a98bea93e1439b329dc4205ee377ac1
+Parent:   ec5085c823005b11e44daede8ee86a406052b113
+Author:   angdraug@debian.org
+Date:     15/08/09 12:49:32
+Branch:   samizdat-head
+
+Changelog: 
+
+more thread-safety: replaced class variables with singletons
+
+Changes against parent ec5085c823005b11e44daede8ee86a406052b113
+
+  added    lib/samizdat/engine/globals.rb
+  patched  lib/samizdat/engine/deployment.rb
+  patched  lib/samizdat/engine/helpers.rb
+  patched  lib/samizdat/engine.rb
+  patched  lib/samizdat/models/content.rb
+
+----------------------------------------------------------------------
+Revision: ec5085c823005b11e44daede8ee86a406052b113
+Parent:   6388909d5c803d588f495fcc8dca02a3efe25851
+Author:   angdraug@debian.org
+Date:     15/08/09 12:45:39
+Branch:   samizdat-head
+
+Changelog: 
+
+do not invoke Kernel#site_name in vain
+
+Changes against parent 6388909d5c803d588f495fcc8dca02a3efe25851
+
+  patched  lib/samizdat/controllers/message_controller.rb
+
+----------------------------------------------------------------------
+Revision: 6388909d5c803d588f495fcc8dca02a3efe25851
+Parent:   acef13c1d9fe7aaa821b524ae397d0909720b4c1
+Author:   angdraug@debian.org
+Date:     15/08/09 12:26:18
+Branch:   samizdat-head
+
+Changelog: 
+
+blacklist for registration email domains implemented
+
+Changes against parent acef13c1d9fe7aaa821b524ae397d0909720b4c1
+
+  patched  data/samizdat/defaults.yaml
+  patched  lib/samizdat/controllers/member_controller.rb
+
+----------------------------------------------------------------------
+Revision: acef13c1d9fe7aaa821b524ae397d0909720b4c1
+Parent:   17576091699400268f826db04a0abeeed5d02369
+Author:   angdraug@debian.org
+Date:     13/08/09 14:27:46
+Branch:   samizdat-head
+
+Changelog: 
+
+abstract $samizdat_current_request away under Request
+
+$samizdat_current_request is now only used by following methods in
+Request:
+
+ * Request.current_request
+ * set_current_request
+ * reset_current_request
+
+These methods will need to be updated once we find a thread-safe AND
+DRb-compatible way to keep track of the current Request object.
+
+Changes against parent 17576091699400268f826db04a0abeeed5d02369
+
+  patched  lib/samizdat/engine/deployment.rb
+  patched  lib/samizdat/engine/request.rb
+
+----------------------------------------------------------------------
+Revision: 17576091699400268f826db04a0abeeed5d02369
+Parent:   8027df8c7728214def04aca5a623f6c2349638f9
+Author:   angdraug@debian.org
+Date:     04/08/09 13:50:30
+Branch:   samizdat-head
+
+Changelog: 
+
+updated pg_hba.conf example to PostgreSQL 8.4 format
+
+Changes against parent 8027df8c7728214def04aca5a623f6c2349638f9
+
+  patched  doc/install.txt
+
+----------------------------------------------------------------------
+Revision: 8027df8c7728214def04aca5a623f6c2349638f9
+Parent:   e3ac5a78c59f39b24ab8a569417b887897c8409a
+Author:   angdraug@debian.org
+Date:     03/08/09 20:08:00
+Branch:   samizdat-head
+
+Changelog: 
+
+override whole RDF config instead of merging it
+
+Changes against parent e3ac5a78c59f39b24ab8a569417b887897c8409a
+
+  patched  lib/samizdat/engine/deployment.rb
+
+----------------------------------------------------------------------
+Revision: e3ac5a78c59f39b24ab8a569417b887897c8409a
+Parent:   2df30b15fcf30fe7bd79494fe3ccb6d1d2316c0f
+Author:   angdraug@debian.org
+Date:     28/07/09 19:31:41
+Branch:   samizdat-head
+
+Changelog: 
+
+now that the libraries have been split out, Samizdat is just the engine, so we can use require 'samizdat' instead of 'samizdat/engine'
+
+Changes against parent 2df30b15fcf30fe7bd79494fe3ccb6d1d2316c0f
+
+  added    lib/samizdat.rb
+  patched  bin/samizdat-import-feeds
+  patched  bin/samizdat-role
+  patched  cgi-bin/dispatch.rb
+  patched  doc/install.txt
+  patched  lib/samizdat/components/list.rb
+  patched  lib/samizdat/components/resource.rb
+  patched  lib/samizdat/engine/controller.rb
+  patched  lib/samizdat/engine/dataset.rb
+  patched  lib/samizdat/engine/deployment.rb
+  patched  lib/samizdat/engine/dispatcher.rb
+  patched  lib/samizdat/engine/exceptions.rb
+  patched  lib/samizdat/engine/helpers.rb
+  patched  lib/samizdat/engine/plugins.rb
+  patched  lib/samizdat/engine/request.rb
+  patched  lib/samizdat/engine/session.rb
+  patched  lib/samizdat/engine/view.rb
+  patched  lib/samizdat/helpers/application_helper.rb
+  patched  lib/samizdat/helpers/syndication_helper.rb
+  patched  lib/samizdat/models/content.rb
+  patched  lib/samizdat/models/event.rb
+  patched  lib/samizdat/models/member.rb
+  patched  lib/samizdat/models/message.rb
+  patched  lib/samizdat/models/moderation.rb
+  patched  lib/samizdat/models/tag.rb
+  patched  lib/samizdat/plugins/access.rb
+  patched  lib/samizdat/plugins/blog.rb
+  patched  lib/samizdat/plugins/content_file.rb
+  patched  lib/samizdat/plugins/content_inline.rb
+  patched  lib/samizdat/plugins/file_default.rb
+  patched  lib/samizdat/plugins/flash.rb
+  patched  lib/samizdat/plugins/flowplayer.rb
+  patched  lib/samizdat/plugins/html.rb
+  patched  lib/samizdat/plugins/image.rb
+  patched  lib/samizdat/plugins/inline_default.rb
+  patched  lib/samizdat/plugins/language_prefix.rb
+  patched  lib/samizdat/plugins/occupation.rb
+  patched  lib/samizdat/plugins/plain_text.rb
+  patched  lib/samizdat/plugins/profile.rb
+  patched  lib/samizdat/plugins/role.rb
+  patched  lib/samizdat/plugins/route.rb
+  patched  lib/samizdat/plugins/squish.rb
+  patched  lib/samizdat/plugins/tag.rb
+  patched  lib/samizdat/plugins/tag_default.rb
+  patched  lib/samizdat/plugins/textile.rb
+  patched  lib/samizdat/plugins/virtual_tag.rb
+  patched  test/mock.rb
+  patched  test/tc_application_helper.rb
+  patched  test/tc_message_helper.rb
+  patched  test/tc_password.rb
+  patched  test/tc_robot.rb
+  patched  test/tc_version.rb
+
+----------------------------------------------------------------------
+Revision: 2df30b15fcf30fe7bd79494fe3ccb6d1d2316c0f
+Parent:   9010dac53a4c730adfe4e606c8db79de29956862
+Author:   angdraug@debian.org
+Date:     28/07/09 17:51:17
+Branch:   samizdat-head
+
+Changelog: 
+
+remove Cache and Storage unit tests
+
+Changes against parent 9010dac53a4c730adfe4e606c8db79de29956862
+
+  dropped  test/tc_cache.rb
+  dropped  test/tc_storage.rb
+  patched  test/ts_samizdat.rb
+
+----------------------------------------------------------------------
+Revision: 9010dac53a4c730adfe4e606c8db79de29956862
+Parent:   c3dedd2e692067776c91088e54dd02ebbc633bc7
+Author:   angdraug@debian.org
+Date:     28/07/09 15:29:41
+Branch:   samizdat-head
+
+Changelog: 
+
+Split Sanitize, Cache, and Storage libraries into subprojects
+
+- sanitize.rb became Whitewash (branch whitewash-head)
+- cache.rb became SynCache (branch syncache-head)
+- storage.rb became Graffiti (branch graffiti-head)
+
+Changes against parent c3dedd2e692067776c91088e54dd02ebbc633bc7
+
+  dropped  bin/samizdat-drb-server
+  dropped  doc/diagrams/samizdat_rdf_classes.dia
+  dropped  doc/man/samizdat-drb-server.1
+  dropped  doc/rdf-impl-report.txt
+  dropped  doc/rdf-storage.txt
+  dropped  doc/storage-impl.txt
+  dropped  lib/samizdat/cache.rb
+  dropped  lib/samizdat/sanitize.rb
+  dropped  lib/samizdat/storage.rb
+  patched  README
+  patched  bin/samizdat-import-feeds
+  patched  lib/samizdat/controllers/query_controller.rb
+  patched  lib/samizdat/engine/deployment.rb
+  patched  lib/samizdat/engine.rb
+  patched  lib/samizdat/helpers/syndication_helper.rb
+  patched  lib/samizdat/models/content.rb
+  patched  lib/samizdat/models/message.rb
+  patched  test/mock.rb
+  patched  test/util.rb
+
+----------------------------------------------------------------------
+Revision: c3dedd2e692067776c91088e54dd02ebbc633bc7
+Parent:   6e3288e9f2f492a684f7cf842ae9c759acdf3174
+Author:   angdraug@debian.org
+Date:     27/07/09 14:19:53
+Branch:   samizdat-head
+
+Changelog: 
+
+* Squish expression validation: allow '||' and '!=' operators, accept '' token between punctuation marks
+* use all nodes, not just subject nodes, when checking if query graph is joint
+* dropped the "reassign to smaller collor" optimization, it only works for raster images
+
+Changes against parent 6e3288e9f2f492a684f7cf842ae9c759acdf3174
+
+  patched  lib/samizdat/storage.rb
+
+----------------------------------------------------------------------
+Revision: 6e3288e9f2f492a684f7cf842ae9c759acdf3174
+Parent:   1542f605181364a646ed05e3572e3d8de9e7e51a
+Author:   angdraug@debian.org
+Date:     24/07/09 13:14:47
+Branch:   samizdat-head
+
+Changelog: 
+
+revert to allowing ambiguous property maps; support mapping of many-to-many relations
+
+Changes against parent 1542f605181364a646ed05e3572e3d8de9e7e51a
+
+  patched  lib/samizdat/storage.rb
+  patched  test/tc_storage.rb
+

@@ -1,0 +1,266 @@
+/* definitions common to every stylesheet 
+(due to bug in NN4.x @import should use full path to stylesheet) */
+@import url("common.css");
+
+/* global settings */
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	color: #000;
+	background: #fff; }
+p { margin: 0.5em 0; }
+form { margin: 0; padding: 0; }
+pre { margin: 0.25em 0; }
+
+/* site head */
+#head {
+	width: 100%; height: 1.4em;
+	padding: 0.2em 0 0 0;
+	color: #ccc;
+	background: #000; }
+#head-left {
+	position: absolute;
+	z-index: 100;
+	padding: 0.2em 0 0 0;
+	top:0; left: 15px; }
+#head-right {
+	position: absolute;
+	z-index: 200;
+	padding: 0.2em 0 0 0;
+	top:0; right: 15px; }
+#subhead {
+	position: relative;
+	z-index: 50;
+	top: 0; left: 0;
+	width: 100%; height: 1.2em;
+	font-size: small;
+	color: #000;
+	background: #999;
+	border-bottom: 1px solid #000; }
+#subhead-right {
+	position: absolute;
+	right: 15px; }
+#languages {
+	margin-right: 2px;
+	text-align: right;
+	font-size: small; }
+
+/* main section */
+#main {
+	position: relative;
+	z-index: 150;
+	margin: 1em 0.7em; }
+
+/* site foot */
+#foot {
+	position: relative;
+	left: 5px;
+	margin: 0 0 2px 0;
+	font-size: x-small; }
+
+/* front page header and footer */
+#front-header, #front-footer {
+	position: relative;
+	top: 0; right: 0;
+	margin: 2px;
+	padding: 0 0.5em;
+	background: #ddd;
+	font-size: small;
+	border: 1px solid #000; }
+
+/* content box */
+div.box {
+	margin: 4px 0 4px 4px;
+	border-right: 1px solid #000;
+	border-bottom: 1px solid #000; }
+div.box-title {
+	padding: 1px;
+	padding-left: 10px;
+	text-align: left;
+	font-size: 115%;
+	color: #fff;
+	background: #900;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+	border-left: 1px solid #000; }
+div.box-content {
+	text-align: left;
+	padding: 4px;
+	margin-left: 7px; }
+div.box-content div.box-title {
+	font-size: 100%;
+	color: #000;
+	background: #999; }
+div.box-content div.box-content div.box {
+	border-right: 1px solid #999;
+	border-bottom: 1px solid #999; }
+div.box-content div.box-content div.box-title {
+	background: #ddd;
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;
+	border-left: 1px solid #999; }
+
+/* form elements */
+div.label {
+	margin-bottom: 3px; }
+input, textarea {
+	border: 1px solid #000;
+	margin-top: 1px;
+	margin-bottom: 4px;
+	padding: 1px;
+	background: #fff; }
+input + input { margin-left: 15px; }
+select {
+	border: 1px solid #000;
+	margin-top: 1px;
+	margin-bottom: 4px;
+	margin-right: 15px;
+	padding: 0px;
+	background: #fff; }
+input.submit {
+	margin-top: 4px;
+	padding: 0;
+	background: #999; }
+p.moderation {
+	border-bottom: 1px solid #000;
+	font-weight: bold; }
+
+/* action links */
+a.action, a.action:visited { color: #c00; }
+a.moderator_action, a.moderator_action:visited {
+	border: 1px solid #000;
+	padding-left: 2px;
+	padding-right: 2px;
+	text-decoration: none;
+	color: #fff;
+	background: #900; }
+
+/* resource list */
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0; }
+ul li {
+	margin-top: 2px;
+	border-right: 1px solid #000;
+	border-bottom: 1px solid #000; }
+ul li.even { background: #ccc; }
+
+/* table */
+table { width: 97%; }
+div>table { width: 100%; }  /* MSIE hack */
+th { background: #999; }
+td, th {
+	padding: 4px;
+	vertical-align: top;
+	border-bottom: 1px solid #000;
+	border-right: 1px solid #000; }
+tr { background: #fff; }
+tr.even { background: #ccc; }
+td.tags { width: 15%; height: 100%; text-align: left; }
+td.links-head { height: 100%; font-weight: bold; background: #999; border: thin outset #000; }
+td.links { text-align: left; font-size: small; }
+td.features { width: 55%; text-align: left; }
+
+/* diff table */
+table.diff th { font-weight: normal; }
+table.diff td {
+	vertical-align: top;
+	text-align: left; }
+table.diff td.delete { background: #f99; }
+table.diff td.add { background: #9f9; }
+
+/* list foot */
+div.foot { text-align: right; }
+
+/* navigation link */
+div.nav { font-size: small; }
+
+/* resource description */
+div.resource {
+	text-align: left;
+	padding-bottom: 3px; }
+div.title { font-weight: bold; }
+div.info {
+	font-style: italic;
+	font-size: small; }
+
+/* message */
+div.message { margin-top: 1px; text-align: left; }
+ul div.message {
+	margin: 0 -1px -1px 0;
+	background: #fff; }
+div.message div.title {
+	background: #ccc;
+	border-right: 1px solid #000; }
+div.message div.info {
+	padding-bottom: 2px;
+	background: #ccc;
+	border-right: 1px solid #000;
+	border-bottom: 1px solid #000; }
+div.message div.content {
+	margin-top: 2px;
+	padding: 4px 4px 4px 0;
+	border-right: 1px solid #000;
+	border-bottom: 1px solid #000; }
+div.replies div.replies {
+	padding-left: 1.5em; }
+
+/* markup in a message */
+div.content ul {
+	list-style-type: square;
+	margin: 0.25em 0;
+	padding-left: 2em; }
+div.content li { border: none; }
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+	margin: 0 0 0.25em 0;
+	border-bottom: 1px solid #000; }
+
+/* feeds */
+div.feed {
+	margin-top: 0.5em;
+	padding-top: 0.25em;
+	border-top: 1px solid #000; }
+div.feed-name {
+	font-weight: bold;
+	margin-bottom: 0.5em; }
+div.feed li {
+	margin-bottom: 0.5em;
+	border: 0; }
+
+/* notice */
+div.notice {
+	margin: 4px 0 4px 4px;
+	padding: 0 10px 0 10px;
+	border: 1px solid #000; }
+
+/* anchors */
+a { color: #c00; }
+a:visited { color: #900; }
+
+#head a {
+	color: #e00;
+	text-decoration: none; }
+#head a:visited { color: #d00; }
+#head a:hover { text-decoration: underline; }
+
+#subhead a {
+	color: #000;
+	text-decoration: none; }
+#subhead a:hover {
+	color: #000;
+	text-decoration: underline; }
+
+div.title a, td.tags a, td.links a {
+	text-decoration: none; }
+div.title a:hover, td.tags a:hover, td.links a:hover {
+	text-decoration: underline; }
+
+div.box-title a, div.box-title a:visited {
+	color: #fff; }
+div.title a, div.title a:visited, div.info a, div.info a:visited,
+div.box-content div.box-title a, div.box-content div.box-title a:visited,
+td.tags a, td.tags a:visited, td.links a, td.links a:visited {
+	color: #000; }

@@ -1,0 +1,17 @@
+/* hide some elements in fully featured UA */
+.hidden {
+	display: none; }
+
+div.hidden-message {
+	text-decoration: line-through; }
+
+#head-left img { margin: 0; }
+#head-left a img { border: 0; }
+img { margin: 3px; }
+a.image img { margin-bottom: 0; border: 0; }
+a.image div { margin: 3px; margin-top: 0; font-size: x-small; }
+
+div.flowplayer {
+	width: 320px;
+	height: 264px; }
+

@@ -1,0 +1,140 @@
+#!/usr/bin/env ruby
+#
+# Samizdat syndication feeds updater
+#
+#   Copyright (c) 2002-2009  Dmitry Borodaenko <angdraug@debian.org>
+#
+#   This program is free software.
+#   You can distribute/modify this program under the terms of
+#   the GNU General Public License version 3 or later.
+#
+# vim: et sw=2 sts=2 ts=8 tw=0
+
+require 'samizdat'
+require 'samizdat/helpers/syndication_helper'
+require 'rss/1.0'
+require 'rss/2.0'
+require 'rss/dublincore'
+require 'rss/maker'
+require 'timeout'
+
+class FeedUpdaterError < RuntimeError; end
+
+class FeedUpdater
+  include SyndicationHelper
+
+  CONNECTION_TIMEOUT = 60   # 1 minute
+
+  def initialize
+    @sites = SamizdatSites.instance.all
+  end
+
+  # cycle through all sites and update all configured imported feeds
+  #
+  # configuration:
+  #
+  #   import_feeds:
+  #     name:
+  #       url: http://example.com/feed.rss
+  #       limit: 5
+  #
+  # or, to use limit:page limit:
+  #
+  #   import_feeds:
+  #     name: http://example.com/feed.rss
+  #
+  # each feed is only fetched once per URL across all sites
+  #
+  def run
+    feeds = {}
+
+    @sites.each do |site_name|
+      @site = Site.new(site_name)
+
+      # Only sites with a shared remote cache can import feeds.
+      # See Site#initialize().
+      cache_uri = config.cache or next
+
+      each_import_feed do |feed_name, url, limit|
+        # fetch once per url across shared caches of all sites
+        (feeds[url] ||= {})[cache_uri] ||= shared_cache if url
+      end
+    end
+
+    feeds.each do |url, caches|
+      begin
+        update_feed(url, caches)
+      rescue FeedUpdaterError => error
+        log error
+        next   # just ignore the feed if it can't be updated
+      end
+    end
+
+    flush_pages_with_syndication(feeds)
+  end
+
+  private
+
+  def update_feed(url, caches)
+    response = nil   # scope fix
+    begin
+      Timeout.timeout(CONNECTION_TIMEOUT) do
+        response = open(url) {|file| file.read }
+      end
+    rescue => error
+      raise FeedUpdaterError, "Failed to fetch feed from #{url}: " + error.message
+    end
+
+    begin
+      feed = parse_feed(response)
+    rescue => error
+      raise FeedUpdaterError, "Failed to parse feed from #{url}: " + error.message
+    end
+
+    caches.each_value do |c|
+      c['samizdat/*/import_feeds/' + url] = feed   # '*' to avoid clashes with site_name
+    end
+  end
+
+  def parse_feed(response)
+    # Remove tag section not needed and known to be buggy for invalid "mn" type
+    # URI http://usefulinc.com/rss/manifest/
+    #
+    # fixme: explain this better
+    #
+    if response =~ %r{http://usefulinc.com/rss/manifest/}
+      response.sub!(%r{<rdf:Description(.*\n)*?.*mn:channels.*(.*\n)*?.*</rdf:Description>}, '')
+    end
+
+    begin
+      rss = RSS::Parser.parse(response)   # try RSS 1.0 compliant parser first
+    rescue RSS::Error
+      rss = RSS::Parser.parse(response, false)   # fall back to non RSS 1.0 compliant
+    end
+
+    rss.respond_to?(:items) or raise FeedUpdaterError, "Failed to parse RSS"
+
+    # don't store more than limit:page items
+    rss.items[0, limit_page].collect {|item|
+      {
+        'link' => item.link.strip,
+        'title' => item.title.strip,
+        'date' => item.date
+      }
+    }
+  end
+
+  def flush_pages_with_syndication(feeds)
+    # make sure we only flush each affected shared cache once
+    all_caches = {}
+    feeds.each_value do |caches|
+      all_caches.merge!(caches)
+    end
+
+    all_caches.each_value do |c|
+      c.flush(%r{\Asamizdat/[^/]+/index/})
+    end
+  end
+end
+
+FeedUpdater.new.run

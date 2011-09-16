@@ -1,0 +1,24 @@
+.TH "SAMIZDAT-CREATE-DATABASE" "1" 
+.SH "NAME" 
+samizdat-create-database - Samizdat database generation script
+.SH "SYNOPSIS" 
+.PP 
+\fBsamizdat-create-database\fP \fB<site>\fP [\fB<driver>\fP] 
+.SH "DESCRIPTION" 
+.PP 
+\fBsamizdat-create-database\fP 
+Generates a database for a Samizdat site with empty tables and triggers,
+creates a user with the same name, and grants that user all necessary
+access rights.
+.SH "OPTIONS" 
+.IP "\fB<site>\fP         " 10 
+name of database and database user, should be the same as site name in
+most cases
+.IP "\fB<driver>\fP " 10
+database driver, one of \fBpgsql\fP (default), \fBsqlite3\fP
+
+.SH "AUTHOR" 
+.PP 
+This manual page was written by Dmitry Borodaenko <angdraug@debian.org>.
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU GPL version 3 or later.

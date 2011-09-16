@@ -1,0 +1,216 @@
+# Samizdat RDF Schema, N3 notation
+# 
+#   Copyright (c) 2002-2009 Dmitry Borodaenko <angdraug@debian.org>
+#
+#   This program is free software.
+#   You can distribute/modify this program under the terms of
+#   the GNU General Public License version 3 or later.
+#
+
+@prefix : <#> .
+
+# RDF Namespaces
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+# Dublin Core
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+# iCalendar
+@prefix ical: <http://www.w3.org/2002/12/cal#> .
+
+# General Resource Properties
+
+# Resource ID
+:id
+	rdfs:subPropertyOf dct:identifier ;
+	rdfs:domain rdfs:Resource ;
+	rdfs:comment "Unique (within site) numeric id of the resource." .
+
+# Publication Timestamp
+dc:date
+	rdfs:domain rdfs:Resource ;
+	rdfs:comment "Date and time when the resource was published on a site." .
+
+# Resource Title
+dc:title
+	rdfs:domain :Message .   # todo: expand to rdfs:Resource
+
+# Samizdat Classes
+
+# Member
+:Member   # todo: integrate with FOAF
+	rdfs:subClassOf rdfs:Resource .
+
+:login
+	rdfs:domain :Member ;
+	rdfs:range rdfs:Literal .
+
+:fullName
+	rdfs:subPropertyOf dc:title ;   # todo: replace with dc:title
+	rdfs:domain :Member ;
+	rdfs:range rdfs:Literal .
+
+:email
+	rdfs:domain :Member ;
+	rdfs:range rdfs:Literal .
+
+# Messages and Threads
+:Message
+	rdfs:subClassOf rdfs:Resource .
+
+:inReplyTo
+	rdfs:subPropertyOf dct:isPartOf ;
+	rdfs:domain :Message ;
+	rdfs:range :Message .
+
+:isTranslationOf
+	rdfs:subPropertyOf dct:isPartOf ;
+	rdfs:domain :Message ;
+	rdfs:range :Message ;
+	rdfs:comment "Subject message is a translation of object message into dc:language." .
+
+dc:creator
+	rdfs:domain :Message ;
+	rdfs:range :Member .
+
+dc:format
+	rdfs:domain :Message .
+
+dc:language
+	rdfs:domain :Message .
+
+:hidden
+	rdfs:domain :Message ;
+	rdfs:range rdfs:Literal 
+	rdfs:comment "When true, message is hidden from public view." .
+
+:locked
+	rdfs:domain :Message ;
+	rdfs:range rdfs:Literal 
+	rdfs:comment "When true, no replies can be added to the message." .
+
+:content
+	rdfs:domain :Message ;
+	rdfs:range rdfs:Literal .
+
+# Content Organization and Filtering
+
+:Tag
+	rdfs:subClassOf rdfs:Resource ;
+	rdfs:comment "A characteristic of a resource. In addition to standard tags, each site can create its own tags, representing different topics of interest." .
+
+dc:relation
+	rdfs:domain rdfs:Resource ;
+	rdfs:range :Tag .
+
+:subTagOf
+	rdfs:subPropertyOf dct:isPartOf ;
+	rdfs:domain :Tag ;
+	rdfs:range :Tag .
+
+# Voting
+:Proposition
+	rdfs:subClassOf rdf:Statement ;
+	rdfs:comment "A kind of statement that can be voted upon by site members." .
+
+:rating
+	rdfs:domain :Proposition ;
+	rdfs:range rdfs:Literal ;
+	rdfs:comment "Approvement rating of a proposition as voted by site members. Calculated from individual votes." .
+
+:Vote
+	rdfs:subClassOf rdfs:Resource ;
+	rdfs:comment "Vote cast on approvement rating of a statement by a site member." .
+
+:voteProposition
+	rdfs:domain :Vote ;
+	rdfs:range :Proposition .
+
+:voteMember
+	rdfs:domain :Vote ;
+	rdfs:range :Member .
+
+:voteRating
+	rdfs:domain :Vote ;
+	rdfs:range rdfs:Literal .
+
+# Author-Approved Properties
+
+# Version Control
+dct:isVersionOf
+	rdfs:domain :Message ;
+	rdfs:range :Message .
+
+:openForAll
+	rdfs:domain :Message ;
+	rdfs:range rdfs:Literal 
+	rdfs:comment "When true, editing of this message is open for all members." .
+
+# Aggregate Resources
+dct:isPartOf
+	rdfs:domain :Resource ;
+	rdfs:range :Resource .
+
+:isPartOfSubProperty
+	rdfs:domain :Resource ;
+	rdfs:range :Resource ;
+	rdfs:comment "Specific subproperty of a dct:isPartOf predicate" .
+
+:partSequenceNumber
+	rdfs:domain :Resource ;
+	rdfs:range rdfs:Literal .
+
+dct:tableOfContents   # compare with dct:hasPart
+	rdfs:domain :Message .
+
+# Calendar
+ical:Vevent
+	rdfs:subClassOf rdfs:Resource .
+
+ical:Recur
+	rdfs:subClassOf rdfs:Resource .
+
+dc:description
+	rdfs:domain ical:Vevent ;
+	rdfs:range :Message .
+
+ical:dtstart
+	rdfs:domain ical:Vevent ;
+	rdfs:range rdfs:Literal .
+
+ical:dtend
+	rdfs:domain ical:Vevent ;
+	rdfs:range rdfs:Literal .
+
+ical:rrule
+	rdfs:domain ical:Vevent ;
+	rdfs:range ical:Recur .
+
+:rruleEvent
+	rdfs:domain ical:Recur ;
+	rdfs:range ical:Vevent ;
+	owl:inverseOf ical:rrule .
+
+ical:freq
+	rdfs:domain ical:Recur ;
+	rdfs:range rdfs:Literal .
+
+ical:interval
+	rdfs:domain ical:Recur ;
+	rdfs:range rdfs:Literal .
+
+ical:until
+	rdfs:domain ical:Recur ;
+	rdfs:range rdfs:Literal .
+
+ical:byday
+	rdfs:domain ical:Recur ;
+	rdfs:range rdfs:Literal .
+
+ical:byhour
+	rdfs:domain ical:Recur ;
+	rdfs:range rdfs:Literal .
+

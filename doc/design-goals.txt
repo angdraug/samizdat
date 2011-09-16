@@ -1,0 +1,139 @@
+Samizdat Design Goals
+=====================
+
+Publish
+-------
+
+Must:
+- allow everyone to post messages immediately readable by everyone (+)
+- include multimedia files in messages (+)
+- publish summaries on the front page (+)
+
+Should:
+- use static publishing (cache as much content as possible into static
+  web objects, with mirroring and p2p in mind) (~)
+- post edited versions of published messages (and provide version
+  control to keep history of modifications) (+)
+- aggregate related messages together (and build complex hypertexts such
+  as FAQs, media-galleries, educational articles, books, etc.) (~)
+- encrypt and sign messages protected by web of trust
+- track resources regardless of their location
+- not require online access for content preparation
+
+Can:
+- PGP-authorized anonymous publishing via Mixmaster
+- full p2p hosting and mirroring (Freenet)
+- advanced versioning (e.g. approvement by original author)
+- advanced aggregation (e.g. alternative slices (a-la CVS tags) of
+  content, see also custom filtered views in "Search and Filter/Should")
+- publish blogs/diaries (that is, personal space for messages from
+  individual members) (+)
+- publish via Atom API
+
+
+Vote
+----
+
+Must:
+- vote on message tags (and make tags more universal, allowing to filter
+  and sort content by overall quality, local relevance, fairness,
+  quality of prose/content, factuality, novelty, related messages,
+  section, topic, event, geographic location and so on) (+)
+- keep track of all cast votes (for accountability) (+)
+- vote for stories to be included on front page (or, to speed-up
+  publishing, to be excluded from front page) (+)
+
+Should:
+- admin-defined quorum
+- vote on request for extensive resource usage
+- allow or require justification for some kinds of votes
+
+Can:
+- pluggable voting mechanisms (e.g. take into account number of votes)
+
+
+Search and filter
+-----------------
+
+Must:
+- categorize and group messages by tags (+)
+- allow members to add new tags (+)
+- set up custom filtered views, publish search filter as a view (~)
+- produce standard meta-data (RDF, Dublin Core, FOAF, etc.) (~)
+- filter out low-quality messages (may look authoritarian, but actually
+  it is the same story as with consensus: it's better in the end to
+  filter them out but still have them available, than to have to resort
+  to deleting spam and other trash) (+)
+
+Should:
+- highlight new messages since last login
+- transparent RDF search requests
+- filter by ratings as voted by specific member group or member's
+  friends
+- categorized RSS syndication (NewsMonster, Reptile etc.) (+)
+
+Can:
+- distributed search across peer sites
+- advanced statistical text analysis (content clusters etc.)
+- automatic spam filtering (+)
+
+
+Cooperate
+---------
+
+Must:
+- allow members to form groups and register friendship relations
+- exchange material goods (books, cds, printouts, services, whatever)
+- event calendar
+
+Should:
+- link calendar with date/time parameters of content metadata (published
+  date, expires date, urgent until, etc.)
+- iCal/xCal calendar exchange, calendar syndication
+
+Can:
+- full-featured collaboration and coordination system
+- generic issue-tracking mechanism to track tasks, timelines, and
+  responsibilities
+
+
+View
+----
+
+Must:
+- preview published messages (+)
+- support publishing content in different languages (i18n) (+)
+- support language selection for site interface and messages (l10n) (+)
+- use CSS to customize representation for light-weight, text-only,
+  printer, PDA, text-to-speech or other accessibility devices (~)
+
+Should:
+- generate image thumbnails and galleries (~)
+- publish and read content via email interface
+- track favorite threads and events
+
+Can:
+- integrate with Haystack
+
+
+Develop
+-------
+
+Architecture:
+- software abstraction layers for: storage/database (+),
+  content+metadata (+), representation (+), syndication,
+  searching/indexing (~), distribution/delivery (~)
+
+Low barrier to entry for new developers:
+- source code conventions (with options for indent, vim, and emacs) (~)
+- documentation: developer documentation (+), source code comments (+),
+  user manuals (~), on-line help
+
+Security:
+- spam filtering (+), IP address blocking
+- filter out dangerous CGI parameters and cookies (+)
+  http://www.cert.org/tech_tips/malicious_code_mitigation.html
+- taint all user input (+)
+- support OpenID, GnuPG/OpenPGP web of trust, SSL/X.509 certificates and
+  SSH keys
+

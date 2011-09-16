@@ -1,0 +1,67 @@
+Samizdat References
+===================
+
+Open Publishing
+---------------
+
+Open publishing is the same as free software
+http://www.cat.org.au/maffew/cat/openpub.html
+
+Three Proposals for Open Publishing
+http://dru.ca/imc/open_pub.html
+
+Active2 Design
+http://docs.indymedia.org/view/Devel/DesignDocument
+
+Development Project Proposal - Active for the future
+http://lists.cat.org.au/pipermail/webcoders/2002-January/000209.html
+
+Kuro5hin FAQ
+http://www.kuro5hin.org/special/faq
+
+
+Resource Description Framework
+------------------------------
+
+RDF Primer
+http://www.w3.org/TR/rdf-primer
+
+Resource Description Framework (RDF): Concepts and Abstract Syntax
+http://www.w3.org/TR/rdf-concepts
+
+RDF Semantics
+http://www.w3.org/TR/rdf-mt
+
+RDF Vocabulary Description Language 1.0: RDF Schema
+http://www.w3.org/TR/rdf-schema
+
+
+RDF Storage and Query Languages
+-------------------------------
+
+RDF Squish query language and Java implementation
+http://ilrt.org/discovery/2001/02/squish/
+
+DAML Query Language
+http://www.daml.org/2003/04/dql/dql
+
+Sesame: A generic Architecture for Storing and Querying RDF and RDF Schema
+http://sesame.aidministrator.nl/publications/del10.pdf
+
+Sesame RQL: a Tutorial
+http://sesame.aidministrator.nl/publications/rql-tutorial.html
+
+
+Dublin Core
+-----------
+
+Using Dublin Core
+http://dublincore.org/documents/usageguide/
+
+
+iCalendar
+---------
+
+RFC 2445
+http://www.w3.org/2002/12/cal/rfc2445
+
