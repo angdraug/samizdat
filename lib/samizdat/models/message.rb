@@ -214,7 +214,7 @@ ORDER BY ?rating DESC}, :id => @id
       property != 'dct::isVersionOf'
     )
       raise RuntimeError,
-        "Invalid property #{CGI.escapeHTML(property)} passed to reparent!"
+        "Invalid property #{Rack::Utils.escape_html(property)} passed to reparent!"
     end
 
     if new_parent.nil? and @content.title.nil?

@@ -213,20 +213,20 @@ class TC_Robot < Test::Unit::TestCase
     response = publish_message(%q{Test '}, '.') do |preview_response|
       msg = REXML::XPath.first(parse(preview_response.body),
         '//h:div[@id="main"]/h:div', XHTML_NS)
-      assert_equal %q{Test &#39;}, text(msg, %{//h:div[@class="box-title"]})
+      assert_equal %q{Test &#x27;}, text(msg, %{//h:div[@class="box-title"]})
     end
     id = response['location'].sub(@base.to_s, '')
     assert_equal Net::HTTPOK, (response = get(id)).class
     msg = REXML::XPath.first(parse(response.body),
       '//h:div[@id="main"]/h:div', XHTML_NS)
-    assert_equal %q{Test &#39;}, text(msg, %{//h:div[@class="box-title"]})
+    assert_equal %q{Test &#x27;}, text(msg, %{//h:div[@class="box-title"]})
 
     assert (response = get('')).kind_of?(Net::HTTPSuccess)
     main = REXML::XPath.first(parse(response.body),
       '//h:div[@id="main"]', XHTML_NS)
     assert msg = REXML::XPath.first(main,
       %{//h:div[@class="info"]/h:a[@href="blog/#{@login}"]/../..}, XHTML_NS)
-    assert_equal %q{Test &#39;}, text(msg, 'h:div[@class="title"]/h:a')
+    assert_equal %q{Test &#x27;}, text(msg, 'h:div[@class="title"]/h:a')
   end
 
   def test_07_edit_message
@@ -315,7 +315,7 @@ class TC_Robot < Test::Unit::TestCase
     else
       route = "message/publish"
     end
-    params = "title=#{CGI.escape(title)}&body=#{CGI.escape(body)}&lang=#{lang}"
+    params = "title=#{Rack::Utils.escape(title)}&body=#{Rack::Utils.escape(body)}&lang=#{lang}"
     params << "&format=#{format}" if format
     preview_response = post(route, params + "&preview", {"Cookie" => @@session})
     if block_given?

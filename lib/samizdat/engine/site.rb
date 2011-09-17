@@ -294,7 +294,7 @@ class Site
   #
   def validate_format(format)
     @config['format'].values.flatten.include?(format) or raise UnknownFormatError,
-      sprintf(_("Format '%s' is not supported"), CGI.escapeHTML(format))
+      sprintf(_("Format '%s' is not supported"), Rack::Utils.escape_html(format))
     format.untaint
   end
 
@@ -313,8 +313,8 @@ class Site
         :adapter => config['db']['adapter'],
         :host => config['db']['host'],
         :database => config['db']['database'],
-        :user => (ENV['USER'] or config['db']['user']),
-        :password => (ENV['USER'] ? nil : config['db']['password']),
+        :user => config['db']['user'],
+        :password => config['db']['password'],
         :quote_identifiers => false
       )
     end

@@ -197,7 +197,7 @@ module MessageHelper
 
       title = translation.content.title
       title = Tag.tag_title(title) if message.nrelated > 0
-      title = CGI.escapeHTML(limit_string(title))
+      title = Rack::Utils.escape_html(limit_string(title))
       title = %{<div class="title">#{resource_href(message.id, title)}</div>\n}
     end
 

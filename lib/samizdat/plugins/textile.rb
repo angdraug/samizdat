@@ -28,7 +28,7 @@ begin
 rescue LoadError
   class RedCloth < String
     def to_html   # revert to text/plain
-      "<pre>#{CGI.escapeHTML(self)}</pre>"
+      "<pre>#{Rack::Utils.escape_html(self)}</pre>"
     end
   end
 end

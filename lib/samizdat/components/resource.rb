@@ -40,7 +40,7 @@ class Resource
           raise ResourceNotFoundError, @id.to_s
         else
           raise RuntimeError,
-            sprintf(_("Unknown resource type '%s'"), CGI.escapeHTML(r[:label]))
+            sprintf(_("Unknown resource type '%s'"), Rack::Utils.escape_html(r[:label]))
         end
       end
     end
@@ -285,7 +285,7 @@ class LiteralComponent < ResourceComponent
     uriref = @request.base + @id.to_s
 
     @title = label
-    @info = %{<a href="#{uriref}">#{rdf.ns_shrink(uriref)}</a> = #{CGI.escapeHTML(value)}}
+    @info = %{<a href="#{uriref}">#{rdf.ns_shrink(uriref)}</a> = #{Rack::Utils.escape_html(value)}}
   end
 end
 
@@ -512,7 +512,7 @@ WHERE (rdf::predicate :id ?predicate)
   def full
     short << box(nil,
       '<p><a href="query/run?q=' <<
-      CGI.escape("SELECT ?vote WHERE (s::voteProposition ?vote #{@id})") <<
+      Rack::Utils.escape("SELECT ?vote WHERE (s::voteProposition ?vote #{@id})") <<
       '">' << _('Votes') << '</a></p>')
   end
 end

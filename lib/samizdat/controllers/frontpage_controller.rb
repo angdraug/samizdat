@@ -32,7 +32,7 @@ class FrontpageController < Controller
     return if try_cache(key)
 
     # links
-    @all_replies_query = CGI.escape('SELECT ?resource WHERE (dc::date ?resource ?date) (s::inReplyTo ?resource ?parent) ORDER BY ?date DESC')
+    @all_replies_query = Rack::Utils.escape('SELECT ?resource WHERE (dc::date ?resource ?date) (s::inReplyTo ?resource ?parent) ORDER BY ?date DESC')
     @more_links = render_more_links
     @imported_feeds = render_feeds
 

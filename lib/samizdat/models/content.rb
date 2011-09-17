@@ -161,7 +161,7 @@ class Content
         end
 
       rescue WhitewashError => e
-        raise UserError, CGI.escapeHTML(e.message).untaint
+        raise UserError, Rack::Utils.escape_html(e.message).untaint
       end
 
     when 'content_file'
@@ -395,11 +395,9 @@ class ContentFileNewUpload < ContentFilePendingUpload
     mkdir(File.dirname(destination))
 
     case file
-    when File, Tempfile   # copy large files directly
-      FileUtils.cp(file.path, destination)
     when StringIO
       File.open(destination, 'w') {|f| f.write(file.read) }
-    when ContentFile
+    when File, Tempfile, UploadTempfile, ContentFile
       begin
         FileUtils.ln(file.path, destination)
       rescue Errno::EXDEV

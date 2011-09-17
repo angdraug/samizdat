@@ -101,32 +101,36 @@ class Route
   end
 end
 
-module Dispatcher
-  def Dispatcher.render(request, route)
-    controller = route.create_controller(request)
-    controller.send(route.action)
-    controller.render
-  end
-
-  def Dispatcher.render_error(request, error)
-    controller = ErrorController.new(request)
-    controller._error(error)
-    controller.render
-  end
-
-  # invoke controller action matching the CGI request
+class Dispatcher
+  # provide Rack application API
+  #
+  # invoke controller action matching the request
   #
   # throw +:finish+ to interrupt the request processing and return to the
   # dispatcher
   #
-  def Dispatcher.dispatch(cgi)
-    catch :finish do
-      request = Request.new(cgi)
-      begin
-        Dispatcher.render(request, Route.new(request))
-      rescue => error
-        Dispatcher.render_error(request, error)
-      end
+  def call(env)
+    request = Request.new(env)
+    begin
+      render(request, Route.new(request))
+    rescue => error
+      render_error(request, error)
     end
+  end
+
+  private
+
+  def render(request, route)
+    controller = route.create_controller(request)
+    catch :finish do
+      controller.send(route.action)
+    end
+    request.response(controller)
+  end
+
+  def render_error(request, error)
+    controller = ErrorController.new(request)
+    controller._error(error)
+    request.response(controller)
   end
 end

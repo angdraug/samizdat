@@ -44,7 +44,7 @@ class QueryController < Controller
       end
 
       body = list(results,
-        nav(dataset, :route => %{query/run?q=#{CGI.escape(query)}&amp;}) <<
+        nav(dataset, :route => %{query/run?q=#{Rack::Utils.escape(query)}&amp;}) <<
         nav_rss(feed) <<
         foot.to_s)
     else
@@ -124,7 +124,7 @@ ORDER BY ?date DESC}
 
     feed_page('query/' + digest(query)) do |maker|
       maker.channel.title = config['site']['name'] + ' / ' + _('Search Result')
-      maker.channel.description = CGI.escapeHTML(query)
+      maker.channel.description = Rack::Utils.escape_html(query)
       maker.channel.link = @request.base + rss_link(query)
       query_dataset(q)
     end
@@ -141,7 +141,7 @@ ORDER BY ?date DESC}
       q = Graffiti::SquishSelect.new(rdf.config, query)
       sql = rdf.select(q)
     rescue Graffiti::ProgrammingError
-      raise UserError, _('Error in your query: ') + CGI.escapeHTML($!.message)
+      raise UserError, _('Error in your query: ') + Rack::Utils.escape_html($!.message)
     end
 
     (q.nodes.size != 1 or not Graffiti::SquishSelect::BN === q.nodes.first) and raise UserError,
@@ -225,6 +225,6 @@ ORDER BY ?date DESC}
   end
 
   def rss_link(query)
-    %{query/rss?q=#{CGI.escape(query)}}
+    %{query/rss?q=#{Rack::Utils.escape(query)}}
   end
 end

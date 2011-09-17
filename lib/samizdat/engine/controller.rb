@@ -25,9 +25,6 @@ class Controller
     @title = nil
     @content_for_layout = nil
 
-    # response headers
-    @headers = {}
-
     # rss feeds
     @feeds = {}
 
@@ -53,8 +50,7 @@ class Controller
       @request.reset_notice
     end
 
-    @request.response(@headers,
-      @layout ? render_template(@layout) : @content_for_layout)
+    @layout ? render_template(@layout) : @content_for_layout
   end
 
   private
@@ -110,7 +106,7 @@ class ErrorController < Controller
   def _error(error)
     case error
     when AuthError
-      @headers['status'] = '401 Authorization Required'
+      @request.status = 401
       @title = _('Access Denied')
       @content_for_layout = %{<p>#{error}.</p>}
 
@@ -124,19 +120,21 @@ class ErrorController < Controller
 %{<p>#{error}.</p><p>}+_("Press 'Back' button of your browser to return.")+'</p>'
 
     when ResourceNotFoundError
-      @headers['status'] = '404 Not Found'
+      @request.status = 404
       @title = _('Resource Not Found')
-      referer = sprintf(_(' (looks like it was %s)'), %{<a href="#{@request.referer}">#{@request.referer}</a>}) if @request.referer
+      if referer = @request.env['HTTP_REFERER']
+        referer = sprintf(_(' (looks like it was %s)'), %{<a href="#{referer}">#{referer}</a>})
+      end
       @content_for_layout =
-'<p>' + sprintf(_('The resource you requested (%s) was not found on this site. Please report this error back to the site you came from%s.'), CGI.escapeHTML(error.message), referer.to_s) + '</p>'
+'<p>' + sprintf(_('The resource you requested (%s) was not found on this site. Please report this error back to the site you came from%s.'), Rack::Utils.escape_html(error.message), referer.to_s) + '</p>'
 
     else
       error_id = log_exception(error, @request)
 
-      @headers['status'] = '500 Internal Server Error'
+      @request.status = 500
       @title = _('Runtime Error')
       @content_for_layout =
-'<p>'+_('Runtime error has occured.')+%{ Error ID: #{CGI.escapeHTML(error_id)}.</p>
+'<p>'+_('Runtime error has occured.')+%{ Error ID: #{Rack::Utils.escape_html(error_id)}.</p>
 <p>}+_('Please report this error to the site administrator.')+'</p>'
     end
 

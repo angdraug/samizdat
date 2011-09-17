@@ -1,0 +1,8 @@
+---
+servers: 4
+socket: /var/run/samizdat/thin.sock
+pid: /var/run/samizdat/thin.pid
+log: /var/log/samizdat/thin.log
+user: www-data
+group: www-data
+rackup: /usr/share/samizdat/cgi-bin/samizdat.ru

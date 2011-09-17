@@ -23,7 +23,7 @@ module ResourceHelper
     info << ': ' << tag.print_rating
     info << ' (<a title="' << _('Click to vote on how this resource is related to this tag') <<
       '" href="resource/' << related.to_s << '/vote' <<
-      '?tag=' << CGI.escape((tag.id or tag.uriref).to_s) <<
+      '?tag=' << Rack::Utils.escape((tag.id or tag.uriref).to_s) <<
       '">' << _('vote') <<
       '</a>)' if tag.allowed_to_vote?(@member)
 

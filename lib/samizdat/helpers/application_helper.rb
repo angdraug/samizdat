@@ -35,7 +35,7 @@ module ApplicationHelper
   # truncate _string_ to the title limit and escape HTML characters in it
   #
   def escape_title(string)
-    CGI.escapeHTML(limit_string(string))
+    Rack::Utils.escape_html(limit_string(string))
   end
 
   # transform date to a standard string representation
@@ -179,7 +179,7 @@ module ApplicationHelper
   # [standard HTML input type] copy _type_ as is into <input> tag
   #
   def form_field(type, name=nil, value=nil, default=nil)
-    value = CGI.escapeHTML(value) if value.class == String
+    value = Rack::Utils.escape_html(value) if value.class == String
     attr = %{ name="#{name}"} if name
     attr += %{ id="f_#{name}"} if name and :label != type
     attr += ' disabled="disabled"' if name and :disabled == default
@@ -376,7 +376,7 @@ module ApplicationHelper
   # included in the feed.
   #
   def feed_page(cache_key)
-    @request.headers['type'] = 'application/xml'
+    @request.headers['Content-Type'] = 'application/xml'
     @layout = nil
 
     @content_for_layout = cache.fetch_or_add(

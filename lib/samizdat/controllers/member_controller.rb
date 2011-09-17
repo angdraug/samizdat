@@ -476,7 +476,7 @@ class MemberController < Controller
 
     # validate email
     @email.nil? or @email =~ EMAIL_PATTERN or raise UserError,
-      sprintf(_("Malformed email address: '%s'"), CGI.escapeHTML(@email))
+      sprintf(_("Malformed email address: '%s'"), Rack::Utils.escape_html(@email))
 
     site.plugins.find_all('spam', :check_email) do |plugin|
       plugin.check_email(@email)
@@ -517,7 +517,7 @@ class MemberController < Controller
     if EMAIL_PATTERN =~ to
       to.untaint
     else
-      raise UserError, sprintf(_("Malformed email address: '%s'"), CGI.escapeHTML(email))
+      raise UserError, sprintf(_("Malformed email address: '%s'"), Rack::Utils.escape_html(email))
     end
     message_id = config['email']['address'].sub(/^[^@]*/,
       Time.now.strftime("%Y%m%d%H%M%S." + Process.pid.to_s))

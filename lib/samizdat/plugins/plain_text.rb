@@ -17,7 +17,7 @@ class PlainTextPlugin < ContentInlinePlugin
   end
 
   def render(request, mode, body)
-    "<pre>#{CGI.escapeHTML(body)}</pre>"
+    "<pre>#{Rack::Utils.escape_html(body)}</pre>"
   end
 
   def format_name

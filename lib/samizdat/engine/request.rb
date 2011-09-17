@@ -44,15 +44,22 @@ class LocalDRbSingleton
   end
 end
 
+class UploadTempfile < SimpleDelegator
+  def initialize(tempfile, original_filename)
+    @tempfile = tempfile
+    @original_filename = original_filename
+    super @tempfile
+  end
+  attr_reader :original_filename
+end
+
 # CGI request and response handler
 #
-# todo: refactor deployment functions into this
-#
-class Request < SimpleDelegator
-  # wrapper for CGI#cookies: add cookie name prefix, return first value
+class Request
+  # wrapper for Rack::Request#cookies (adds cookie name prefix)
   #
   def cookie(name)
-    @cgi.cookies[@cookie_prefix + name][0]
+    @rack.cookies[@cookie_prefix + name]
   end
 
   # create cookie and add it to the HTTP response
@@ -62,20 +69,22 @@ class Request < SimpleDelegator
   # engine/helpers.rb to set a long-term cookie
   #
   def set_cookie(name, value = nil, expires = nil)
-    headers['cookie'] = {} unless headers['cookie'].kind_of? Hash
-    headers['cookie'][name] = CGI::Cookie.new({
-      'name' => @cookie_prefix + name,
-      'value' => value,
-      'path' => File.join(@uri_prefix, ''),
-      'expires' => expires.kind_of?(Numeric) ? Time.now + expires : nil,
-      'secure' => (@env['HTTPS'] and 'session' == name)
-    })
+    Rack::Utils.set_cookie_header!(
+      @headers,
+      @cookie_prefix + name,
+      {
+        :value => value,
+        :path => File.join(@uri_prefix, ''),
+        :expires => expires.kind_of?(Numeric) ? Time.now + expires : nil,
+        :secure => (@env['HTTPS'] and 'session' == name)
+      }
+    )
   end
 
   # set cookie to expire now
   #
   def unset_cookie(name)
-    set_cookie(name, nil, 0)
+    set_cookie(name, '', 0)
   end
 
   # get cached session, refresh or clear it
@@ -143,14 +152,10 @@ class Request < SimpleDelegator
   # set id and refresh session if there's a valid session cookie,
   # set credentials to guest otherwise
   #
-  def initialize(cgi)
-    @cgi = cgi
-
-    # hack to get through to CGI variables
-    class << @cgi
-      public :env_table
-    end
-    @env = @cgi.env_table
+  def initialize(env)
+    @env = env
+    @rack = Rack::Request.new(@env)
+    @params = @rack.params
 
     @host = (
       @env['HTTP_X_FORWARDED_HOST'] or
@@ -160,12 +165,12 @@ class Request < SimpleDelegator
     )
 
     @site, @uri_prefix, @route =
-      SamizdatSites.instance.find(@host, @env['REQUEST_URI'])
+      SamizdatSites.instance.find(@host, @env['PATH_INFO'])
 
     LocalDRbSingleton.instance.start((@site.config.cache_callback or 'druby://localhost:0'))
 
-    @headers = {'charset' => 'utf-8', 'cookie' => {}}
-    @headers['Content-Location'] = File.join('', @uri_prefix)
+    @headers = {}
+    @status = 200
 
     @cookie_prefix = @site.config['site']['cookie_prefix'] + '_'
 
@@ -189,8 +194,6 @@ class Request < SimpleDelegator
     @style = @site.config['style'][0] unless @site.config['style'].include?(style)
 
     @session = cached_session
-
-    super @cgi
   end
 
   # raw CGI environment variables
@@ -222,6 +225,9 @@ class Request < SimpleDelegator
 
   # HTTP response headers
   attr_reader :headers
+
+  # HTTP response status
+  attr_accessor :status
 
   # web server document root (untainted as it's assumed to be safe)
   #
@@ -262,51 +268,46 @@ class Request < SimpleDelegator
     @site.config['style'].reject {|alt| alt == @style }
   end
 
-  # raw CGI#params hash
-  #
-  def cgi_params
-    @cgi.params
+  def keys
+    @params.keys
   end
 
-  # always imitate CGI#[] from Ruby 1.8, normalize value
+  def has_key?(key)
+    @params.has_key?(key)
+  end
+
+  # return normalized value
   #
   def [](key)
-    normalize_parameter(@cgi.params[key][0])
+    return nil unless @params.has_key? key
+    normalize_parameter(@params[key])
   end
 
   # plant a fake CGI parameter
   #
   def []=(key, value)
-    value = [value] unless value.kind_of? Array
-    @cgi.params[key] = value
+    @params[key] = value
   end
 
   # return list of normalized values of CGI parameters with given names
   #
   def values_at(keys)
-    keys.collect {|key| self[key] }
-  end
-
-  # return list of all non-blank values of a multi-value CGI parameter
-  #
-  def all_values(key)
-    return [] unless @cgi.params[key].kind_of?(Array)
-    @cgi.params[key].collect {|value| normalize_parameter(value) }.compact
+    keys.map {|key| self[key] }
   end
 
   # return a file object (not its contents), or +nil+ if it's empty or not a
   # file
   #
   def value_file(key)
-    file = @cgi.params[key].first
+    file = @params[key]
 
-    if (file.kind_of? StringIO or file.kind_of? Tempfile) and file.size > 0
+    if file.kind_of?(Hash) and file.has_key?(:tempfile) and file[:tempfile].size > 0
       limit = @site.config['limit']['content']
-      if file.size > limit
+      if file[:tempfile].size > limit
         raise UserError, sprintf(
           _('Uploaded file is larger than %s bytes limit'), limit)
       end
-      file
+      UploadTempfile.new(file[:tempfile], file[:filename])
     else
       nil
     end
@@ -315,7 +316,7 @@ class Request < SimpleDelegator
   # dump CGI parameters (except passwords) for error report
   #
   def dump_params
-    @cgi.params.dup.delete_if {|k, v|
+    @params.dup.delete_if {|k, v|
       k =~ /^password/
     }.inspect
   end
@@ -363,18 +364,25 @@ class Request < SimpleDelegator
 
   # print header and optionally content, then clean-up and exit
   #
-  def response(headers = {}, body = nil)
+  def response(controller)
     if @notice
       set_cookie('notice', @notice)
     end
 
-    @headers.update(headers)
-    if body
-      body = compress(body)
-    else
-      body = ''
+    body = compress(controller.render) unless 302 == @status
+
+    unless 304 == @status
+      @headers['Content-Type'] ||= 'text/html'
+      @headers['Content-Type'] << '; charset=utf-8'
     end
-    @cgi.out(@headers) { body }
+
+    if body
+      @headers['Content-Length'] = Rack::Utils.bytesize(body).to_s
+      @headers['Content-Location'] = File.join('', @uri_prefix)
+      return [ @status, @headers, [body] ]
+    else
+      return [ @status, @headers, [] ]
+    end
   end
 
   # Make sure 'redirect_when_done' cookie value is set to a relative location,
@@ -407,11 +415,12 @@ class Request < SimpleDelegator
   #
   def redirect(location = nil)
     if location.nil?
-      location = @cgi.referer
+      location = @env['HTTP_REFERER']
     elsif not absolute_url?(location)
       location = File.join(@base, location.to_s)
     end
-    response({'status' => '302 Found', 'location' => location})
+    @headers['Location'] = location
+    @status = 302
     throw :finish
   end
 
@@ -466,7 +475,7 @@ class Request < SimpleDelegator
   end
 
   def referer_but_no_login
-    location = (@cgi.referer or '').sub(/\A#{@base}/, '')
+    location = (@env['HTTP_REFERER'] or '').sub(/\A#{@base}/, '')
     (location.empty? or 'member/login' == location)? '/' : location
   end
 
@@ -483,17 +492,12 @@ class Request < SimpleDelegator
         when /x-gzip/ then 'x-gzip'
         when /gzip/   then 'gzip'
         end
-      unless enc.nil?
-        io = ''   # primitive StringIO replacement
-        class << io
-          def write(str)
-            self << str
-          end
-        end
+      if enc
+        io = StringIO.new
         gz = Zlib::GzipWriter.new(io)
         gz.write(body)
         gz.close
-        body = io
+        body = io.string
         @headers['Content-Encoding'] = enc
         @headers['Vary'] = 'Accept-Encoding'
       end
@@ -503,13 +507,11 @@ class Request < SimpleDelegator
     if @env.has_key?('HTTP_IF_NONE_MATCH')
       etag = '"' + digest(body) + '"'
       @headers['ETag'] = etag
-      catch(:ETagFound) do
-        @env['HTTP_IF_NONE_MATCH'].each(',') do |e|
-          if etag == e.strip.delete(',')
-            @headers['status'] = '304 Not Modified'
-            body = ''   # don't send body
-            throw :ETagFound
-          end
+      @env['HTTP_IF_NONE_MATCH'].split(',').each do |e|
+        if etag == e.strip
+          @status = 304
+          body = nil   # don't send body
+          break
         end
       end
     end

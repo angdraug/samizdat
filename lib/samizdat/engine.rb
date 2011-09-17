@@ -16,7 +16,7 @@ SAMIZDAT_VERSION = '0.6.2'
 # :main:engine.rb
 
 # used below
-require 'cgi'
+require 'rack'
 require 'digest/md5'
 require 'singleton'
 require 'drb'
@@ -30,11 +30,6 @@ require 'uri'
 require 'rbconfig'
 require 'delegate'
 require 'open-uri'
-
-# fix bug in standard cgi.rb
-def CGI::escapeHTML(string)
-  string.gsub(/&/n, '&amp;').gsub(/\"/n, '&quot;').gsub(/\'/n, '&#39;').gsub(/>/n, '&gt;').gsub(/</n, '&lt;')
-end
 
 # samizdat engine
 require 'samizdat/engine/time'

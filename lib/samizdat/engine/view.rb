@@ -15,7 +15,7 @@ class View
   def initialize(site, template)
     location = find_file(template, site.config['templates'])
     location or raise RuntimeError,
-      "Template not found: '#{CGI.escapeHTML(template)}'"
+      "Template not found: '#{Rack::Utils.escape_html(template)}'"
     set_renderer(location)
   end
 

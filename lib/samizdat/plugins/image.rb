@@ -25,7 +25,7 @@ class ImagePlugin < ContentFilePlugin
   end
 
   def render(request, mode, content)
-    title = CGI.escapeHTML(content.title.to_s)
+    title = Rack::Utils.escape_html(content.title.to_s)
     image_href = content.file.href
 
     if version_exists?(content.file, mode)

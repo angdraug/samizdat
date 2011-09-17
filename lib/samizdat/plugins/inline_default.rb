@@ -17,7 +17,7 @@ class TextDefaultPlugin < ContentInlinePlugin
   end
 
   def render(request, mode, body)
-    CGI.escapeHTML(body).split(/^\s*$/).collect {|p|
+    Rack::Utils.escape_html(body).split(/^\s*$/).collect {|p|
       '<p>' + p.gsub(URI::ABS_URI_REF) {|url|
         scheme, host = $1, $4   # see URI::REGEXP::PATTERN::X_ABS_URI
         if AUTOURL_SCHEMES.include?(scheme) and not host.nil?
