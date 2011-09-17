@@ -474,7 +474,7 @@ class MessageController < Controller
   def check_content
     content = @message.content
 
-    content.title or @message.part_of or raise UserError,
+    content.title or (@message.part_of and not @message.translation_of) or raise UserError,
       _('Message title is required for a new message')
 
     site.plugins.find_all('spam', :add_message_fields, :check_message_fields) do |plugin|
