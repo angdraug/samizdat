@@ -46,9 +46,9 @@ present, but the corresponding parts of functionality will not be there.
    http://rubyforge.org/projects/redcloth/
    http://tidy.sf.net/
    http://rubyforge.org/projects/tidy/
-   http://rubyforge.org/projects/mahoro/
    http://rubyforge.org/projects/rmagick/
    http://rubyforge.org/projects/tzinfo/
+   https://github.com/qoobaa/magic
 
 On Debian, just install samizdat package (you may also want to check for
 a newest version in the experimental archive), and follow the

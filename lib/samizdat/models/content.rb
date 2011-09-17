@@ -11,7 +11,7 @@
 require 'samizdat'
 require 'whitewash'
 require 'fileutils'
-require 'mahoro'
+require 'magic'
 
 class Content
   include SiteHelper
@@ -250,6 +250,22 @@ end
 class ContentFile
   include SiteHelper
 
+  def ContentFile.detect_format(file)
+    format =
+      if file.respond_to?(:path) and file.path
+        Magic.guess_file_mime_type(file.path)
+      elsif file.kind_of?(StringIO)
+        Magic.guess_string_mime_type(file.string)
+      elsif file.kind_of?(String)
+        Magic.guess_string_mime_type(file)
+      end
+
+    format.nil? and raise RuntimeError,
+      _('Failed to detect content type of the uploaded file')
+
+    format
+  end
+
   def initialize(site, content)
     @site = site
     @id = content.id
@@ -367,7 +383,7 @@ end
 class ContentFileNewUpload < ContentFilePendingUpload
   def initialize(site, content, upload, part, file)
     super(site, content, upload, part,
-          MahoroSingleton.instance.detect_format(file),
+          ContentFile.detect_format(file),
           file.original_filename.sub(%r{\A.*(?:/|\\)}, ''))
 
     save(file)

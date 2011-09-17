@@ -10,7 +10,6 @@
 
 require 'samizdat'
 require 'whitewash'
-require 'mahoro'
 
 class DefaultConfig
   include Singleton
@@ -65,29 +64,4 @@ end
 
 class WhitewashSingleton < Whitewash
   include Singleton
-end
-
-
-class MahoroSingleton
-  include Singleton
-
-  def initialize
-    @mahoro = Mahoro.new(Mahoro::MIME)
-  end
-
-  def detect_format(file)
-    format =
-      if file.respond_to?(:path) and file.path
-        @mahoro.file(file.path)
-      elsif file.kind_of?(StringIO)
-        @mahoro.buffer(file.string)
-      elsif file.kind_of?(String)
-        @mahoro.buffer(file)
-      end
-
-    format.nil? and raise RuntimeError,
-      _('Failed to detect content type of the uploaded file')
-
-    format
-  end
 end

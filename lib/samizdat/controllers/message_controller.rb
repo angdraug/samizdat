@@ -370,7 +370,7 @@ class MessageController < Controller
     title = parent.content.title if title.nil? and parent
 
     if file = @request.value_file('file')
-      format = MahoroSingleton.instance.detect_format(file)
+      format = ContentFile.detect_format(file)
       format = site.validate_format(format)
       if format and :inline == format_type(format)
         body = file.read   # transform to inline message
