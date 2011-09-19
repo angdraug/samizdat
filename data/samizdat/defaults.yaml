@@ -70,7 +70,7 @@ locale:
   # message language selection list in advanced message publishing
   # interface.
   #
-  languages: [ en, be, de, eo, es, fr, ja, pl, ru, ua ]
+  languages: [ en, be, de, eo, es, fr, ja, pl, ru, uk ]
 
   # If set to 'yes', list of languages on the front page will be sorted
   # alphabetically. If set to 'no' or unset, the list will be dispayed
