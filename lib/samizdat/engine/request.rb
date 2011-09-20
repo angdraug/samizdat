@@ -102,10 +102,7 @@ class Request < SimpleDelegator
     @accept_language.uniq!
 
     lang.untaint
-    if defined? GetText
-      samizdat_bindtextdomain(lang, @site.config['locale']['path'])
-    end
-
+    samizdat_bindtextdomain(lang, @site.config['locale']['path'])
     @language = lang
   end
 

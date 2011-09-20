@@ -40,7 +40,7 @@ end
 require 'time'
 require 'date'
 
-unless ''.methods.include? 'to_time'
+unless String.method_defined? 'to_time'
   class String
     def to_time
       Time.parse(self)
@@ -48,7 +48,7 @@ unless ''.methods.include? 'to_time'
   end
 end
 
-unless DateTime.strptime.methods.include? 'to_time'
+unless DateTime.method_defined? 'to_time'
   class DateTime
     def to_time
       Time.parse(self.to_s)
@@ -56,54 +56,8 @@ unless DateTime.strptime.methods.include? 'to_time'
   end
 end
 
-# try to initialize GetText
-begin
-  require 'gettext'
-
-  GetText.module_eval do
-    #:nodoc: all source files and classes are equal
-    def callersrc
-      "samizdat"   # hack for GetText < 1.6.0
-    end
-    def bound_target(klass = nil)
-      Object   # hack for GetText >= 1.6.0
-    end
-  end
-
-  include GetText
-
-  # workaround for API change in GetText 1.6.0
-  major, minor = GetText::VERSION.split('.').collect {|i| i.to_i }
-  if major < 1 or (1 == major and minor < 6) then
-    # GetText < 1.6.0
-    def samizdat_bindtextdomain(locale, path=nil)
-      bindtextdomain('samizdat', path, locale, 'utf-8')
-    end
-  elsif major < 2
-    # GetText < 2.0.0
-    def samizdat_bindtextdomain(locale, path=nil)
-      GetText::bindtextdomain('samizdat',
-        :locale => locale,
-        :charset => 'utf-8',
-        :path => path)
-    end
-  else
-    def samizdat_bindtextdomain(locale, path=nil)
-      GetText::bindtextdomain('samizdat',
-        :charset => 'utf-8',
-        :path => path)
-      GetText::set_locale(locale)
-    end
-  end
-  major, minor = nil
-
-rescue LoadError
-  def _(msgid)
-    msgid
-  end
-end
-
 # samizdat engine
+require 'samizdat/engine/gettext'
 require 'samizdat/engine/exceptions'
 require 'samizdat/engine/globals'
 require 'samizdat/engine/helpers'

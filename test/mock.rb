@@ -75,6 +75,7 @@ end
 
 class MockRequest
   def initialize
+    samizdat_bindtextdomain('C')
     @site = MockSite.instance
     @session = MockSession.new
     @moderate = false
@@ -82,7 +83,6 @@ class MockRequest
     @uri_prefix = ''
     @base = 'http://localhost/'
     @route = '/'
-    bindtextdomain('samizdat', nil, 'C', 'utf-8')
   end
 
   attr_accessor :site, :session, :moderate, :options, :uri_prefix, :base, :route

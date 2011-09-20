@@ -114,7 +114,7 @@ class FrontpageController < Controller
   def language_list
     return '' if
       'yes' == @request.cookie('nostatic') or
-      not defined?(GetText) or
+      not (defined?(FastGettext) or defined?(GetText)) or
       config['locale']['languages'].size <= 1
 
     if config['locale']['allow_monolanguage']
