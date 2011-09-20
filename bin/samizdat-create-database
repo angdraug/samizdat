@@ -45,7 +45,7 @@ case "$DRIVER" in
 			exit 3
 		fi
 		echo "Creating database and user..."
-		su -c "createdb --encoding UNICODE '$SITE' && createlang plpgsql '$SITE' && createuser -SDR '$SITE'" - postgres
+		su -c "createdb --encoding UNICODE '$SITE' && createuser -SDR '$SITE' && createlang plpgsql '$SITE'" - postgres
 		echo "Generating database schema..."
 		echo "$SQL" | su -c "psql -q '$SITE' 2>/dev/null" - postgres
 		echo
