@@ -8,7 +8,7 @@
 #
 # vim: et sw=2 sts=2 ts=8 tw=0
 
-$KCODE = 'utf8'
+$KCODE = 'utf8' if RUBY_VERSION < '1.9'
 
 # Samizdat version
 SAMIZDAT_VERSION = '0.6.2'
@@ -23,7 +23,7 @@ require 'drb'
 require 'dbi'
 
 # used by samizdat core
-require 'jcode'   # multi-byte character support
+require 'jcode' if RUBY_VERSION < '1.9'   # multi-byte character support
 require 'stringio'   # fix a conflict between Ruby 1.6 cgi.rb and yaml.rb
 require 'tempfile'
 require 'uri'

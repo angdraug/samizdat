@@ -44,7 +44,7 @@ class Password
   # generate random password
   #
   def Password.random
-    p = ''; 1.upto(10) { p << (?a + rand(26)).chr }
+    p = ''; 1.upto(10) { p << (97 + rand(26)).chr }   # 97 == ?a
     p
   end
 end

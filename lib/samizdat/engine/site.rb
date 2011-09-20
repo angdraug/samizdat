@@ -369,14 +369,33 @@ module SiteHelper
     config['limit']['page']
   end
 
+  if RUBY_VERSION < '1.9'
+    def limit_string_size(string)
+      $KCODE = 'utf8'
+      string.jsize
+    end
+
+    def limit_string_cut(string, limit)
+      string.each_char[0, limit - 1].join
+    end
+
+  else
+    def limit_string_size(string)
+      string.size
+    end
+
+    def limit_string_cut(string, limit)
+      string[0, limit - 1]
+    end
+  end
+
   # return _string_ truncated to the _limit_, with ellipsis if necessary
   #
   def limit_string(string, limit=config['limit']['title'])
     return nil unless string.kind_of? String
 
-    $KCODE = 'utf8'
-    if string.jsize > limit
-      string.each_char[0, limit - 1].join.sub(
+    if limit_string_size(string) > limit
+      limit_string_cut(string, limit).sub(
         # cut back to the last word boundary
         /\s+\S*?\z/, ''
       ) + ellipsis

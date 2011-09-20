@@ -65,7 +65,7 @@ class Route
     end
 
     if @action
-      if Controller.instance_methods(false).include?(@action)
+      if Controller.method_defined?(@action)
         # methods defined in Controller class are not valid actions
         raise ResourceNotFoundError, request.route.to_s
       end
