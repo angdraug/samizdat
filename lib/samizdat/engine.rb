@@ -79,12 +79,20 @@ begin
     def samizdat_bindtextdomain(locale, path=nil)
       bindtextdomain('samizdat', path, locale, 'utf-8')
     end
-  else
+  elsif major < 2
+    # GetText < 2.0.0
     def samizdat_bindtextdomain(locale, path=nil)
       GetText::bindtextdomain('samizdat',
         :locale => locale,
         :charset => 'utf-8',
         :path => path)
+    end
+  else
+    def samizdat_bindtextdomain(locale, path=nil)
+      GetText::bindtextdomain('samizdat',
+        :charset => 'utf-8',
+        :path => path)
+      GetText::set_locale(locale)
     end
   end
   major, minor = nil
