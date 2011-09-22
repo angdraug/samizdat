@@ -65,11 +65,11 @@ class Route
     end
 
     if @action
+      @action = @action.untaint.to_sym
       if Controller.method_defined?(@action)
         # methods defined in Controller class are not valid actions
         raise ResourceNotFoundError, request.route.to_s
       end
-      @action = @action.untaint.to_sym
     end
 
     @action ||= DEFAULT_ACTION
