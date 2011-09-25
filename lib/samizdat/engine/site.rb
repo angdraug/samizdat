@@ -231,7 +231,7 @@ class Site
     @local_cache = SiteCache.new(CacheSingleton.instance, @name)
     if @config.cache and @config.cache =~ /\Adruby:/
       @shared_cache = CacheSingleton.instance.fetch_or_add('drb/' + @config.cache) do
-        DRbObject.new_with_uri(@config.cache)
+        SynCache::RemoteCache.new(@config.cache)
       end
       @cache = SiteCache.new(@shared_cache, @name)
     else
