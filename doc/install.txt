@@ -22,17 +22,18 @@ Get the Required Software
 You need the following software to run Samizdat: Ruby programming
 language environment, Apache or Lighttpd web server, PostgreSQL database
 with enabled PL/pgSQL procedural language (MySQL and SQLite3 are also
-supported), Ruby/Postgres bindings, Ruby/DBI interface, Ruby/Tidy,
-Mahoro, and RMagick libraries.
+supported), Ruby/Postgres bindings, Ruby/DBI interface, HTMLtidy or
+Ruby/Tidy, Ruby/magic, and RMagick libraries.
 
 For better performance, you should run Samizdat with mod_ruby or FastCGI
 module.
 
-Other recommended modules are: Ruby/GetText for translation of user
-interface to different languages, Ruby algorithm/diff for version
-comparison, RedCloth for Textile hypertext markup, TZInfo for timezone
-conversions. Samizdat will still work if the recommended modules are not
-present, but the corresponding parts of functionality will not be there.
+Other recommended modules are: FastGettext or Ruby-GetText for
+translation of user interface to different languages, Ruby
+algorithm/diff for version comparison, RedCloth for Textile hypertext
+markup, TZInfo for timezone conversions. Samizdat will still work if the
+recommended modules are not present, but the corresponding parts of
+functionality will not be there.
 
    http://ruby-lang.org/
    http://httpd.apache.org/
@@ -41,8 +42,9 @@ present, but the corresponding parts of functionality will not be there.
    http://rubyforge.org/projects/ruby-dbi/
    http://www.modruby.net/
    http://raa.ruby-lang.org/list.rhtml?name=fcgi
-   http://www.yotabanana.com/hiki/ruby-gettext.html?ruby-gettext
-   http://packages.qa.debian.org/liba/libalgorithm-diff-ruby.html
+   https://github.com/grosser/fast_gettext
+   https://github.com/mutoh/gettext
+   http://packages.qa.debian.org/r/ruby-algorithm-diff.html
    http://rubyforge.org/projects/redcloth/
    http://tidy.sf.net/
    http://rubyforge.org/projects/tidy/
