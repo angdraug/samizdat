@@ -48,7 +48,7 @@ class Resource
     end
 
     @type.untaint
-    @component = instance_eval(@type + 'Component.new(@request, @id)')
+    @component = instance_eval(@type + 'Component').new(@request, @id)
   end
 
   attr_reader :request, :id, :type
