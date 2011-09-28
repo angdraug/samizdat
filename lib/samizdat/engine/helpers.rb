@@ -11,6 +11,8 @@
 require 'samizdat'
 require 'yaml'
 
+module Kernel
+
 # debug output
 #
 def log(msg)
@@ -83,10 +85,6 @@ def exclude_hidden(node)
   "(s::hidden #{node} ?hidden FILTER ?hidden = 'false')"
 end
 
-def ellipsis
-  "\xe2\x80\xa6"
-end
-
 # true if _url_ can be an absolute URL (i.e. contains scheme component)
 #
 def absolute_url?(url)
@@ -120,3 +118,7 @@ def display_file_size(size)
 end
 
 LINK_ATTRIBUTE = { 'a' => 'href', 'img' => 'src' }
+
+end
+
+include Kernel

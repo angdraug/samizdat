@@ -18,14 +18,29 @@ class LocalDRbSingleton
     @started = {}
   end
 
-  def start(uri)
-    Thread.critical = true
-    unless @started[uri]
-      @started[uri] = true
+  if RUBY_VERSION < '1.9'
+    def start(uri)
+      Thread.critical = true
+      unless @started[uri]
+        @started[uri] = true
+        Thread.critical = false
+        DRb.start_service(uri)
+      end
       Thread.critical = false
-      DRb.start_service(uri)
     end
-    Thread.critical = false
+
+  else
+    def start(uri)
+      mutex = Mutex.new
+      mutex.lock
+      if @started[uri]
+        mutex.unlock
+      else
+        @started[uri] = true
+        mutex.unlock
+        DRb.start_service(uri)
+      end
+    end
   end
 end
 

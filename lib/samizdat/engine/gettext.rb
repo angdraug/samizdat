@@ -8,6 +8,8 @@
 #
 # vim: et sw=2 sts=2 ts=8 tw=0
 
+module Kernel
+
 # try to initialize FastGettext
 begin
   require 'fast_gettext'
@@ -71,3 +73,7 @@ rescue LoadError
     end
   end
 end
+
+end
+
+include Kernel

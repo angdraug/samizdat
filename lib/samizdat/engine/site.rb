@@ -379,6 +379,10 @@ module SiteHelper
       string.each_char[0, limit - 1].join
     end
 
+    def ellipsis
+      "\xe2\x80\xa6"
+    end
+
   else
     def limit_string_size(string)
       string.size
@@ -386,6 +390,10 @@ module SiteHelper
 
     def limit_string_cut(string, limit)
       string[0, limit - 1]
+    end
+
+    def ellipsis
+      "\u2026"
     end
   end
 

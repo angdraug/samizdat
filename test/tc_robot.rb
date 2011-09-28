@@ -45,13 +45,13 @@ class TC_Robot < Test::Unit::TestCase
 
   # utility methods
 
-  def post(action, data, header=nil)
+  def post(action, data, header={})
     Net::HTTP.start(@base.host) do |http|
       http.post(@base.path + action, data, header)
     end
   end
 
-  def get(action, header=nil)
+  def get(action, header={})
     Net::HTTP.start(@base.host) do |http|
       http.get(@base.path + action, header)
     end
