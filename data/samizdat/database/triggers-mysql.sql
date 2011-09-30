@@ -9,73 +9,73 @@
 
 DELIMITER |
 
-CREATE TRIGGER insert_statement BEFORE INSERT ON Statement
+CREATE TRIGGER insert_statement BEFORE INSERT ON statement
     FOR EACH ROW
     BEGIN
 	IF NEW.id IS NULL OR NEW.id = 0 THEN
-	    INSERT INTO Resource (literal, uriref, label)
-		VALUES ('false', 'false', 'Statement');
-	    SET NEW.id = (SELECT MAX(id) FROM Resource);
+	    INSERT INTO resource (literal, uriref, label)
+		VALUES ('false', 'false', 'statement');
+	    SET NEW.id = (SELECT MAX(id) FROM resource);
 	END IF;
     END; |
 
-CREATE TRIGGER insert_member BEFORE INSERT ON Member
+CREATE TRIGGER insert_member BEFORE INSERT ON member
     FOR EACH ROW
     BEGIN
 	IF NEW.id IS NULL OR NEW.id = 0 THEN
-	    INSERT INTO Resource (literal, uriref, label)
-		VALUES ('false', 'false', 'Member');
-	    SET NEW.id = (SELECT MAX(id) FROM Resource);
+	    INSERT INTO resource (literal, uriref, label)
+		VALUES ('false', 'false', 'member');
+	    SET NEW.id = (SELECT MAX(id) FROM resource);
 	END IF;
     END; |
 
-CREATE TRIGGER insert_message BEFORE INSERT ON Message
+CREATE TRIGGER insert_message BEFORE INSERT ON message
     FOR EACH ROW
     BEGIN
 	IF NEW.id IS NULL OR NEW.id = 0 THEN
-	    INSERT INTO Resource (literal, uriref, label)
-		VALUES ('false', 'false', 'Message');
-	    SET NEW.id = (SELECT MAX(id) FROM Resource);
+	    INSERT INTO resource (literal, uriref, label)
+		VALUES ('false', 'false', 'message');
+	    SET NEW.id = (SELECT MAX(id) FROM resource);
 	END IF;
     END; |
 
-CREATE TRIGGER insert_vote BEFORE INSERT ON Vote
+CREATE TRIGGER insert_vote BEFORE INSERT ON vote
     FOR EACH ROW
     BEGIN
 	IF NEW.id IS NULL OR NEW.id = 0 THEN
-	    INSERT INTO Resource (literal, uriref, label)
-		VALUES ('false', 'false', 'Vote');
-	    SET NEW.id = (SELECT MAX(id) FROM Resource);
+	    INSERT INTO resource (literal, uriref, label)
+		VALUES ('false', 'false', 'vote');
+	    SET NEW.id = (SELECT MAX(id) FROM resource);
 	END IF;
     END; |
 
 DELIMITER ;
 
 
-CREATE TRIGGER delete_statement AFTER DELETE ON Statement
+CREATE TRIGGER delete_statement AFTER DELETE ON statement
     FOR EACH ROW
-    DELETE FROM Resource WHERE id = OLD.id;
+    DELETE FROM resource WHERE id = OLD.id;
 
-CREATE TRIGGER delete_member AFTER DELETE ON Member
+CREATE TRIGGER delete_member AFTER DELETE ON member
     FOR EACH ROW
-    DELETE FROM Resource WHERE id = OLD.id;
+    DELETE FROM resource WHERE id = OLD.id;
 
-CREATE TRIGGER delete_message AFTER DELETE ON Message
+CREATE TRIGGER delete_message AFTER DELETE ON message
     FOR EACH ROW
-    DELETE FROM Resource WHERE id = OLD.id;
+    DELETE FROM resource WHERE id = OLD.id;
 
-CREATE TRIGGER delete_vote AFTER DELETE ON Vote
+CREATE TRIGGER delete_vote AFTER DELETE ON vote
     FOR EACH ROW
-    DELETE FROM Resource WHERE id = OLD.id;
+    DELETE FROM resource WHERE id = OLD.id;
 
 
-CREATE TRIGGER insert_rating AFTER INSERT ON Vote
+CREATE TRIGGER insert_rating AFTER INSERT ON vote
     FOR EACH ROW
-    UPDATE Statement SET rating = (SELECT AVG(rating) FROM Vote
+    UPDATE statement SET rating = (SELECT AVG(rating) FROM vote
 	WHERE proposition = NEW.proposition) WHERE id = NEW.proposition;
 
-CREATE TRIGGER update_rating AFTER UPDATE ON Vote
+CREATE TRIGGER update_rating AFTER UPDATE ON vote
     FOR EACH ROW
-    UPDATE Statement SET rating = (SELECT AVG(rating) FROM Vote
+    UPDATE statement SET rating = (SELECT AVG(rating) FROM vote
 	WHERE proposition = NEW.proposition) WHERE id = NEW.proposition;
 

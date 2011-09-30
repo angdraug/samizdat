@@ -15,15 +15,13 @@ class TagsController < Controller
     page = (@request['page'] or 1).to_i
 
     tags = [[_('Tag'), _('Related Resources')]] +
-      dataset[page - 1].collect {|tag, nrelated|
-        subtags = rdf.select_all('
+      dataset[page - 1].collect {|tag|
+        subtags = rdf.fetch(%q{
           SELECT ?subtag
           WHERE (s::subTagOf ?subtag :tag)
-          ORDER BY ?subtag', limit_page, 0,
-          { :tag => tag })
-
-        subtags = subtags.collect! {|subtag,|
-          resource_href(subtag, Resource.new(@request, subtag).title)
+          ORDER BY ?subtag}, :tag => tag[:id]
+        ).limit(limit_page).map {|s|
+          resource_href(s[:subtag], Resource.new(@request, s[:subtag]).title)
         }.join(', ')
 
         unless subtags.empty?
@@ -32,15 +30,15 @@ class TagsController < Controller
 
         if @request.moderate?
           subtags << ', ' unless subtags.empty?
-          subtags << link("tags/#{tag}/add_subtag", _('add a sub-tag'))
+          subtags << link("tags/#{tag[:id]}/add_subtag", _('add a sub-tag'))
         end
 
         unless subtags.empty?
           subtags = ' (' + subtags + ')'
         end
 
-        [ resource_href(tag, Resource.new(@request, tag).title) + subtags,
-          nrelated ]
+        [ resource_href(tag[:id], Resource.new(@request, tag[:id]).title) + subtags,
+          tag[:nrelated_with_subtags] ]
       }
 
     @title = config['site']['name'] + ': ' +
@@ -58,12 +56,12 @@ class TagsController < Controller
       subtag = (Model.validate_id(subtag) or
                 raise ResourceNotFoundError, subtag)
 
-      db.transaction do |db|
+      db.transaction do
         log_moderation('subtag')
-        rdf.assert('
+        rdf.assert(%q{
           UPDATE ?sub_tag_of = :tag
-          WHERE (s::subTagOf :subtag ?sub_tag_of)',
-          {:tag => @id, :subtag => subtag})
+          WHERE (s::subTagOf :subtag ?sub_tag_of)},
+          :tag => @id, :subtag => subtag)
       end
       cache.flush
 

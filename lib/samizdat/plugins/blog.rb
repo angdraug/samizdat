@@ -17,7 +17,7 @@ class BlogPlugin < RoutePlugin
     return unless match.kind_of? MatchData
 
     login, route = match[1, 2]
-    id, = db.select_one('SELECT id FROM Member WHERE login = ?', login)
+    id = db[:member].filter(:login => login).get(:id)
     return unless id
 
     request.route = '/resource/' + id.to_s + route.to_s

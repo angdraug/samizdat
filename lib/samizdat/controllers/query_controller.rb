@@ -28,8 +28,8 @@ class QueryController < Controller
 
     @title = _('Search Result') + page_number(page)
 
-    dataset = SqlDataSet.new(site, q.to_sql[0])
-    results = dataset[page - 1].collect {|id,| Resource.new(@request, id).list_item }
+    dataset = SqlDataSet.new(site, q.to_sql)
+    results = dataset[page - 1].map {|r| Resource.new(@request, r.values.first).list_item }
 
     if results.size > 0
       feed = rss_link(query)
@@ -127,7 +127,7 @@ ORDER BY ?date DESC}
       maker.channel.description = CGI.escapeHTML(query)
       maker.channel.link = @request.base + rss_link(query)
 
-      SqlDataSet.new(site, q.to_sql[0])[0]
+      SqlDataSet.new(site, q.to_sql).first
     end
   end
 
@@ -140,7 +140,7 @@ ORDER BY ?date DESC}
   def validate_query(query)
     begin
       q = Graffiti::SquishSelect.new(rdf.config, query)
-      sql, = rdf.select(q)
+      sql = rdf.select(q)
     rescue Graffiti::ProgrammingError
       raise UserError, _('Error in your query: ') + CGI.escapeHTML($!.message)
     end

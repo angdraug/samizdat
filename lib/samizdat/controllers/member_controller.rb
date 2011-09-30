@@ -130,8 +130,11 @@ class MemberController < Controller
 
       # create account
       p = Password.encrypt(@password)
-      db.do('INSERT INTO Member (login, email, password) VALUES (?, ?, ?)',
-            @login, @email, (site.email_enabled? ? nil : p))
+      db[:member].insert(
+        :login => @login,
+        :email => @email,
+        :password => (site.email_enabled? ? nil : p)
+      )
 
       if site.email_enabled?   # request confirmation over email
         confirm = confirm_hash(@login)
@@ -200,7 +203,7 @@ class MemberController < Controller
     login = nil
 
     db.transaction do
-      login, = db.select_one('SELECT login FROM Member WHERE confirm = ?', confirm)
+      login = db[:member].filter(:confirm => confirm).get(:login)
 
       login.nil? and raise UserError, _('Confirmation hash not found')
       @session.member and @session.login != login and raise UserError,
@@ -208,16 +211,15 @@ class MemberController < Controller
 
       # set password and email from preferences
       prefs = Preferences.new(site, login)
-      password = prefs['password'] and db.do(
-        'UPDATE Member SET password = ? WHERE login = ?', password, login)
-      email = prefs['email'] and db.do(
-        'UPDATE Member SET email = ? WHERE login = ?', email, login)
+      ds = db[:member].filter(:login => login)
+      password = prefs['password'] and ds.update(:password => password)
+      email = prefs['email'] and ds.update(:email => email)
       prefs.delete('password')
       prefs.delete('email')
       prefs.save
 
       # clear confirmation hash
-      db.do('UPDATE Member SET confirm = NULL WHERE login = ?', login)
+      ds.update(:confirm => nil)
 
       start_session = true if password and email and not @session.member
     end
@@ -251,8 +253,8 @@ class MemberController < Controller
 
     if login and login =~ LOGIN_PATTERN
       p = Password.random
-      db.transaction do |db|
-        email, = db.select_one 'SELECT email FROM Member WHERE login = ?', login
+      db.transaction do
+        email = db[:member].filter(:login => login).get(:email)
         email or raise UserError, _('Wrong login')
         confirm = confirm_hash(login)
 
@@ -286,8 +288,7 @@ class MemberController < Controller
       prefs['blocked_by'] = @session.member
       prefs['password'] = password   # remember password
       prefs.save
-      db.do(
-        'UPDATE Member SET password = NULL, session = NULL WHERE id = ?', @id)
+      db[:member][:id => @id] = {:password => nil, :session => nil}
     end
   end
 
@@ -296,13 +297,15 @@ class MemberController < Controller
       password.nil? or raise UserError, _('Account is not blocked')
       prefs['password'] or raise UserError, _("Can't unblock, the account has no password")
 
+      ds = db[:member].filter(:id => @id)
+
       if site.email_enabled? and prefs['email']
         email = prefs.delete('email')   # confirm email
-        db.do 'UPDATE Member SET email = ? WHERE id = ?', email, @id
+        ds.update(:email => email)
       end
 
       password = prefs.delete('password')   # restore password
-      db.do 'UPDATE Member SET password = ? WHERE id = ?', password, @id
+      ds.update(:password => password)
 
       prefs.delete('blocked_by')
       prefs.save
@@ -370,7 +373,7 @@ class MemberController < Controller
     @request.assert_action_confirmed
 
     changes = []   # scope fix
-    db.transaction do |db|   # AutoCommit assumed off
+    db.transaction do
       check_duplicates
       changes = yield.compact
     end
@@ -386,22 +389,20 @@ class MemberController < Controller
 
   def change_full_name
     if @full_name and @full_name != @session.full_name
-      db.do 'UPDATE Member SET full_name = ? WHERE id = ?',
-        @full_name, @session.member
+      db[:member][:id => @session.member] = {:full_name => @full_name}
       return sprintf(_('%s updated'), _('Full name'))
     end
   end
 
   def change_password
     if @password
-      p, = db.select_one(
-        'SELECT password FROM Member WHERE id = ?', @session.member)
+      ds = db[:member].filter(:id => @session.member)
+      p = ds.get(:password)
       Password.check(@request['password'], p) or raise AuthError,
         _('Wrong current password')
       Password.check(@password, p) and return nil   # unchanged
 
-      db.do 'UPDATE Member SET password = ? WHERE id = ?',
-        Password.encrypt(@password), @session.member
+      ds.update(:password => Password.encrypt(@password))
       return sprintf(_('%s updated'), _('Password'))
     end
   end
@@ -422,8 +423,7 @@ class MemberController < Controller
         return _('Confirmation request is sent to your new email address.')
 
       else   # without confirmation
-        db.do 'UPDATE Member SET email = ? WHERE id = ?',
-          @email, @session.member
+        db[:member][:id => @session.member] = {:email => @email}
         return sprintf(_('%s updated'), _('Email'))
       end
     end
@@ -436,11 +436,10 @@ class MemberController < Controller
     if @request.has_key? 'confirm'
       @request.assert_action_confirmed
       db.transaction do
-        login, password = db.select_one(
-          'SELECT login, password FROM Member WHERE id = ?', @id)
-        login.nil? and raise ResourceNotFoundError, @id.to_s
+        m = db[:member].filter(:id => @id).select(:login, :password).first
+        m.nil? and raise ResourceNotFoundError, @id.to_s
 
-        yield login, password, Preferences.new(site, login)
+        yield m[:login], m[:password], Preferences.new(site, m[:login])
         log_moderation(action)
       end
       cache.flush
@@ -489,28 +488,25 @@ class MemberController < Controller
   # run it from inside the same transaction that stores the verified values
   #
   def check_duplicates
+    ds = db[:member]
     if @session.member
       @current_email = rdf.get_property(@session.member, 's::email')
-      except_self = ' AND id != ' + @session.member.to_s
+      ds = ds.filter(:id => @session.member).invert
     end
 
     if @full_name and @full_name != @session.full_name
-      id, = db.select_one(
-        'SELECT id FROM Member WHERE full_name = ?' + except_self.to_s,
-        @full_name)
-      id.nil? or raise UserError,
+      m = ds.filter(:full_name => @full_name).first
+      m.nil? or raise UserError,
         _('Full name you have specified is used by someone else')
     end
     if @email and @email != @current_email
-      id, = db.select_one(
-        'SELECT id FROM Member WHERE email = ?' + except_self.to_s,
-        @email)
-      id.nil? or raise UserError,
+      m = ds.filter(:email => @email).first
+      m.nil? or raise UserError,
         _('Email address you have specified is used by someone else')
     end
     if @login and @session.member.nil?
-      id, = db.select_one 'SELECT id FROM Member WHERE login = ?', @login
-      id.nil? or raise UserError,
+      m = ds.filter(:login => @login).first
+      m.nil? or raise UserError,
         _('Login name you specified is already used by someone else')
     end
   end

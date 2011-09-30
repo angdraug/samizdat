@@ -113,7 +113,7 @@ class Preferences < DelegateClass(Hash)
       @prefs = {}
     else
       # todo: do we need to cache this?
-      prefs, = db.select_one 'SELECT prefs FROM Member WHERE login = ?', @login
+      prefs = db[:member].filter(:login => @login).get(:prefs)
       @prefs = yaml_hash(prefs)
     end
 
@@ -127,7 +127,6 @@ class Preferences < DelegateClass(Hash)
   def save(confirm=nil)
     return if 'guest' == @login
     @prefs or raise RuntimeError, 'No preferences to save'
-    db.do 'UPDATE Member SET prefs = ?, confirm = ? WHERE login = ?',
-      @prefs.to_yaml, confirm, @login
+    db[:member][:login => @login] = {:prefs => @prefs.to_yaml, :confirm => confirm}
   end
 end

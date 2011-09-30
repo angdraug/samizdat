@@ -616,7 +616,7 @@ class MessageController < Controller
   #
   def save(log_action = nil)
     @request.assert_action_confirmed
-    db.transaction do |db|
+    db.transaction do
       log_moderation(log_action) if log_action
       yield
       @upload.status = 'confirmed' if @upload

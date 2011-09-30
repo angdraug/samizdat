@@ -43,41 +43,6 @@ class TC_Robot < Test::Unit::TestCase
     @base, @login, @full_name, @email, @password = nil
   end
 
-  # utility methods
-
-  def post(action, data, header={})
-    Net::HTTP.start(@base.host) do |http|
-      http.post(@base.path + action, data, header)
-    end
-  end
-
-  def get(action, header={})
-    Net::HTTP.start(@base.host) do |http|
-      http.get(@base.path + action, header)
-    end
-  end
-
-  def get_action_token(response)
-    elements(parse_page(response.body),
-      '//h:input[@name="action_token"]', 'value')[0]
-  end
-
-  def publish_message(title, body, parent = nil, format = nil)
-    if parent
-      action = "message/#{parent}/reply"
-    else
-      action = "message/publish"
-    end
-    params = "title=#{CGI.escape(title)}&body=#{CGI.escape(body)}"
-    params << "&format=#{format}" if format
-    preview_response = post(action, params + "&preview", {"Cookie" => @@session})
-    if block_given?
-      yield preview_response
-    end
-    action_token = get_action_token(preview_response)
-    post(action, params + "&action_token=#{action_token}&confirm", {"Cookie" => @@session})
-  end
-
   # order-sensitive tests
 
   def test_00_anonymous
@@ -155,6 +120,7 @@ class TC_Robot < Test::Unit::TestCase
 
     assert_equal Net::HTTPFound, response.class
     assert id = response['location'].sub(@base.to_s, '')
+    assert(id.to_i > 0, "Unexpected redirect location '#{response['location']}'")
     assert_equal Net::HTTPOK, (response = get(id)).class
     msg = REXML::XPath.first(parse_page(response.body),
       '//h:div[@id="main"]/h:div', XHTML_NS)
@@ -227,11 +193,12 @@ class TC_Robot < Test::Unit::TestCase
     title, body = 'Test Thread', '.'
     response = publish_message(title, body)
     parent = thread = response['location'].sub(@base.to_s, '')
-    count = 10   # increase if you have time to wait
+    count = 5   # increase if you have time to wait
     while count > 0 do
       title, body = 'Test Message ' + count.to_s, 'blah blah.'
       response = publish_message(title, body, parent)
-      @@session = response['set-cookie']
+      assert @@session = response['set-cookie']
+      assert_equal Net::HTTPFound, response.class
       parent = response['location'].sub(/#.*$/, '').sub(@base.to_s, '')
       response = get("resource/#{parent}/vote", {"Cookie" => @@session})
       assert action_token = get_action_token(response)
@@ -263,11 +230,87 @@ class TC_Robot < Test::Unit::TestCase
     assert_equal %q{Test &#39;}, text(msg, 'h:div[@class="title"]/h:a')
   end
 
+  def test_07_edit_message
+    response = publish_message('Test Edit', 'Version 1')
+    id = response['location'].sub(@base.to_s, '')
+    assert_equal Net::HTTPOK, (response = get(id)).class
+    msg = REXML::XPath.first(parse(response.body),
+      '//h:div[@id="main"]/h:div', XHTML_NS)
+    assert_equal 'Version 1', elements(msg,
+      '//h:div[@class="content"]/h:p').join.strip
+
+    response = publish_message('Test Edit', 'Version 2', id, nil, 'edit')
+    assert_equal id, response['location'].sub(@base.to_s, '')
+    assert_equal Net::HTTPOK, (response = get(id)).class
+    msg = REXML::XPath.first(parse(response.body),
+      '//h:div[@id="main"]/h:div', XHTML_NS)
+    assert_equal 'Version 2', elements(msg,
+      '//h:div[@class="content"]/h:p').join.strip
+  end
+
+  def test_08_translate_message
+    response = publish_message('Test Translate', 'English')
+    id = response['location'].sub(@base.to_s, '')
+    assert_equal Net::HTTPOK, (response = get(id)).class
+    msg = REXML::XPath.first(parse(response.body),
+      '//h:div[@id="main"]/h:div', XHTML_NS)
+    assert_equal 'English', elements(msg,
+      '//h:div[@class="content"]/h:p').join.strip
+
+    response = publish_message('Test Translate', 'Belarusian', id, nil, 'translate', 'be')
+    assert translation = response['location'].sub(@base.to_s, '')
+    assert_equal Net::HTTPOK, (response = get(translation)).class
+    msg = REXML::XPath.first(parse(response.body),
+      '//h:div[@id="main"]/h:div', XHTML_NS)
+    assert_equal 'Belarusian', elements(msg,
+      '//h:div[@class="content"]/h:p').join.strip
+
+    assert_equal Net::HTTPOK, (response = get(id)).class
+    msg = REXML::XPath.first(parse(response.body),
+      '//h:div[@id="main"]/h:div', XHTML_NS)
+    assert_equal 'be', elements(msg, '//h:div[@class="info"]/h:a[2]').join.strip
+  end
+
   # todo: test pagination
 
   private
 
   def parse_page(html)
     parse(@site.whitewash.tidy(html))
+  end
+
+  # utility methods
+
+  def post(action, data, header={})
+    Net::HTTP.start(@base.host) do |http|
+      http.post(@base.path + action, data, header)
+    end
+  end
+
+  def get(action, header={})
+    Net::HTTP.start(@base.host) do |http|
+      http.get(@base.path + action, header)
+    end
+  end
+
+  def get_action_token(response)
+    elements(parse_page(response.body),
+      '//h:input[@name="action_token"]', 'value')[0]
+  end
+
+  def publish_message(title, body, parent = nil, format = nil, action = 'reply', lang = 'en')
+    if parent
+      route = "message/#{parent}/#{action}"
+    else
+      route = "message/publish"
+    end
+    params = "title=#{CGI.escape(title)}&body=#{CGI.escape(body)}&lang=#{lang}"
+    params << "&format=#{format}" if format
+    preview_response = post(route, params + "&preview", {"Cookie" => @@session})
+    if block_given?
+      yield preview_response
+    end
+    action_token = get_action_token(preview_response)
+    post(route, params + "&action_token=#{action_token}&confirm", {"Cookie" => @@session})
   end
 end

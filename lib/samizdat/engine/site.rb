@@ -307,21 +307,16 @@ class Site
     # todo: check connection timeouts, auto-reconnect
     # optimize: generate connection pool
     local_cache.fetch_or_add('database') do
-      db = DBI.connect(config['db']['dsn'],
-        (ENV['USER'] or config['db']['user']),
-        ENV['USER']? nil : config['db']['password'])
-      begin
-        db['AutoCommit'] = false
-        db['quote_boolean'] = Proc.new {|value| value ? "'true'" : "'false'" }
-        db['detect_boolean'] = Proc.new do |column_info, value|
-          ::DBI::SQL_VARCHAR == column_info['sql_type'] and
-            5 == column_info['precision'] and
-            ['true', 'false'].include?(value.downcase)
-        end
-      rescue DBI::NotSupportedError
-        # no need to disable if it's not there
-      end
-      db
+      config['db']['adapter'] or raise RuntimeError,
+        'Invalid database connection configuration: adapter not defined'
+      Sequel.connect(
+        :adapter => config['db']['adapter'],
+        :host => config['db']['host'],
+        :database => config['db']['database'],
+        :user => (ENV['USER'] or config['db']['user']),
+        :password => (ENV['USER'] ? nil : config['db']['password']),
+        :quote_identifiers => false
+      )
     end
   end
 
@@ -339,6 +334,8 @@ end
 # @site instance variable initialized.
 #
 module SiteHelper
+  include Sequel::SQL::Constants
+
   attr_reader :site
 
   def config

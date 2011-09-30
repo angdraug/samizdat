@@ -8,11 +8,11 @@
 --
 
 -- grant access to different user for maximum priviledge separation
-GRANT INSERT, UPDATE, SELECT ON Resource, Statement, Vote, Member, Message,
-	Tag, PendingUpload, PendingUploadFile
+GRANT INSERT, UPDATE, SELECT ON resource, statement, vote, member, message,
+	tag, pending_upload, pending_upload_file
 TO samizdat;
-GRANT INSERT, UPDATE, DELETE, SELECT ON Part TO samizdat;
-GRANT INSERT, SELECT ON Moderation TO samizdat;
-GRANT SELECT ON Role TO samizdat;
-GRANT USAGE, UPDATE, SELECT ON Resource_id_seq, PendingUpload_id_seq
+GRANT INSERT, UPDATE, DELETE, SELECT ON part TO samizdat;
+GRANT INSERT, SELECT ON moderation TO samizdat;
+GRANT SELECT ON role TO samizdat;
+GRANT USAGE, UPDATE, SELECT ON resource_id_seq, pending_upload_id_seq
 TO samizdat;

@@ -264,11 +264,12 @@ module ApplicationHelper
   #
   def tag_cloud
     data = Tag.find_tags(site)
-    max_tag, max_usage = data.first
-    return '' unless max_usage and max_usage > 0
+    return '' if data.empty?
+    max_usage = data.first[:nrelated_with_subtags]
+    return '' unless max_usage > 0
 
-    data.collect {|tag, usage|
-      [ tag, usage, Tag.new(site, tag).name(@request) ]
+    data.collect {|tag|
+      [ tag[:id], tag[:nrelated_with_subtags], Tag.new(site, tag[:id]).name(@request) ]
 
     }.sort_by {|tag, usage, title| title.downcase }.collect {|tag, usage, title|
       font_size = 75 + 75 * usage / max_usage
@@ -283,13 +284,17 @@ module ApplicationHelper
   def tag_select(tag = nil)
     return [] unless @member.allowed_to?('vote')
 
-    tags = (Tag.find_tags(site).transpose[0] or [])
+    tags = Tag.find_tags(site).map {|t| t[:id] }
     if tag.kind_of?(Tag) and not tags.include?(tag.id)
       # make sure the tag we want is in the list
       tags.unshift((tag.id or tag.uriref))
     end
-    tags.collect! {|t| [ t, Tag.new(site, t).name(@request) ] }
-    tags = tags.sort_by {|t, name| name.downcase }
+
+    tags = tags.collect {|t|
+      [ t, Tag.new(site, t).name(@request) ]
+    }.sort_by {|t, name|
+      name.downcase
+    }
     tags.unshift [nil, _('SELECT TAG')]
 
     [ [:label, 'tag', _('Select a tag that this resource will be related to')],
@@ -379,8 +384,8 @@ module ApplicationHelper
 
       require 'rss/maker'
       RSS::Maker.make("1.0") {|maker|
-        yield(maker).collect do |id,|
-          Resource.new(@request, id).rss(maker)
+        yield(maker).collect do |row|
+          Resource.new(@request, row.values.first).rss(maker)
         end
 
         maker.channel.about = File.join(@request.base, @request.env['REQUEST_URI'])

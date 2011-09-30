@@ -28,8 +28,8 @@ class HistoryController < Controller
       WHERE (dct::isVersionOf ?version #{@id})
             (dc::date ?version ?date)
       ORDER BY ?date DESC})
-    dataset[page - 1].each {|version,| versions.push version }
-    last, = dataset[page][0] if dataset.size > page * limit_page
+    dataset[page - 1].each {|r| versions.push r[:version] }
+    last = dataset[page].first[:version] if dataset.size > page * limit_page
 
     # table of changes
     compare = _('compare with previous version')

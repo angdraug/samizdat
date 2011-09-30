@@ -123,19 +123,7 @@ module Dispatcher
     catch :finish do
       request = Request.new(cgi)
       begin
-        begin
-          Dispatcher.render(request, Route.new(request))
-
-        rescue DRb::DRbConnError => error
-          # todo: try to re-establish the lost connection and retry
-          raise
-        rescue DBI::ProgrammingError, DBI::OperationalError => error
-          if 'server closed the connection unexpectedly' == error.message
-            # todo: try to re-establish the lost connection and retry
-          end
-          raise
-        end
-
+        Dispatcher.render(request, Route.new(request))
       rescue => error
         Dispatcher.render_error(request, error)
       end

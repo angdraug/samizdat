@@ -7,79 +7,79 @@
 --   the GNU General Public License version 3 or later.
 --
 
-CREATE TRIGGER insert_statement AFTER INSERT ON Statement
+CREATE TRIGGER insert_statement AFTER INSERT ON statement
     FOR EACH ROW WHEN NEW.id IS NULL
     BEGIN
-	INSERT INTO Resource (literal, uriref, label)
-	    VALUES ('false', 'false', 'Statement');
-	UPDATE Statement SET id = (SELECT MAX(id) FROM Resource)
+	INSERT INTO resource (literal, uriref, label)
+	    VALUES ('false', 'false', 'statement');
+	UPDATE statement SET id = (SELECT MAX(id) FROM resource)
 	    WHERE rowid = NEW.rowid;
     END;
 
-CREATE TRIGGER insert_member AFTER INSERT ON Member
+CREATE TRIGGER insert_member AFTER INSERT ON member
     FOR EACH ROW WHEN NEW.id IS NULL
     BEGIN
-	INSERT INTO Resource (literal, uriref, label)
-	    VALUES ('false', 'false', 'Member');
-	UPDATE Member SET id = (SELECT MAX(id) FROM Resource)
+	INSERT INTO resource (literal, uriref, label)
+	    VALUES ('false', 'false', 'member');
+	UPDATE member SET id = (SELECT MAX(id) FROM resource)
 	    WHERE rowid = NEW.rowid;
     END;
 
-CREATE TRIGGER insert_message AFTER INSERT ON Message
+CREATE TRIGGER insert_message AFTER INSERT ON message
     FOR EACH ROW WHEN NEW.id IS NULL
     BEGIN
-	INSERT INTO Resource (literal, uriref, label)
-	    VALUES ('false', 'false', 'Message');
-	UPDATE Message SET id = (SELECT MAX(id) FROM Resource)
+	INSERT INTO resource (literal, uriref, label)
+	    VALUES ('false', 'false', 'message');
+	UPDATE message SET id = (SELECT MAX(id) FROM resource)
 	    WHERE rowid = NEW.rowid;
     END;
 
-CREATE TRIGGER insert_vote AFTER INSERT ON Vote
+CREATE TRIGGER insert_vote AFTER INSERT ON vote
     FOR EACH ROW WHEN NEW.id IS NULL
     BEGIN
-	INSERT INTO Resource (literal, uriref, label)
-	    VALUES ('false', 'false', 'Vote');
-	UPDATE Vote SET id = (SELECT MAX(id) FROM Resource)
+	INSERT INTO resource (literal, uriref, label)
+	    VALUES ('false', 'false', 'vote');
+	UPDATE vote SET id = (SELECT MAX(id) FROM resource)
 	    WHERE rowid = NEW.rowid;
     END;
 
 
-CREATE TRIGGER delete_statement AFTER DELETE ON Statement
+CREATE TRIGGER delete_statement AFTER DELETE ON statement
     FOR EACH ROW
     BEGIN
-	DELETE FROM Resource WHERE id = OLD.id;
+	DELETE FROM resource WHERE id = OLD.id;
     END;
 
-CREATE TRIGGER delete_member AFTER DELETE ON Member
+CREATE TRIGGER delete_member AFTER DELETE ON member
     FOR EACH ROW
     BEGIN
-	DELETE FROM Resource WHERE id = OLD.id;
+	DELETE FROM resource WHERE id = OLD.id;
     END;
 
-CREATE TRIGGER delete_message AFTER DELETE ON Message
+CREATE TRIGGER delete_message AFTER DELETE ON message
     FOR EACH ROW
     BEGIN
-	DELETE FROM Resource WHERE id = OLD.id;
+	DELETE FROM resource WHERE id = OLD.id;
     END;
 
-CREATE TRIGGER delete_vote AFTER DELETE ON Vote
+CREATE TRIGGER delete_vote AFTER DELETE ON vote
     FOR EACH ROW
     BEGIN
-	DELETE FROM Resource WHERE id = OLD.id;
+	DELETE FROM resource WHERE id = OLD.id;
     END;
 
 
-CREATE TRIGGER insert_rating AFTER INSERT ON Vote
+CREATE TRIGGER insert_rating AFTER INSERT ON vote
     FOR EACH ROW
     BEGIN
-        UPDATE Statement SET rating = (SELECT AVG(rating) FROM Vote
+        UPDATE statement SET rating = (SELECT AVG(rating) FROM vote
 	    WHERE proposition = NEW.proposition) WHERE id = NEW.proposition;
     END;
 
-CREATE TRIGGER update_rating AFTER UPDATE ON Vote
+CREATE TRIGGER update_rating AFTER UPDATE ON vote
     FOR EACH ROW
     BEGIN
-        UPDATE Statement SET rating = (SELECT AVG(rating) FROM Vote
+        UPDATE statement SET rating = (SELECT AVG(rating) FROM vote
 	    WHERE proposition = NEW.proposition) WHERE id = NEW.proposition;
     END;
 

@@ -76,8 +76,8 @@ module MessageHelper
     if message.translations.to_a.size > 0
       language = _('language') + ': ' + message.lang if message.lang
       translations = _('translation') + ': ' +
-        message.translations.sort_by {|l, m| l }.collect {|l, m|
-          %{<a href="#{m}">#{l}</a>}
+        message.translations.sort_by {|t| t[:lang] }.collect {|t|
+          %{<a href="#{t[:msg]}">#{t[:lang]}</a>}
         }.join(' ')
     end
 

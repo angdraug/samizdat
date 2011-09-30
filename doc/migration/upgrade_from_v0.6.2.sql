@@ -11,26 +11,26 @@ BEGIN;
 
 -- update tables
 
-ALTER TABLE Member
+ALTER TABLE member
         ALTER COLUMN full_name DROP NOT NULL;
 
-ALTER TABLE Message
+ALTER TABLE message
         ADD COLUMN locked BOOLEAN;
 
-ALTER TABLE Resource
-        ADD COLUMN part_of INTEGER REFERENCES Resource,
-        ADD COLUMN part_of_subproperty INTEGER REFERENCES Resource,
+ALTER TABLE resource
+        ADD COLUMN part_of INTEGER REFERENCES resource,
+        ADD COLUMN part_of_subproperty INTEGER REFERENCES resource,
         ADD COLUMN part_sequence_number INTEGER;
 
-CREATE INDEX Resource_part_of_idx ON Resource (part_of);
+CREATE INDEX resource_part_of_idx ON resource (part_of);
 
-REVOKE INSERT, UPDATE ON Role FROM samizdat;
+REVOKE INSERT, UPDATE ON role FROM samizdat;
 
 -- create new tables
 
 CREATE TABLE Event (
-        id INTEGER PRIMARY KEY REFERENCES Resource,
-        description INTEGER REFERENCES Message,
+        id INTEGER PRIMARY KEY REFERENCES resource,
+        description INTEGER REFERENCES message,
         dtstart TIMESTAMP WITH TIME ZONE NOT NULL,
         dtend TIMESTAMP WITH TIME ZONE);
 
@@ -40,7 +40,7 @@ CREATE TYPE RecurrenceFreq AS ENUM ('secondly', 'minutely', 'hourly', 'daily',
         'weekly', 'monthly', 'yearly');
 
 CREATE TABLE Recurrence (
-        id INTEGER PRIMARY KEY REFERENCES Resource,
+        id INTEGER PRIMARY KEY REFERENCES resource,
         event INTEGER REFERENCES Event,
         freq RecurrenceFreq DEFAULT 'daily' NOT NULL,
         interval INTEGER DEFAULT 1 NOT NULL,
@@ -50,17 +50,17 @@ CREATE TABLE Recurrence (
 
 CREATE INDEX Recurrence_event_until_idx ON Recurrence (event, until);
 
-CREATE TABLE Part (
-        id INTEGER REFERENCES Resource,
-        part_of INTEGER REFERENCES Resource,
-        part_of_subproperty INTEGER REFERENCES Resource,
+CREATE TABLE part (
+        id INTEGER REFERENCES resource,
+        part_of INTEGER REFERENCES resource,
+        part_of_subproperty INTEGER REFERENCES resource,
         distance INTEGER DEFAULT 0 NOT NULL);
 
-CREATE INDEX Part_id_idx ON Part (id);
-CREATE INDEX Part_part_of_idx ON Part (part_of);
+CREATE INDEX part_id_idx ON part (id);
+CREATE INDEX part_part_of_idx ON part (part_of);
 
-CREATE TABLE Tag (
-        id INTEGER PRIMARY KEY REFERENCES Resource,
+CREATE TABLE tag (
+        id INTEGER PRIMARY KEY REFERENCES resource,
         nrelated INTEGER,
         nrelated_with_subtags INTEGER);
 
@@ -86,9 +86,9 @@ CREATE INDEX PendingUploadFile_upload_idx ON PendingUploadFile (upload);
 
 -- grant access to new tables (change samizdat to your user if different)
 
-GRANT INSERT, UPDATE, SELECT ON Event, Recurrence, Tag,
+GRANT INSERT, UPDATE, SELECT ON Event, Recurrence, tag,
         PendingUpload, PendingUploadFile TO samizdat;
-GRANT INSERT, UPDATE, DELETE, SELECT ON Part TO samizdat;
+GRANT INSERT, UPDATE, DELETE, SELECT ON part TO samizdat;
 GRANT USAGE, UPDATE, SELECT ON PendingUpload_id_seq TO samizdat;
 
 -- update triggers
@@ -107,7 +107,7 @@ CREATE TRIGGER delete_recurrence AFTER DELETE ON Recurrence
 
 DROP FUNCTION update_rating() CASCADE;
 
-CREATE FUNCTION select_subproperty(value Resource.id%TYPE, subproperty Resource.id%TYPE) RETURNS Resource.id%TYPE AS $$
+CREATE FUNCTION select_subproperty(value resource.id%TYPE, subproperty resource.id%TYPE) RETURNS resource.id%TYPE AS $$
     BEGIN
         IF subproperty IS NULL THEN
             RETURN NULL;
@@ -117,48 +117,48 @@ CREATE FUNCTION select_subproperty(value Resource.id%TYPE, subproperty Resource.
     END;
 $$ LANGUAGE 'plpgsql';
 
-CREATE FUNCTION calculate_statement_rating(statement_id Statement.id%TYPE) RETURNS Statement.rating%TYPE AS $$
+CREATE FUNCTION calculate_statement_rating(statement_id statement.id%TYPE) RETURNS statement.rating%TYPE AS $$
     BEGIN
-        RETURN (SELECT AVG(rating) FROM Vote WHERE proposition = statement_id);
+        RETURN (SELECT AVG(rating) FROM vote WHERE proposition = statement_id);
     END;
 $$ LANGUAGE 'plpgsql';
 
-CREATE FUNCTION update_nrelated(tag_id Resource.id%TYPE) RETURNS VOID AS $$
+CREATE FUNCTION update_nrelated(tag_id resource.id%TYPE) RETURNS VOID AS $$
     DECLARE
-        dc_relation Resource.label%TYPE := 'http://purl.org/dc/elements/1.1/relation';
-        s_subtag_of Resource.label%TYPE := 'http://www.nongnu.org/samizdat/rdf/schema#subTagOf';
-        s_subtag_of_id Resource.id%TYPE;
-        n Tag.nrelated%TYPE;
+        dc_relation resource.label%TYPE := 'http://purl.org/dc/elements/1.1/relation';
+        s_subtag_of resource.label%TYPE := 'http://www.nongnu.org/samizdat/rdf/schema#subTagOf';
+        s_subtag_of_id resource.id%TYPE;
+        n tag.nrelated%TYPE;
         supertag RECORD;
     BEGIN
         -- update nrelated
         SELECT COUNT(*) INTO n
-            FROM Statement s
-            INNER JOIN Resource p ON s.predicate = p.id
+            FROM statement s
+            INNER JOIN resource p ON s.predicate = p.id
             WHERE p.label = dc_relation AND s.object = tag_id AND s.rating > 0;
 
-        UPDATE Tag SET nrelated = n WHERE id = tag_id;
+        UPDATE tag SET nrelated = n WHERE id = tag_id;
         IF NOT FOUND THEN
-            INSERT INTO Tag (id, nrelated) VALUES (tag_id, n);
+            INSERT INTO tag (id, nrelated) VALUES (tag_id, n);
         END IF;
 
         -- update nrelated_with_subtags for this tag and its supertags
-        SELECT id INTO s_subtag_of_id FROM Resource
+        SELECT id INTO s_subtag_of_id FROM resource
             WHERE label = s_subtag_of;
 
         FOR supertag IN (
             SELECT tag_id AS id, 0 AS distance
                 UNION
-                SELECT part_of AS id, distance FROM Part
+                SELECT part_of AS id, distance FROM part
                     WHERE id = tag_id
                     AND part_of_subproperty = s_subtag_of_id
                 ORDER BY distance ASC)
         LOOP
-            UPDATE Tag
+            UPDATE tag
                 SET nrelated_with_subtags = nrelated + COALESCE((
                     SELECT SUM(subt.nrelated)
-                        FROM Part p
-                        INNER JOIN Tag subt ON subt.id = p.id
+                        FROM part p
+                        INNER JOIN tag subt ON subt.id = p.id
                         WHERE p.part_of = supertag.id
                         AND p.part_of_subproperty = s_subtag_of_id), 0)
                 WHERE id = supertag.id;
@@ -166,12 +166,12 @@ CREATE FUNCTION update_nrelated(tag_id Resource.id%TYPE) RETURNS VOID AS $$
     END;
 $$ LANGUAGE 'plpgsql';
 
-CREATE FUNCTION update_nrelated_if_subtag(tag_id Resource.id%TYPE, property Resource.id%TYPE) RETURNS VOID AS $$
+CREATE FUNCTION update_nrelated_if_subtag(tag_id resource.id%TYPE, property resource.id%TYPE) RETURNS VOID AS $$
     DECLARE
-        s_subtag_of Resource.label%TYPE := 'http://www.nongnu.org/samizdat/rdf/schema#subTagOf';
-        s_subtag_of_id Resource.id%TYPE;
+        s_subtag_of resource.label%TYPE := 'http://www.nongnu.org/samizdat/rdf/schema#subTagOf';
+        s_subtag_of_id resource.id%TYPE;
     BEGIN
-        SELECT id INTO s_subtag_of_id FROM Resource
+        SELECT id INTO s_subtag_of_id FROM resource
             WHERE label = s_subtag_of;
 
         IF property = s_subtag_of_id THEN
@@ -182,22 +182,22 @@ $$ LANGUAGE 'plpgsql';
 
 CREATE FUNCTION update_rating() RETURNS TRIGGER AS $$
     DECLARE
-        dc_relation Resource.label%TYPE := 'http://purl.org/dc/elements/1.1/relation';
-        old_rating Statement.rating%TYPE;
-        new_rating Statement.rating%TYPE;
-        tag_id Resource.id%TYPE;
-        predicate_uriref Resource.label%TYPE;
+        dc_relation resource.label%TYPE := 'http://purl.org/dc/elements/1.1/relation';
+        old_rating statement.rating%TYPE;
+        new_rating statement.rating%TYPE;
+        tag_id resource.id%TYPE;
+        predicate_uriref resource.label%TYPE;
     BEGIN
         -- save some values for later reference
         SELECT s.rating, s.object, p.label
             INTO old_rating, tag_id, predicate_uriref
-            FROM Statement s
-            INNER JOIN Resource p ON s.predicate = p.id
+            FROM statement s
+            INNER JOIN resource p ON s.predicate = p.id
             WHERE s.id = NEW.proposition;
 
         -- set new rating of the proposition
         new_rating := calculate_statement_rating(NEW.proposition);
-        UPDATE Statement SET rating = new_rating WHERE id = NEW.proposition;
+        UPDATE statement SET rating = new_rating WHERE id = NEW.proposition;
 
         -- check if new rating reverts truth value of the proposition
         IF predicate_uriref = dc_relation
@@ -211,7 +211,7 @@ CREATE FUNCTION update_rating() RETURNS TRIGGER AS $$
     END;
 $$ LANGUAGE 'plpgsql';
 
-CREATE TRIGGER update_rating AFTER INSERT OR UPDATE OR DELETE ON Vote
+CREATE TRIGGER update_rating AFTER INSERT OR UPDATE OR DELETE ON vote
     FOR EACH ROW EXECUTE PROCEDURE update_rating();
 
 CREATE FUNCTION before_update_part() RETURNS TRIGGER AS $$
@@ -231,7 +231,7 @@ CREATE FUNCTION before_update_part() RETURNS TRIGGER AS $$
 
         -- check for loops
         IF NEW.part_of = NEW.id OR NEW.part_of IN (
-            SELECT id FROM Part WHERE part_of = NEW.id)
+            SELECT id FROM part WHERE part_of = NEW.id)
         THEN
             -- unset part_of, but don't fail whole query
             NEW.part_of = NULL;
@@ -249,7 +249,7 @@ CREATE FUNCTION before_update_part() RETURNS TRIGGER AS $$
     END;
 $$ LANGUAGE 'plpgsql';
 
-CREATE TRIGGER before_update_part BEFORE INSERT OR UPDATE ON Resource
+CREATE TRIGGER before_update_part BEFORE INSERT OR UPDATE ON resource
     FOR EACH ROW EXECUTE PROCEDURE before_update_part();
 
 CREATE FUNCTION after_update_part() RETURNS TRIGGER AS $$
@@ -270,16 +270,16 @@ CREATE FUNCTION after_update_part() RETURNS TRIGGER AS $$
         IF TG_OP != 'INSERT' THEN
             IF OLD.part_of IS NOT NULL THEN
                 -- clean up links generated for old part_of
-                DELETE FROM Part
+                DELETE FROM part
                     WHERE id IN (
                         -- for old resource...
                         SELECT OLD.id
                         UNION
                         --...and all its parts, ...
-                        SELECT id FROM Part WHERE part_of = OLD.id)
+                        SELECT id FROM part WHERE part_of = OLD.id)
                     AND part_of IN (
                         -- ...remove links to all parents of old resource
-                        SELECT part_of FROM Part WHERE id = OLD.id)
+                        SELECT part_of FROM part WHERE id = OLD.id)
                     AND part_of_subproperty = OLD.part_of_subproperty;
             END IF;
         END IF;
@@ -287,20 +287,20 @@ CREATE FUNCTION after_update_part() RETURNS TRIGGER AS $$
         IF TG_OP != 'DELETE' THEN
             IF NEW.part_of IS NOT NULL THEN
                 -- generate links to the parent and grand-parents of new resource
-                INSERT INTO Part (id, part_of, part_of_subproperty, distance)
+                INSERT INTO part (id, part_of, part_of_subproperty, distance)
                     SELECT NEW.id, NEW.part_of, NEW.part_of_subproperty, 1
                     UNION
                     SELECT NEW.id, part_of, NEW.part_of_subproperty, distance + 1
-                        FROM Part
+                        FROM part
                         WHERE id = NEW.part_of
                         AND part_of_subproperty = NEW.part_of_subproperty;
 
                 -- generate links from all parts of new resource to all its parents
-                INSERT INTO Part (id, part_of, part_of_subproperty, distance)
+                INSERT INTO part (id, part_of, part_of_subproperty, distance)
                     SELECT child.id, parent.part_of, NEW.part_of_subproperty,
                            child.distance + parent.distance
-                        FROM Part child
-                        INNER JOIN Part parent
+                        FROM part child
+                        INNER JOIN part parent
                             ON parent.id = NEW.id
                             AND parent.part_of_subproperty = NEW.part_of_subproperty
                         WHERE child.part_of = NEW.id
@@ -320,54 +320,54 @@ CREATE FUNCTION after_update_part() RETURNS TRIGGER AS $$
     END;
 $$ LANGUAGE 'plpgsql';
 
-CREATE TRIGGER after_update_part AFTER INSERT OR UPDATE OR DELETE ON Resource
+CREATE TRIGGER after_update_part AFTER INSERT OR UPDATE OR DELETE ON resource
     FOR EACH ROW EXECUTE PROCEDURE after_update_part();
 
 -- update data
 
-UPDATE Resource
+UPDATE resource
         SET label = 'http://www.nongnu.org/samizdat/rdf/tag#Translation'
         WHERE literal = 'false' AND uriref = 'true'
         AND label = 'http://www.nongnu.org/samizdat/rdf/focus#Translation';
 
 CREATE FUNCTION upgrade() RETURNS VOID AS $$
     DECLARE
-        version_of Resource.label%TYPE := 'http://purl.org/dc/terms/isVersionOf';
-        version_of_id Resource.id%TYPE;
-        dc_relation Resource.label%TYPE := 'http://purl.org/dc/elements/1.1/relation';
-        translation Resource.label%TYPE := 'http://www.nongnu.org/samizdat/rdf/tag#Translation';
-        translation_of Resource.label%TYPE := 'http://www.nongnu.org/samizdat/rdf/schema#isTranslationOf';
-        translation_of_id Resource.id%TYPE;
-        in_reply_to Resource.label%TYPE := 'http://www.nongnu.org/samizdat/rdf/schema#inReplyTo';
-        in_reply_to_id Resource.id%TYPE;
-        t Resource.id%TYPE;
+        version_of resource.label%TYPE := 'http://purl.org/dc/terms/isVersionOf';
+        version_of_id resource.id%TYPE;
+        dc_relation resource.label%TYPE := 'http://purl.org/dc/elements/1.1/relation';
+        translation resource.label%TYPE := 'http://www.nongnu.org/samizdat/rdf/tag#Translation';
+        translation_of resource.label%TYPE := 'http://www.nongnu.org/samizdat/rdf/schema#isTranslationOf';
+        translation_of_id resource.id%TYPE;
+        in_reply_to resource.label%TYPE := 'http://www.nongnu.org/samizdat/rdf/schema#inReplyTo';
+        in_reply_to_id resource.id%TYPE;
+        t resource.id%TYPE;
     BEGIN
         -- transform isVersionOf into subproperty of isPartOf
-        SELECT id INTO version_of_id FROM Resource
+        SELECT id INTO version_of_id FROM resource
             WHERE label = 'false' AND uriref = 'true' AND label = version_of;
         IF NOT FOUND THEN
-            INSERT INTO Resource (uriref, label) VALUES ('true', version_of)
+            INSERT INTO resource (uriref, label) VALUES ('true', version_of)
                 RETURNING id INTO version_of_id;
         END IF;
 
-        UPDATE Resource r
+        UPDATE resource r
             SET part_of = m.version_of, part_of_subproperty = version_of_id
-            FROM Message m
+            FROM message m
             WHERE r.part_of IS NULL
             AND m.id = r.id
             AND m.version_of IS NOT NULL;
 
         -- transform (reply dc::relation tag::Translation) into subproperty of isPartOf
-        SELECT id INTO translation_of_id FROM Resource
+        SELECT id INTO translation_of_id FROM resource
             WHERE label = 'false' AND uriref = 'true' AND label = translation_of;
         IF NOT FOUND THEN
-            INSERT INTO Resource (uriref, label) VALUES ('true', translation_of)
+            INSERT INTO resource (uriref, label) VALUES ('true', translation_of)
                 RETURNING id INTO translation_of_id;
         END IF;
 
-        UPDATE Resource r
+        UPDATE resource r
             SET part_of = m.parent, part_of_subproperty = translation_of_id
-            FROM Message m, Statement s, Resource p, Resource tr
+            FROM message m, statement s, resource p, resource tr
             WHERE r.part_of IS NULL
             AND m.id = r.id
             AND m.parent IS NOT NULL
@@ -375,22 +375,22 @@ CREATE FUNCTION upgrade() RETURNS VOID AS $$
             AND s.predicate = p.id AND p.label = dc_relation
             AND s.object = tr.id AND tr.label = translation;
 
-        UPDATE Vote v
+        UPDATE vote v
             SET rating = -2
-            FROM Resource tr, Statement s
+            FROM resource tr, statement s
             WHERE v.proposition = s.id AND s.object = tr.id AND tr.label = translation;
 
         -- transform inReplyTo into subproperty of isPartOf
-        SELECT id INTO in_reply_to_id FROM Resource
+        SELECT id INTO in_reply_to_id FROM resource
             WHERE label = 'false' AND uriref = 'true' AND label = in_reply_to;
         IF NOT FOUND THEN
-            INSERT INTO Resource (uriref, label) VALUES ('true', in_reply_to)
+            INSERT INTO resource (uriref, label) VALUES ('true', in_reply_to)
                 RETURNING id INTO in_reply_to_id;
         END IF;
 
-        UPDATE Resource r
+        UPDATE resource r
             SET part_of = m.parent, part_of_subproperty = in_reply_to_id
-            FROM Message m
+            FROM message m
             WHERE r.part_of IS NULL
             AND m.id = r.id
             AND m.parent IS NOT NULL;
@@ -398,7 +398,7 @@ CREATE FUNCTION upgrade() RETURNS VOID AS $$
         -- calculate nrelated for all tags
         FOR t IN (
             SELECT DISTINCT s.object
-                FROM Statement s, Resource p
+                FROM statement s, resource p
                 WHERE s.rating > 0
                 AND s.predicate = p.id AND p.label = dc_relation)
         LOOP
@@ -411,8 +411,13 @@ SELECT upgrade();
 
 DROP FUNCTION upgrade();
 
-ALTER TABLE Message DROP COLUMN parent;
-ALTER TABLE Message DROP COLUMN description;
-ALTER TABLE Message DROP COLUMN version_of;
+ALTER TABLE message DROP COLUMN parent;
+ALTER TABLE message DROP COLUMN description;
+ALTER TABLE message DROP COLUMN version_of;
+
+UPDATE Resource SET label = 'member' WHERE label = 'Member';
+UPDATE Resource SET label = 'message' WHERE label = 'Message';
+UPDATE Resource SET label = 'statement' WHERE label = 'Statement';
+UPDATE Resource SET label = 'vote' WHERE label = 'Vote';
 
 COMMIT;

@@ -79,8 +79,11 @@ class Controller
     (@session.member and @id) or raise RuntimeError,
       'Not enough data to log moderation'
 
-    db.do 'INSERT INTO Moderation (moderator, action, resource)
-      VALUES (?, ?, ?)', @session.member, action, @id
+    db[:Moderation].insert(
+      :moderator => @session.member,
+      :action => action,
+      :resource => @id
+    )
   end
 
   # Check if page body (@content_for_layout) is found in the cache under _key_.

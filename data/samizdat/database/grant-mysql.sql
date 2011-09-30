@@ -8,11 +8,11 @@
 --
 
 -- grant access to different use for maximum priviledge separation
-GRANT INSERT, UPDATE, SELECT ON Resource TO samizdat;
-GRANT INSERT, UPDATE, SELECT ON Statement TO samizdat;
-GRANT INSERT, UPDATE, SELECT ON Vote TO samizdat;
-GRANT INSERT, UPDATE, SELECT ON Member TO samizdat;
-GRANT INSERT, UPDATE, SELECT ON Message TO samizdat;
-GRANT INSERT, UPDATE, SELECT ON Role TO samizdat;
+GRANT INSERT, UPDATE, SELECT ON resource TO samizdat;
+GRANT INSERT, UPDATE, SELECT ON statement TO samizdat;
+GRANT INSERT, UPDATE, SELECT ON vote TO samizdat;
+GRANT INSERT, UPDATE, SELECT ON member TO samizdat;
+GRANT INSERT, UPDATE, SELECT ON message TO samizdat;
+GRANT INSERT, UPDATE, SELECT ON role TO samizdat;
 
-GRANT INSERT, SELECT ON Moderation TO samizdat;
+GRANT INSERT, SELECT ON moderation TO samizdat;

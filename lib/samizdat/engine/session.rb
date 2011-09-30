@@ -40,13 +40,12 @@ class Session
     if cookie and cookie =~ COOKIE_PATTERN
       @cookie = cookie
 
-      db.transaction do |db|
-        @member, @login_time = db.select_one(
-          'SELECT id, login_time
-             FROM Member
-            WHERE session = ?', @cookie)
-
-        @member and fresh!
+      db.transaction do
+        if m = db[:member].filter(:session => @cookie).select(:id, :login_time).first
+          @member = m[:id]
+          @login_time = m[:login_time]
+          fresh!
+        end
       end
     end
 
@@ -64,26 +63,22 @@ class Session
   # Return cookie value on success, +nil+ on failure.
   #
   def start!(login, password)
-    db.transaction do |db|
-      id, p = db.select_one(
-        'SELECT id, password FROM Member WHERE login = ?', login)
-
-      if id and p.nil?
-        report_blocked_account(login, id)
-      elsif id.nil? or (password and not Password.check(password, p))
+    db.transaction do
+      m = db[:member].filter(:login => login).select(:id, :password).first
+      if m and m[:password].nil?
+        report_blocked_account(login, m[:id])
+      elsif m.nil? or (password and not Password.check(password, m[:password]))
         return nil
       end
 
-      @cookie = random_digest(id)
-      db.do(
-        'UPDATE Member
-        SET login_time = current_timestamp,
-            last_time = current_timestamp,
-            session = ?
-        WHERE id = ?', @cookie, id)
-      db.commit
+      @cookie = random_digest(m[:id])
+      db[:member][:id => m[:id]] = {
+        :login_time => CURRENT_TIMESTAMP,
+        :last_time => CURRENT_TIMESTAMP,
+        :session => @cookie
+      }
 
-      @member = id
+      @member = m[:id]
       @login_time = Time.now
       copy_from_member_object
       return @cookie
@@ -100,9 +95,7 @@ class Session
   #
   def clear!
     if @member
-      db.transaction do |db|
-        db.do "UPDATE Member SET session=NULL WHERE id = ?", @member
-      end
+      db[:member][:id => @member] = {:session => nil}
     end
     if @cookie
       cache.delete(Session.cache_key(@cookie))

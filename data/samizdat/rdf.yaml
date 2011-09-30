@@ -21,36 +21,36 @@ ns:
 # properties, so at least these three and s::id must be mapped.
 #
 map:
-  's::id': {Resource: id}
-  'dc::date': {Resource: published_date}
-  'dct::isPartOf': {Resource: part_of}
-  's::isPartOfSubProperty': {Resource: part_of_subproperty}
-  's::partSequenceNumber': {Resource: part_sequence_number}
+  's::id': {resource: id}
+  'dc::date': {resource: published_date}
+  'dct::isPartOf': {resource: part_of}
+  's::isPartOfSubProperty': {resource: part_of_subproperty}
+  's::partSequenceNumber': {resource: part_sequence_number}
 
-  'rdf::subject': {Statement: subject}
-  'rdf::predicate': {Statement: predicate}
-  'rdf::object': {Statement: object}
+  'rdf::subject': {statement: subject}
+  'rdf::predicate': {statement: predicate}
+  'rdf::object': {statement: object}
 
-  's::login': {Member: login}
-  's::fullName': {Member: full_name}
-  's::email': {Member: email}
+  's::login': {member: login}
+  's::fullName': {member: full_name}
+  's::email': {member: email}
 
-  'dc::title': {Message: title}
-  'dc::creator': {Message: creator}
-  'dc::format': {Message: format}
-  'dc::language': {Message: language}
-  's::openForAll': {Message: open}
-  's::hidden': {Message: hidden}
-  's::locked': {Message: locked}
-  's::content': {Message: content}
-  's::htmlFull': {Message: html_full}
-  's::htmlShort': {Message: html_short}
+  'dc::title': {message: title}
+  'dc::creator': {message: creator}
+  'dc::format': {message: format}
+  'dc::language': {message: language}
+  's::openForAll': {message: open}
+  's::hidden': {message: hidden}
+  's::locked': {message: locked}
+  's::content': {message: content}
+  's::htmlFull': {message: html_full}
+  's::htmlShort': {message: html_short}
 
-  's::rating': {Statement: rating}
+  's::rating': {statement: rating}
 
-  's::voteProposition': {Vote: proposition}
-  's::voteMember': {Vote: member}
-  's::voteRating': {Vote: rating}
+  's::voteProposition': {vote: proposition}
+  's::voteMember': {vote: member}
+  's::voteRating': {vote: rating}
 
 # Map of properties into lists of their subproperties. For each property
 # listed here, an additional qualifier field named <field>_subproperty
@@ -73,5 +73,5 @@ subproperties:
 # in the RDF graph.
 #
 transitive_closure:
-  'dct::isPartOf': Part
+  'dct::isPartOf': part
 

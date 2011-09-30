@@ -10,6 +10,9 @@
 
 require 'samizdat'
 
+# Samizdat DataSet classes add caching and pagination on top of Sequel
+# datasets.
+#
 class DataSet
   include SiteHelper
 
@@ -42,6 +45,10 @@ class DataSet
     end
   end
 
+  def first
+    self[0]
+  end
+
   private
 
   def generate_key(seed)
@@ -62,13 +69,11 @@ class SqlDataSet < DataSet
   private
 
   def fetch(query, limit = nil, offset = nil)
-    limit and query << " LIMIT #{limit}"
-    offset and query << " OFFSET #{offset}"
-    db.select_all(query)
+    db.fetch(query).limit(limit, offset).all
   end
 
   def fetch_count(query)
-    db.select_one(%{SELECT COUNT(*) FROM (#{query}) AS s})[0]
+    db.fetch(query).count
   end
 end
 
@@ -89,12 +94,11 @@ class RdfDataSet < DataSet
   private
 
   def fetch(query, limit = nil, offset = nil)
-    rdf.select_all(query, limit, offset, @params)
+    rdf.fetch(query, @params).limit(limit, offset).all
   end
 
   def fetch_count(query)
-    sql, *values = rdf.select(query, @params)
-    db.select_one(%{SELECT COUNT(*) FROM (#{sql}) AS s}, *values)[0]
+    rdf.fetch(query, @params).count
   end
 end
 

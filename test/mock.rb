@@ -29,6 +29,10 @@ class MockDb
   def select_one(query, params={})
     nil
   end
+
+  def fetch(query, params={})
+    []
+  end
 end
 
 class MockSite < Site

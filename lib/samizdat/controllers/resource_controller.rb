@@ -51,7 +51,7 @@ class ResourceController < Controller
     if tag.kind_of?(Tag) and rating   # commit vote
       @request.assert_action_confirmed
       # rating is validated by Tag#vote
-      db.transaction {|db| tag.vote(@member, rating) }
+      tag.vote(@member, rating)
       @request.redirect(@id)
 
     else   # display vote form
@@ -91,7 +91,7 @@ class ResourceController < Controller
     box(
       Tag.tag_title(@title) + page_number(page),
       list(
-        dataset[page - 1].collect {|r,| Resource.new(@request, r).short },
+        dataset[page - 1].map {|r| Resource.new(@request, r[:related]).short },
         nav(dataset, :name => 'related_page') << nav_rss(rss_link)
       )
     )

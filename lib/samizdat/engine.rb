@@ -20,7 +20,7 @@ require 'cgi'
 require 'digest/md5'
 require 'singleton'
 require 'drb'
-require 'dbi'
+require 'sequel'
 
 # used by samizdat core
 require 'jcode' if RUBY_VERSION < '1.9'   # multi-byte character support
@@ -36,27 +36,8 @@ def CGI::escapeHTML(string)
   string.gsub(/&/n, '&amp;').gsub(/\"/n, '&quot;').gsub(/\'/n, '&#39;').gsub(/>/n, '&gt;').gsub(/</n, '&lt;')
 end
 
-# add to_time() to String and DateTime if it's not there
-require 'time'
-require 'date'
-
-unless String.method_defined? 'to_time'
-  class String
-    def to_time
-      Time.parse(self)
-    end
-  end
-end
-
-unless DateTime.method_defined? 'to_time'
-  class DateTime
-    def to_time
-      Time.parse(self.to_s)
-    end
-  end
-end
-
 # samizdat engine
+require 'samizdat/engine/time'
 require 'samizdat/engine/gettext'
 require 'samizdat/engine/exceptions'
 require 'samizdat/engine/globals'

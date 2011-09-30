@@ -30,16 +30,16 @@ class ResourcesList
   end
 
   def full
-    @data.collect {|id,|
-      Resource.new(@request, id).short
+    @data.map {|r|
+      Resource.new(@request, r.values.first).short
     }.join << %{<div class="foot">#{@nav}</div>}
   end
 
   alias :short :full
 
   def list_item
-    items = @data.collect {|id,|
-      Resource.new(@request, id).list_item
+    items = @data.map {|r|
+      Resource.new(@request, r.values.first).list_item
     }
     list(items, @nav)
   end

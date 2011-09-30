@@ -26,22 +26,21 @@ class Resource
     @id or raise ResourceNotFoundError, id.to_s
 
     @type = cache.fetch_or_add(%{resource_type/#{@id}}) do
-      external, literal, label =
-        db.select_one("SELECT uriref, literal, label FROM Resource WHERE literal = 'false' AND id = ?", @id)
+      r = db[:resource][:id => @id]
 
-      if external
+      if r[:uriref]
         'Uriref'
-      elsif literal
+      elsif r[:literal]
         'Literal'
       else   # internal resource
-        case label
-        when 'Member', 'Message', 'Statement', 'Vote'
-          label
+        case r[:label]
+        when 'member', 'message', 'statement', 'vote'
+          r[:label].capitalize
         when nil
           raise ResourceNotFoundError, @id.to_s
         else
           raise RuntimeError,
-            sprintf(_("Unknown resource type '%s'"), CGI.escapeHTML(label))
+            sprintf(_("Unknown resource type '%s'"), CGI.escapeHTML(r[:label]))
         end
       end
     end
@@ -155,8 +154,8 @@ WHERE (rdf::subject ?stmt #{@id})
 ORDER BY ?rating DESC})
 
     tags = {}
-    dataset[0].each {|tag_id,|
-      tag = Tag.new(site, tag_id, @id)
+    dataset[0].each {|r|
+      tag = Tag.new(site, r[:tag], @id)
       tags[tag.id] = tag   # assume it has an id as we got it from the db
     }
 
@@ -240,8 +239,8 @@ ORDER BY ?subtag},
     n = nav(dataset, :name => page_parameter)
     n << options[:nav].to_s
 
-    entries = dataset[page - 1].collect do |part,|
-      resource = Resource.new(@request, part)
+    entries = dataset[page - 1].map do |row|
+      resource = Resource.new(@request, row.values.first)
       case options[:render]
       when Proc
         yield resource
@@ -269,7 +268,7 @@ class UrirefComponent < ResourceComponent
   def initialize(request, id)
     super
 
-    uriref, = db.select_one("SELECT label FROM Resource WHERE uriref = 'true' AND id = ?", @id)
+    uriref = db[:resource].filter(:id => @id).get(:label)
 
     @title = rdf.ns_shrink(uriref)
     @title.gsub!(/\Atag::/, '') and @title = _(@title)   # tag is a special case
@@ -283,7 +282,7 @@ class LiteralComponent < ResourceComponent
   def initialize(request, id)
     super
 
-    value, = db.select_one("SELECT label FROM Resource WHERE literal = 'true' AND id = ?", @id)
+    value = db[:resource].filter(:id => @id).get(:label)
     uriref = @request.base + @id.to_s
 
     @title = label
@@ -405,8 +404,9 @@ ORDER BY ?msg}, nil, :id => id)
 
     return '' if dataset.empty?
 
-    '<div class="replies">' + dataset[0].collect {|reply,|
+    '<div class="replies">' + dataset[0].map {|r|
       # fixme: limit recursion, detect loops
+      reply = r[:msg]
       Resource.new(@request, reply).short + render_all_replies(reply)
     }.join + '</div>'
   end
@@ -427,26 +427,25 @@ class MemberComponent < ResourceComponent
     @feeds[@title] = File.join(member.location, 'rss') unless @messages_dataset.empty?
 
     # used to check if account is blocked
-    password, @prefs = db.select_one(
-      'SELECT password, prefs FROM Member WHERE id = ?', @id)
-    @blocked = password.nil?
+    m = db[:member][:id => @id]
+    if m[:password].nil?
+      @blocker = yaml_hash(m[:prefs])['blocked_by'].to_i
+      if @blocker > 0
+        @blocker_name = db[:member].filter(:id => @blocker).get(:full_name)
+      end
+    end
   end
 
   def full
     body = '<p>' + @info + '</p>'
 
-    if @blocked
-      blocked_by = yaml_hash(@prefs)['blocked_by'].to_i
-      if blocked_by > 0
-        b_name, = db.select_one(
-          'SELECT full_name FROM Member WHERE id = ?', blocked_by)
-        body << '<p>' <<
-          sprintf(
-            _('Account <a href="%s">blocked by moderator</a>: %s.'),
-            'moderation/' + @id.to_s,
-            resource_href(blocked_by, escape_title(b_name))
-          ) << '</p>'
-      end
+    if @blocker_name
+      body << '<p>' <<
+        sprintf(
+          _('Account <a href="%s">blocked by moderator</a>: %s.'),
+          'moderation/' + @id.to_s,
+          resource_href(@blocker, escape_title(@blocker_name))
+        ) << '</p>'
     end
 
     box(nil, body)
@@ -468,8 +467,8 @@ class MemberComponent < ResourceComponent
     if @request.moderate? and not @moderator
       # show block/unblock button unless that member is a moderator, too
       %{<div class="foot"><a class="moderator_action" href="member/#{@id}/} <<
-        (@blocked ? 'unblock' : 'block') << '">' <<
-        (@blocked ? _('UNBLOCK') : _('BLOCK')) <<
+        (@blocker ? 'unblock' : 'block') << '">' <<
+        (@blocker ? _('UNBLOCK') : _('BLOCK')) <<
         %{</a></div>\n}
     end
   end
@@ -490,11 +489,13 @@ class StatementComponent < ResourceComponent
 
     @title = _('Statement') + ' ' + @id.to_s
 
-    @predicate, @subject, @object = rdf.select_one %{
-SELECT ?p, ?s, ?o
-WHERE (rdf::predicate #{@id} ?p)
-      (rdf::subject #{@id} ?s)
-      (rdf::object #{@id} ?o)}
+    r = rdf.fetch(%q{
+SELECT ?predicate, ?subject, ?object
+WHERE (rdf::predicate :id ?predicate)
+      (rdf::subject :id ?subject)
+      (rdf::object :id ?object)}, :id => @id
+    ).first
+    r.each {|field, value| instance_variable_set('@' + field.to_s, value) }
 
     @info = %{
 (<a href="#{@predicate}">} + _('Predicate') + %{ #{@predicate}</a>,
@@ -523,16 +524,18 @@ class VoteComponent < ResourceComponent
 
     @title = _('Vote') + ' ' + @id.to_s
 
-    date, @stmt, @voter, rating = rdf.select_one %{
+    v = rdf.fetch(%q{
 SELECT ?date, ?stmt, ?member, ?rating
-WHERE (dc::date #{@id} ?date)
-      (s::voteProposition #{@id} ?stmt)
-      (s::voteMember #{@id} ?member)
-      (s::voteRating #{@id} ?rating)}
+WHERE (dc::date :id ?date)
+      (s::voteProposition :id ?stmt)
+      (s::voteMember :id ?member)
+      (s::voteRating :id ?rating)}, :id => @id).first
+    @stmt = v[:stmt]
+    @voter = v[:member]
 
     name = escape_title(Member.cached(site, @voter).full_name)
     @info = sprintf(_('<a href="%s">%s</a> gave rating %4.2f to the <a href="%s">Statement %s</a> on %s.'),
-      @voter, name, rating, @stmt, @stmt, format_date(date).to_s)
+      @voter, name, v[:rating], @stmt, @stmt, format_date(v[:date]).to_s)
 
     @links['made'] = @voter
   end

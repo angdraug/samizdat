@@ -60,18 +60,18 @@ class Content
     self.format = format   # also sets @inline and @cacheable
 
     if @id.kind_of? Integer
-      content, full, short = rdf.select_one(
+      r = rdf.fetch(
         %q{SELECT ?content, ?full, ?short
         WHERE (s::id :id ?id)
         OPTIONAL (s::content :id ?content)
                  (s::htmlFull :id ?full)
                  (s::htmlShort :id ?short)
-        }, :id => @id)
+        }, :id => @id).first
 
-      self.body = content
+      self.body = r[:content]
 
-      if cacheable? and full
-        @html_cache = HtmlCache.new(full, short)
+      if cacheable? and r[:full]
+        @html_cache = HtmlCache.new(r[:full], r[:short])
       end
     end
 
@@ -175,27 +175,19 @@ class Content
     return unless @id.kind_of? Integer
 
     @html_cache = nil
+    fields = {:html_full => nil, :html_short => nil}
 
     if cacheable?
       @html_cache = HtmlCache.new(
         render(request, :full),
         render(request, :short))
-
+      fields[:html_full] = @html_cache[:full]
       if @html_cache[:short] != @html_cache[:full]
-        db.do(
-          'UPDATE Message SET html_full = ?, html_short = ? WHERE id = ?',
-          @html_cache[:full], @html_cache[:short], @id)
-      else
-        db.do(
-          'UPDATE Message SET html_full = ?, html_short = NULL
-          WHERE id = ?', @html_cache[:full], @id)
+        fields[:html_short] = @html_cache[:short]
       end
-
-    else
-      db.do(
-        'UPDATE Message SET html_full = NULL, html_short = NULL
-        WHERE id = ?', @id)
     end
+
+    db[:message][:id => @id] = fields
   end
 
   # Re-render HtmlCache for a single message.
@@ -206,7 +198,7 @@ class Content
   #
   def Content.regenerate_html(site, id)
     # fixme: update_html needs a Request object
-    site.db.transaction {|db| Message.cached(site, id).content.update_html }
+    site.db.transaction { Message.cached(site, id).content.update_html }
   end
 
   # Re-render HtmlCache for all messages. Depending on the size of your site,
@@ -218,8 +210,8 @@ class Content
   #   ruby -r samizdat -e 'DRb.start_service; Content.regenerate_all_html(Site.new("samizdat"))'
   #
   def Content.regenerate_all_html(site)
-    site.db.select_all('SELECT id FROM Message WHERE content IS NOT NULL') do |id,|
-      Content.regenerate_html(site.id)
+    site.db[:message].filter(:content => nil).invert.select(:id).each do |m|
+      Content.regenerate_html(site, m[:id])
     end
     site.cache.flush
   end
@@ -474,27 +466,23 @@ class PendingUpload
       dir = File.join(site.content_dir, path.untaint)
       FileUtils.rmdir(dir) if File.exists?(dir) and File.directory?(dir)
     end
-    db.do %q{UPDATE PendingUpload SET status = ? WHERE id = ?}, status, @id
+    db[:pending_upload][:id => @id] = {:status => status}
   end
 
   private
 
   def load_from_db
-    @login, = db.select_one('SELECT login FROM PendingUpload WHERE id = ?', @id)
+    @login = db[:pending_upload].filter(:id => @id).get(:login)
     @login or raise ResourceNotFoundError, 'PendingUpload ' + @id.to_s
 
     @parts = []
-    db.select_all(%q{
-      SELECT part, format, original_filename
-      FROM PendingUploadFile
-      WHERE upload = ?}, @id
-    ) do |part, format, original_filename|
-
+    db[:pending_upload_file].filter(:upload => @id).each do |f|
       content_file = ContentFilePendingUpload.new(
-        site, Content.new(site, nil, @login), self, part, format, original_filename)
+        site, Content.new(site, nil, @login), self,
+        f[:part], f[:format], f[:original_filename])
 
-      if part
-        @parts[part] = content_file
+      if f[:part]
+        @parts[ f[:part] ] = content_file
       else
         @file = content_file
       end
@@ -504,7 +492,7 @@ class PendingUpload
   def register(login, file, parts)
     @login = login
 
-    db.transaction do |db|
+    db.transaction do
       check_queue
       insert
       if file
@@ -526,48 +514,34 @@ class PendingUpload
     timeout = (config['timeout']['pending_upload'] or 4 * 60 * 60)
     queue_limit = (config['limit']['pending_upload_queue_size'] or 3)
 
-    db.select_all(%q{
-      SELECT id
-      FROM PendingUpload
-      WHERE login = ?
-      AND status = 'pending'
-      AND created_date < CURRENT_TIMESTAMP - ? * INTERVAL '1 seconds'},
-      @login, timeout
-    ) do |id,|
-      PendingUpload.new(site, id).status = 'expired'
+    pending = db[:pending_upload].filter(:login => @login, :status => 'pending')
+
+    pending.filter(
+      %q{created_date < CURRENT_TIMESTAMP - ? * INTERVAL '1 seconds'}, timeout
+    ).select(:id).each do |u|
+      PendingUpload.new(site, u[:id]).status = 'expired'
     end
 
-    count, = db.select_one(%q{
-      SELECT COUNT(*)
-      FROM PendingUpload
-      WHERE login = ? AND status = 'pending'}, @login)
-
-    if count >= queue_limit
-      id, = db.select_one(
-        %q{SELECT id FROM PendingUpload
-        WHERE login = ?
-        AND status = 'pending'
-        ORDER BY id
-        LIMIT 1}, @login)
+    if pending.count >= queue_limit
+      id = pending.order(:id).get(:id)
       PendingUpload.new(site, id).status = 'expired'
     end
   end
 
   def insert
-    db.do('INSERT INTO PendingUpload (login) VALUES (?)', @login)
-    @id, = db.select_one(
-      'SELECT MAX(id) FROM PendingUpload WHERE login = ?', @login)
+    @id = db[:pending_upload].insert(:login => @login)
   end
 
   def add_file(file, part = nil)
     content_file = ContentFileNewUpload.new(
       site, Content.new(site, nil, @login), self, part, file)
 
-    db.do('
-      INSERT INTO PendingUploadFile (
-        upload, part, format, original_filename)
-      VALUES (?, ?, ?, ?)',
-        @id, part, content_file.format, content_file.original_filename)
+    db[:pending_upload_file].insert(
+      :upload => @id,
+      :part => part,
+      :format => content_file.format,
+      :original_filename => content_file.original_filename
+    )
 
     content_file
   end

@@ -132,7 +132,7 @@ site:
 
 # Database Connection
 #
-# default assumes following PostgreSQL configuration:
+# Defaults assume following PostgreSQL configuration:
 #
 # pg_hba.conf:
 #   local samizdat [all] ident samizdat
@@ -141,19 +141,21 @@ site:
 #   samizdat postgres postgres
 #   samizdat www-data samizdat
 #
+# Options provided below are passed verbatim to Sequel#connect.
+#
 db:
-
-  # Data source name in Ruby/DBI notation: 'DBI:Driver:database:host'.
-  # For local database (on the same host as the web server), omit the
-  # ':host' part.
-  #
-  dsn: 'DBI:Pg:samizdat'
-
-  # Database user and password. If IDENT authentication method is
-  # properly configured (see doc/install.txt), omit the password.
-  #
+  adapter: postgres
+  database: samizdat
   user: samizdat
-  #password: secret   # ident authentication by default
+
+  # When accessing a local PostgreSQL database, omit the host.
+  #
+  #host: localhost
+
+  # If PostgreSQL IDENT authentication method is properly configured
+  # (see doc/install.txt), omit the password.
+  #
+  #password: secret
 
 # HTTPS encryption
 #

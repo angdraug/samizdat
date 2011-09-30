@@ -29,49 +29,47 @@ class Message < Model
 
       @creator = Member.cached(site, @creator)
 
-      @parts = parts_dataset[0].collect {|part,| Message.cached(site, part) }
+      @parts = parts_dataset[0].collect {|p| Message.cached(site, p[:part]) }
       @content = Content.new(site, self)
 
       find_next_and_previous_parts
 
       unless @version_of
-        @nversions, = rdf.select_one %{
-SELECT count(?version)
-WHERE (dct::isVersionOf ?version :id)}, :id => @id
+        @nversions = rdf.fetch(%{
+SELECT ?version
+WHERE (dct::isVersionOf ?version :id)}, :id => @id).count
 
-        @nreplies, = rdf.select_one %{
-SELECT count(?msg)
+        @nreplies = rdf.fetch(%{
+SELECT ?msg
 WHERE (s::inReplyTo ?msg :id)
-      #{exclude_hidden('?msg')}}, :id => @id
+      #{exclude_hidden('?msg')}}, :id => @id).count
 
-        @nreplies_all, = rdf.select_one %{
-SELECT count(?msg)
+        @nreplies_all = rdf.fetch(%{
+SELECT ?msg
 WHERE (s::inReplyTo ?msg :id TRANSITIVE)
-      #{exclude_hidden('?msg')}}, :id => @id
+      #{exclude_hidden('?msg')}}, :id => @id).count
       end
 
       unless @translation_of
-        @translations = rdf.select_all(
+        @translations = rdf.fetch(
 %{SELECT ?lang, ?msg
 WHERE (s::isTranslationOf ?msg :id)
       (dc::language ?msg ?lang)
       #{exclude_hidden('?msg')}
-ORDER BY ?lang ASC}, limit_page, nil, :id => @id
-      ).collect {|l, m| [l, m] }   # DBI::Row to Array
+ORDER BY ?lang ASC}, :id => @id).limit(limit_page).all
       end
 
       unless @part_of
-        @tags = rdf.select_all(
+        @tags = rdf.fetch(
 %{SELECT ?tag
 WHERE (rdf::subject ?stmt :id)
       (rdf::predicate ?stmt dc::relation)
       (rdf::object ?stmt ?tag)
       (s::rating ?stmt ?rating)
 LITERAL ?rating > 0
-ORDER BY ?rating DESC}, limit_page, nil, :id => @id
-      ).collect {|t,| Tag.new(site, t, @id) }
-        @nrelated, = db.select_one(%q{
-          SELECT nrelated_with_subtags FROM Tag WHERE id = ?}, @id)
+ORDER BY ?rating DESC}, :id => @id
+        ).limit(limit_page).collect {|r| Tag.new(site, r[:tag], @id) }
+        @nrelated = db[:tag].filter(:id => @id).get(:nrelated_with_subtags)
         @nrelated ||= 0
       end
     end
@@ -200,11 +198,11 @@ ORDER BY ?rating DESC}, limit_page, nil, :id => @id
   end
 
   def hide!(hide)
-    db.do 'UPDATE Message SET hidden = ? WHERE id = ?', hide, @id
+    db[:message][:id => @id] = {:hidden => hide}
   end
 
   def lock!(lock)
-    db.do 'UPDATE Message SET locked = ? WHERE id = ?', lock, @id
+    db[:message][:id => @id] = {:locked => lock}
   end
 
   def reparent!(new_parent, property, part_sequence_number = nil)
@@ -215,7 +213,6 @@ ORDER BY ?rating DESC}, limit_page, nil, :id => @id
       'dct::isPartOf' == rdf.ns_shrink(map.subproperty_of) and
       property != 'dct::isVersionOf'
     )
-
       raise RuntimeError,
         "Invalid property #{CGI.escapeHTML(property)} passed to reparent!"
     end
@@ -224,9 +221,9 @@ ORDER BY ?rating DESC}, limit_page, nil, :id => @id
       raise UserError, _("Set message title before reparenting")
     end
 
-    rdf.select_all(
+    rdf.fetch(
       %q{SELECT 0 WHERE (dct::isPartOf :new_parent :id TRANSITIVE)},
-      nil, nil, :id => @id, :new_parent => new_parent
+      :id => @id, :new_parent => new_parent
     ).empty? or raise UserError,
       _('Invalid new parent: message cannot be a part of its own part')
 
@@ -243,17 +240,18 @@ ORDER BY ?rating DESC}, limit_page, nil, :id => @id
            WHERE (#{property} :id ?parent)}
       end
 
-    rdf.assert(query, {
+    rdf.assert(
+      query,
       :id => @id,
       :new_parent => new_parent,
       :seq => part_sequence_number
-    })
+    )
 
     @part_of = new_parent   # fixme: update other attributes
   end
 
   def insert!
-    @id, = rdf.assert( %{
+    @id, = rdf.assert(%{
 INSERT ?msg
 WHERE (dc::creator ?msg :creator)
       (dc::title ?msg :title)
@@ -263,10 +261,11 @@ WHERE (dc::creator ?msg :creator)
       (s::content ?msg :content)
       (s::openForAll ?msg :open)
       (#{part_of_property or 'dct::isPartOf'} ?msg :part_of)},
-      { :date => @date.httpdate, :creator => @creator.id, :title => @content.title,
-        :language => @lang, :format => @content.format, :content => @content.body,
-        :open => (@open or false),
-        :part_of => (@parent or @translation_of or @part_of) } )
+
+      :date => @date.httpdate, :creator => @creator.id, :title => @content.title,
+      :language => @lang, :format => @content.format, :content => @content.body,
+      :open => (@open or false),
+      :part_of => (@parent or @translation_of or @part_of))
 
     if @parts and not @parts.empty?
       @parts.collect! do |part|
@@ -281,43 +280,31 @@ WHERE (dc::creator ?msg :creator)
 
   def edit!(old_content)
     @id or raise UserError, _('Reference to previous version lost')
+    message = db[:message].filter(:id => @id)
+    resource = db[:resource].filter(:id => @id)
 
     # save old version at new id
-    db.do('
-      INSERT INTO Message (
-        creator, title, language, format, content, open,
-        html_full, html_short)
-      SELECT
-        creator, title, language, format, content, open,
-        html_full, html_short
-      FROM Message
-      WHERE id = ?', @id)
-    version, = db.select_one 'SELECT MAX(id) FROM Resource'
-    db.do(%q{
-      UPDATE Resource
-      SET published_date = (
-            SELECT published_date FROM Resource WHERE id = ?),
-          part_of = ?,
-          part_of_subproperty = ?
-      WHERE id = ?},
-      @id, @id, version_of_resource_id, version)
+    fields = [:creator, :title, :language, :format, :content, :open,
+              :html_full, :html_short]
+    version = db[:message].insert(fields, message.select(*fields))
+    db[:resource].filter(:id => version).update(
+      :published_date => resource.select(:published_date),
+      :part_of => @id,
+      :part_of_subproperty => version_of_resource_id
+    )
     old_content.id = version
 
     # write new version at old id
-    db.do '
-      UPDATE Message
-      SET creator = ?, title = ?, format = ?, content = ?, language = ?
-      WHERE id = ?',
-      @creator.id, @content.title, @content.format, @content.body, @lang, @id
-    db.do '
-      UPDATE Resource
-      SET published_date = CURRENT_TIMESTAMP
-      WHERE id = ?', @id
-
-    unless @open.nil?   # change s:openForAll
-      db.do 'UPDATE Message SET open = ? WHERE id = ?',
-        (@open or false), @id
-    end
+    values = {
+      :creator => @creator.id,
+      :title => @content.title,
+      :format => @content.format,
+      :content => @content.body,
+      :language => @lang
+    }
+    values[:open] = (@open or false) unless @open.nil?
+    message.update(values)
+    resource.update(:published_date => CURRENT_TIMESTAMP)
 
     update_content
   end
@@ -325,10 +312,14 @@ WHERE (dc::creator ?msg :creator)
   # replace content without saving previous version
   #
   def replace!(old_content)
-    db.do "UPDATE Message SET creator = ?, title = ?, language = ?, format = ?,
-      content = ?, open = ? WHERE id = ?",
-      @creator.id, @content.title, @lang, @content.format,
-      @content.body, false, @id
+    db[:message].filter(:id => @id).update(
+      :creator => @creator.id,
+      :title => @content.title,
+      :format => @content.format,
+      :content => @content.body,
+      :language => @lang,
+      :open => false
+    )
 
 # todo: make Graffiti::SquishAssert grok this 
 #
@@ -363,9 +354,10 @@ ORDER BY ?seq, ?part}, limit_page, :id => id)
   private
 
   def load_from_rdf
-    @date, @creator, @lang, @part_of, @parent, @version_of, @translation_of, @sub_tag_of, @part_sequence_number, @hidden, @locked, @open =
-      rdf.select_one(%{
-SELECT ?date, ?creator, ?lang, ?part_of, ?parent, ?version_of, ?translation_of, ?sub_tag_of, ?part_sequence_number, ?hidden, ?locked, ?open
+    fields = %w(date creator lang part_of parent version_of translation_of
+      sub_tag_of part_sequence_number hidden locked open)
+    values = rdf.fetch(%{
+SELECT #{ fields.map {|f| '?' + f }.join(', ') }
 WHERE (dc::date :id ?date)
 OPTIONAL (dc::creator :id ?creator)
          (dc::language :id ?lang)
@@ -377,9 +369,9 @@ OPTIONAL (dc::creator :id ?creator)
          (s::partSequenceNumber :id ?part_sequence_number)
          (s::hidden :id ?hidden)
          (s::locked :id ?locked)
-         (s::openForAll :id ?open)}, :id => @id)
-
-    raise ResourceNotFoundError, 'Message ' + @id.to_s if @date.nil?
+         (s::openForAll :id ?open)}, :id => @id).first
+    raise ResourceNotFoundError, 'Message ' + @id.to_s if values.nil?
+    values.each {|field, value| instance_variable_set('@' + field.to_s, value) }
   end
 
   def find_next_and_previous_parts
@@ -389,7 +381,7 @@ OPTIONAL (dc::creator :id ?creator)
     index = nil   # scope fix
 
     0.upto((dataset.size - 1) / dataset.limit) do |page|
-      if index = dataset[page].find_index {|part,| part == @id }
+      if index = dataset[page].find_index {|r| r[:part] == @id }
         index += page * dataset.limit
         break
       end
@@ -412,14 +404,8 @@ OPTIONAL (dc::creator :id ?creator)
 
   def version_of_resource_id
     label = rdf.config.ns_expand('dct::isVersionOf')
-    id, = db.select_one(
-      %q{SELECT id FROM Resource WHERE uriref = 'true' AND label = ?}, label)
-
-    return id if id
-
-    db.do(
-      %q{INSERT INTO Resource (uriref, label) VALUES ('true', ?)}, label)
-    id, = db.select_one 'SELECT MAX(id) FROM Resource'
-    return id
+    resource = db[:resource]
+    uriref = {:uriref => true, :label => label}
+    resource.filter(uriref).get(:id) or resource.insert(uriref)
   end
 end

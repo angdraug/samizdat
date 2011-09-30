@@ -128,10 +128,16 @@ Example:
   end
 
   def set_dbroot
-    case db.driver_name
-    when 'Pg'
-      @dbroot = DBI.connect(config['db']['dsn'], 'postgres')
-    when 'SQLite3'
+    adapter = config['db']['adapter']
+    case adapter
+    when 'postgres'
+      @dbroot = Sequel.connect(
+        :adapter => adapter,
+        :host => config['db']['host'],
+        :database => config['db']['database'],
+        :user => 'postgres'
+      )
+    when 'sqlite'
       @dbroot = db
     else
       raise "Database driver #{db.driver_name} is not supported by this command."
@@ -140,25 +146,26 @@ Example:
 
   def list
     puts "Members of the site #{ENV['SAMIZDAT_SITE']} with #{@role} priviledges:"
-    puts db.select_all(
+    puts db.fetch(
       %q{SELECT DISTINCT m.login
-      FROM Role r
-      INNER JOIN Member m ON r.member = m.id
+      FROM role r
+      INNER JOIN member m ON r.member = m.id
       WHERE r.role = ?
       ORDER BY m.login}, @role
-    ).join("\n")
+    ).all.map {|r| r[:login] }.join("\n")
   end
 
   def grant
-    @dbroot.select_all(
-      %q{SELECT * FROM Role WHERE member = ? AND role = ?}, @id, @role
-    ).empty? or raise "Member #{@member} already has #{@role} priviledges."
-
-    @dbroot.do(%q{INSERT INTO Role (member, role) VALUES (?, ?)}, @id, @role)
+    data = {
+      :member => @id,
+      :role => @role
+    }
+    @dbroot[:role].filter(data).empty? or raise "Member #{@member} already has #{@role} priviledges."
+    @dbroot[:role].insert(data)
   end
 
   def revoke
-    @dbroot.do(%q{DELETE FROM Role WHERE member = ? AND role = ?}, @id, @role)
+    @dbroot[:role].filter(:member => @id, :role => @role).delete
   end
 end
 

@@ -11,7 +11,7 @@
 class BlockedAccountsList < ResourcesList
   def initialize(request)
     @dataset = SqlDataSet.new(
-      request.site, %{SELECT id FROM Member WHERE password IS NULL ORDER BY id DESC})
+      request.site, %{SELECT id FROM member WHERE password IS NULL ORDER BY id DESC})
     super(request, @dataset, :list_item)
   end
 
@@ -50,8 +50,8 @@ class ModerationController < Controller
     end
 
     log_table = [[_('Date'), _('Moderator'), _('Action'), _('Resource')]] +
-      dataset[page - 1].collect {|date, moderator, action, resource|
-        l = Moderation.new(site, resource, action, moderator, date)
+      dataset[page - 1].map {|m|
+        l = Moderation.new(site, m[:resource], m[:action], m[:moderator], m[:action_date])
         [
           format_date(l.date),
           l.moderator ? resource_href(l.moderator, Resource.new(@request, l.moderator).title) : '&nbsp;',
@@ -76,9 +76,9 @@ class ModerationController < Controller
     dataset = Moderation.find_pending(site)
 
     pending_table = [[_('Date'), _('Resource')]] + 
-      dataset[page - 1].collect {|action_date, resource|
-        resource = Resource.new(@request, resource)
-        [ format_date(action_date), resource.short + resource.buttons ]
+      dataset[page - 1].collect {|r|
+        resource = Resource.new(@request, r[:resource])
+        [ format_date(r[:action_date]), resource.short + resource.buttons ]
       }
 
     @title = _('Pending Moderation Requests') + page_number(page)

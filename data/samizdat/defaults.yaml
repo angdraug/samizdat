@@ -47,8 +47,8 @@ templates:
 #  #
 #  address: 'root@localhost'
 #
-#  # Program with Senmail command-line interface that can be used to send
-#  # outgoing mails.
+#  # Program with Sendmail command-line interface that can be used to
+#  # send outgoing mails.
 #  #
 #  sendmail: '/usr/sbin/sendmail'
 

@@ -45,9 +45,12 @@ class Moderation
   # first and invoke it from inside transaction)
   #
   def log!
-    db.do 'INSERT INTO Moderation (moderator, action, resource)
-      VALUES (?, ?, ?)', @moderator, @action, @resource
-        @date = Time.now
+    db[:moderation].insert(
+      :moderator => @moderator,
+      :action => @action,
+      :resource => @resource
+    )
+    @date = Time.now
   end
 
   # produce a list of moderation actions for the given resource (or all
@@ -96,10 +99,10 @@ class Moderation
   def Moderation.find_pending(site)
     SqlDataSet.new(site, %{
       SELECT requested.action_date, requested.resource
-      FROM Moderation AS requested
-      INNER JOIN Resource AS r
+      FROM moderation AS requested
+      INNER JOIN resource AS r
         ON requested.resource = r.id
-      LEFT JOIN Moderation AS acknowledged
+      LEFT JOIN moderation AS acknowledged
         ON acknowledged.resource = requested.resource
           AND acknowledged.moderator IS NOT NULL
           AND acknowledged.action_date >= r.published_date
@@ -114,23 +117,25 @@ class Moderation
   #
   def Moderation.request_status(site, resource)
     site.cache.fetch_or_add("moderation/request_status/#{resource.to_i}") do
-      requested_date, acknowledged_date = site.db.select_one %q{
+      r = site.db.fetch(%q{
         SELECT
           requested.action_date AS requested_date,
           acknowledged.action_date AS acknowledged_date
-        FROM Moderation AS requested
-        INNER JOIN Resource AS r
+        FROM moderation AS requested
+        INNER JOIN resource AS r
           ON requested.resource = r.id
-        LEFT JOIN Moderation AS acknowledged
+        LEFT JOIN moderation AS acknowledged
           ON acknowledged.resource = requested.resource
             AND acknowledged.moderator IS NOT NULL
             AND acknowledged.action_date >= r.published_date
         WHERE requested.resource = ?
-          AND requested.action = 'request'}, resource.to_i
+          AND requested.action = 'request'}, resource.to_i).first
 
-      if acknowledged_date
+      if r.nil?
+        :none
+      elsif r[:acknowledged_date]
         :acknowledged
-      elsif requested_date
+      elsif r[:requested_date]
         :requested
       else
         :none
@@ -158,7 +163,7 @@ class Moderation
   # acknowledged since resource was last modified
   #
   def Moderation.request!(site, resource)
-    site.db.transaction do |db|
+    site.db.transaction do
       moderation = Moderation.new(site, resource, 'request')
       Moderation.check_request(site, resource)
       moderation.log!

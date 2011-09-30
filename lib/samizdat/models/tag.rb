@@ -85,14 +85,14 @@ class Tag
 
   def Tag.related_dataset(site, id)
     RdfDataSet.new(site, %{
-SELECT ?msg
-WHERE (rdf::subject ?stmt ?msg)
+SELECT ?related
+WHERE (rdf::subject ?stmt ?related)
       (rdf::predicate ?stmt dc::relation)
       (rdf::object ?stmt ?tag)
       (s::rating ?stmt ?rating FILTER ?rating > 0)
-      (dc::date ?msg ?date)
-      #{exclude_hidden('?msg')}
-EXCEPT (dct::isPartOf ?msg ?parent)
+      (dc::date ?related ?date)
+      #{exclude_hidden('?related')}
+EXCEPT (dct::isPartOf ?related ?parent)
 OPTIONAL (dct::isPartOf ?tag ?supertag TRANSITIVE)
 LITERAL ?tag = :id OR ?supertag = :id
 ORDER BY ?date DESC}, site.config['limit']['page'], :id => id)
@@ -105,7 +105,7 @@ ORDER BY ?date DESC}, site.config['limit']['page'], :id => id)
 
     SqlDataSet.new(site, %{
       SELECT id, nrelated_with_subtags
-      FROM Tag
+      FROM tag
       WHERE nrelated_with_subtags > 0
       #{special_tags}
       ORDER BY nrelated_with_subtags DESC},
@@ -116,7 +116,7 @@ ORDER BY ?date DESC}, site.config['limit']['page'], :id => id)
     list = Tag.tags_dataset(site)[0]
 
     if block_given?
-      list.collect {|tag, usage| yield tag, usage }
+      list.map {|tag| yield tag[:id], tag[:nrelated_with_subtags] }
     else
       list
     end
@@ -150,12 +150,13 @@ ORDER BY ?date DESC}, site.config['limit']['page'], :id => id)
   def rating
     return nil unless @related
     if @rating.nil?
-      @rating, = rdf.select_one %{
+      @rating = rdf.fetch(%{
 SELECT ?rating
-WHERE (rdf::subject ?stmt #{@related})
+WHERE (rdf::subject ?stmt :related)
       (rdf::predicate ?stmt dc::relation)
-      (rdf::object ?stmt #{@id})
-      (s::rating ?stmt ?rating)}
+      (rdf::object ?stmt :id)
+      (s::rating ?stmt ?rating)},
+      :related => @related, :id => @id).get(:rating)
 
       @rating = @rating ? @rating.to_f : _('none')
     end
@@ -172,7 +173,7 @@ WHERE (rdf::subject ?stmt #{@related})
     @plugin.pre_vote(member, @related)
 
     # always make sure @id and @uriref are SQL-safe
-    rdf.assert( %{
+    rdf.assert(%{
 UPDATE ?rating = :rating
 WHERE (rdf::subject ?stmt :related)
       (rdf::predicate ?stmt dc::relation)
@@ -180,7 +181,7 @@ WHERE (rdf::subject ?stmt :related)
       (s::voteProposition ?vote ?stmt)
       (s::voteMember ?vote :member)
       (s::voteRating ?vote ?rating)},
-      { :rating => value, :related => @related, :member => member.id }
+      :rating => value, :related => @related, :member => member.id
     )
 
     @rating = nil   # invalidate rating cache
