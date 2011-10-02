@@ -1,6 +1,6 @@
 # Samizdat RDF Schema, N3 notation
 # 
-#   Copyright (c) 2002-2009 Dmitry Borodaenko <angdraug@debian.org>
+#   Copyright (c) 2002-2011 Dmitry Borodaenko <angdraug@debian.org>
 #
 #   This program is free software.
 #   You can distribute/modify this program under the terms of
@@ -17,9 +17,6 @@
 # Dublin Core
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dct: <http://purl.org/dc/terms/> .
-
-# iCalendar
-@prefix ical: <http://www.w3.org/2002/12/cal#> .
 
 # General Resource Properties
 
@@ -165,52 +162,4 @@ dct:isPartOf
 
 dct:tableOfContents   # compare with dct:hasPart
 	rdfs:domain :Message .
-
-# Calendar
-ical:Vevent
-	rdfs:subClassOf rdfs:Resource .
-
-ical:Recur
-	rdfs:subClassOf rdfs:Resource .
-
-dc:description
-	rdfs:domain ical:Vevent ;
-	rdfs:range :Message .
-
-ical:dtstart
-	rdfs:domain ical:Vevent ;
-	rdfs:range rdfs:Literal .
-
-ical:dtend
-	rdfs:domain ical:Vevent ;
-	rdfs:range rdfs:Literal .
-
-ical:rrule
-	rdfs:domain ical:Vevent ;
-	rdfs:range ical:Recur .
-
-:rruleEvent
-	rdfs:domain ical:Recur ;
-	rdfs:range ical:Vevent ;
-	owl:inverseOf ical:rrule .
-
-ical:freq
-	rdfs:domain ical:Recur ;
-	rdfs:range rdfs:Literal .
-
-ical:interval
-	rdfs:domain ical:Recur ;
-	rdfs:range rdfs:Literal .
-
-ical:until
-	rdfs:domain ical:Recur ;
-	rdfs:range rdfs:Literal .
-
-ical:byday
-	rdfs:domain ical:Recur ;
-	rdfs:range rdfs:Literal .
-
-ical:byhour
-	rdfs:domain ical:Recur ;
-	rdfs:range rdfs:Literal .
 

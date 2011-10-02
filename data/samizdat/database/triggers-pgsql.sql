@@ -30,18 +30,6 @@ CREATE TRIGGER insert_message BEFORE INSERT ON Message
 CREATE TRIGGER insert_vote BEFORE INSERT ON Vote
     FOR EACH ROW EXECUTE PROCEDURE insert_resource('Vote');
 
-CREATE TRIGGER insert_item BEFORE INSERT ON Item
-    FOR EACH ROW EXECUTE PROCEDURE insert_resource('Item');
-
-CREATE TRIGGER insert_possession BEFORE INSERT ON Possession
-    FOR EACH ROW EXECUTE PROCEDURE insert_resource('Possession');
-
-CREATE TRIGGER insert_event BEFORE INSERT ON Event
-    FOR EACH ROW EXECUTE PROCEDURE insert_resource('Event');
-
-CREATE TRIGGER insert_recurrence BEFORE INSERT ON Recurrence
-    FOR EACH ROW EXECUTE PROCEDURE insert_resource('Recurrence');
-
 CREATE FUNCTION delete_resource() RETURNS TRIGGER AS $$
     BEGIN
         DELETE FROM Resource WHERE id = OLD.id;
@@ -59,18 +47,6 @@ CREATE TRIGGER delete_message AFTER DELETE ON Message
     FOR EACH ROW EXECUTE PROCEDURE delete_resource();
 
 CREATE TRIGGER delete_vote AFTER DELETE ON Vote
-    FOR EACH ROW EXECUTE PROCEDURE delete_resource();
-
-CREATE TRIGGER delete_item AFTER DELETE ON Item
-    FOR EACH ROW EXECUTE PROCEDURE delete_resource();
-
-CREATE TRIGGER delete_possession AFTER DELETE ON Possession
-    FOR EACH ROW EXECUTE PROCEDURE delete_resource();
-
-CREATE TRIGGER delete_event AFTER DELETE ON Event
-    FOR EACH ROW EXECUTE PROCEDURE delete_resource();
-
-CREATE TRIGGER delete_recurrence AFTER DELETE ON Recurrence
     FOR EACH ROW EXECUTE PROCEDURE delete_resource();
 
 CREATE FUNCTION select_subproperty(value Resource.id%TYPE, subproperty Resource.id%TYPE) RETURNS Resource.id%TYPE AS $$

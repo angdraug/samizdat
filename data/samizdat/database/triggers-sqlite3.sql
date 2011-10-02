@@ -43,24 +43,6 @@ CREATE TRIGGER insert_vote AFTER INSERT ON Vote
 	    WHERE rowid = NEW.rowid;
     END;
 
-CREATE TRIGGER insert_item AFTER INSERT ON Item
-    FOR EACH ROW WHEN NEW.id IS NULL
-    BEGIN
-	INSERT INTO Resource (literal, uriref, label)
-	    VALUES ('false', 'false', 'Item');
-	UPDATE Item SET id = (SELECT MAX(id) FROM Resource)
-	    WHERE rowid = NEW.rowid;
-    END;
-
-CREATE TRIGGER insert_possession AFTER INSERT ON Possession
-    FOR EACH ROW WHEN NEW.id IS NULL
-    BEGIN
-	INSERT INTO Resource (literal, uriref, label)
-	    VALUES ('false', 'false', 'Possession');
-	UPDATE Possession SET id = (SELECT MAX(id) FROM Resource)
-	    WHERE rowid = NEW.rowid;
-    END;
-
 
 CREATE TRIGGER delete_statement AFTER DELETE ON Statement
     FOR EACH ROW
@@ -81,18 +63,6 @@ CREATE TRIGGER delete_message AFTER DELETE ON Message
     END;
 
 CREATE TRIGGER delete_vote AFTER DELETE ON Vote
-    FOR EACH ROW
-    BEGIN
-	DELETE FROM Resource WHERE id = OLD.id;
-    END;
-
-CREATE TRIGGER delete_item AFTER DELETE ON Item
-    FOR EACH ROW
-    BEGIN
-	DELETE FROM Resource WHERE id = OLD.id;
-    END;
-
-CREATE TRIGGER delete_possession AFTER DELETE ON Possession
     FOR EACH ROW
     BEGIN
 	DELETE FROM Resource WHERE id = OLD.id;

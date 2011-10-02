@@ -89,21 +89,6 @@ ENGINE InnoDB DEFAULT CHARACTER SET binary;
 
 CREATE INDEX Moderation_resource_idx ON Moderation (resource);
 
--- Material Items Sharing
-CREATE TABLE Item (
-	id INTEGER PRIMARY KEY REFERENCES Resource,
-	description INTEGER REFERENCES Message,
-	contributor INTEGER REFERENCES Member,
-	possessor INTEGER REFERENCES Member)
-ENGINE InnoDB DEFAULT CHARACTER SET binary;
-
-CREATE TABLE Possession (
-	id INTEGER PRIMARY KEY REFERENCES Resource,
-	item INTEGER REFERENCES Item,
-	taken_from INTEGER REFERENCES Member,
-	given_to INTEGER REFERENCES Member)
-ENGINE InnoDB DEFAULT CHARACTER SET binary;
-
 -- Role-based Access Control
 CREATE TABLE Role (
 	member INTEGER REFERENCES Member,

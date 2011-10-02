@@ -158,32 +158,6 @@ class MessageController < Controller
     )
   end
 
-  def describe
-    assert_post
-
-    @message = Message.new(site, nil)
-    set_creator
-    set_content
-    set_lang
-    set_open
-
-    event = Event.cached(site, @id)
-    event.description and raise UserError,
-      _('This event already has a description')
-    resource = Resource.new(@request, @id)
-
-    post(
-      :title => _('Describe Event'),
-      :edit => Proc.new {
-        @message.insert!
-        event.description = @message.id
-        event.save!
-      },
-      :redirect => Proc.new { @id },
-      :footer => box(resource.title, resource.full)
-    )
-  end
-
   def edit
     assert_post
 

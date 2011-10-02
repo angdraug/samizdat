@@ -52,24 +52,6 @@ map:
   's::voteMember': {Vote: member}
   's::voteRating': {Vote: rating}
 
-  'items::description': {Item: description}
-  'items::contributor': {Item: contributor}
-  'items::possessor': {Item: possessor}
-
-  'items::item': {Possession: item}
-  'items::takenFrom': {Possession: taken_from}
-  'items::givenTo': {Possession: given_to}
-
-  'dc::description': {Event: description}
-  'ical::dtstart': {Event: dtstart}
-  'ical::dtend': {Event: dtend}
-  's::rruleEvent': {Recurrence: event}
-  'ical::freq': {Recurrence: freq}
-  'ical::interval': {Recurrence: interval}
-  'ical::until': {Recurrence: until}
-  'ical::byhour': {Recurrence: byhour}
-  'ical::byday': {Recurrence: byday}
-
 # Map of properties into lists of their subproperties. For each property
 # listed here, an additional qualifier field named <field>_subproperty
 # is defined in the same table (as defined under 'map:' above) referring

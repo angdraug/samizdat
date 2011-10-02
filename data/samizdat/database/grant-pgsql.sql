@@ -9,7 +9,7 @@
 
 -- grant access to different user for maximum priviledge separation
 GRANT INSERT, UPDATE, SELECT ON Resource, Statement, Vote, Member, Message,
-	Item, Possession, Event, Recurrence, Tag, PendingUpload, PendingUploadFile
+	Tag, PendingUpload, PendingUploadFile
 TO samizdat;
 GRANT INSERT, UPDATE, DELETE, SELECT ON Part TO samizdat;
 GRANT INSERT, SELECT ON Moderation TO samizdat;

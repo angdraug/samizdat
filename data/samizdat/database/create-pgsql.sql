@@ -79,42 +79,6 @@ CREATE TABLE Vote (
 
 CREATE INDEX Vote_proposition_idx ON Vote (proposition);
 
--- Material Items Sharing
-CREATE TABLE Item (
-	id INTEGER PRIMARY KEY REFERENCES Resource,
-	description INTEGER REFERENCES Message,
-	contributor INTEGER REFERENCES Member,
-	possessor INTEGER REFERENCES Member);
-
-CREATE TABLE Possession (
-	id INTEGER PRIMARY KEY REFERENCES Resource,
-	item INTEGER REFERENCES Item,
-	taken_from INTEGER REFERENCES Member,
-	given_to INTEGER REFERENCES Member);
-
--- Calendar
-CREATE TABLE Event (
-	id INTEGER PRIMARY KEY REFERENCES Resource,
-	description INTEGER REFERENCES Message,
-	dtstart TIMESTAMP WITH TIME ZONE NOT NULL,
-	dtend TIMESTAMP WITH TIME ZONE);
-
-CREATE INDEX Event_dtstart_idx ON Event (dtstart);
-
-CREATE TYPE RecurrenceFreq AS ENUM ('secondly', 'minutely', 'hourly', 'daily',
-	'weekly', 'monthly', 'yearly');
-
-CREATE TABLE Recurrence (
-	id INTEGER PRIMARY KEY REFERENCES Resource,
-	event INTEGER REFERENCES Event,
-	freq RecurrenceFreq DEFAULT 'daily' NOT NULL,
-	interval INTEGER DEFAULT 1 NOT NULL,
-	until TIMESTAMP WITH TIME ZONE,
-	byday TEXT,
-	byhour TEXT);
-
-CREATE INDEX Recurrence_event_until_idx ON Recurrence (event, until);
-
 -- Moderation Actions Log
 CREATE TABLE Moderation (
 	action_date TIMESTAMP WITH TIME ZONE

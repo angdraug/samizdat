@@ -11,7 +11,6 @@
 require 'samizdat'
 require 'samizdat/helpers/resource_helper'
 require 'samizdat/helpers/message_helper'
-require 'samizdat/helpers/event_helper'
 
 class Resource
   include SiteHelper
@@ -36,7 +35,7 @@ class Resource
         'Literal'
       else   # internal resource
         case label
-        when 'Member', 'Message', 'Statement', 'Vote', 'Item', 'Event', 'Recurrence'
+        when 'Member', 'Message', 'Statement', 'Vote'
           label
         when nil
           raise ResourceNotFoundError, @id.to_s
@@ -541,67 +540,5 @@ WHERE (dc::date #{@id} ?date)
   def short
     box(nil, @info) <<
       box(_('Vote Proposition'), Resource.new(@request, @stmt).short)
-  end
-end
-
-class ItemComponent < ResourceComponent
-end
-
-class EventComponent < ResourceComponent
-  include MessageHelper
-  include EventHelper
-
-  def initialize(request, id)
-    super
-
-    @event = Event.cached(site, @id)
-
-    if @event.description
-      @title = Resource.new(@request, @event.description).title
-    else
-      @title = _('Event') + ' ' + @id.to_s
-    end
-
-    @info = describe_event(@event)
-  end
-
-  def short
-    html = box(nil, @info)
-
-    if @event.description
-      html << message_content(Message.cached(site, @event.description), :short)
-    end
-
-    html
-  end
-
-  def full
-    html = box(nil, @info)
-
-    unless @event.rrules.empty?
-      html << box(
-        _('Recurrence Rules'),
-        @event.rrules.collect {|rrule|
-          '<p>' + describe_recurrence(rrule) + '</p>'
-        }.join
-      )
-    end
-
-    if @event.description
-      html << box(_('Description'), Resource.new(@request, @event.description).full)
-    end
-
-    html
-  end
-end
-
-class RecurrenceComponent < ResourceComponent
-  include EventHelper
-
-  def initialize(request, id)
-    super
-
-    @rrule = Recurrence.cached(site, id)
-    @info = describe_recurrence(@rrule)
   end
 end

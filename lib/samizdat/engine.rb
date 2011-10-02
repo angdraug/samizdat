@@ -79,7 +79,6 @@ require 'samizdat/models/message'
 require 'samizdat/models/content'
 require 'samizdat/models/tag'
 require 'samizdat/models/moderation'
-require 'samizdat/models/event'
 
 require 'samizdat/components/resource'
 require 'samizdat/components/list'

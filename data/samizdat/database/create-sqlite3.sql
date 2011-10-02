@@ -90,23 +90,6 @@ CREATE TABLE Moderation (
 CREATE INDEX Moderation_action_date_idx ON Moderation (action_date);
 CREATE INDEX Moderation_resource_idx ON Moderation (resource);
 
--- Material Items Sharing
-CREATE TABLE Item (
-	id INTEGER REFERENCES Resource,
-	description INTEGER REFERENCES Message,
-	contributor INTEGER REFERENCES Member,
-	possessor INTEGER REFERENCES Member);
-
-CREATE INDEX Item_id_idx ON Item (id);
-
-CREATE TABLE Possession (
-	id INTEGER REFERENCES Resource,
-	item INTEGER REFERENCES Item,
-	taken_from INTEGER REFERENCES Member,
-	given_to INTEGER REFERENCES Member);
-
-CREATE INDEX Possession_id_idx ON Possession (id);
-
 -- Role-based Access Control
 CREATE TABLE Role (
 	member INTEGER REFERENCES Member,
