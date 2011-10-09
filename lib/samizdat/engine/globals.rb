@@ -18,7 +18,7 @@ class DefaultConfig
   # /usr/share, /usr/local/share, and current directory.
   #
   DIRS = [ '/etc/samizdat/',
-           Config::CONFIG['datadir'] + '/samizdat/',
+           RbConfig::CONFIG['datadir'] + '/samizdat/',
            '/usr/local/share/samizdat/',
            '.' ]
 
