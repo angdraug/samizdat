@@ -143,7 +143,10 @@ class Content
       html = @plugin.render(request, mode, body)
 
       begin
-        if @parts and not @parts.empty?
+        if @plugin.safe_html?
+          html
+
+        elsif @parts and not @parts.empty?
           site.whitewash.sanitize(html) do |element|
             attribute_name = LINK_ATTRIBUTE[element.name] or next
             attribute = element.attribute(attribute_name) or next

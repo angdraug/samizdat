@@ -31,6 +31,10 @@ class ContentInlinePlugin < Plugin
     ''
   end
 
+  def safe_html?
+    false
+  end
+
   def cut(mode, body)
     case mode
     when :short

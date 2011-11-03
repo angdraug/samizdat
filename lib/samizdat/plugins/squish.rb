@@ -35,6 +35,10 @@ class SquishPlugin < ContentInlinePlugin
   def format_name
     _('Squish query')
   end
+
+  def safe_html?
+    true
+  end
 end
 
 PluginClasses.instance['squish'] = SquishPlugin
