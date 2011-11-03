@@ -402,7 +402,8 @@ The test makes several assumptions about the configuration of the site.
 Email interface should be disabled (this is necessary because the test
 uses fake email addresses for account creation and can't respond to
 confirmation requests), post access for guests should be denied, and
-vote access for members should be allowed.
+vote access for members should be allowed. Your SynCache server should
+run without rate limit (no --flush-delay).
 
 After you have made sure that you can connect directly to your web
 server, and double-checked your configuration, fire up the robot:

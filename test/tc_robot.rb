@@ -48,7 +48,7 @@ class TC_Robot < Test::Unit::TestCase
   def test_00_anonymous
     # load front page
     assert_equal Net::HTTPOK, (response = get('')).class
-    root = parse_page(response.body)
+    root = parse(response.body)
     # test version
     version, = elements(root,
       '/h:html/h:head/h:meta[@name="generator"]', 'content') 
@@ -62,7 +62,7 @@ class TC_Robot < Test::Unit::TestCase
     # test anonymous check on publish
     response = get('message/publish')
     assert_equal Net::HTTPUnauthorized, response.class
-    root = parse_page(response.body)
+    root = parse(response.body)
     assert_equal ['Access Denied'], elements(root,
       '//h:div[@id="main"]/h:div/h:div[@class="box-title"]')
   end
@@ -73,7 +73,7 @@ class TC_Robot < Test::Unit::TestCase
       {'Referer' => @base.path})
     case response
     when Net::HTTPOK
-      root = parse_page(response.body)
+      root = parse(response.body)
       assert_equal ['User Error'], elements(root,
         '//h:div[@id="main"]/h:div/h:div[@class="box-title"]')
       print 'test login already exists'
@@ -84,7 +84,7 @@ class TC_Robot < Test::Unit::TestCase
       # check if valid session is reflected in subhead
       response = get('', {'Cookie' => @@session})
       assert_equal Net::HTTPOK, response.class
-      root = parse_page(response.body)
+      root = parse(response.body)
       assert_equal @login, elements(root,
         '//h:div[@id="subhead"]/h:div/h:a[1]')[0]
     else
@@ -107,7 +107,7 @@ class TC_Robot < Test::Unit::TestCase
     response = get('', {"Cookie" => @@session})
     assert @@session = response['set-cookie']
     assert_equal Net::HTTPOK, response.class
-    root = parse_page(response.body)
+    root = parse(response.body)
     blog_link, = elements(root,
       '//h:div[@id="subhead"]/h:div/h:a[1]', 'href')
     assert_equal 'blog/' + @login, blog_link
@@ -122,7 +122,7 @@ class TC_Robot < Test::Unit::TestCase
     assert id = response['location'].sub(@base.to_s, '')
     assert(id.to_i > 0, "Unexpected redirect location '#{response['location']}'")
     assert_equal Net::HTTPOK, (response = get(id)).class
-    msg = REXML::XPath.first(parse_page(response.body),
+    msg = REXML::XPath.first(parse(response.body),
       '//h:div[@id="main"]/h:div', XHTML_NS)
     assert_equal title, text(msg, %{//h:div[@class="box-title"]})
     assert_equal body, elements(msg,
@@ -136,7 +136,7 @@ class TC_Robot < Test::Unit::TestCase
     assert_equal Net::HTTPFound, response.class
     assert id2 = response['location'].gsub(/^.*#id/, '')
     assert_equal Net::HTTPOK, (response = get(id2)).class
-    assert msg = REXML::XPath.first(parse_page(response.body),
+    assert msg = REXML::XPath.first(parse(response.body),
       '//h:div[@id="main"]/h:div', XHTML_NS)
     assert_equal title, text(msg, %{//h:div[@class="box-title"]})
     assert_equal body, elements(msg,
@@ -153,7 +153,7 @@ class TC_Robot < Test::Unit::TestCase
 
     # get a test resource
     assert (response = get('')).kind_of?(Net::HTTPSuccess)
-    main = REXML::XPath.first(parse_page(response.body),
+    main = REXML::XPath.first(parse(response.body),
       '//h:div[@id="main"]', XHTML_NS)
     assert msg = REXML::XPath.first(main,
       %{//h:div[@class="info"]/h:a[@href="blog/#{@login}"]/../..}, XHTML_NS)
@@ -170,7 +170,7 @@ class TC_Robot < Test::Unit::TestCase
     response = post("resource/#{id}/vote",
       "tag=#{@@tag_id}&rating=2")
     assert_equal Net::HTTPUnauthorized, response.class
-    root = parse_page(response.body)
+    root = parse(response.body)
     assert_equal ['Access Denied'], elements(root,
       '//h:div[@id="main"]/h:div/h:div[@class="box-title"]')
 
@@ -182,9 +182,8 @@ class TC_Robot < Test::Unit::TestCase
       {"Cookie" => @@session, "Referer" => @base.path + id})
     assert_equal Net::HTTPFound, response.class
     assert_equal id, response['location'].sub(@base.to_s, '')
-    sleep 5
     assert_equal Net::HTTPOK, (response = get(id)).class
-    root = parse_page(response.body)
+    root = parse(response.body)
     assert_equal [': 1.00'], elements(root,
       %{//h:div[@id="tags"]/h:div[@class="box-content"]/h:p[1]})
   end
@@ -212,18 +211,18 @@ class TC_Robot < Test::Unit::TestCase
 
   def test_06_escape_title
     response = publish_message(%q{Test '}, '.') do |preview_response|
-      msg = REXML::XPath.first(parse_page(preview_response.body),
+      msg = REXML::XPath.first(parse(preview_response.body),
         '//h:div[@id="main"]/h:div', XHTML_NS)
       assert_equal %q{Test &#39;}, text(msg, %{//h:div[@class="box-title"]})
     end
     id = response['location'].sub(@base.to_s, '')
     assert_equal Net::HTTPOK, (response = get(id)).class
-    msg = REXML::XPath.first(parse_page(response.body),
+    msg = REXML::XPath.first(parse(response.body),
       '//h:div[@id="main"]/h:div', XHTML_NS)
     assert_equal %q{Test &#39;}, text(msg, %{//h:div[@class="box-title"]})
 
     assert (response = get('')).kind_of?(Net::HTTPSuccess)
-    main = REXML::XPath.first(parse_page(response.body),
+    main = REXML::XPath.first(parse(response.body),
       '//h:div[@id="main"]', XHTML_NS)
     assert msg = REXML::XPath.first(main,
       %{//h:div[@class="info"]/h:a[@href="blog/#{@login}"]/../..}, XHTML_NS)
@@ -271,13 +270,25 @@ class TC_Robot < Test::Unit::TestCase
     assert_equal 'be', elements(msg, '//h:div[@class="info"]/h:a[2]').join.strip
   end
 
+  def test_09_tags
+    response = get('tags')
+    body = REXML::XPath.first(parse(response.body),
+      '//h:div[@id="main"]/h:div', XHTML_NS)
+    assert_equal 'Tag', elements(body, '//h:th[1]').join.strip
+    assert_equal 'Related Resources', elements(body, '//h:th[2]').join.strip
+  end
+
+  def test_10_moderation
+    response = get('moderation')
+    body = REXML::XPath.first(parse(response.body),
+      '//h:div[@id="main"]/h:div', XHTML_NS)
+    assert_equal ['Links', 'Moderation Log'],
+      elements(body, '//h:div[@class="box-title"]')
+  end
+
   # todo: test pagination
 
   private
-
-  def parse_page(html)
-    parse(@site.whitewash.tidy(html))
-  end
 
   # utility methods
 
@@ -294,7 +305,7 @@ class TC_Robot < Test::Unit::TestCase
   end
 
   def get_action_token(response)
-    elements(parse_page(response.body),
+    elements(parse(response.body),
       '//h:input[@name="action_token"]', 'value')[0]
   end
 
