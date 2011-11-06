@@ -24,7 +24,7 @@ class ContentFilePlugin < Plugin
   #
   def rewrite_link(request, mode, content, element)
     attribute_name = LINK_ATTRIBUTE[element.name]
-    element.attributes[attribute_name] = content.file.href if attribute_name
+    element[attribute_name] = content.file.href if attribute_name
   end
 
   # invoked when new content file is uploaded

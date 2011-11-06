@@ -11,7 +11,7 @@
 require 'samizdat'
 require 'samizdat/plugins/content_file'
 require 'fileutils'
-require 'rexml/document'
+require 'nokogiri'
 
 # don't allow RMagic to second-guess ld.so
 RMAGICK_BYPASS_VERSION_TEST = true
@@ -50,7 +50,7 @@ class ImagePlugin < ContentFilePlugin
   end
 
   def rewrite_link(request, mode, content, element)
-    if 'img' != element.name or %r{/a\b}.match(element.xpath)
+    if 'img' != element.name or %r{/a\b}.match(element.path)
       super
 
     else   # <img/> that is not wrapped inside <a/>
@@ -58,13 +58,14 @@ class ImagePlugin < ContentFilePlugin
         (content.id and Message.cached(site, content.id).lang) or
         request['lang'] or request.language)
       html = request.temporary_language(lang) { render(request, mode, content) }
-      new_element = REXML::Document.new(html).root
 
-      element.attributes.each_attribute do |attribute|
-        new_element.attributes[attribute.name] ||= attribute
+      n = Nokogiri::HTML(html) {|config| config.noblanks }
+      n = n.xpath('//html/body').children.first
+      element.attribute_nodes.each do |attribute|
+        n[attribute.name] ||= attribute.value
       end
 
-      element.document.root.elements[element.xpath] = new_element
+      element.replace(n)
     end
   end
 
