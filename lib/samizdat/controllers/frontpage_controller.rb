@@ -71,9 +71,9 @@ class FrontpageController < Controller
 
       case feed
       when 'updates'
-        UpdatesList.new(@request).dataset[0]
+        UpdatesList.new(@request).dataset
       else
-        FeaturesList.new(@request, limit_page).dataset[0]
+        FeaturesList.new(@request, limit_page).dataset
       end
     end
   end

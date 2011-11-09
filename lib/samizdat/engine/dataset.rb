@@ -16,14 +16,21 @@ require 'samizdat'
 class DataSet
   include SiteHelper
 
-  def initialize(site, query, limit = nil)
+  def initialize(site, query)
     @site = site
     @query = query
-    @limit = (limit or limit_page)
+    yield self if block_given?
+    @limit ||= limit_page
     @cache_key = generate_key(query)
   end
 
-  attr_reader :limit
+  # number of rows to fetch per page
+  #
+  attr_accessor :limit
+
+  # principal column for use be ResourceList and the likes
+  #
+  attr_accessor :key
 
   def size
     @size ||= cache.fetch_or_add(@cache_key + 'size') do
@@ -78,8 +85,8 @@ class SqlDataSet < DataSet
 end
 
 class RdfDataSet < DataSet
-  def initialize(site, query, limit = nil, params = {})
-    super(site, query, limit)
+  def initialize(site, query, params = {})
+    super(site, query)
     self.params = params
   end
 

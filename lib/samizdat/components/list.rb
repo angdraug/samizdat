@@ -11,12 +11,19 @@
 require 'samizdat'
 require 'samizdat/helpers/application_helper'
 
+# Render a list of resources from a given dataset.
+#
+# The list is opportunistically paginated using 'page' CGI parameter.
+# The dataset must present resource id as :id column.
+#
 class ResourcesList
   include ApplicationHelper
 
   def initialize(request, dataset, style)
     self.request = request
     @dataset = dataset
+    @dataset.key or raise RuntimeError,
+      "Can't use a DataSet without a key in a resources list"
     @style = style
     @page = (@request['page'] or 1).to_i
     @data = dataset[@page - 1]
@@ -31,7 +38,7 @@ class ResourcesList
 
   def full
     @data.map {|r|
-      Resource.new(@request, r.values.first).short
+      Resource.new(@request, r[@dataset.key]).short
     }.join << %{<div class="foot">#{@nav}</div>}
   end
 
@@ -39,7 +46,7 @@ class ResourcesList
 
   def list_item
     items = @data.map {|r|
-      Resource.new(@request, r.values.first).list_item
+      Resource.new(@request, r[@dataset.key]).list_item
     }
     list(items, @nav)
   end
@@ -72,9 +79,11 @@ LITERAL ?original_lang = :lang
      OR ?translation_lang = :lang' if request.monolanguage?}
 GROUP BY ?msg
 ORDER BY max(?date) DESC},
-      limit,
       :threshold => config['limit']['features_threshold'],
-      :lang => request.language)
+      :lang => request.language) {|ds|
+      ds.limit = limit
+      ds.key = :msg
+    }
 
     super(request, dataset, :short)
     @nav = nav(dataset, :route => 'frontpage/features?')
@@ -99,8 +108,7 @@ EXCEPT (dct::isPartOf ?msg ?parent)
 LITERAL ?original_lang = :lang
      OR ?translation_lang = :lang' if request.monolanguage?}
 ORDER BY ?date DESC},
-      limit_page,
-      :lang => request.language)
+      :lang => request.language) {|ds| ds.key = :msg }
 
     super(request, dataset, :list_item)
     @nav = nav(dataset, :route => 'frontpage/updates?')

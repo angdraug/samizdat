@@ -384,8 +384,9 @@ module ApplicationHelper
 
       require 'rss/maker'
       RSS::Maker.make("1.0") {|maker|
-        yield(maker).collect do |row|
-          Resource.new(@request, row.values.first).rss(maker)
+        dataset = yield maker
+        dataset.first.collect do |row|
+          Resource.new(@request, row[dataset.key]).rss(maker)
         end
 
         maker.channel.about = File.join(@request.base, @request.env['REQUEST_URI'])

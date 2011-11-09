@@ -72,7 +72,7 @@ class Member < Model
     if query.empty?
       EmptyDataSet.new(site)
     else
-      SqlDataSet.new(site, query + %q{ ORDER BY member})
+      dataset = SqlDataSet.new(site, query + %q{ ORDER BY member}) {|ds| ds.key = :member }
     end
   end
 
@@ -80,9 +80,9 @@ class Member < Model
     RdfDataSet.new(site, %{
 SELECT ?msg
 WHERE (dc::date ?msg ?date)
-      (dc::creator ?msg :id)
+      (dc::creator ?msg :creator)
 EXCEPT (dct::isPartOf ?msg ?parent)
-ORDER BY ?msg DESC}, limit_page, :id => @id)
+ORDER BY ?msg DESC}, :creator => @id) {|ds| ds.key = :msg }
   end
 
   private

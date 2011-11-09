@@ -174,8 +174,7 @@ ORDER BY ?rating DESC})
 SELECT ?subtag
 WHERE (s::subTagOf ?subtag :tag)
 ORDER BY ?subtag},
-      limit_page,
-      :tag => @id)
+      :tag => @id) {|ds| ds.key = :subtag }
 
     unless dataset.empty?
       parts_list(
@@ -221,7 +220,7 @@ ORDER BY ?subtag},
       ' / ' + Tag.tag_title(@title)
     maker.channel.link = File.join(@request.base, @id.to_s)
 
-    Tag.related_dataset(site, @id)[0]
+    Tag.related_dataset(site, @id)
   end
 
   private
@@ -239,8 +238,8 @@ ORDER BY ?subtag},
     n = nav(dataset, :name => page_parameter)
     n << options[:nav].to_s
 
-    entries = dataset[page - 1].map do |row|
-      resource = Resource.new(@request, row.values.first)
+    entries = dataset[page - 1].map do |r|
+      resource = Resource.new(@request, r[dataset.key])
       case options[:render]
       when Proc
         yield resource
@@ -343,9 +342,9 @@ class MessageComponent < ResourceComponent
       else
         dataset = RdfDataSet.new(site, %{
 SELECT ?msg
-WHERE (s::inReplyTo ?msg :id)
+WHERE (s::inReplyTo ?msg :parent)
       #{exclude_hidden('?msg')}
-ORDER BY ?msg}, limit_page, :id => @id)
+ORDER BY ?msg}, :parent => @id) {|ds| ds.key = :msg }
 
         if @message.nreplies != @message.nreplies_all
           n = %{<div class="nav"><a href="#{@id}?replies=all">} +
@@ -366,7 +365,7 @@ ORDER BY ?msg}, limit_page, :id => @id)
   end
 
   def moderation_log(page = 1)
-    Moderation.find(site, @id, { :message => true })
+    Moderation.find(site, @id, :message => true)
   end
 
   # add RSS item of the message to _maker_ feed
@@ -400,7 +399,7 @@ ORDER BY ?msg}, limit_page, :id => @id)
 SELECT ?msg
 WHERE (s::inReplyTo ?msg :id)
       #{exclude_hidden('?msg')}
-ORDER BY ?msg}, nil, :id => id)
+ORDER BY ?msg}, :id => id)
 
     return '' if dataset.empty?
 

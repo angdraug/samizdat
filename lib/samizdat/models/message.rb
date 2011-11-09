@@ -344,11 +344,11 @@ WHERE (dc::creator ?msg :creator)
   def parts_dataset(id = @id)
     RdfDataSet.new(site, %{
 SELECT ?part
-WHERE (dct::isPartOf ?part :id)
+WHERE (dct::isPartOf ?part :parent)
       #{exclude_hidden('?part')}
 EXCEPT (s::isPartOfSubProperty ?part ?subproperty)
 OPTIONAL (s::partSequenceNumber ?part ?seq)
-ORDER BY ?seq, ?part}, limit_page, :id => id)
+ORDER BY ?seq, ?part}, :parent => id) {|ds| ds.key = :part }
   end
 
   private

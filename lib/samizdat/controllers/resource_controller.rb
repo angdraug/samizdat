@@ -91,7 +91,7 @@ class ResourceController < Controller
     box(
       Tag.tag_title(@title) + page_number(page),
       list(
-        dataset[page - 1].map {|r| Resource.new(@request, r[:related]).short },
+        dataset[page - 1].map {|r| Resource.new(@request, r[dataset.key]).short },
         nav(dataset, :name => 'related_page') << nav_rss(rss_link)
       )
     )

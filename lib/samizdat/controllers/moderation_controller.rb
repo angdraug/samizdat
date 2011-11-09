@@ -11,7 +11,8 @@
 class BlockedAccountsList < ResourcesList
   def initialize(request)
     @dataset = SqlDataSet.new(
-      request.site, %{SELECT id FROM member WHERE password IS NULL ORDER BY id DESC})
+      request.site, %{SELECT id FROM member WHERE password IS NULL ORDER BY id DESC}
+    ) {|ds| ds.key = :id }
     super(request, @dataset, :list_item)
   end
 

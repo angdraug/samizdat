@@ -28,8 +28,8 @@ class QueryController < Controller
 
     @title = _('Search Result') + page_number(page)
 
-    dataset = SqlDataSet.new(site, q.to_sql)
-    results = dataset[page - 1].map {|r| Resource.new(@request, r.values.first).list_item }
+    dataset = query_dataset(q)
+    results = dataset[page - 1].map {|r| Resource.new(@request, r[dataset.key]).list_item }
 
     if results.size > 0
       feed = rss_link(query)
@@ -126,8 +126,7 @@ ORDER BY ?date DESC}
       maker.channel.title = config['site']['name'] + ' / ' + _('Search Result')
       maker.channel.description = CGI.escapeHTML(query)
       maker.channel.link = @request.base + rss_link(query)
-
-      SqlDataSet.new(site, q.to_sql).first
+      query_dataset(q)
     end
   end
 
@@ -145,13 +144,19 @@ ORDER BY ?date DESC}
       raise UserError, _('Error in your query: ') + CGI.escapeHTML($!.message)
     end
 
-    (q.nodes.size != 1) and raise UserError,
+    (q.nodes.size != 1 or not Graffiti::SquishSelect::BN === q.nodes.first) and raise UserError,
       _('Must-bind list should contain only one blank node, filters based on queries with a complex answer pattern are not implemented')
 
     (q.pattern.size > config['limit']['pattern']) and raise UserError,
       sprintf(_('User-defined query pattern should not be longer than %s clauses'), config['limit']['pattern'])
 
     q
+  end
+
+  def query_dataset(query)
+    SqlDataSet.new(site, query.to_sql) do |ds|
+      ds.key = query.nodes.first.sub(Graffiti::SquishQuery::BN, '\1').to_sym
+    end
   end
 
   def edit_box(q)

@@ -95,7 +95,7 @@ WHERE (rdf::subject ?stmt ?related)
 EXCEPT (dct::isPartOf ?related ?parent)
 OPTIONAL (dct::isPartOf ?tag ?supertag TRANSITIVE)
 LITERAL ?tag = :id OR ?supertag = :id
-ORDER BY ?date DESC}, site.config['limit']['page'], :id => id)
+ORDER BY ?date DESC}, :id => id) {|ds| ds.key = :related }
   end
 
   def Tag.tags_dataset(site)
@@ -108,8 +108,9 @@ ORDER BY ?date DESC}, site.config['limit']['page'], :id => id)
       FROM tag
       WHERE nrelated_with_subtags > 0
       #{special_tags}
-      ORDER BY nrelated_with_subtags DESC},
-      site.config['limit']['tags'])
+      ORDER BY nrelated_with_subtags DESC}) {|ds|
+      ds.limit = site.config['limit']['tags']
+    }
   end
 
   def Tag.find_tags(site)
