@@ -320,7 +320,7 @@ class MemberController < Controller
   end
 
   def secure_action(action)
-    if (not @request.env['HTTPS']) and
+    if (not @request.ssl?) and
       config['https'] and config['https']['force_secure_session']
 
       config['https']['base'] + action

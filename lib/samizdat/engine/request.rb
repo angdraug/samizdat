@@ -44,13 +44,17 @@ class LocalDRbSingleton
   end
 end
 
-class UploadTempfile < SimpleDelegator
+class UploadTempfile
   def initialize(tempfile, original_filename)
     @tempfile = tempfile
     @original_filename = original_filename
-    super @tempfile
   end
+
   attr_reader :original_filename
+
+  def method_missing(method, *args)
+    @tempfile.call(method, *args)
+  end
 end
 
 # CGI request and response handler
@@ -76,7 +80,7 @@ class Request
         :value => value,
         :path => File.join(@uri_prefix, ''),
         :expires => expires.kind_of?(Numeric) ? Time.now + expires : nil,
-        :secure => (@env['HTTPS'] and 'session' == name)
+        :secure => (ssl? and 'session' == name)
       }
     )
   end
@@ -177,17 +181,10 @@ class Request
     set_language(@site.config['locale']['languages'], @env['HTTP_ACCEPT_LANGUAGE'])
 
     # construct @base
-    proto = (@env['HTTP_X_FORWARDED_PROTO'] or
-             @env['HTTP_X_FORWARDED_SCHEME'] or
-             @env['HTTP_X_SCHEME'] or
-             @env['HTTPS'] ? 'https' : 'http')
-    port = (@env['HTTP_X_FORWARDED_PORT'] or
-            @env['HTTP_X_PORT'] or
-            defined?(MOD_RUBY) ?
-              Apache.request.connection.local_port :
-              @env['SERVER_PORT'])
-    port = (port.to_i == {'http' => 80, 'https' => 443}[proto]) ? '': ':' + port.to_s
-    @base = proto + '://' + @host + port + File.join(@uri_prefix, '')
+    scheme = @rack.scheme
+    port = @rack.port
+    port = (port == {'http' => 80, 'https' => 443}[scheme]) ? '': ':' + port.to_s
+    @base = scheme + '://' + @host + port + File.join(@uri_prefix, '')
 
     # select CSS style
     @style = cookie('style')
@@ -228,6 +225,14 @@ class Request
 
   # HTTP response status
   attr_accessor :status
+
+  def ssl?
+    @rack.ssl?
+  end
+
+  def referer
+    @rack.referer
+  end
 
   # web server document root (untainted as it's assumed to be safe)
   #
@@ -415,7 +420,7 @@ class Request
   #
   def redirect(location = nil)
     if location.nil?
-      location = @env['HTTP_REFERER']
+      location = referer
     elsif not absolute_url?(location)
       location = File.join(@base, location.to_s)
     end
@@ -475,7 +480,7 @@ class Request
   end
 
   def referer_but_no_login
-    location = (@env['HTTP_REFERER'] or '').sub(/\A#{@base}/, '')
+    location = (referer or '').sub(/\A#{@base}/, '')
     (location.empty? or 'member/login' == location)? '/' : location
   end
 

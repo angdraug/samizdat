@@ -122,7 +122,7 @@ class ErrorController < Controller
     when ResourceNotFoundError
       @request.status = 404
       @title = _('Resource Not Found')
-      if referer = @request.env['HTTP_REFERER']
+      if referer = @request.referer
         referer = sprintf(_(' (looks like it was %s)'), %{<a href="#{referer}">#{referer}</a>})
       end
       @content_for_layout =
