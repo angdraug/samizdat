@@ -241,6 +241,7 @@ plugins:
       # disable this sort of spam protection.
       #
       check_roles: [ guest, member ]
+      post_delay: 60
 
     # Spam filter based on a merge of regular expressions
     #
