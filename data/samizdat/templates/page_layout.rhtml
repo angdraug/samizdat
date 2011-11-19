@@ -28,8 +28,12 @@
 <div><a href="#main" class="hidden">Skip navigation</a></div>
 <div id="head">
   <div id="head-left"><a href="<%= @request.base %>" title="<%= logo_link_title %>"><%= config['site']['logo'] %></a></div>
-  <div id="head-right"><a href="message/publish"><%= _('Publish') %></a>
-    :: <a href="query"><%= _('Search') %></a></div>
+  <div id="head-right"><a href="message/publish"><%= _('Publish') %></a> ::
+    <form action="query/search" method="post">
+      <input name="substring" id="f_substring" type="text" value="" placeholder="<%= _('Search string') %>" />
+      <input name="search" id="f_search" type="submit" value="Search" />
+    </form>
+  </div>
 </div>
 <div id="subhead">
   <div id="subhead-right">

@@ -37,6 +37,8 @@ pre { margin: 0.25em 0; }
 #head-right {
 	position: absolute;
 	z-index: 200;
+	width: 50%;
+	text-align: right;
 	padding: 0.2em 0 0 0;
 	top:0; right: 15px; }
 #subhead {
@@ -282,3 +284,7 @@ div.notice {
 a { text-decoration: none; color: #641212; }
 a:visited { color: #641212; }
 a:hover { text-decoration: underline; color: #c40f0f; }
+
+div#head-right form {
+	background-color: inherit;
+	display: inline; }
