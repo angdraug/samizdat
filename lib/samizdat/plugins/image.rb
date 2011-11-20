@@ -59,8 +59,8 @@ class ImagePlugin < ContentFilePlugin
         request['lang'] or request.language)
       html = request.temporary_language(lang) { render(request, mode, content) }
 
-      n = Nokogiri::HTML(html) {|config| config.noblanks }
-      n = n.xpath('//html/body').children.first
+      n = Nokogiri::HTML.fragment(html) {|config| config.noblanks }
+      n = n.children.first
       element.attribute_nodes.each do |attribute|
         n[attribute.name] ||= attribute.value
       end
