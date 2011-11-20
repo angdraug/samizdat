@@ -247,7 +247,7 @@ class ContentFile
 
   def ContentFile.detect_format(file)
     format =
-      if file.respond_to?(:path) and file.path
+      if file.respond_to?(:path) and file.path or file.kind_of?(UploadTempfile)
         Magic.guess_file_mime_type(file.path)
       elsif file.kind_of?(StringIO)
         Magic.guess_string_mime_type(file.string)
