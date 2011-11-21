@@ -12,8 +12,10 @@ require 'samizdat'
 require 'samizdat/plugins/content_inline'
 
 class HtmlPlugin < ContentInlinePlugin
+  FORMAT = 'text/html'
+
   def match?(format)
-    'text/html' == format
+    FORMAT == format
   end
 
   def render(request, mode, body)
@@ -22,6 +24,14 @@ class HtmlPlugin < ContentInlinePlugin
 
   def format_name
     'HTML'
+  end
+
+  def source_format
+    FORMAT
+  end
+
+  def source_format_name
+    'html'
   end
 end
 

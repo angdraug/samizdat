@@ -34,8 +34,10 @@ rescue LoadError
 end
 
 class TextilePlugin < ContentInlinePlugin
+  FORMAT = 'text/textile'
+
   def match?(format)
-    'text/textile' == format
+    FORMAT == format
   end
 
   def render(request, mode, body)
@@ -44,6 +46,13 @@ class TextilePlugin < ContentInlinePlugin
 
   def format_name
     'Textile'
+  end
+  def source_format
+    FORMAT
+  end
+
+  def source_format_name
+    'textile'
   end
 end
 
