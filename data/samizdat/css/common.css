@@ -15,3 +15,28 @@ div.flowplayer {
 	width: 320px;
 	height: 264px; }
 
+#postblock .box-content {
+  float: left;
+  width: 65%; }
+#postblock #f_title {
+  width: 30em; }
+#textile-ref {
+  column-count: 2;
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+  margin-left: 66%;
+  width: 33%; }
+@media screen and (max-width: 899px) {
+  #textile-ref {
+    column-count: 1;
+    -moz-column-count: 1;
+    -webkit-column-count: 1;
+    margin-left: 80%;
+    width: 17%; } }
+#textile-ref h1 {
+  -webkit-column-span:all;
+  -moz-column-span:all;
+  column-span:all; }
+
+#foot { clear:both; }
+
