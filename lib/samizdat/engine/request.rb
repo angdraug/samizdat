@@ -52,8 +52,12 @@ class UploadTempfile
 
   attr_reader :original_filename
 
+  def path
+    @tempfile.path
+  end
+
   def method_missing(method, *args)
-    @tempfile.call(method, *args)
+    @tempfile.send(method, *args)
   end
 end
 
