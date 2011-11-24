@@ -248,7 +248,19 @@ class ContentFile
   def ContentFile.detect_format(file)
     format =
       if file.respond_to?(:path) and file.path
-        Magic.guess_file_mime_type(file.path)
+      f = Magic.guess_file_mime_type(file.path)
+      # dirty hack for ogg files
+      if f == 'application/ogg'
+        path =
+          if file.respond_to?(:original_filename)
+            file.original_filename
+          else
+            file.path
+          end
+        path =~ /\.ogv$/i ? 'video/ogg' : 'audio/ogg'
+      else
+        f
+      end
       elsif file.kind_of?(StringIO)
         Magic.guess_string_mime_type(file.string)
       elsif file.kind_of?(String)
