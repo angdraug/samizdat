@@ -142,7 +142,7 @@ format:
   # included in <img/> tag should go into this section.
   #
   other: [ application/pdf, application/ogg, audio/ogg, audio/mpeg, audio/x-mp3,
-    video/mpeg, video/quicktime, video/x-msvideo, video/x-ms-asf,
+    video/mpeg, video/quicktime, video/x-msvideo, video/x-ms-asf, video/ogg,
     video/x-ms-wmv, application/vnd.rn-realmedia, video/mp4, video/x-flv,
     application/x-shockwave-flash, application/x-bittorrent,
     application/vnd.oasis.opendocument.graphics,
@@ -155,7 +155,7 @@ format:
 file_extension: { image/jpeg: jpg, audio/mpeg: mp3, video/quicktime: mov,
   video/x-msvideo: avi, video/x-ms-asf: wmv, video/x-ms-wmv: wmv,
   application/vnd.rn-realmedia: rm, application/x-shockwave-flash: swf,
-  application/x-bittorrent: torrent,
+  application/x-bittorrent: torrent, video/ogg: ogv,
   application/vnd.oasis.opendocument.graphics: odg,
   application/vnd.oasis.opendocument.presentation: odp,
   application/vnd.oasis.opendocument.spreadsheet: ods,
