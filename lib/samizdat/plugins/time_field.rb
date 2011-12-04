@@ -15,13 +15,13 @@ class TimeFieldPlugin < SpamPlugin
     begin
       config['plugins']['options']['spam']['post_delay']
     rescue
-      DEFAULT_DELAY
     end
+    @delay ||= DEFAULT_DELAY
   end
 
   def add_message_fields(request)
     return [] unless @roles.include? request.role
-    %{<input name="#{field_name}" type="hidden" value="#{(Time.now + delay).to_i}"/>\n}
+    %{<input name="#{field_name}" type="hidden" value="#{(Time.now + @delay).to_i}"/>\n}
   end
 
   def check_message_fields(request)
