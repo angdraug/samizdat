@@ -418,12 +418,12 @@ class MemberComponent < ResourceComponent
     member = Member.cached(site, @id)
     @login = member.login
     @title = member.full_name
-    @location = member.location
+    @location = member.location.to_s
     @moderator = member.allowed_to?('moderate')
     @info = _('Login') + ": #{@login}"
 
     @messages_dataset = member.messages_dataset
-    @feeds[@title] = File.join(member.location, 'rss') unless @messages_dataset.empty?
+    @feeds[@title] = File.join(@location, 'rss') unless @messages_dataset.empty?
 
     # used to check if account is blocked
     m = db[:member][:id => @id]
