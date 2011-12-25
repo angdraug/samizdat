@@ -1,0 +1,18 @@
+<div id="languages">
+<% langlist.each do |lang| name = lnames[lang]
+     if name 
+       if lang == current_language %>
+<a href="member/set?lang=<%= lang %>"><strong><%= name %><%= _(' (default language)') if lang == default_language %></strong></a> 
+<%     else %>
+<a href="member/set?lang=<%= lang %>"><%= name %><%= _(' (default language)') if lang == default_language %></a> 
+<%     end
+     end
+   end
+   if config['locale']['allow_monolanguage'] 
+     if @request.monolanguage? %>
+<br /><a href="member/set?monolanguage=no"><%= _('Show messages in all languages') %></a>
+<%   else %> 
+<br /><a href="member/set?monolanguage=yes"><%= sprintf(_('Show only messages in %s'), _('(name that this language calls itself)')) %></a>
+<%   end 
+   end %>
+</div>

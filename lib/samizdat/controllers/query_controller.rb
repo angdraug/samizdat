@@ -34,25 +34,9 @@ class QueryController < Controller
     if results.size > 0
       feed = rss_link(query)
       @feeds[@title] = feed
-
-      if @request.advanced_ui? and @request['page'].nil?
-        foot = form(
-          'message/publish',
-          [:hidden, 'format', 'application/x-squish'],
-          [:hidden, 'body', query],
-          [:submit, 'publish', _('Publish This Query')])
-      end
-
-      body = list(results,
-        nav(dataset, :route => %{query/run?q=#{Rack::Utils.escape(query)}&amp;}) <<
-        nav_rss(feed) <<
-        foot.to_s)
-    else
-      body = '<p>' << _('No matching resources found.') << '</p>'
     end
 
-    @content_for_layout = box(@title, body)
-    @content_for_layout << edit_box(q) if @request['page'].nil?
+   @content_for_layout = render_template('query_result.rhtml', binding)
   end
 
   # search messages by a substring
@@ -160,68 +144,22 @@ ORDER BY ?date DESC}
   end
 
   def edit_box(q)
-    editbox = box(_('Search By Substring'),
-      form('query/search',
-        [:text, 'substring', @request['substring']],
-        [:submit, 'search', _('Search')]))
+    clauses = ((q.pattern.size >= config['limit']['pattern'])?
+          q.pattern :
+          q.pattern + [['']]
+        ).collect {|clause|
+          predicate, subject, object = clause.first(3).collect {|uri| q.ns_shrink(uri) }
+        }
 
     if @request.advanced_ui?
-      edit = box(_('Select Target'),
-        form_field(:select, 'nodes', q.pattern.collect {|p, s, o| s }.uniq))
-
       properties = config['map'].keys
       if config['subproperties']
         properties += config['subproperties'].values.flatten
       end
       properties.sort!
-
-      i = 0
-      edit << box( _('Query Pattern (predicate subject object)'),
-        ((q.pattern.size >= config['limit']['pattern'])?
-          q.pattern :
-          q.pattern + [['']]
-        ).collect {|clause|
-          predicate, subject, object = clause.first(3).collect {|uri| q.ns_shrink(uri) }
-          i += 1
-
-          %{#{i}. } +
-          # todo: add external properties to the options list
-          form_field(:select, "predicate_#{i}",
-            [_('BLANK CLAUSE ')] + properties, predicate) +
-            # make sure 'BLANK CLAUSE' includes whitespace in all translations
-          form_field(:text, "subject_#{i}", subject) +
-          form_field(:text, "object_#{i}", q.substitute_literals(object)) +
-          form_field(:br)
-          # todo: select subject and object from variables and known urirefs
-        }.join
-      )
-
-      edit << box(_('Literal Condition'),
-        form_field(:text, 'literal', q.substitute_literals(q.literal)))
-
-      edit << box(_('Order By'),
-        form_field(:select, 'order', q.variables, q.order) +
-        form_field(:select, 'order_dir',
-          [['ASC', _('Ascending')], ['DESC', _('Descending')]], q.order_dir))
-
-      edit << box(nil, '<pre>USING ' +
-        q.ns.to_a.collect {|n| n.join(' FOR ') }.join("\n      ") + '</pre>' +
-        form_field(:hidden, 'using', q.ns.to_a.flatten.join(' ')))
-
-      edit << form_field(:submit, 'update', _('Update'))
-
-      editbox << box(_('Construct Query'),
-        %{<form action="query/update" method="post">#{edit}</form>})
-
-      editbox << box(_('Edit Raw Query'),
-        form('query/run',
-          [:textarea, 'q', q.to_s],
-          [:label],
-          [:submit, 'run', _('Run')]))
     end
 
-    editbox = q.substitute_literals(editbox)
-    box(_('Edit Query'), editbox)
+    render_template('query_edit_box.rhtml', binding)
   end
 
   def rss_link(query)

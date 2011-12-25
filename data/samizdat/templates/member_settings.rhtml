@@ -1,0 +1,35 @@
+<div class="box">
+  <div class="box-title"><%= _('Change Appearance') %></div>
+  <div class="box-content">
+<% if config['style'].size > 1 %>
+<p><%= _('Theme:') %> <%
+     config['style'].each do |s| %>
+<a class="action" href="member/set?style=<%= s %>"><%= s %></a>&nbsp;<% 
+     end %></p>
+<% end %>
+
+
+<% if 'yes' == @request.cookie('nostatic') %>
+<p><a class="action" href="member/set?nostatic=no"><%= _('Show static content on the front page') %></a></p>
+<% else %>
+<p><a class="action" href="member/set?nostatic=yes"><%= _('Hide static content from the front page') %></a></p>
+<% end %>
+
+<% if @request.advanced_ui? %>
+<p><a class="action" href="member/set?ui=basic"><%= _('Return to basic interface') %></a></p>
+<% else %>
+<p><a class="action" href="member/set?ui=advanced"><%= _('Enable advanced interface') %></a></p>
+<% end %>
+</div></div>
+
+<% if @session.moderator? %>
+<div class="box">
+  <div class="box-title"><%= _('Moderation Facility') %></div>
+  <div class="box-content">
+<%   if @request.moderate? %>
+<a class="action" href="member/set?moderate=no"><%= _('Disable') %></a>
+<%   else %>
+<a class="action" href="member/set?moderate=yes"><%= _('Enable') %></a>
+<%   end %>
+</div></div>
+<% end %>

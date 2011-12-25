@@ -1,0 +1,7 @@
+<div class="message" id="id<%= message.id %>">
+<%if title %>
+<div class="title"><%= resource_href(message.id, title) %></div>
+<% end %>
+<div class="info"><%= message_info(message, mode) %></div>
+<div class="content"><%= hide_message(content, message.hidden?) %></div>
+</div>

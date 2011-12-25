@@ -1,0 +1,19 @@
+<div class="box">
+  <div class="box-title"><%= @title %></div>
+  <div class="box-content">
+    <form action="<%= secure_action('member/change_account') %>" method="post">
+      <div class="label"><label for="f_email"><%= _('Email') %></label></div>
+      <input type="text" name="email" id="f_email" value="<%= @email %>" />
+<% if @session.member %>
+      <div class="label"><label for="f_password"><%= _('Current Password') %></label></div>
+      <input type="password" name="password" id="f_password" />
+<% end %>
+      <div class="label"><label for="f_password1"><%= _('New Password') %></label></div>
+      <input type="password" name="password1" id="f_password1" />
+      <div class="label"><label for="f_password2"><%= _('Reenter password to confirm') %></label></div>
+      <input type="password" name="password2" id="f_password2" />
+      <br /><input type="submit" name="confirm" id="f_confirm" value="<%= _('Confirm') %>"/>
+<%= make_secure_form %>
+    </form>
+  </div>
+</div>

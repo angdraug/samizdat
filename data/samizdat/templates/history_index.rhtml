@@ -1,0 +1,22 @@
+<div class="box">
+  <div class="box-title"><%= @title %></div>
+  <div class="box-content">
+<table>
+<thead><tr><th><%= _('Versions') %></th><th><%= _('Changes') %></th></tr></thead>
+<tbody>
+<% compare = _('compare with previous version')
+   0.upto(versions.size - 1) do |i| %>
+<tr><td><%= Resource.new(@request, versions[i]).list_item %></td><td>
+<%   if i < versions.size - 1 %>
+<a href="diff?old=<%= versions[i+1] %>&amp;new=<%= versions[i] %>"><%= compare %></a>
+<%    elsif last %>
+<a href="diff?old=<%= last %>&amp;new=<%= versions[i] %>"><%= compare %></a>
+<%    end %>
+</td></tr>
+<% end %>
+</tbody>
+</table>
+<% if foot != '' %>
+<div class="foot"><%= foot %></div>
+<% end %>
+</div></div>

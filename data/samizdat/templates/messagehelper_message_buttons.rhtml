@@ -1,0 +1,40 @@
+<div class="foot">
+<% unless message.version_of %>
+<%# all of these buttons only work with the current version %>
+<%   if @member.allowed_to?('post')
+       if message.may_reply? %>
+<a class="action" href="message/<%= message.id %>/reply"><%= _('Reply') %></a>
+<%     end
+       if message.translation_of.nil? and config['locale']['languages'].size > 1 %>
+<a class="action" href="message/<%= message.id %>/translate"><%= _('Translate') %></a>
+<%     end
+       if may_edit %>
+<a class="action" href="message/<%= message.id %>/edit"><%= _('Edit') %></a>
+<%     end
+     end
+     if @request.moderate?
+       if message.hidden? %>
+<a class="moderator_action" href="message/<%= message.id %>/unhide"><%= _('UNHIDE') %></a>
+<%     else %>
+<a class="moderator_action" href="message/<%= message.id %>/hide"><%= _('HIDE') %></a>
+<%     end %>
+<%     if message.locked? %>
+<a class="moderator_action" href="message/<%= message.id %>/unlock"><%= _('UNLOCK') %></a>
+<%     else %>
+<a class="moderator_action" href="message/<%= message.id %>/lock"><%= _('LOCK') %></a>
+<%     end %>
+<a class="moderator_action" href="message/<%= message.id %>/reparent"><%= _('REPARENT') %></a>
+<a class="moderator_action" href="message/<%= message.id %>/takeover"><%= _('TAKE OVER') %></a>
+<%   end
+   end
+   if @request.moderate? %>
+<%# old versions can still be replaced %>
+<a class="moderator_action" href="message/<%= message.id %>/replace"><%= _('REPLACE') %></a>
+<%   if :requested == request_status %>
+<a class="moderator_action" href="message/<%= message.id %>/acknowledge"><%= _('ACKNOWLEDGE') %>
+<%   end
+   elsif @member.allowed_to?('post') and :none == request_status %>
+<%# moderation can be requested for any message version %>
+<a class="action" href="message/<%= message.id %>/request_moderation"><%= _('Request Moderation') %></a>
+<% end %>
+</div>

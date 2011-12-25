@@ -1,0 +1,17 @@
+<div class="box">
+  <div class="box-title"><%= @title %></div>
+  <div class="box-content">
+<% case error
+     when AuthError, AccountBlockedError %>
+<p><%= error %>.</p>
+<%   when UserError %>
+<p><%= error %>.</p>
+<p><% _("Press 'Back' button of your browser to return.") %></p>
+<%   when ResourceNotFoundError %>
+<p><%= sprintf(_('The resource you requested (%s) was not found on this site. Please report this error back to the site you came from%s.'), Rack::Utils.escape_html(error.message), referer.to_s) %></p>
+<%   else %>
+<p><%= _('Runtime error has occured.') %> <%= _('Error ID:') %> <%= Rack::Utils.escape_html(error_id) %>.</p>
+<p><%= _('Please report this error to the site administrator.') %></p>
+<% end %>
+  </div>
+</div>

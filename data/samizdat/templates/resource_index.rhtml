@@ -1,0 +1,21 @@
+<% if related %>
+<div class="box">
+  <div class="box-title"><%= Tag.tag_title(@title) %><%= page_number(page) %></div>
+  <div class="box-content">
+    <ul>
+<%   dataset[page - 1].each do |r| %>
+      <li><%= Resource.new(@request, r[dataset.key]).short %></li>
+<%   end %>
+    </ul>
+<% if foot != '' %>
+    <div class="foot"><%= foot %></div>
+<% end %>
+  </div>
+</div>
+<% end %>
+<% if body %>
+<div class="box">
+  <div class="box-title"><%= @title %></div>
+  <div class="box-content"><%= body %></div>
+</div>
+<% end %>

@@ -26,14 +26,29 @@ class ResourceController < Controller
   # render resource
   #
   def index
-    @content_for_layout =
+    related, body =
       if @request.has_key?('page')
-        box(@title, @resource.parts.to_s)
+        [ false, @resource.parts.to_s ]
       elsif @request.has_key?('related_page')
-        related
+        [ true, nil ]
       else
-        related + box(@title, @resource.page)
+        [ true, @resource.page ]
       end
+
+    if related 
+      dataset = Tag.related_dataset(site, @id)
+
+      if dataset.empty?
+        related = false
+      else
+        page = (@request['related_page'] or 1).to_i
+        rss_link = %{resource/#{@id}/rss}
+        @feeds[ Tag.tag_title(@title) ] = rss_link
+        foot = nav(dataset, :name => 'related_page') + nav_rss(rss_link)
+      end
+    end
+
+    @content_for_layout = render_template('resource_index.rhtml', binding)
   end
 
   # vote on tag rating
@@ -55,16 +70,11 @@ class ResourceController < Controller
       @request.redirect(@id)
 
     else   # display vote form
-      vote_title = _('Vote') + ': ' + @title
-      vote_form = secure_form(
-        nil,
-        *tag_fields(tag) +
-        [ [:br], [:submit, nil, _('Submit')] ])
-
-      @content_for_layout =
-        box(vote_title, vote_form) +
-        box(@title, @resource.full)
-      @title = vote_title
+      tags = @member.allowed_to?('vote') ? tag_list(tag) : nil
+      tags &&= [nil, _('SELECT TAG')] + tags
+      tag = (tag ? (tag.id or tag.uriref) : nil)
+      @content_for_layout = render_template('resource_vote.rhtml', binding)
+      @title = _('Vote') + ': ' + @title
     end
   end
 
@@ -76,24 +86,4 @@ class ResourceController < Controller
     end
   end
 
-  private
-
-  # related resources
-  #
-  def related
-    page = (@request['related_page'] or 1).to_i
-    dataset = Tag.related_dataset(site, @id)
-
-    return '' if dataset.empty?
-
-    rss_link = %{resource/#{@id}/rss}
-    @feeds[ Tag.tag_title(@title) ] = rss_link
-    box(
-      Tag.tag_title(@title) + page_number(page),
-      list(
-        dataset[page - 1].map {|r| Resource.new(@request, r[dataset.key]).short },
-        nav(dataset, :name => 'related_page') << nav_rss(rss_link)
-      )
-    )
-  end
 end

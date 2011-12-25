@@ -1,0 +1,12 @@
+<div class="box">
+  <div class="box-title"><%= @title %></div>
+  <div class="box-content">
+<% if good_login %>
+<p><%= _('New password has been sent to you.') %></p>
+<% else %>
+<form action="<%= action_location %>" method="post">
+<div class="label"><label for="f_login"><%= _('Login') %></label></div>
+<input type="text" name="login" id="f_login" />
+<input type="submit" name="recover" id="f_recover" />
+</form>
+<% end %>

@@ -1,0 +1,22 @@
+<div class="box">
+  <div class="box-title"><%= @title %></div>
+  <div class="box-content">
+    <p class="moderation"><%= _('This message will be moved to new parent') %></p>
+<% = Resource.new(@request, @id).full %>
+    <form action="<%= action_location %>" method="post">
+      <div class="label"><label for="f_new_parent"><%= _('New Parent') %></label></div>
+      <input type="text" name="new_parent" id="f_new_parent" value="<%= @message.part_of %>"/>
+      <div class="label"><label for="f_property"><%= _('Select the kind of a relation to the new parent') %></label></div>
+      <select name="property" id="f_property">
+<% property_map.each do |v,l| %>
+<option value="<%= l %>" <%= 'selected="selected"' if l==@message.part_of_property %>><%= l %></option>
+<% end %>
+      </select>
+      <div class="label"><label for="f_part_sequence_number"><%= _('Part sequence number (in the absense of sequence numbers, parts are ordered by resource id)') %></label></div>
+      <input type="text" name="part_sequence_number" id="f_part_sequence_number" value="<%= @message.part_sequence_number %>"/>
+      <br />
+      <input type="submit" name="confirm" id="f_confirm" value="<%= _('Confirm') %>"/>
+<%= make_secure_form %>
+    </form>
+  </div>
+</div>

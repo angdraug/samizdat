@@ -40,51 +40,28 @@ class ModerationController < Controller
       dataset = Moderation.find(site)
 
       if Moderation.find_pending(site).size > 0
-        links.push(%q{<p><a href="moderation/pending">} + _('Pending Moderation Requests') + '</a></p>')
+        links.push [ "moderation/pending", _('Pending Moderation Requests' ]
       end
 
       if @request.moderate? and not BlockedAccountsList.new(@request).dataset.empty?
-        links.push(%q{<p><a href="moderation/blocked">} + _('Blocked Accounts') + '</a></p>')
+        links.push [ "moderation/blocked", _('Blocked Accounts') ]
       end
 
-      links.push(%q{<p><a href="moderation/who">} + _('Moderators') + '</a></p>')
+      links.push [ "moderation/who", _('Moderators') ]
     end
 
-    log_table = [[_('Date'), _('Moderator'), _('Action'), _('Resource')]] +
-      dataset[page - 1].map {|m|
-        l = Moderation.new(site, m[:resource], m[:action], m[:moderator], m[:action_date])
-        [
-          format_date(l.date),
-          l.moderator ? resource_href(l.moderator, Resource.new(@request, l.moderator).title) : '&nbsp;',
-          _(Moderation::ACTION_LABELS[l.action]),
-          Resource.new(@request, l.resource).list_item
-        ]
-      }
-
-    links = 
-      if links.empty?
-        ''
-      else
-        box(_('Links'), links.join, 'links')
-      end
-
     @title = _('Moderation Log') + title.to_s + page_number(page)
-    @content_for_layout = links + box(@title, table(log_table, nav(dataset)))
+    foot = nav(dataset)
+    @content_for_layout = render_template('moderation_index.rhtml', binding)
   end
 
   def pending
     page = (@request['page'] or 1).to_i
     dataset = Moderation.find_pending(site)
 
-    pending_table = [[_('Date'), _('Resource')]] + 
-      dataset[page - 1].collect {|r|
-        resource = Resource.new(@request, r[:resource])
-        [ format_date(r[:action_date]), resource.short + resource.buttons ]
-      }
-
     @title = _('Pending Moderation Requests') + page_number(page)
-    @content_for_layout = box(
-      @title, table(pending_table, nav(dataset)))
+    foot = nav(dataset)
+    @content_for_layout = render_template('moderation_pending.rhtml', binding)
   end
 
   def blocked

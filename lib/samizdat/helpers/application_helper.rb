@@ -56,24 +56,10 @@ module ApplicationHelper
     config['site']['name'] + ': ' + _('Front Page')
   end
 
-  # hyperlink
-  #
-  def link(location, text, title = nil)
-    %{<a href="#{location}"} +
-      (title ? %{ title="#{title}"} : '') +
-      %{>#{text}</a>}
-  end
-
   # wrap title and content into a CSS-rendered box
   #
   def box(title, content, id=nil)
-    box_title = %{<div class="box-title">#{title}</div>} if title
-    box_id = %{ id="#{id}"} if id
-%{<div class="box"#{box_id}>
-  #{box_title}<div class="box-content">
-#{content}
-  </div>
-</div>\n}
+    render_template('applicationhelper_box.rhtml', binding)
   end
 
   # page number to be appended to a page title
@@ -120,15 +106,7 @@ module ApplicationHelper
       pages << max_page
     end
 
-    pages = _('pages: ') + pages.collect {|i|
-      (i.kind_of?(Integer) and i != page)?
-        %{<a href="#{link}#{i}">#{i}</a>} : i
-    }.join(' ')
-
-    pages << %{, <a href="#{link}#{page + 1}">} + _('next page') + '</a>' if
-      page < max_page
-
-    '<div class="nav">' << pages << "</div>\n"
+    render_template('applicationhelper_nav.rhtml', binding)
   end
 
   # add link to RSS rendering of the page
@@ -139,32 +117,8 @@ module ApplicationHelper
 
   # resource list with navigation link
   #
-  def list(list, nav, foot='')
-    foot = %{<div class="foot">\n#{foot + nav}</div>\n} unless
-      '' == foot and '' == nav
-    even = 1
-    %{<ul>\n} <<
-    list.collect {|li|
-      even = 1 - even
-      %{<li#{' class="even"' if even == 1}>#{li}</li>\n}
-    }.join << %{</ul>\n} << foot
-  end
-
-  # resource table with navigation link
-  #
-  def table(table, nav, foot='')
-    foot = %{<div class="foot">\n#{foot + nav}</div>\n} unless
-      '' == foot and '' == nav
-    even = 1
-    %{<table>\n<thead><tr>\n} <<
-    table.shift.collect {|th| "<th>#{th}</th>\n" }.join <<
-    %{</tr></thead>\n<tbody>\n} <<
-    table.collect {|row|
-      even = 1 - even   # todo: a CSS-only way to do this
-      %{<tr#{' class="even"' if even == 1}>\n} << row.collect {|td|
-        "<td>#{td or '&nbsp;'}</td>\n"
-      }.join << "</tr>\n"
-    }.join << %{</tbody></table>\n} << foot
+  def list(list, nav='', foot='')
+    render_template('applicationhelper_list.rhtml', binding)
   end
 
   # type can be any of the following:
@@ -260,6 +214,12 @@ module ApplicationHelper
     form(action, *fields)
   end
 
+  def make_secure_form
+    if @session.member
+      %{<input type="hidden" name="action_token" id="f_action_token" value="#{@request.action_token}" />}
+    end
+  end
+
   # Sort tags by name, alter font size in proportion to tag usage.
   #
   def tag_cloud
@@ -268,22 +228,13 @@ module ApplicationHelper
     max_usage = data.first[:nrelated_with_subtags]
     return '' unless max_usage > 0
 
-    data.collect {|tag|
-      [ tag[:id], tag[:nrelated_with_subtags], Tag.new(site, tag[:id]).name(@request) ]
+    tags = data.collect {|tag|
+      [ tag[:id], tag[:nrelated_with_subtags], Tag.new(site, tag[:id]).name(@request) ] }
 
-    }.sort_by {|tag, usage, title| title.downcase }.collect {|tag, usage, title|
-      font_size = 75 + 75 * usage / max_usage
-
-      %{<span style="font-size: #{font_size}%">} <<
-        %{<a href="#{tag}">#{title}</a></span>}
-    }.join("\n")
+    render_template('applicationhelper_tag_cloud.rhtml', binding)
   end
 
-  # drop-down menu to select tag from a list
-  #
-  def tag_select(tag = nil)
-    return [] unless @member.allowed_to?('vote')
-
+  def tag_list(tag = nil)
     tags = Tag.find_tags(site).map {|t| t[:id] }
     if tag.kind_of?(Tag) and not tags.include?(tag.id)
       # make sure the tag we want is in the list
@@ -295,35 +246,6 @@ module ApplicationHelper
     }.sort_by {|t, name|
       name.downcase
     }
-    tags.unshift [nil, _('SELECT TAG')]
-
-    [ [:label, 'tag', _('Select a tag that this resource will be related to')],
-        [:select, 'tag', tags, (tag ? (tag.id or tag.uriref) : nil)] ]
-  end
-
-  # form fields for vote on tag rating
-  #
-  def tag_fields(tag)
-    return [] unless @member.allowed_to?('vote')
-
-    fields = tag_select(tag)
-
-    if @request.advanced_ui?
-      fields.push(
-        [:label, 'tag_id', _("If the tag you want is not in the list above, enter its id (a number)")],
-          [:text, 'tag_id']
-      )
-    end
-
-    fields.push(
-      [:label, 'rating', _('Give a rating of how strongly this resource is related to the tag that you selected')],
-        [:select, 'rating', [
-          [-2, _('-2 (No)')],
-          [-1, _('-1 (Not Likely)')],
-          [0, _('0 (Uncertain)')],
-          [1, _('1 (Likely)')],
-          [2, _('2 (Yes)')] ], 0]
-    )
   end
 
   # render link to resource with a tooltip
@@ -353,10 +275,7 @@ module ApplicationHelper
   # _title_ should be HTML-escaped
   #
   def resource(id, title, info)
-%{<div class="resource">
-<div class="title">#{resource_href(id, title)}</div>
-<div class="info">#{info}</div>
-</div>\n}
+    render_template('applicationhelper_resource.rhtml', binding)
   end
 
   # Wrap a page around a ResourceList.
@@ -364,11 +283,9 @@ module ApplicationHelper
   def list_page(title, list_class)
     @feeds.delete_if {|t, l| t != title }
     list = list_class.new(@request)
-    content = list.to_s
-    content << '<div class="foot">' << nav_rss(@feeds[title]) << '</div>' if @feeds[title]
 
     @title = title + page_number(list.page)
-    @content_for_layout = box(@title, content)
+    @content_for_layout = render_template('applicationhelper_list_page.rhtml', binding)
   end
 
   # Render an RSS feed page. Pass it a block that sets channel title,
@@ -419,4 +336,10 @@ module ApplicationHelper
       map
     end
   end
+
+  def render_template(template, b=nil)
+    b ||= binding
+    View.cached(@request.site, template).render(b)
+  end
+
 end

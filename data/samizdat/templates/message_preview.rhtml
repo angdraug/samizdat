@@ -1,0 +1,18 @@
+<div class="box">
+  <div class="box-title"><%= escape_title(@message.content.title) %></div>
+  <div class="box-content">
+<%= message(@message, :full) %>
+<%= cut_warning %>
+    <p><%=  _("Press 'Back' button to change the message.") %></p>
+    <form action="<%= action_location %>" method="post">
+      <input type="submit" name="confirm" id="f_confirm" value="<%= _('Confirm') %>"/>
+      <input type="hidden" name="title" id="f_title" value="<%= @message.content.title %>" />
+      <input type="hidden" name="upload" id="f_upload" value="<%= @upload %>" />
+      <input type="hidden" name="body" id="f_body" value="<%= body %>" />
+      <input type="hidden" name="tag" id="f_tag" value="<%= @tag %>" />
+      <input type="hidden" name="lang" id="f_lang" value="<%= @message.lang %>" />
+      <input type="hidden" name="format" id="f_format" value="<%= @message.content.format %>" />
+      <input type="hidden" name="open" id="f_open" value="<%= @message.open %>" />
+      <input type="hidden" name="action" id="f_action" value="<%= @action %>" />
+<%= make_secure_form %>
+</form></div></div>

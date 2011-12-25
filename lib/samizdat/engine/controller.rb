@@ -59,8 +59,9 @@ class Controller
     self.class.to_s.sub(/Controller\z/, '').downcase + '.rhtml'
   end
 
-  def render_template(template)
-    View.cached(@request.site, template).render(binding)
+  def render_template(template, b=nil)
+    b ||= binding
+    View.cached(@request.site, template).render(b)
   end
 
   # check if moderatorial action is allowed
@@ -108,36 +109,25 @@ class ErrorController < Controller
     when AuthError
       @request.status = 401
       @title = _('Access Denied')
-      @content_for_layout = %{<p>#{error}.</p>}
 
     when AccountBlockedError
       @title = _('Account Is Blocked')
-      @content_for_layout = %{<p>#{error}</p>}
 
     when UserError
       @title = _('User Error')
-      @content_for_layout =
-%{<p>#{error}.</p><p>}+_("Press 'Back' button of your browser to return.")+'</p>'
 
     when ResourceNotFoundError
       @request.status = 404
       @title = _('Resource Not Found')
-      if referer = @request.referer
-        referer = sprintf(_(' (looks like it was %s)'), %{<a href="#{referer}">#{referer}</a>})
-      end
-      @content_for_layout =
-'<p>' + sprintf(_('The resource you requested (%s) was not found on this site. Please report this error back to the site you came from%s.'), Rack::Utils.escape_html(error.message), referer.to_s) + '</p>'
+      referer = sprintf(_(' (looks like it was %s)'), %{<a href="#{@request.referer}">#{@request.referer}</a>}) if @request.referer
 
     else
       error_id = log_exception(error, @request)
 
       @request.status = 500
       @title = _('Runtime Error')
-      @content_for_layout =
-'<p>'+_('Runtime error has occured.')+%{ Error ID: #{Rack::Utils.escape_html(error_id)}.</p>
-<p>}+_('Please report this error to the site administrator.')+'</p>'
     end
 
-    @content_for_layout = box(@title, @content_for_layout)
+    @content_for_layout = render_template('error__error.rhtml', binding)
   end
 end

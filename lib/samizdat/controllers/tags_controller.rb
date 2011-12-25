@@ -14,37 +14,21 @@ class TagsController < Controller
     dataset = Tag.tags_dataset(site)
     page = (@request['page'] or 1).to_i
 
-    tags = [[_('Tag'), _('Related Resources')]] +
-      dataset[page - 1].collect {|tag|
+    tags = 
+      dataset[page - 1].collect {|tag, nrelated|
         subtags = rdf.fetch(%q{
           SELECT ?subtag
           WHERE (s::subTagOf ?subtag :tag)
           ORDER BY ?subtag}, :tag => tag[:id]
-        ).limit(limit_page).map {|s|
-          resource_href(s[:subtag], Resource.new(@request, s[:subtag]).title)
-        }.join(', ')
+        ).limit(limit_page)
 
-        unless subtags.empty?
-          subtags = _('subtags') + ': ' + subtags
-        end
-
-        if @request.moderate?
-          subtags << ', ' unless subtags.empty?
-          subtags << link("tags/#{tag[:id]}/add_subtag", _('add a sub-tag'))
-        end
-
-        unless subtags.empty?
-          subtags = ' (' + subtags + ')'
-        end
-
-        [ resource_href(tag[:id], Resource.new(@request, tag[:id]).title) + subtags,
-          tag[:nrelated_with_subtags] ]
+        [ tag, nrelated, subtags ]
       }
 
-    @title = config['site']['name'] + ': ' +
+    @title = config['site']['name'] + _(': ') +
       _('Top Tags') + page_number(page)
-    @content_for_layout = box(@title,
-      table(tags, nav(dataset)))
+    foot = nav(dataset)
+    @content_for_layout = render_template('tags_index.rhtml', binding)
   end
 
   def add_subtag
@@ -69,12 +53,7 @@ class TagsController < Controller
 
     else
       @title = _('Add a sub-tag')
-      @content_for_layout = box(@title,
-        secure_form(nil,
-          [:label, 'subtag', _('Enter Sub-Tag ID')],
-            [:text, 'subtag'],
-          [:submit, 'submit', _('Submit')])
-      )
+      @content_for_layout = render_template('tags_add_subtag.rhtml', binding)
     end
   end
 end

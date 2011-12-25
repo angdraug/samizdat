@@ -20,10 +20,7 @@ class MessageController < Controller
   def source
     @message = Message.cached(site, @id)
     @title = escape_title(@message.content.title)
-    @content_for_layout = box(@title,
-      form(nil,
-        [:label, 'content', _('Content')],
-        [:textarea, 'content', @message.content.body]))
+    @content_for_layout = render_template('message_source.rhtml', binding)
   end
 
   def hide
@@ -83,17 +80,7 @@ class MessageController < Controller
       @request.redirect(@message.id)
     else
       @title = _('Reparent Message')
-      @content_for_layout = box(@title,
-        '<p class="moderation">'  + _('This message will be moved to new parent') + '</p>' +
-        Resource.new(@request, @id).full +
-        secure_form(nil,
-          [:label, 'new_parent', _('New Parent')],
-            [:text, 'new_parent', @message.part_of],
-          [:label, 'property', _('Select the kind of a relation to the new parent')],
-            [:select, 'property', property_map, @message.part_of_property],
-          [:label, 'part_sequence_number', _('Part sequence number (in the absense of sequence numbers, parts are ordered by resource id)')],
-            [:text, 'part_sequence_number', @message.part_sequence_number],
-          [:br], [:submit, 'confirm', _('Confirm')]))
+      @content_for_layout = render_template('message_reparent.rhtml', binding)
     end
   end
 
@@ -235,12 +222,7 @@ class MessageController < Controller
       Moderation.check_request(site, @id)
 
       @title = _('Request Moderation')
-      @content_for_layout = box(@title,
-        '<p>' <<
-        _('Please confirm that you want to request moderation of this message:') <<
-        '</p>' <<
-        Resource.new(@request, @id).full <<
-        secure_form(nil, [:submit, 'confirm', _('Confirm')]))
+      @content_for_layout = render_template('message_request_moderation.rhtml', binding)
     end
   end
 
@@ -255,12 +237,7 @@ class MessageController < Controller
       @request.set_redirect_when_done_cookie
 
       @title = _('Acknowledge Moderation Request')
-      @content_for_layout = box(@title,
-        '<p class="moderation">' <<
-        _('Moderation request will be marked as acknowledged without moderatorial action.') <<
-        '</p>' <<
-        Resource.new(@request, @id).full <<
-        secure_form(nil, [:submit, 'confirm', _('Confirm')]))
+      @content_for_layout = render_template('message_acknowledge.rhtml', binding)
     end
   end
 
@@ -304,10 +281,9 @@ class MessageController < Controller
     else
       @title = options[:title]
       edit_form_options = (options[:edit_form_options] or [])
-      @content_for_layout =
-        options[:header].to_s +
-        box(@title, form(nil, *edit_form(*edit_form_options))) +
-        options[:footer].to_s
+      @content_for_layout = content_for_post( @title, 
+        options[:header], options[:footer], action_location, 
+        *edit_form_options )
     end
   end
 
@@ -491,83 +467,57 @@ class MessageController < Controller
       @request.redirect(@id)
     else
       @title = title
-      @content_for_layout = box(
-        @title,
-        message + secure_form(nil, [:submit, 'confirm', _('Confirm')]))
+      @content_for_layout = render_template('message_toggle.rhtml', binding)
     end
   end
 
-  def edit_form(*options)
-    fields = [
-      [:label, 'title', _('Title')],
-        [:text, 'title', @old_content.title],
-      [:label, 'body', _('Content')],
-        [:textarea, 'body', @old_content.inline? ? @old_content.body : nil]
-    ]
+  def content_for_post(title, header, footer, action, *options)
+    old_title = @old_content.title
+
+    old_body  = @old_content.inline? ? @old_content.body : ''
 
     # file upload: list of supported formats
-    formats = (config['format']['image'].to_a + config['format']['other'].to_a).collect {|format|
+    upload_formats = (config['format']['image'].to_a + config['format']['other'].to_a).collect {|format|
       file_extension(format)
     }.uniq.join(', ')
+    # file upload: maximal size of file
+    upload_file_size = display_file_size(config['limit']['content'])
 
-    fields.push(
-      [:label, 'file', sprintf(
-        _('Alternatively, upload a file (formats supported: %s; size limit: %s)'),
-         formats, display_file_size(config['limit']['content']))],
-      [:file, 'file']
-    )
 
-    if @tag
-      # preset tag
-      fields.push([:hidden, 'tag', @tag])
-    elsif options.include? :show_tags
-      # select tag for new message
-      fields.push(*tag_select)
+    tags = if @tag 
+      @tag
+    elsif options.include?(:show_tags) && @member.allowed_to?('vote')
+      tag_list
     end
 
     # more optional options
     lnames = language_names
-    advanced_formats = ['text/plain', 'application/x-squish']
-    fields.push(
-      [:label, 'lang', _('Language of the message')],
-        [:select, 'lang',
-          ([@request.language] +
-           config['locale']['languages'].to_a
-          ).uniq.collect {|lang| [ lang, lnames[lang] ] } +
-            [['und', _('None of the above')]],
-          @message.lang],
+    langs  = ([@request.language] + config['locale']['languages'].to_a).uniq.collect {|l|
+            [l, lnames[l]] }
 
-      [:label, 'format', _('Format')],
-        [:select, 'format',
-          ([nil] + config['format']['inline'].to_a).collect {|format|
+    msg_lang = @message.lang
+
+    advanced_formats = ['text/plain', 'application/x-squish']
+    formats = ([nil] + config['format']['inline'].to_a).collect {|format|
             if @request.advanced_ui? or not advanced_formats.include?(format)
               [format, site.plugins.find('content_inline', format).format_name]
             end
-          }.compact,
-          @old_content.format ],
+          }.compact
+    old_format = @old_content.format
 
-      [:label, 'open', _("Editing is open for all members (excluding guests who can't edit anyone's messages)")],
-        [:checkbox, 'open', @message.open,
-          (options.include?(:disable_open) ? :disabled : nil)]
-    )
+    disable_open = options.include?(:disable_open)
+    msg_open = @message.open
+    attach_parts = options.include?(:attach_parts)
 
-    if options.include? :attach_parts
-      fields.push([:label, 'part_1', _('Attach message parts from files')])
-      1.upto(config['limit']['parts']) {|i| fields.push([:file, 'part_' + i.to_s], [:br]) }
-      # todo: dynamic form with JavaScript
+    if lock_date = (@message.date.respond_to?(:to_time) and options.include?(:lock_date))
+      date = @message.date.to_time.to_i
     end
 
-    if @message.date.respond_to?(:to_time) and options.include?(:lock_date)
-      fields.push([:hidden, 'date', @message.date.to_time.to_i])
+    plugins = site.plugins.find_all('spam', :add_message_fields, :check_message_fields) do |plugin|
+      plugin.add_message_fields(@request)
     end
 
-    site.plugins.find_all('spam', :add_message_fields, :check_message_fields) do |plugin|
-      fields.push(*plugin.add_message_fields(@request))
-    end
-
-    fields.push([:br], [:submit, 'preview', _('Preview')])
-
-    fields
+    render_template('message_content_for_post.rhtml', binding)
   end
 
   def preview
@@ -577,24 +527,7 @@ class MessageController < Controller
     end
 
     @title = _('Message Preview')
-    @content_for_layout = box(
-      escape_title(@message.content.title),
-      message(@message, :full) <<
-        cut_warning.to_s <<
-        '<p>' << _("Press 'Back' button to change the message.") << '</p>' <<
-        secure_form(
-          nil,
-          [:submit, 'confirm', _('Confirm')],
-          [:hidden, 'title', @message.content.title],
-          [:hidden, 'upload', @upload],
-          [:hidden, 'body', body],
-          [:hidden, 'tag', @tag],
-          [:hidden, 'lang', @message.lang],
-          [:hidden, 'format', @message.content.format],
-          [:hidden, 'open', @message.open],
-          [:hidden, 'action', @action.to_s]
-        )
-    )
+    @content_for_layout = render_template('message_preview.rhtml', binding)
   end
 
   def update_tag
