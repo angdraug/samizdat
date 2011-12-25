@@ -7,7 +7,7 @@
   <p><%= _('Use existing account:') %></p>
   <form action="<%= secure_action('member/login') %>" method="post">
     <div class="label"><label for="f_login"><%= _('Login') %></label></div>
-    <input type="text" name="login" id="f_login" />
+    <input type="text" name="login" id="f_login" class="required" />
     <div class="label"><label for="f_password"><%= _('Password') %></label></div>
     <input type="password" name="password" id="f_password" />
     <br /><input type="submit" />
@@ -16,3 +16,8 @@
 <% end %>
 <%= password_recovery_link %>
 </div></div>
+<script type="text/javascript"><!--
+$(function(){
+  $('form').formchecker();
+});
+--></script>

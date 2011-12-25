@@ -3,10 +3,10 @@
   <div class="box-content">
     <form action="<%= secure_action('member/change_account') %>" method="post">
       <div class="label"><label for="f_email"><%= _('Email') %></label></div>
-      <input type="text" name="email" id="f_email" value="<%= @email %>" />
+      <input type="text" name="email" id="f_email" value="<%= @email %>" class="required email" />
 <% if @session.member %>
       <div class="label"><label for="f_password"><%= _('Current Password') %></label></div>
-      <input type="password" name="password" id="f_password" />
+      <input type="password" name="password" id="f_password" class="simplecheck" />
 <% end %>
       <div class="label"><label for="f_password1"><%= _('New Password') %></label></div>
       <input type="password" name="password1" id="f_password1" />
@@ -17,3 +17,8 @@
     </form>
   </div>
 </div>
+<script type="text/javascript"><!--
+$(function(){
+  $('form').formchecker();
+});
+--></script>

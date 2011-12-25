@@ -14,7 +14,7 @@
 
 <% if @request.advanced_ui? %>
       <div class="label"><label for="f_tag_id"><%= _('If the tag you want is not in the list above, enter its id (a number)') %></label></div>
-      <input type="text" name="tag_id" id="f_tag_id" />
+      <input type="text" name="tag_id" id="f_tag_id" class="optional integer" />
 <% end %>
       <div class="label"><label for="f_rating"><%= _('Give a rating of how strongly this resource is related to the tag that you selected') %></label></div>
       <select name="rating" id="f_rating">

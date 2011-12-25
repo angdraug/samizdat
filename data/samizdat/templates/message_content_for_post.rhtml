@@ -1,15 +1,15 @@
 <%= header %>
 <div class="box" id="postblock">
 <div class="box-title"><%= title %></div><div class="box-content">
-<form action="<%= action %>" enctype="multipart/form-data" method="post">
+<form action="<%= action %>" enctype="multipart/form-data" method="post" id="postform">
 <div class="label"><label for="f_title"><%= _('Title') %></label></div>
-<input type="text" name="title" id="f_title" value="<%= old_title %>"/>
+<input type="text" name="title" id="f_title" value="<%= old_title %>" class="required" />
 
 <div class="label"><label for="f_body"><%= _('Content') %></label></div>
-<textarea name="body" id="f_body"  cols="70" rows="20"><%= old_body %></textarea>
+<textarea name="body" id="f_body"  cols="70" rows="20" class="mutualexclusive"><%= old_body %></textarea>
 
 <div class="label"><label for="f_file"><%= sprintf(_('Alternatively, upload a file (formats supported: %s; size limit: %s)'), upload_formats, upload_file_size) %></label></div>
-<input type="file" name="file" id="f_file" />
+<input type="file" name="file" id="f_file" class="mutualexclusive" />
 
 <% if tags 
      if not tags.kind_of?(Array) %>
@@ -161,3 +161,16 @@ fn1. <%= _('Foo.') %>
 </div>
 
 <%= footer %>
+
+<script type="text/javascript"><!--
+$(function(){
+  var f = $('#postform');
+  f.formchecker().dynamicform();
+<%  case config['wysiwyg_editor']
+    when 'tinymce' %>
+  f.dynamicform({ reset_helper : (new TinymceEditor(true)).reset_helper });
+<%  when 'wysiwyg' %>
+  f.wysiwyg();
+<%  end %>
+});
+--></script>
