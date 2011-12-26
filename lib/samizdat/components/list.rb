@@ -107,7 +107,7 @@ EXCEPT (dct::isPartOf ?msg ?parent)
          (dc::language ?translation ?translation_lang)
 LITERAL ?original_lang = :lang
      OR ?translation_lang = :lang' if request.monolanguage?}
-ORDER BY ?date DESC},
+ORDER BY ?msg DESC},
       :lang => request.language) {|ds| ds.key = :msg }
 
     super(request, dataset, :list_item)

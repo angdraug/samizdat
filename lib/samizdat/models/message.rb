@@ -39,6 +39,14 @@ class Message < Model
 SELECT ?version
 WHERE (dct::isVersionOf ?version :id)}, :id => @id).count
 
+        if @nversions > 0
+          @first_date = rdf.fetch(%{
+SELECT ?date
+WHERE (dct::isVersionOf ?version :id)
+      (dc::date ?version ?date)
+ORDER BY ?date}, :id => @id).first[:date]
+        end
+
         @nreplies = rdf.fetch(%{
 SELECT ?msg
 WHERE (s::inReplyTo ?msg :id)
@@ -49,6 +57,8 @@ SELECT ?msg
 WHERE (s::inReplyTo ?msg :id TRANSITIVE)
       #{exclude_hidden('?msg')}}, :id => @id).count
       end
+
+      @first_date ||= @date
 
       unless @translation_of
         @translations = rdf.fetch(
@@ -79,7 +89,7 @@ ORDER BY ?rating DESC}, :id => @id
     :open, :tags, :parts, :next_part, :previous_part
 
   attr_reader :lang, :parent, :translation_of, :version_of, :sub_tag_of,
-    :nversions, :translations, :nreplies, :nreplies_all, :nrelated
+    :nversions, :first_date, :translations, :nreplies, :nreplies_all, :nrelated
 
   def parent=(parent)
     @part_of = @parent = parent

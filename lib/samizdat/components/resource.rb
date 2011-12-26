@@ -375,7 +375,7 @@ ORDER BY ?msg}, :parent => @id) {|ds| ds.key = :msg }
   def rss(maker)
     item = maker.items.new_item
     item.link = @request.base + @id.to_s
-    item.date = @message.date.to_time
+    item.date = @message.first_date.to_time
 
     item.title = escape_title(@translation.content.title)
     item.dc_language = @translation.lang
