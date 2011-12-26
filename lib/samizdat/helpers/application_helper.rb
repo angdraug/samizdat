@@ -380,7 +380,7 @@ module ApplicationHelper
     @layout = nil
 
     @content_for_layout = cache.fetch_or_add(
-      'rss/' + cache_key + '/' + @request.accept_language.join(':')) do
+      File.join('rss', @request.base, cache_key, @request.accept_language.join(':'))) do
 
       require 'rss/maker'
       RSS::Maker.make("1.0") {|maker|
