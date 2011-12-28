@@ -468,6 +468,11 @@ class Request
       io.rewind
     end
 
+    if value.respond_to?(:encoding)
+      value.force_encoding('UTF-8')
+      value.valid_encoding? or raise UserError, 'Invalid input encoding'
+    end
+
     (value =~ /[^\s]/) ? value : nil
   end
 
