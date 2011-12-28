@@ -478,7 +478,7 @@ class MemberComponent < ResourceComponent
     maker.channel.title = maker.channel.description = @title
     maker.channel.link = File.join(@request.base, @location)
 
-    @messages_dataset[0]
+    @messages_dataset
   end
 end
 
