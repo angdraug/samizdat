@@ -9,7 +9,11 @@
 # vim: et sw=2 sts=2 ts=8 tw=0
 
 require 'samizdat'
-require 'erb'
+begin
+  require 'erubis'
+rescue LoadError
+  require 'erb'
+end
 
 class View
   def initialize(site, template)
@@ -34,7 +38,12 @@ class View
   private
 
   def set_renderer(location)
-    body = File.open(location) {|f| f.read }
-    @erb = ERB.new(body.untaint, nil, '>')
+    if (defined? Erubis)
+      @erb = Erubis::FastEruby.load_file(location, 
+        :cachename => File.join('/var/cache/samizdat', File.basename(location)))
+    else
+      body = File.open(location) {|f| f.read }
+      @erb = ERB.new(body.untaint, nil, '>')
+    end
   end
 end

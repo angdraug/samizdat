@@ -57,7 +57,7 @@ class UploadTempfile
   end
 
   def method_missing(method, *args)
-    @tempfile.send(method, *args)
+    @tempfile.call(method, *args)
   end
 end
 

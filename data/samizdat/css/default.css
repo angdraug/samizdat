@@ -27,6 +27,8 @@ pre { margin: 0.25em 0; }
 #head-right {
 	position: absolute;
 	z-index: 200;
+	width: 50%;
+	text-align: right;
 	padding: 0.2em 0 0 0;
 	top:0; right: 15px; }
 #subhead {
@@ -264,3 +266,6 @@ div.title a, div.title a:visited, div.info a, div.info a:visited,
 div.box-content div.box-title a, div.box-content div.box-title a:visited,
 td.tags a, td.tags a:visited, td.links a, td.links a:visited {
 	color: #000; }
+
+/* search box */
+div#head-right form { display: inline; }

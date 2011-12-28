@@ -28,6 +28,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; }
 	font-weight: bold;
 	font-variant: small-caps;
 	text-align: right;
+	width: 50%;
 	background: #fff; /*Publicar  :: Compartir  :: Buscar*/
  }
 #subhead {

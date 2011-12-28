@@ -35,6 +35,8 @@ pre { margin: 0.25em 0; }
 #head-right {
 	position: absolute;
 	z-index: 200;
+	width: 50%;
+	text-align: right;
 	padding: 0.2em 0 0 0;
 	top:0; right: 7%; }
 #subhead {
@@ -265,3 +267,5 @@ a { text-decoration: none; color: #336699; }
 a:visited { color: #336699; }
 a:hover { text-decoration: underline; color: #000000; }
 
+/* search box */
+div#head-right form { border-color: #336699; }

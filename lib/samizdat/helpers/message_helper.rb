@@ -10,6 +10,24 @@
 
 require 'samizdat/helpers/application_helper'
 
+# inline formats that need a link to view source
+#
+class SourceFormat
+  @@format_hash = nil
+
+  def SourceFormat.format_hash
+    unless (@@format_hash)
+      @@format_hash = {}
+      site.plugins.find_all('content_inline', :source_format, :source_format_name) do |plugin|
+        @@format_hash[plugin.source_format] = plugin.source_format_name
+      end
+    end
+
+    @@format_hash
+  end
+end
+
+
 module MessageHelper
   include ApplicationHelper
 
@@ -30,16 +48,10 @@ module MessageHelper
     }.join(', ')
   end
 
-  # inline formats that need a link to view source
-  #
-  SOURCE_FORMAT = {
-    'text/textile' => 'textile',
-    'text/html' => 'html'
-  }
-
   # render _message_ info line (except tags)
   #
   def message_info(message, mode)
+    format_hash = SourceFormat.format_hash
     creator = member_link(message.creator)
     date = format_date(message.date)
 
@@ -64,7 +76,7 @@ module MessageHelper
       if message.id and message.nversions.to_i > 0
         history = %{<a href="history/#{message.id}">} + _('history') + '</a>'
       end
-      if message.id and format = SOURCE_FORMAT[message.content.format]
+      if message.id and format = format_hash[message.content.format]
         source = %{<a href="message/#{message.id}/source" title="} +
           _('view source') + %{">#{format}</a>}
       end

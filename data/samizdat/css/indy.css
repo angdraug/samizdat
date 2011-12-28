@@ -27,6 +27,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; }
 	font-weight: bold;
 	font-variant: small-caps;
 	text-align: right;
+	min-height: 20px;
 	background: #555; }
 #subhead {
 	margin: 0 0.7em;
@@ -232,3 +233,6 @@ div.title a, div.title a:visited, div.info a, div.info a:visited,
 div.box-content div.box-title a, div.box-content div.box-title a:visited,
 td.tags a, td.tags a:visited, td.links a, td.links a:visited {
 	color: #f90; }
+
+/* search box */
+div#head-right form { border-color: #000; }
