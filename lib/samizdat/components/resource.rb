@@ -28,6 +28,8 @@ class Resource
     @type = cache.fetch_or_add(%{resource_type/#{@id}}) do
       r = db[:resource][:id => @id] or raise ResourceNotFoundError, @id.to_s
 
+      raise ResourceNotFoundError, @id.to_s unless r
+
       if r[:uriref]
         'Uriref'
       elsif r[:literal]
