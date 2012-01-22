@@ -26,7 +26,7 @@ class Resource
     @id or raise ResourceNotFoundError, id.to_s
 
     @type = cache.fetch_or_add(%{resource_type/#{@id}}) do
-      r = db[:resource][:id => @id]
+      r = db[:resource][:id => @id] or raise ResourceNotFoundError, @id.to_s
 
       if r[:uriref]
         'Uriref'
@@ -36,8 +36,6 @@ class Resource
         case r[:label]
         when 'member', 'message', 'statement', 'vote'
           r[:label].capitalize
-        when nil
-          raise ResourceNotFoundError, @id.to_s
         else
           raise RuntimeError,
             sprintf(_("Unknown resource type '%s'"), Rack::Utils.escape_html(r[:label]))
