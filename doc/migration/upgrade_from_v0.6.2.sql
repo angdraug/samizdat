@@ -28,28 +28,6 @@ REVOKE INSERT, UPDATE ON role FROM samizdat;
 
 -- create new tables
 
-CREATE TABLE Event (
-        id INTEGER PRIMARY KEY REFERENCES resource,
-        description INTEGER REFERENCES message,
-        dtstart TIMESTAMP WITH TIME ZONE NOT NULL,
-        dtend TIMESTAMP WITH TIME ZONE);
-
-CREATE INDEX Event_dtstart_idx ON Event (dtstart);
-
-CREATE TYPE RecurrenceFreq AS ENUM ('secondly', 'minutely', 'hourly', 'daily',
-        'weekly', 'monthly', 'yearly');
-
-CREATE TABLE Recurrence (
-        id INTEGER PRIMARY KEY REFERENCES resource,
-        event INTEGER REFERENCES Event,
-        freq RecurrenceFreq DEFAULT 'daily' NOT NULL,
-        interval INTEGER DEFAULT 1 NOT NULL,
-        until TIMESTAMP WITH TIME ZONE,
-        byday TEXT,
-        byhour TEXT);
-
-CREATE INDEX Recurrence_event_until_idx ON Recurrence (event, until);
-
 CREATE TABLE part (
         id INTEGER REFERENCES resource,
         part_of INTEGER REFERENCES resource,
@@ -64,46 +42,34 @@ CREATE TABLE tag (
         nrelated INTEGER,
         nrelated_with_subtags INTEGER);
 
-CREATE TYPE PendingUploadStatus AS ENUM ('pending', 'confirmed', 'expired');
+CREATE TYPE pending_upload_status AS ENUM ('pending', 'confirmed', 'expired');
 
-CREATE TABLE PendingUpload (
+CREATE TABLE pending_upload (
         id SERIAL PRIMARY KEY,
         created_date TIMESTAMP WITH TIME ZONE
                 DEFAULT CURRENT_TIMESTAMP NOT NULL,
         login TEXT NOT NULL,
-        status PendingUploadStatus DEFAULT 'pending' NOT NULL);
+        status pending_upload_status DEFAULT 'pending' NOT NULL);
 
-CREATE INDEX PendingUpload_status_idx ON PendingUpload (login, status);
+CREATE INDEX pending_upload_status_idx ON pending_upload (login, status);
 
-CREATE TABLE PendingUploadFile (
-        upload INTEGER NOT NULL REFERENCES PendingUpload,
+CREATE TABLE pending_upload_file (
+        upload INTEGER NOT NULL REFERENCES pending_upload,
         part INTEGER,
         UNIQUE (upload, part),
         format TEXT,
         original_filename TEXT);
 
-CREATE INDEX PendingUploadFile_upload_idx ON PendingUploadFile (upload);
+CREATE INDEX pending_upload_file_upload_idx ON pending_upload_file (upload);
 
 -- grant access to new tables (change samizdat to your user if different)
 
-GRANT INSERT, UPDATE, SELECT ON Event, Recurrence, tag,
-        PendingUpload, PendingUploadFile TO samizdat;
+GRANT INSERT, UPDATE, SELECT ON tag,
+        pending_upload, pending_upload_file TO samizdat;
 GRANT INSERT, UPDATE, DELETE, SELECT ON part TO samizdat;
-GRANT USAGE, UPDATE, SELECT ON PendingUpload_id_seq TO samizdat;
+GRANT USAGE, UPDATE, SELECT ON pending_upload_id_seq TO samizdat;
 
 -- update triggers
-
-CREATE TRIGGER insert_event BEFORE INSERT ON Event
-    FOR EACH ROW EXECUTE PROCEDURE insert_resource('Event');
-
-CREATE TRIGGER insert_recurrence BEFORE INSERT ON Recurrence
-    FOR EACH ROW EXECUTE PROCEDURE insert_resource('Recurrence');
-
-CREATE TRIGGER delete_event AFTER DELETE ON Event
-    FOR EACH ROW EXECUTE PROCEDURE delete_resource();
-
-CREATE TRIGGER delete_recurrence AFTER DELETE ON Recurrence
-    FOR EACH ROW EXECUTE PROCEDURE delete_resource();
 
 DROP FUNCTION update_rating() CASCADE;
 
@@ -221,8 +187,8 @@ CREATE FUNCTION before_update_part() RETURNS TRIGGER AS $$
                 RETURN NEW;
             END IF;
         ELSIF TG_OP = 'UPDATE' THEN
-            IF (NEW.part_of = OLD.part_of) OR
-                (NEW.part_of IS NULL AND OLD.part_of IS NULL)
+            IF (NEW.part_of IS NULL AND OLD.part_of IS NULL) OR
+                ((NEW.part_of = OLD.part_of) AND (NEW.part_of_subproperty = OLD.part_of_subproperty))
             THEN
                 -- part_of is unchanged, do nothing
                 RETURN NEW;
@@ -259,8 +225,8 @@ CREATE FUNCTION after_update_part() RETURNS TRIGGER AS $$
                 RETURN NEW;
             END IF;
         ELSIF TG_OP = 'UPDATE' THEN
-            IF (NEW.part_of = OLD.part_of) OR
-                (NEW.part_of IS NULL AND OLD.part_of IS NULL)
+            IF (NEW.part_of IS NULL AND OLD.part_of IS NULL) OR
+                ((NEW.part_of = OLD.part_of) AND (NEW.part_of_subproperty = OLD.part_of_subproperty))
             THEN
                 -- part_of is unchanged, do nothing
                 RETURN NEW;
@@ -419,5 +385,8 @@ UPDATE Resource SET label = 'member' WHERE label = 'Member';
 UPDATE Resource SET label = 'message' WHERE label = 'Message';
 UPDATE Resource SET label = 'statement' WHERE label = 'Statement';
 UPDATE Resource SET label = 'vote' WHERE label = 'Vote';
+
+DROP TABLE item;
+DROP TABLE possession;
 
 COMMIT;
