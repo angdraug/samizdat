@@ -5,5 +5,5 @@
 <%= Resource.new(@request, @id).full %>
     <form action="<%= action_location %>" method="post">
       <input type="submit" name="confirm" id="f_confirm" value="<%= _('Confirm') %>"/>
-<%= make_secure_form %>
+<%= action_token_field %>
 </form></div></div>

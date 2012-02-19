@@ -4,18 +4,18 @@
 <table>
 <thead><tr><th><%= _('Tag') %></th><th><%= _('Related Resources') %></th></tr></thead>
 <tbody>
-<% tags.each do |tag, nrelated, subtags| %> 
-  <tr><td><%= resource_href(tag, Resource.new(@request, tag).title) %>
+<% tags.each do |tag_id, nrelated, subtags| %>
+  <tr><td><%= resource_href(tag_id) %>
 <%   if subtags.empty?
        if @request.moderate? %>
 (<a href="tags/<%= tag_id %>/add_subtag"><%= _('add a sub-tag') %></a>)
 <%     end
      else %>
 (<%= _('subtags:')%>
-<%= subtags.map {|s| resource_href(s, Resource.new(@request, subtag).title)}.join(', ') %>
-<%     if @request.moderate? 
+<%= subtags.map {|s| resource_href(s[:id]) }.join(', ') %>
+<%     if @request.moderate?
 %>, <a href="tags/<%= tag_id %>/add_subtag"><%= _('add a sub-tag') %></a><%
-     end
+       end
 %>)
 <%   end %>
 </td><td><%= nrelated %></td></tr>

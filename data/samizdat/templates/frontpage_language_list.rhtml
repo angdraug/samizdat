@@ -1,7 +1,8 @@
 <div id="languages">
-<% langlist.each do |lang| name = lnames[lang]
+<% languages.each do |lang|
+     name = language_names[lang]
      if name 
-       if lang == current_language %>
+       if lang == @request.language %>
 <a href="member/set?lang=<%= lang %>"><strong><%= name %><%= _(' (default language)') if lang == default_language %></strong></a> 
 <%     else %>
 <a href="member/set?lang=<%= lang %>"><%= name %><%= _(' (default language)') if lang == default_language %></a> 

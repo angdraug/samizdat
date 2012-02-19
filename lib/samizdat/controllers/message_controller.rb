@@ -152,7 +152,7 @@ class MessageController < Controller
     if @session.member.nil? or
       (@message.creator.id != @session.member and not @message.open)
 
-      raise UserError, _('You are not allowed to edit this message') 
+      raise UserError, _('You are not allowed to edit this message')
     end
     @message.assert_current_version
 
@@ -202,7 +202,7 @@ class MessageController < Controller
       :edit => Proc.new { @message.replace!(@old_content) },
       :edit_form_options => [:lock_date],
       :moderate => 'replace',
-      :header => 
+      :header =>
         '<p class="moderation">' +
         _('MESSAGE WILL BE COMPLETELY REPLACED, NO RECOVERY WILL BE POSSIBLE. PLEASE PROVIDE DETAILED JUSTIFICATION FOR THIS ACTION.') +
         '</p>'
@@ -281,9 +281,9 @@ class MessageController < Controller
     else
       @title = options[:title]
       edit_form_options = (options[:edit_form_options] or [])
-      @content_for_layout = content_for_post( @title, 
-        options[:header], options[:footer], action_location, 
-        *edit_form_options )
+      @content_for_layout = content_for_post(
+        @title, options[:header], options[:footer], action_location,
+        *edit_form_options)
     end
   end
 
@@ -484,7 +484,7 @@ class MessageController < Controller
     upload_file_size = display_file_size(config['limit']['content'])
 
 
-    tags = if @tag 
+    tags = if @tag
       @tag
     elsif options.include?(:show_tags) && @member.allowed_to?('vote')
       tag_list

@@ -14,5 +14,5 @@
       <input type="hidden" name="format" id="f_format" value="<%= @message.content.format %>" />
       <input type="hidden" name="open" id="f_open" value="<%= @message.open %>" />
       <input type="hidden" name="action" id="f_action" value="<%= @action %>" />
-<%= make_secure_form %>
+<%= action_token_field %>
 </form></div></div>

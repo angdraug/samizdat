@@ -3,7 +3,7 @@
   <div class="box-title"><%= _('Links') %></div>
   <div class="box-content">
 <%   links.each do |href, title| %>
-<p><a href="<%= href %>"><%= title %></a></p>
+    <p><a href="<%= href %>"><%= title %></a></p>
 <% end %>
   </div>
 </div>
@@ -17,15 +17,14 @@
         <td><%=  _('Action') %></td>
         <td><%=  _('Resource') %></td></tr>
     </thead><tbody>
-<% dataset[page - 1].each do |m|
-     l = Moderation.new(site, m[:resource], m[:action], m[:moderator], m[:action_date])%>
+<% log.each do |l| %>
     <tr><td><%= format_date(l.date) %></td>
-        <td><%= l.moderator ? resource_href(l.moderator, Resource.new(@request, l.moderator).title) : '&nbsp;' %></td>
+        <td><%= l.moderator ? resource_href(l.moderator) : '&nbsp;' %></td>
         <td><%= _(Moderation::ACTION_LABELS[l.action]) %></td>
-        <td><%= Resource.new(@request, l.resource).list_item  %></td></tr>
+        <td><%= Resource.new(@request, l.resource).list_item %></td></tr>
 <% end %>
      </tbody></table>
-<% if foot != '' %>
+<% if foot and not foot.empty? %>
 <div class="foot"><%= foot %></div>
 <% end %>
   </div>

@@ -164,8 +164,7 @@ ORDER BY ?rating DESC})
       end
     end
 
-    related = @id
-    tags = tags.values
+    tags = tags.values.find_all {|t| t.id != @id }.sort_by {|t| -t.sort_index }
     render_template('resourcecomponent_tags.rhtml', binding)
   end
 

@@ -40,17 +40,20 @@ class ModerationController < Controller
       dataset = Moderation.find(site)
 
       if Moderation.find_pending(site).size > 0
-        links.push [ "moderation/pending", _('Pending Moderation Requests' ]
+        links.push(["moderation/pending", _('Pending Moderation Requests')])
       end
 
       if @request.moderate? and not BlockedAccountsList.new(@request).dataset.empty?
-        links.push [ "moderation/blocked", _('Blocked Accounts') ]
+        links.push(["moderation/blocked", _('Blocked Accounts')])
       end
 
-      links.push [ "moderation/who", _('Moderators') ]
+      links.push(["moderation/who", _('Moderators')])
     end
 
     @title = _('Moderation Log') + title.to_s + page_number(page)
+    log = dataset[page - 1].map do |m|
+      Moderation.new(site, m[:resource], m[:action], m[:moderator], m[:action_date])
+    end
     foot = nav(dataset)
     @content_for_layout = render_template('moderation_index.rhtml', binding)
   end

@@ -14,7 +14,7 @@ class TagsController < Controller
     dataset = Tag.tags_dataset(site)
     page = (@request['page'] or 1).to_i
 
-    tags = 
+    tags =
       dataset[page - 1].collect {|tag, nrelated|
         subtags = rdf.fetch(%q{
           SELECT ?subtag
@@ -22,7 +22,7 @@ class TagsController < Controller
           ORDER BY ?subtag}, :tag => tag[:id]
         ).limit(limit_page)
 
-        [ tag, nrelated, subtags ]
+        [ tag[:id], nrelated, subtags ]
       }
 
     @title = config['site']['name'] + _(': ') +

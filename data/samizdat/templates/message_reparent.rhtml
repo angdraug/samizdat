@@ -16,7 +16,7 @@
       <input type="text" name="part_sequence_number" id="f_part_sequence_number" value="<%= @message.part_sequence_number %>" class="optional integer" />
       <br />
       <input type="submit" name="confirm" id="f_confirm" value="<%= _('Confirm') %>"/>
-<%= make_secure_form %>
+<%= action_token_field %>
     </form>
   </div>
 </div>

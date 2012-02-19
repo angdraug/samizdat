@@ -204,19 +204,11 @@ module ApplicationHelper
     %{action_token/#{@session.login}}
   end
 
-  # Wrapper around form() to protect logged in members against CSRF by adding a
-  # hidden action confirmation hash to the form and storing it in cache.
+  # Add a hidden action confirmation hash to the form for CSRF protection.
   #
-  def secure_form(action, *fields)
+  def action_token_field
     if @session.member
-      fields.push [:hidden, 'action_token', @request.action_token]
-    end
-    form(action, *fields)
-  end
-
-  def make_secure_form
-    if @session.member
-      %{<input type="hidden" name="action_token" id="f_action_token" value="#{@request.action_token}" />}
+      %{<input type="hidden" name="action_token" value="#{@request.action_token}" />}
     end
   end
 
@@ -252,7 +244,7 @@ module ApplicationHelper
   #
   # _title_ should be HTML-escaped
   #
-  def resource_href(id, title)
+  def resource_href(id, title = Resource.new(@request, id).title)
     return '' unless title.kind_of? String
     id.nil? ? limit_string(title) :
       '<a title="'+_('Click to view the resource')+%{" href="#{id}">#{limit_string(title)}</a>}
@@ -341,5 +333,4 @@ module ApplicationHelper
     b ||= binding
     View.cached(@request.site, template).render(b)
   end
-
 end

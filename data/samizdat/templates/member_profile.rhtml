@@ -6,9 +6,9 @@
       <input type="text" name="full_name" id="f_full_name" value="<%= @session.full_name %>" />
 <% site.plugins['profile'].each do |plugin| %>
 <%= plugin.form_fields(@member) %>
-<% end  %>
+<% end %>
       <br /><input type="submit" name="confirm" id="f_confirm" value="<%= _('Confirm') %>"/>
-<%= make_secure_form %>
+<%= action_token_field %>
     </form>
   </div>
 </div>

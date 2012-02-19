@@ -5,7 +5,7 @@
       <div class="label"><label for="f_subtag"><%= _('Enter Sub-Tag ID') %></label></div>
       <input type="text" name="subtag" id="f_subtag" class="optional integer" />
       <input type="submit" value="<%= _('Submit') %>"/>
-<%= make_secure_form %>
+<%= action_token_field %>
     </form>
   </div>
 </div>

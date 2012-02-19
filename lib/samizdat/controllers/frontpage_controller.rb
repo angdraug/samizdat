@@ -117,14 +117,10 @@ class FrontpageController < Controller
       not (defined?(FastGettext) or defined?(GetText)) or
       config['locale']['languages'].size <= 1
 
-    current_language = @request.language
-
-    langlist = config['locale']['languages']
-    langlist = langlist.sort if config['locale']['sort_languages']
-    lnames = language_names
+    languages = config['locale']['languages']
+    languages = languages.sort if config['locale']['sort_languages']
 
     render_template('frontpage_language_list.rhtml', binding)
-
   end
 
   def render_more_links
