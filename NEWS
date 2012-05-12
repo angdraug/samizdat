@@ -1,6 +1,35 @@
 Samizdat News
 =============
 
+2012-05-12: Samizdat 0.7.0 is released.
+
+    This version features massive improvements both in the user interface and
+    under the hood. Posts by registered members are now organized into blogs,
+    publishing a message with several pictures and other multimedia parts can
+    now be done in a single step, sub-tags provide even finer control over site
+    structure, while translations have been promoted from special-class comments
+    into its own kind of a message part. Other changes include short message cut
+    mark, support for comments with empty titles, Lock Comments moderation
+    action, and public moderators list.
+
+    Samizdat Storage, Cache, and Sanitize modules were split out into their own
+    sub-projects called Graffiti, SynCache, and Whitewash. Since Samizdat 0.6.2,
+    Graffiti has grown the ability to handle transitive properties and negative
+    sub-queries, and migrated from Ruby/DBI to Sequel as a backend interface to
+    relational databases. Whitewash moved away from reliance on HTMLTidy and
+    REXML, both cleanup and parsing of HTML is now handled by Nokogiri.
+
+    Samizdat itself has migrated from cgi.rb to Rack as its interface with the
+    Web server, examples in the documentation show the new recommended way to
+    setup Samizdat using Thin Ruby application server and Varnish cache behind
+    Nginx front-end web server. Mahoro file type detection library was replaced
+    with Magic FFI bindings, while FastGettext is now preferred over
+    Ruby/GetText for i18n.
+
+    As usual, see release notes [0] for details and upgrade instructions.
+
+    [0] http://samizdat.nongnu.org/release-notes/samizdat-0.7.0.html
+
 2009-02-12: Samizdat 0.6.2 is released.
 
     The most important part of this release is the long list of security

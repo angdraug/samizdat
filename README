@@ -8,8 +8,8 @@ Samizdat is a generic RDF-based engine for building collaboration and
 open publishing web sites. Samizdat provides users with means to
 cooperate and coordinate on all kinds of activities, including media
 activism, resource sharing, education and research, advocacy, and so on.
-Samizdat intends to promote values of freedom, openness, equality, and
-cooperation.
+Samizdat implements workflows that promote values of freedom, openness,
+equality, and cooperation.
 
 Samizdat users can publish, view, comment, edit, and aggregate text and
 multimedia resources, vote on site structure and resource
@@ -63,15 +63,15 @@ Wiki
 - history of changes with colored difference tables
 
 Blogging and Syndication
-- export of RSS 1.0 feeds for front page, tags, and Squish RDF queries
+- personal blog space
+- export of RSS 1.0 feeds for front page, blogs, tags, and RDF query results
 - import of RSS feeds into the front page
-- personal blog space (in progress)
 
 Semantic Web
 - site structure follows RDF model
 - search with RDF queries, publish queries as messages
 - Dublin Core metadata
-- built-in relational storage for RDF
+- uses Graffiti relational RDF store
 
 Security
 - all user input is tainted and HTML-sanitized
@@ -82,7 +82,7 @@ Security
 - login forms and cookies may be limited to HTTPS connections
 
 Implementation
-- Ruby, PostgreSQL (or SQLite3, MySQL), Apache (or Lighttpd)
+- Ruby, PostgreSQL, Nginx
 - full Unicode (UTF-8)
 - XHTML 1.0 markup with switchable CSS themes
 - GetText l10n framework (UI available in 11 languages)
@@ -101,13 +101,6 @@ Documentation
    translations.txt:    Translations
    references.txt:      References
 
-Papers
-
-   collreif.tex: Model for Collaborative Decision Making Based on RDF
-                 Reification, April 2004
-   rel-rdf.tex:  Accessing Relational Data with RDF Queries and
-                 Assertions, April 2004
-
 Presentations
 
    oscom3_samizdat.xml: OSCOM3, May 2003, Cambridge, MA
@@ -119,8 +112,9 @@ Presentations
 Links
 
    http://samizdat.nongnu.org/
-   http://savannah.nongnu.org/projects/samizdat/
+   https://github.com/angdraug/samizdat
+   https://savannah.nongnu.org/projects/samizdat/
    http://raa.ruby-lang.org/list.rhtml?name=samizdat
-   http://freshmeat.net/projects/samizdat/
-   http://docs.indymedia.org/view/Devel/SamizdatEngine
+   http://freecode.com/projects/samizdat
+   https://docs.indymedia.org/view/Devel/SamizdatEngine
 
