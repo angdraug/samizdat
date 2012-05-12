@@ -5,11 +5,7 @@
 <div class="label"><label for="f_login"><%= _('Login') %></label></div>
 <input type="text" name="login" id="f_login" class="required" />
 <div class="label"><label for="f_email"><%= _('Email') %></label></div>
-<input type="text" name="email" id="f_email" value="<%= @email %>" class="required email" />
-<% if @session.member %>
-<div class="label"><label for="f_password"><%= _('Current Password') %></label></div>
-<input type="password" name="password" id="f_password" class="simplecheck" />
-<% end %>
+<input type="text" name="email" id="f_email" class="required email" />
 <div class="label"><label for="f_password1"><%= _('New Password') %></label></div>
 <input type="password" name="password1" id="f_password1" />
 <div class="label"><label for="f_password2"><%= _('Reenter password to confirm') %></label></div>

@@ -1,7 +1,7 @@
 <div class="box">
   <div class="box-title"><%= @title %></div>
   <div class="box-content">
-<% if login && password %><%# only if incorrect really %>
+<% if login && password %><%# only if incorrect really (fixme: unbundle from controller logic) %>
   <p><%= _('Wrong login name or password. Try again.') %></p>
 <% else %>
   <p><%= _('Use existing account:') %></p>

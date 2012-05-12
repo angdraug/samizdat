@@ -35,7 +35,7 @@ class ResourceController < Controller
         [ true, @resource.page ]
       end
 
-    if related 
+    if related
       dataset = Tag.related_dataset(site, @id)
 
       if dataset.empty?

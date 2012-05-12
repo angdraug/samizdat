@@ -220,7 +220,6 @@ class MessageController < Controller
 
     else
       Moderation.check_request(site, @id)
-
       @title = _('Request Moderation')
       @content_for_layout = render_template('message_request_moderation.rhtml', binding)
     end
@@ -235,7 +234,6 @@ class MessageController < Controller
 
     else
       @request.set_redirect_when_done_cookie
-
       @title = _('Acknowledge Moderation Request')
       @content_for_layout = render_template('message_acknowledge.rhtml', binding)
     end

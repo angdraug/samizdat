@@ -55,7 +55,6 @@ class MemberController < Controller
 
   def create
     @title = _('Create New Account')
-    @email = rdf.get_property(@session.member, 's::email') if @session.member
     @content_for_layout = render_template('member_create.rhtml', binding)
   end
 
@@ -134,6 +133,7 @@ class MemberController < Controller
       @request.set_redirect_when_done_cookie
       @title = _('Log in')
     end
+
     @content_for_layout = render_template('member_login.rhtml', binding)
   end
 
@@ -202,9 +202,7 @@ class MemberController < Controller
 
     login, = @request.values_at %w[login]
 
-    good_login = (login and login =~ LOGIN_PATTERN)
-
-    if good_login
+    if login and login =~ LOGIN_PATTERN
       p = Password.random
       db.transaction do
         email = db[:member].filter(:login => login).get(:email)
@@ -219,6 +217,7 @@ class MemberController < Controller
         request_confirmation(email, confirm,
           sprintf(_('New password was generated for your account: %s'), p))
       end # transaction
+      @notice = _('New password has been sent to you.')
     end
 
     @title = _('Recover Lost Password')

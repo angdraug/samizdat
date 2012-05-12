@@ -1,8 +1,8 @@
 <div class="box">
   <div class="box-title"><%= @title %></div>
   <div class="box-content">
-<% if good_login %>
-<p><%= _('New password has been sent to you.') %></p>
+<% if @notice %>
+<p><%= @notice %></p>
 <% else %>
 <form action="<%= action_location %>" method="post">
 <div class="label"><label for="f_login"><%= _('Login') %></label></div>

@@ -128,7 +128,7 @@ select {
 	margin-right: 15pt;
 	padding: 0pt;
 	background: #ffffff; }
-input.submit {
+input[type="submit"] {
 	background: #ffffff;
 	margin-top: 4pt;
 	padding: 0 }

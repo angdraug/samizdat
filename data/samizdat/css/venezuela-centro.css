@@ -105,7 +105,7 @@ select {
 	margin-right: 15px;
 	padding: 0px;
 	background: #fff; }
-input.submit {
+input[type="submit"] {
 	margin-top: 4px;
 	padding: 0; }
 p.moderation {
