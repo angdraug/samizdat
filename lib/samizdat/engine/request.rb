@@ -378,7 +378,11 @@ class Request
       set_cookie('notice', @notice)
     end
 
-    body = compress(controller.render) unless 302 == @status
+    body = controller.render
+    if body.kind_of?(LazyContent)
+      return [ @status, @headers, body ]
+    else
+    body = compress(body) unless 302 == @status
 
     unless 304 == @status
       @headers['Content-Type'] ||= 'text/html'
@@ -391,6 +395,7 @@ class Request
       return [ @status, @headers, [body] ]
     else
       return [ @status, @headers, [] ]
+    end
     end
   end
 
