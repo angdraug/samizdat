@@ -17,7 +17,7 @@ class LazyContent
   end
 
   def each
-    @content.each_with_index {|a,i| yield(@content[i]=force_val(a)) }
+    @content.each_with_index {|a,i| yield(@content[i]=force_val(a).to_s) }
   end
 
   def to_s

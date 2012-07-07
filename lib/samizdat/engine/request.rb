@@ -380,6 +380,8 @@ class Request
 
     body = controller.render
     if body.kind_of?(LazyContent)
+      @headers['Content-Type'] ||= 'text/html'
+      @headers['Content-Type'] << '; charset=utf-8'
       return [ @status, @headers, body ]
     else
     body = compress(body) unless 302 == @status

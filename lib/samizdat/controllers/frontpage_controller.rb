@@ -46,19 +46,20 @@ class FrontpageController < Controller
     @template = 'frontpage_index.rhtml'
     @lazy_content << 'lazy_page_layout_begin.rhtml'
     @lazy_content << 'lazy_frontpage_index_1.rhtml'
-    @lazy_content << lambda { tag_cloud }
+    @lazy_content << lambda {|_| tag_cloud }
     @lazy_content << 'lazy_frontpage_index_2.rhtml'
-    @lazy_content << lambda { FeaturesList.new(@request) }
+    @lazy_content << lambda {|_| FeaturesList.new(@request) }
     @lazy_content << 'lazy_frontpage_index_3.rhtml'
-    @lazy_content << lambda { UpdatesList.new(@request) }
+    @lazy_content << lambda {|_| UpdatesList.new(@request) }
     @lazy_content << 'lazy_frontpage_index_4.rhtml'
     @lazy_content << 'lazy_page_layout_end.rhtml'
   end
 
   def render
-     out = LazyContent.new
+
+     out = LazyContent.new(@request)
      @lazy_content.each do |x|
-       out << x.kind_of?(Proc) ? x : render_template(x)
+       out.push(x.kind_of?(Proc) ? x : render_template(x))
      end
      out
   end
