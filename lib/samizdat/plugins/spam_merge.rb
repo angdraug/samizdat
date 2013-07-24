@@ -12,6 +12,8 @@ require 'samizdat'
 require 'samizdat/plugins/spam'
 
 class SpamMergePlugin < SpamPlugin
+  register_as 'spam_merge'
+
   def check_text(role, text)
     return unless regexp_list.kind_of?(Enumerable) and @roles.include?(role)
 
@@ -59,5 +61,3 @@ class SpamMergePlugin < SpamPlugin
     end
   end
 end
-
-PluginClasses.instance['spam_merge'] = SpamMergePlugin
