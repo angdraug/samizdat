@@ -12,6 +12,8 @@ require 'samizdat'
 require 'samizdat/plugins/content_file'
 
 class FlashPlugin < ContentFilePlugin
+  register_as 'flash'
+
   def match?(format)
     'application/x-shockwave-flash' == format
   end
@@ -28,5 +30,3 @@ class FlashPlugin < ContentFilePlugin
     </script>} + download_link(href, content, 'image')
   end
 end
-
-PluginClasses.instance['flash'] = FlashPlugin

@@ -21,6 +21,8 @@ class SquishPluginHelper
 end
 
 class SquishPlugin < ContentInlinePlugin
+  register_as 'squish'
+
   def match?(format)
     'application/x-squish' == format
   end
@@ -40,5 +42,3 @@ class SquishPlugin < ContentInlinePlugin
     true
   end
 end
-
-PluginClasses.instance['squish'] = SquishPlugin

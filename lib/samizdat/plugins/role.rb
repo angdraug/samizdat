@@ -12,6 +12,8 @@ require 'samizdat'
 require 'samizdat/plugins/access'
 
 class RolePlugin < AccessPlugin
+  register_as 'role'
+
   def match?(member, action)
     @options.each do |role, actions|
       return true if
@@ -63,5 +65,3 @@ class RolePlugin < AccessPlugin
     [ _('guest'), _('member'), _('moderator') ]
   end
 end
-
-PluginClasses.instance['role'] = RolePlugin

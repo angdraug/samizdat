@@ -12,6 +12,8 @@ require 'samizdat'
 require 'samizdat/plugins/content_file'
 
 class FlowplayerPlugin < ContentFilePlugin
+  register_as 'flowplayer'
+
   def match?(format)
     ['video/x-flv', 'video/mp4'].include?(format)
   end
@@ -37,5 +39,3 @@ class FlowplayerPlugin < ContentFilePlugin
     end
   end
 end
-
-PluginClasses.instance['flowplayer'] = FlowplayerPlugin

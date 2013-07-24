@@ -12,6 +12,8 @@ require 'samizdat'
 require 'samizdat/plugins/content_inline'
 
 class TextDefaultPlugin < ContentInlinePlugin
+  register_as 'inline_default'
+
   def default?
     true
   end
@@ -39,5 +41,3 @@ class TextDefaultPlugin < ContentInlinePlugin
 
   AUTOURL_SCHEMES = %w[http https ftp]
 end
-
-PluginClasses.instance['inline_default'] = TextDefaultPlugin

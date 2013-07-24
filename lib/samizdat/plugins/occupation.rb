@@ -12,6 +12,8 @@ require 'samizdat'
 require 'samizdat/plugins/profile'
 
 class OccupationPlugin < ProfilePlugin
+  register_as 'occupation'
+
   def fields
     ['occupation']
   end
@@ -20,5 +22,3 @@ class OccupationPlugin < ProfilePlugin
     {'occupation' => _('Occupation')}[field]
   end
 end
-
-PluginClasses.instance['occupation'] = OccupationPlugin

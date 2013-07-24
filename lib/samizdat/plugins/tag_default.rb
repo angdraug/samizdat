@@ -12,6 +12,8 @@ require 'samizdat'
 require 'samizdat/plugins/tag'
 
 class TagDefaultPlugin < TagPlugin
+  register_as 'tag_default'
+
   def default?
     true
   end
@@ -20,5 +22,3 @@ class TagDefaultPlugin < TagPlugin
     Tag.find_tags(site, &block)
   end
 end
-
-PluginClasses.instance['tag_default'] = TagDefaultPlugin

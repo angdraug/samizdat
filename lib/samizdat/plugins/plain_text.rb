@@ -12,6 +12,8 @@ require 'samizdat'
 require 'samizdat/plugins/content_inline'
 
 class PlainTextPlugin < ContentInlinePlugin
+  register_as 'plain_text'
+
   def match?(format)
     'text/plain' == format
   end
@@ -24,5 +26,3 @@ class PlainTextPlugin < ContentInlinePlugin
     _('Verbatim plain text')
   end
 end
-
-PluginClasses.instance['plain_text'] = PlainTextPlugin

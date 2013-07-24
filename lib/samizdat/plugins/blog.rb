@@ -12,6 +12,8 @@ require 'samizdat'
 require 'samizdat/plugins/route'
 
 class BlogPlugin < RoutePlugin
+  register_as 'blog'
+
   def rewrite(request)
     match = PATTERN.match(request.route)
     return unless match.kind_of? MatchData
@@ -27,5 +29,3 @@ class BlogPlugin < RoutePlugin
 
   PATTERN = Regexp.new(%r{\A/blog/([a-zA-Z0-9]+)(/.*)?\z}).freeze
 end
-
-PluginClasses.instance['blog'] = BlogPlugin

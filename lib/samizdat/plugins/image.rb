@@ -20,6 +20,8 @@ require 'RMagick'
 class ImagePlugin < ContentFilePlugin
   include Magick
 
+  register_as 'image'
+
   def match?(format)
     :image == format_type(format)
   end
@@ -128,5 +130,3 @@ class ImagePlugin < ContentFilePlugin
     end
   end
 end
-
-PluginClasses.instance['image'] = ImagePlugin

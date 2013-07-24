@@ -39,6 +39,10 @@ class Plugin
   def depends
     []
   end
+
+  def self.register_as(type)
+    PluginClasses.instance[type] = self
+  end
 end
 
 # singleton Hash mapping plugin names to classes

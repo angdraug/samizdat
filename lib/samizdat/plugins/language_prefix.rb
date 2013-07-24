@@ -14,6 +14,8 @@ require 'samizdat/plugins/route'
 # Make sure this plugin is at the head of the route rewriting chain.
 #
 class LanguagePrefixPlugin < RoutePlugin
+  register_as 'language_prefix'
+
   def rewrite(request)
     match = PATTERN.match(request.route)
     return unless match.kind_of? MatchData
@@ -29,5 +31,3 @@ class LanguagePrefixPlugin < RoutePlugin
 
   PATTERN = Regexp.new(%r{\A/([a-zA-Z0-9_.@]+)(/.*)\z}).freeze
 end
-
-PluginClasses.instance['language_prefix'] = LanguagePrefixPlugin

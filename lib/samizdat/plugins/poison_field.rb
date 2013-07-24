@@ -12,6 +12,8 @@ require 'samizdat'
 require 'samizdat/plugins/spam'
 
 class PoisonFieldPlugin < SpamPlugin
+  register_as 'poison_field'
+
   def add_message_fields(request)
     return [] unless @roles.include? request.role
     %{<input name="#{field_name}" style="display:none" type="text" />\n}
@@ -29,5 +31,3 @@ class PoisonFieldPlugin < SpamPlugin
     'email'
   end
 end
-
-PluginClasses.instance['poison_field'] = PoisonFieldPlugin
