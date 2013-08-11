@@ -12,6 +12,8 @@ require 'samizdat'
 require 'samizdat/plugins/content_file'
 
 class FileDefaultPlugin < ContentFilePlugin
+  register_as 'file_default'
+
   def default?
     true
   end
@@ -20,5 +22,3 @@ class FileDefaultPlugin < ContentFilePlugin
     '<p>' + download_link(content.file.href, content) + '</p>'
   end
 end
-
-PluginClasses.instance['file_default'] = FileDefaultPlugin

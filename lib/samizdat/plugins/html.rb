@@ -12,6 +12,8 @@ require 'samizdat'
 require 'samizdat/plugins/content_inline'
 
 class HtmlPlugin < ContentInlinePlugin
+  register_as 'html'
+
   def match?(format)
     'text/html' == format
   end
@@ -24,5 +26,3 @@ class HtmlPlugin < ContentInlinePlugin
     'HTML'
   end
 end
-
-PluginClasses.instance['html'] = HtmlPlugin

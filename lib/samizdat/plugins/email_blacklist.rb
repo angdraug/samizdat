@@ -12,6 +12,8 @@ require 'samizdat'
 require 'samizdat/plugins/spam'
 
 class EmailBlacklistPlugin < SpamPlugin
+  register_as 'email_blacklist'
+
   def check_email(email)
     entry = blacklist.detect {|bl| email =~ bl } and raise SpamError,
       sprintf(_("The email address you have specified matches blacklist entry " +
@@ -31,5 +33,3 @@ class EmailBlacklistPlugin < SpamPlugin
       end
   end
 end
-
-PluginClasses.instance['email_blacklist'] = EmailBlacklistPlugin
