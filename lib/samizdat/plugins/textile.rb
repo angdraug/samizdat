@@ -34,7 +34,7 @@ rescue LoadError
 end
 
 class TextilePlugin < ContentInlinePlugin
-  register_as 'textile'
+  register_inline_format 'text/textile', 'textile'
 
   def match?(format)
     'text/textile' == format
