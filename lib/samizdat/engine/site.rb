@@ -424,4 +424,21 @@ module SiteHelper
       :other
     end
   end
+
+  def try_config(path, fallback=nil)
+    if path.kind_of? String
+      path = path.split '/'
+    elsif !path.kind_of? Array
+      raise "Path is neither String nor Array"
+    end
+
+    cfg = config
+    ret = begin
+      path.each {|p| cfg = cfg[p] }
+      cfg
+    rescue
+    end
+
+    ret or fallback
+  end
 end

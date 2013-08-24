@@ -1,0 +1,35 @@
+Samizdat CAPTCHA is configured like other parts if Samizdat.
+
+Configuration is located under the following subtree:
+
+plugins:
+  options:
+    spam:
+      captcha:
+
+Variables used by various parts of plugin:
+
+- number        total number of captha files to generate and use
+    (default: 1000)
+- directory     where to store image files (default: /var/lib/samizdat/captcha)
+- font          font used during image generation (default: DejaVu Serif)
+- fontsize      font size in pixels (default: 24)
+- hoffset       horisontal offset of first letter (and letter width too)
+  (default: font size * 5/6)
+- unrotate      whether letter's baseline rotated with accumulation or not
+  (default: false)
+- web_path      virtual path to captcha images directory (default: /captcha/)
+- usecookie     whether to set or not cookie if first challenge successfully
+  passed (default: false)
+- passed        cookie plain content, change it! (default: captcha_passed)
+- saltlength    cookie salt length, better change it (3..5 is okay)
+    (default: 4)
+
+To create/delete/update captcha images and database table use
+samizdat-manage-captcha. It accepts the following options:
+
+    -s, --site=SITE                  Samizdat site name
+    -f, --format=[FORMAT]            Image format, default one is `png'
+    -c, --create                     Create images and database table
+    -u, --update                     Update (create new) images
+    -d, --delete                     Delete images and drop table
