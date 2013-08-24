@@ -1,0 +1,94 @@
+#!/usr/bin/env ruby
+#
+# vim: et sw=2 sts=2 ts=8 tw=0
+
+require 'optparse'
+require 'samizdat/captcha/captcha'
+require 'samizdat/captcha/equation'
+
+class App
+  include SiteHelper
+
+  def run
+    opts = OptionParser.new
+    appconfig = {}
+
+    opts.on('-s', '--site=SITE', String, 'Samizdat site name') {|val|
+      appconfig[:site] = val }
+    opts.on('-f', '--format=[FORMAT]', String, 'Image format') {|val|
+      appconfig[:format] = val.downcase }
+    opts.on('-c', '--create', 'Create images and database table') {
+      appconfig[:action] = :create }
+    opts.on('-u', '--update', 'Update (create new) images') {
+      appconfig[:action] = :update }
+    opts.on('-d', '--delete', 'Delete images and drop table') {
+      appconfig[:action] = :delete }
+
+    opts.parse(ARGV)
+
+    if appconfig[:site]
+      @site = Site.new(appconfig[:site])
+    else
+      $stderr.puts opts.to_s
+      exit 1;
+    end
+
+    @captcha = Captcha.new(site)
+    @number  = try_config(Captcha::CONFIG + 'number', Captcha::DEFAULT_NUMBER)
+    @format  = appconfig[:format] || 'png'
+    self.send appconfig[:action]
+  end
+
+  private
+
+  def generate
+    mathops = Equation::MATHOPS.map {|op, ch| ch }
+    @number.times do |id|
+      equation = Equation.generate
+      filename = "#{id}.#{@format}"
+      w, h = @captcha.generate_file( "#{equation}=", filename, mathops )
+
+      yield id, equation.result, filename, w, h
+    end
+  end
+
+  def create
+    table = @captcha.create_table
+
+    generate do |id, result, filename, width, height|
+      table.insert(
+        :id       => id,
+        :result   => result,
+        :filename => filename,
+        :width    => width,
+        :height   => height
+      )
+    end
+  end
+
+  def delete
+    table = @captcha.table
+    table.each {|ds| @captcha.delete_file(ds[:filename]) }
+    db.drop_table Captcha::TABLE
+  end
+
+  def update
+    table = @captcha.table
+    generate do |id, result, filename, width, height|
+      table.filter( :id => id ) \
+        .each {|ds|
+          # generate will silently rewrite existing files so we don't want
+          # to delete them again
+          @captcha.delete_file(ds[:filename]) if ds[:filename] != filename
+         } \
+        .update(
+          :result   => result,
+          :filename => filename,
+          :width    => width,
+          :height   => height
+        )
+    end
+  end
+end
+
+App.new.run
