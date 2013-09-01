@@ -49,6 +49,8 @@ require 'samizdat/engine/view'
 require 'samizdat/engine/controller'
 require 'samizdat/engine/dispatcher'
 
+require 'samizdat/engine/inline'
+
 # samizdat application
 require 'samizdat/models/member'
 require 'samizdat/models/message'

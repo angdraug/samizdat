@@ -51,6 +51,11 @@ class ContentInlinePlugin < Plugin
     end
   end
 
+  def self.register_inline_format(full, short)
+    register_as short
+    InlineFormat.instance[full] = short
+  end
+
   private
 
   CUT_MARK_DEFAULT = '$$$'

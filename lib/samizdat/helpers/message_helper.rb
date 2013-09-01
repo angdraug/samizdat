@@ -30,13 +30,6 @@ module MessageHelper
     }.join(', ')
   end
 
-  # inline formats that need a link to view source
-  #
-  SOURCE_FORMAT = {
-    'text/textile' => 'textile',
-    'text/html' => 'html'
-  }
-
   # render _message_ info line (except tags)
   #
   def message_info(message, mode)
@@ -64,7 +57,7 @@ module MessageHelper
       if message.id and message.nversions.to_i > 0
         history = %{<a href="history/#{message.id}">} + _('history') + '</a>'
       end
-      if message.id and format = SOURCE_FORMAT[message.content.format]
+      if message.id and format = InlineFormat.instance[message.content.format]
         source = %{<a href="message/#{message.id}/source" title="} +
           _('view source') + %{">#{format}</a>}
       end
