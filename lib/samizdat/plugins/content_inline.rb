@@ -51,9 +51,9 @@ class ContentInlinePlugin < Plugin
     end
   end
 
-  def self.register_inline_format(full, short)
-    register_as short
-    InlineFormat.instance[full] = short
+  def self.register_inline_format(format, name)
+    register_as name
+    InlineFormat.instance[format] = name
   end
 
   private

@@ -51,6 +51,12 @@ class PluginClasses < Hash
   include Singleton
 end
 
+# inline formats that need a link to view source
+#
+class InlineFormat < Hash
+  include Singleton
+end
+
 # plugins configuration for a Samizdat site
 #
 class Plugins
