@@ -1,0 +1,10 @@
+<div class="feed">
+<% feeds.each do |feed,feed_name| %>
+<div class="feed-name"><%= feed_name %></div>
+<ul>
+<%   feed.each do |item| %>
+<li><a href="<%= item['link'] %>" title="<%= format_date(item['date'])%>"><%= item['title'] %></a></li>
+<%   end %>
+</ul>
+<% end %>
+</div>

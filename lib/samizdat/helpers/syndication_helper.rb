@@ -33,20 +33,15 @@ module SyndicationHelper
   end
 
   def render_feeds
-    output = ''
-
+    feeds = []
     each_import_feed do |feed_name, url, limit|
       feed = shared_cache['samizdat/*/import_feeds/' + url]   # '*' to avoid clashes with site_name
 
       if feed.kind_of? Array and feed.size > 0
-        output << %{<div class="feed"><div class="feed-name">#{feed_name}</div>\n<ul>}
-        feed[0, limit].each do |item|
-          output << %{<li><a href="#{item['link']}" title="#{format_date(item['date'])}">#{item['title']}</a></li>\n}
-        end
-        output << %{</ul></div>\n}
+        feeds.push(feed[0, limit], feed_name)
       end
     end
 
-    output
+    render_template('syndicationhelper_render_feeds.rhtml', binding)
   end
 end

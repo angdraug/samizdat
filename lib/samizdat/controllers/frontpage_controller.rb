@@ -117,30 +117,10 @@ class FrontpageController < Controller
       not (defined?(FastGettext) or defined?(GetText)) or
       config['locale']['languages'].size <= 1
 
-    if config['locale']['allow_monolanguage']
-      mono = '<br/><a href="member/set?monolanguage=' +
-        (@request.monolanguage? ? 'no' : 'yes') + '">' +
-        if @request.monolanguage?
-          _('Show messages in all languages')
-        else
-          sprintf(_('Show only messages in %s'),
-                  _('(name that this language calls itself)'))
-        end +
-        '</a>'
-    end
+    languages = config['locale']['languages']
+    languages = languages.sort if config['locale']['sort_languages']
 
-    current_language = @request.language
-
-    list = config['locale']['languages']
-    list = list.sort if config['locale']['sort_languages']
-    lnames = language_names
-
-    '<div id="languages">' + list.collect {|lang|
-      name = lnames[lang] or next
-      name += _(' (default language)') if lang == default_language
-      name = %{<strong>#{name}</strong>} if lang == current_language
-      %{<a href="member/set?lang=#{lang}">#{name}</a>\n}
-    }.join + mono.to_s + '</div>'
+    render_template('frontpage_language_list.rhtml', binding)
   end
 
   def render_more_links

@@ -1,0 +1,22 @@
+<div class="box">
+  <div class="box-title"><%= @title %></div>
+  <div class="box-content">
+<% if results.size > 0 %>
+<%= list(results) %>
+<div class="foot">
+<%= nav(dataset, :route => %{query/run?q=#{Rack::Utils.escape(query)}&amp;}) %>
+<%= nav_rss(feed) %>
+<%   if @request.advanced_ui? and @request['page'].nil? %>
+<form action="/message/publish" method="post">
+<input name="format" id="f_format" type="hidden" value="application/x-squish" />
+<input name="body" id="f_body" type="hidden" value="<%= query %>" />
+<input name="publish" id="f_publish" type="submit" value="<%= _('Publish This Query') %>" class="submit" />
+</form>
+<%   end %>
+</div>
+<% else %>
+    <p><%= _('No matching resources found.') %></p>
+<% end %>
+  </div>
+</div>
+<%= edit_box(q) if @request['page'].nil? %>

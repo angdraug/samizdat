@@ -1,0 +1,36 @@
+<div class="box">
+  <div class="box-title"><%= _('Vote:') %> <%= @title %></div>
+  <div class="box-content">
+    <form action="<%= action_location %>" method="post">
+<% if tags %>
+<div class="label"><label for="f_tag"><%= _('Select a tag that this resource will be related to') %> </label>
+</div>
+<select name="tag" id="f_tag">
+<%   tags.each do |t, name| %>
+<option value="<%= t %>"<% ' selected="selected"' if t==tag %>><%= name %></option>
+<%   end %>
+</select>
+<% end %>
+
+<% if @request.advanced_ui? %>
+      <div class="label"><label for="f_tag_id"><%= _('If the tag you want is not in the list above, enter its id (a number)') %></label></div>
+      <input type="text" name="tag_id" id="f_tag_id" class="optional integer" />
+<% end %>
+      <div class="label"><label for="f_rating"><%= _('Give a rating of how strongly this resource is related to the tag that you selected') %></label></div>
+      <select name="rating" id="f_rating">
+        <option value="-2"><%= _('-2 (No)') %></option>
+        <option value="-1"><%= _('-1 (Not Likely)') %></option>
+        <option value="0" selected="selected"><%= _('0 (Uncertain)') %></option>
+        <option value="1"><%= _('1 (Likely)') %></option>
+        <option value="2"><%= _('2 (Yes)') %></option>
+      </select>
+      <br /><input type="submit" value="<%= _('Submit') %>"/>
+<%= action_token_field %>
+    </form>
+  </div>
+</div>
+<div class="box">
+  <div class="box-title"><%= @title %></div>
+  <div class="box-content"><%= @resource.full %></div>
+</div>
+  

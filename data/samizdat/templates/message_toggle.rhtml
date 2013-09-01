@@ -1,0 +1,8 @@
+<div class="box">
+  <div class="box-title"><%= @title %></div>
+  <div class="box-content">
+<%= message %>
+    <form action="<%= action_location %>" method="post">
+      <input type="submit" name="confirm" id="f_confirm" value="<%= _('Confirm') %>"/>
+<%= action_token_field %>
+</form></div></div>

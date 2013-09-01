@@ -9,7 +9,7 @@
 # vim: et sw=2 sts=2 ts=8 tw=0
 
 require 'samizdat'
-require 'samizdat/helpers/resource_helper'
+require 'samizdat/helpers/application_helper'
 require 'samizdat/helpers/message_helper'
 
 class Resource
@@ -99,7 +99,7 @@ class Resource
 end
 
 class ResourceComponent
-  include ResourceHelper
+  include ApplicationHelper
 
   def initialize(request, id)
     self.request = request
@@ -164,7 +164,8 @@ ORDER BY ?rating DESC})
       end
     end
 
-    tag_box(@id, tags.values)
+    tags = tags.values.find_all {|t| t.id != @id }.sort_by {|t| -t.sort_index }
+    render_template('resourcecomponent_tags.rhtml', binding)
   end
 
   def parts

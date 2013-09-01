@@ -1,0 +1,176 @@
+<%= header %>
+<div class="box" id="postblock">
+<div class="box-title"><%= title %></div><div class="box-content">
+<form action="<%= action %>" enctype="multipart/form-data" method="post" id="postform">
+<div class="label"><label for="f_title"><%= _('Title') %></label></div>
+<input type="text" name="title" id="f_title" value="<%= old_title %>" class="required" />
+
+<div class="label"><label for="f_body"><%= _('Content') %></label></div>
+<textarea name="body" id="f_body"  cols="70" rows="20" class="mutualexclusive"><%= old_body %></textarea>
+
+<div class="label"><label for="f_file"><%= sprintf(_('Alternatively, upload a file (formats supported: %s; size limit: %s)'), upload_formats, upload_file_size) %></label></div>
+<input type="file" name="file" id="f_file" class="mutualexclusive" />
+
+<% if tags 
+     if not tags.kind_of?(Array) %>
+<input type="hidden" name="tag" id="f_tag" value="<%= tags %>" />
+<%   else %>
+<div class="label"><label for="f_tag"><%= _('Select a tag that this resource will be related to') %> </label></div>
+<select name="tag" id="f_tag">
+<option value="" selected="selected"><%= _('SELECT TAG') %></option>
+<%     tags.each do |t, name| %>
+<option value="<%= t %>"><%= name %></option>
+<%     end %>
+</select>
+<%   end
+   end %>
+
+<div class="label"><label for="f_lang"><%= _('Language of the message') %></label></div>
+<select name="lang" id="f_lang">
+<% langs.each do |l, n| %>
+<option value="<%= l %>" <%= 'selected="selected"' if l==msg_lang %>><%= n %></option>
+<% end %>
+<option value="und"><%= _('None of the above') %></option>
+</select>
+
+<div class="label"><label for="f_format"><%= _('Format') %></label></div>
+<select name="format" id="f_format">
+<% formats.each do |f, n| %>
+<option value="<%= f %>" <%= 'selected="selected"' if f==old_format %>><%= n %></option>
+<% end %>
+</select>
+
+<div class="label"><label for="f_open"><%= _("Editing is open for all members (excluding guests who can't edit anyone's messages)") %></label></div>
+<input type="checkbox" name="open" id="f_open" <%= 'checked="checked"' if msg_open %> value="<%= msg_open %>"<%= 'disabled="disabled"' if disable_open %> />
+
+<% if attach_parts %>
+<div class="label"><label for="f_part_1"><%= _('Attach message parts from files') %></label></div>
+<input type="file" name="part_1" id="f_part_1" /><br /><noscript>
+<%   2.upto(config['limit']['parts']) do |i| %>
+<input type="file" name="part_<%= i %>" id="f_part_<%= i %>" /><br />
+<%   end %>
+</noscript>
+<% end %>
+
+<% if lock_date %>
+<input type="hidden" name="date" value="<%= date %>" />
+<% end %>
+
+<% plugins.each do |plugin| %>
+<%= plugin %>
+<% end %>
+<br /><input type="submit" name="preview" id="f_preview" value="<%= _('Preview') %>"/>
+</form>
+</div>
+<%# textile ref %>
+<div id="textile-ref">
+<h1><%= _('Textile Reference') %></h1>
+<h2><%= _('Text Blocks') %></h2>
+<p>
+<b>h<i>n</i>.</b> <%= _('Heading') %> (n = 1..6)<br />
+<b>bq.</b> <%= _('Blockquote') %><br />
+<b>fn<i>n</i>.</b> <%= _('Footnote') %><br />
+<b>p.</b> <%= _('Paragraph') %><br />
+<b>bc.</b> <%= _('Block code') %><br />
+<b>pre.</b> <%= _('Pre-formatted') %><br />
+<b>#</b> <%= _('Numeric list') %><br />
+<b>*</b> <%= _('Bulleted list') %><br />
+<b>notextile.</b> <%= _('no &lt;b&gt;textile here&lt;/b&gt;') %><br />
+</p>
+<h3> <%= _('Extended Blocks') %></h3>
+<p>
+<b>p.</b> <%= _('instruction is optional') %></p>
+<p>bq.. <%= _('quote') %><br />
+&nbsp;<br />
+<%= _('continued quote') %><br />
+&nbsp;<br />
+p. <%= _('paragraph') %>
+</p>
+
+<h2><%= _('Phrase modifiers') %></h2>
+<p>
+<em>_<%= _('emphasis') %>_</em><br />
+<strong>*<%= _('strong') %>*</strong><br />
+<i>__<%= _('italic') %>__</i></br />
+<b>**<%= _('bold') %>**</b></br />
+<cite>??<%= _('citation') %>??</cite><br />
+-<del><%= _('deleted text') %></del>-<br />
++<ins><%= _('inserted text') %></ins>+<br />
+^<sup><%= _('superscript') %></sup>^<br />
+~<sub><%= _('subscript') %></sub>~<br />
+<span>%<%= _('span') %>%</span><br />
+<code>@<%= _('code') %>@</code><br />
+==<%= _('no &lt;b&gt;textile&lt;/b&gt;') %>==<br />
+</p>
+
+<h2><%= _('Links and images') %></h2>
+<p>
+"<%= _('link text (link title)') %>":http://&#8230;<br />
+!<%= _('image url (alt text)') %>!<br />
+!<%= _('image url (alt text)') %>!:http://&#8230;<br />
+</p>
+<p><%= _('Text in (parentheses) is optional.') %></p>
+
+<h2><%= _('Punctuation') %></h2>
+<p>
+<b>"<%= _('quotes') %>"</b> &rarr; &#8220;<%= _('quotes') %>&#8221;<br />
+<b>'<%= _('quotes') %>'</b> &rarr; &#8216;<%= _('quotes') %>&#8217;<br />
+<b><%= _("it's") %></b> &rarr; <%= _('it&#8217;s') %><br />
+<b><%= _('em -- dash') %></b> &rarr; <%= _('em &#8212; dash') %><br />
+<b><%= _('en - dash') %></b> &rarr; <%= _('en &#8211; dash') %><br />
+<b>2 x 4</b> &rarr; 2 &#215; 4<br />
+</p>
+
+<h2><%= _('Attributes') %></h2>
+<p>
+(<%= _('class') %>)<br />
+(<%= _('#id') %>)<br />
+{<%= _('style') %>}<br />
+[<%= _('language') %>]<br />
+</p>
+<h3><%= _('Example') %></h3>
+<p>p(#id). %(class)<%= _('text') %>%</p>
+
+<h2><%= _('Alignment') %></h2>
+<p>
+&gt; <%= _('right') %><br />
+&lt; <%= _('left') %><br />
+= <%= _('center') %><br />
+&lt;&gt; <%= _('justify') %>
+</p>
+<h3><%= _('Example') %></h3>
+<p>p=. <%= _('justified text') %></p>
+
+<h2><%= _('Tables') %></h2>
+<p>
+|_. <%= _('table') %>|_. <%= _('header') %>|<br />
+|<%= _('table') %>|<%= _('row') %>|<br />
+|<%= _('table') %>|<%= _('row') %>|
+</p>
+
+<h2><%= _('Acronyms') %></h2>
+<p><%= _('IMC(Independent Media Center)') %></p>
+
+<h2><%= _('Footnotes') %></h2>
+<p>
+<%= _('See foo[1].') %><br />
+<br />
+fn1. <%= _('Foo.') %>
+</p>
+</div>
+</div>
+
+<%= footer %>
+
+<script type="text/javascript"><!--
+$(function(){
+  var f = $('#postform');
+  f.formchecker().dynamicform();
+<%  case config['wysiwyg_editor']
+    when 'tinymce' %>
+  f.dynamicform({ reset_helper : (new TinymceEditor(true)).reset_helper });
+<%  when 'wysiwyg' %>
+  f.wysiwyg();
+<%  end %>
+});
+--></script>

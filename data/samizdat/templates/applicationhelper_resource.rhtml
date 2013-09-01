@@ -1,0 +1,12 @@
+<div class="resource">
+<% if id %>
+<div class="title"><a title="<%= _('Click to view the resource') %>" href="<%= id %>"><%= limit_string(title) %></a></div>
+<% else %>
+<%= limit_string(title) %>
+<% end %>
+<div class="info"><%= info %></div>
+</div>
+
+<%#
+
+%>

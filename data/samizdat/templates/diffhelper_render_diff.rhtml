@@ -1,0 +1,36 @@
+<div class="box">
+  <div class="box-title"><%= @title %></div>
+  <div class="box-content">
+<table class="diff">
+  <thead>
+    <tr>
+      <th><%= hide_message(Resource.new(@request, old.id).list_item, old_hidden) %></th>
+      <th><%= hide_message(Resource.new(@request, new.id).list_item, new_hidden) %></th>
+    </tr>
+  </thead>
+  <tbody>
+<% rows.each do |left, right| %>
+    <tr>
+<%   if right
+       if left.size > 0 %>
+<td style="width: 50%" class="delete"><div class="content"><%= hide_message(left, old_hidden) %></div></td>
+<%     else %>
+<td style="width: 50%"><div class="content">&nbsp;</div></td>
+<%     end
+       if right.size > 0 %>
+<td style="width: 50%" class="add"><div class="content"><%= hide_message(right, new_hidden) %></div></td>
+<%     else %>
+<td style="width: 50%"><div class="content">&nbsp;</div></td>
+<%     end
+     else
+       if left.size > 0 %>
+<td colspan="2" class="deleted"><div class="content"><%= hide_message(left, old_hidden) %></div></td>
+<%     else %>
+<td colspan="2"><div class="content">&nbsp;</div></td>
+<%     end
+     end %>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+</div></div>

@@ -1,0 +1,17 @@
+<% if not tags.empty? or @member.allowed_to?('vote') %>
+<div class="box" id="tags">
+  <div class="box-title"><%= _('Tags') %></div>
+  <div class="box-content">
+<%   tags.each do |tag| %>
+<p><%= tag.id ? resource_href(tag.id, tag.name(@request)) : tag.name(@request) %>: <%= tag.print_rating %>
+<%     if tag.allowed_to_vote?(@member) %>
+(<a title="<%= _('Click to vote on how this resource is related to this tag') %>" href="resource/<%= @id %>/vote?tag=<%= Rack::Utils.escape((tag.id or tag.uriref).to_s) %>"><%= _('vote') %></a>)<%
+       end %>
+</p>
+<%   end
+     if @member.allowed_to?('vote') %>
+<p><a class="action" title="<%= _('Click to add a tag related to this resource') %>" href="resource/<%= @id %>/vote"><%= _('Add a tag') %></a></p>
+<%   end %>
+  </div>
+</div>
+<% end %>

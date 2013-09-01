@@ -49,7 +49,7 @@ class MessageTester
 
   def info_parent
     m = MockMessage.new(:id => 'upload', :part_of => 2)
-    message_info(m, :full).split(",\n ")[1]
+    message_info(m, :full).split(", ")[1]
   end
 
   def content_no_content

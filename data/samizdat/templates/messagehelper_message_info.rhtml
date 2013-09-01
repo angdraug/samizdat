@@ -1,0 +1,58 @@
+<%= sprintf(_('by&nbsp;%s on&nbsp;%s'), member_link(message.creator), format_date(message.date)) %><%
+
+if message.hidden? then %>, <%= _('hidden') %><% end
+
+if moderation_log
+%>, <a href="moderation/<%= message.id %>"><%= _('moderation log') %></a><%
+end
+
+if :full == mode
+
+  case message.part_of_property
+    when 's::inReplyTo', 'dct::isPartOf' then
+%>, <a href="<%= message.part_of %>"><%= _('parent message') %></a><%
+    when 's::isTranslationOf' then
+%>, <a href="<%= message.translation_of %>"><%= _('the original') %></a><%
+    when 'dct::isVersionOf' then
+%>, <a href="<%= message.version_of %>"><%= _('current version') %></a><%
+    when 's::subTagOf' then
+%>, <a href="<%= message.sub_tag_of %>"><%= _('parent tag') %></a><%
+  end
+
+  if message.previous_part
+%>, <a href="<%= message.previous_part %>"><%= _('previous part') %></a><%
+  end
+
+  if message.next_part
+%>, <a href="<%= message.next_part %>"><%= _('next part') %></a><%
+  end
+
+  if message.id and message.nversions.to_i > 0
+%>, <a href="history/<%= message.id %>"><%= _('history') %></a><%
+  end
+
+  if format
+%>, <a href="message/<%= message.id %>/source" title="<%= _('view source') %>"><%= format %></a><%
+  end
+
+end
+
+if message.nreplies.to_i > 0
+%>, <a href="<%= message.id %>#replies"><%= _('replies') %></a>:&nbsp;<%= message.nreplies_all %><%
+end
+
+if message.translations.to_a.size > 0
+  if message.lang then %>, <%= _('language:') %> <%= message.lang %><% end
+%>, <%= _('translation:') %><%
+  message.translations.sort_by {|m| m[:lang] }.each { |m| %> <a href="<%= m[:msg] %>" hreflang="<%= m[:lang] %>"><%= m[:lang] %></a><% }
+end
+
+unless message.tags.empty?
+%>, <a href="<%= message.id %>#tags"><%= _('related to') %></a>: <%=
+  message.tags.sort_by {|t| -t.sort_index }.map { |tag| resource_href(tag.id, tag.name(@request)) }.join(', ') %><%
+end
+
+if :short == mode and message.part_of
+%>, <a href="<%= message.id %>"><%= _('link') %></a><%
+end %>
+

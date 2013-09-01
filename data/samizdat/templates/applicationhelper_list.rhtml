@@ -1,0 +1,8 @@
+<ul>
+<% list.each do |li| %>
+<li><%= li %></li>
+<% end %>
+</ul>
+<% unless '' == foot and '' == nav %>
+<div class="foot"><%= foot + nav %></div>
+<% end %>

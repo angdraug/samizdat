@@ -1,0 +1,100 @@
+<div class="box">
+  <div class="box-title"><%= _('Edit Query') %></div>
+  <div class="box-content">
+
+<div class="box">
+  <div class="box-title"><%= _('Search By Substring') %></div>
+  <div class="box-content">
+    <form action="/query/search" method="post" id="simple-query">
+      <input name="substring" id="f_substring" type="text" value="<%= @request['substring'] %>" class="required" />
+      <input name="search" id="f_search" type="submit" value="<%= _('Search') %>" class="submit" />
+    </form>
+  </div>
+</div>
+
+<script type="text/javascript"><!--
+$(function(){
+  $('#simple-query').formchecker();
+});
+--></script>
+
+<% if @request.advanced_ui? %>
+<div class="box">
+  <div class="box-title"><%= _('Construct Query') %></div>
+  <div class="box-content">
+    <form action="query/update" method="post" id="advanced-query">
+      <div class="box">
+        <div class="box-title"><%= _('Select Target') %></div>
+        <div class="box-content">
+          <select name="nodes" id="f_nodes">
+<% q.pattern.collect {|p, s, o| s }.uniq.each do |v|%>
+            <option value="<%= v %>"><%= v %></option>
+<% end %>
+          </select>
+
+        </div>
+      </div>
+
+  <div class="box">
+    <div class="box-title"><%= _('Query Pattern (predicate subject object)') %></div>
+    <div class="box-content">
+<% i = 0; clauses.each do |predicate, subject, object| i+=1 %>
+      <%= i %>. <select name="predicate_<%= i %>" id="f_predicate_<%= i %>">
+        <option value="<%= _('BLANK CLAUSE ') %>"><%= _('BLANK CLAUSE ') %></option>
+<% properties.each do |v| %>
+        <option value="<%= v %>" <%= 'selected="selected"' if v==predicate %>><%= v %></option>
+<% end %>
+      </select>
+      <input name="subject_<%= i %>" id="f_subject_<%= i %>" type="text" value="<%= subject %>" />
+      <input name="object_<%= i %>" id="f_object_<%= i %>" type="text" value="<%= q.substitute_literals(object) %>" />
+      <br />
+<% end %>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="box-title"><%= _('Literal Condition') %></div>
+    <div class="box-content">
+      <input name="literal" id="f_literal" type="text" value="<%= q.substitute_literals(q.literal) %>" />
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="box-title"><%= _('Order By') %></div>
+    <div class="box-content">
+      <select name="order" id="f_order">
+<% q.variables.each do |v| %>
+        <option value="<%= v %>" <%= 'selected="selected"' if v==q.order %>><%= v %></option>
+<% end %>
+      </select>
+      <select name="order_dir" id="f_order_dir">
+        <option value="ASC" <%= 'selected="selected"' if "ASC"==q.order_dir %>><%= _('Ascending') %></option>
+        <option value="DESC" <%= 'selected="selected"' if "DESC"==q.order_dir %>><%= _('Descending') %></option>
+      </select>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="box-content">
+      <pre>USING <%= q.ns.to_a.collect {|n| n.join(' FOR ') }.join("\n      ") %></pre>
+      <input name="using" id="f_using" type="hidden" value="<%= q.ns.to_a.flatten.join(' ') %>" />
+    </div>
+  </div>
+
+  <input name="update" id="f_update" type="submit" value="<%= _('Update') %>" class="submit" />
+</form>
+</div>
+</div>
+
+<div class="box">
+  <div class="box-title"><%= _('Edit Raw Query') %></div>
+  <div class="box-content">
+    <form action="/query/run" method="post" id="raw-query">
+      <textarea name="q" id="f_q" cols="70" rows="20" class="required"><%= q %></textarea><br />
+      <input name="run" id="f_run" type="submit" value="<%= _('Run') %>" class="submit" />
+    </form>
+  </div>
+</div>
+<% end %>
+</div>
+</div>

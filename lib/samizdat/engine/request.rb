@@ -331,15 +331,15 @@ class Request
   end
 
   # Generate and return action confirmation hash that is used by
-  # ApplicationHelper#secure_form() for CSRF protection. The hash is stored in
-  # cache and reused in all secure forms until it is removed upon successful
-  # verification.
+  # ApplicationHelper#action_token_field() for CSRF protection. The hash is
+  # stored in cache and reused in all secure forms until it is removed upon
+  # successful verification.
   #
   def action_token
     @action_token ||= generate_action_token
   end
 
-  # Check CSRF protection prepared by ApplicationHelper#secure_form().
+  # Check CSRF protection prepared by ApplicationHelper#action_token_field().
   #
   # Compares the action token submitted in the form against the one stored in
   # cache, fails automatically for non-POST requests, for guests does nothing

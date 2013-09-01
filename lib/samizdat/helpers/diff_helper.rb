@@ -67,64 +67,42 @@ module DiffHelper
   # render difference table between two messages
   #
   def render_diff(old, new)
-    old, new = [old, new].collect do |message|
-      info = Resource.new(@request, message.id).list_item
-      info = hide_message(info, message.hidden?)
-
-      content = message.content
-      if content.inline?
-        format = content.format
-        format = 'text/plain' if 'application/x-squish' == format
-
-        body = content.body
-        body =
-          case format
-          when nil
-            body.split(/(?=\n\n)/)
-          when 'text/plain', 'text/textile'
-            body.split(/(?=\n)/)
-          when 'text/html'
-            body.split(%r{(?=<(?!\s*/))})
-          else
-            [body]
-          end
-        body = body.collect {|line| content.render(@request, :full, line) }
-      else
-        body = [ content.render(@request, :short) ]
-      end
-
-      {
-        :info => info,
-        :body => body,
-        :hidden => message.hidden?
-      }
-    end
-
-    %{<table class="diff">\n<thead><tr>\n} +
-    [old, new].collect {|version| "<th>#{version[:info]}</th>\n" }.join +
-    %{</tr></thead>\n<tbody>\n} +
-    calculate_diff(old[:body], new[:body]).collect {|left, right|
-      width = right ? ' style="width: 50%"' : ' colspan="2"'
-
+    rows = calculate_diff(prep_body(old), prep_body(new)).collect do |left, right|
       left = left.join if left.kind_of? Array
       right = right.join if right.kind_of? Array
 
-      left and left = {
-        :hidden => old[:hidden],
-        :body => left,
-        :class => (right ? ' class="delete"' : '')
-      }
-      right and right = {
-        :hidden => new[:hidden],
-        :body => right,
-        :class => ' class="add"'
-      }
+      [left, right]
+    end
 
-      %{<tr>\n} + [left, right].compact.collect {|line|
-        (line[:body].size > 0) ?
-          %{<td#{width}#{line[:class]}><div class="content">#{hide_message(line[:body], line[:hidden])}</div></td>\n} :
-          %{<td#{width}><div class="content">&nbsp</div></td>\n}
-      }.join + "</tr>\n"
-    }.join + %{</tbody></table>\n}
+    old_hidden = old.hidden?
+    new_hidden = new.hidden?
+
+    render_template('diffhelper_render_diff.rhtml', binding)
+  end
+
+  def prep_body(message)
+    content = message.content
+    if content.inline?
+      format = content.format
+      format = 'text/plain' if 'application/x-squish' == format
+
+      body = content.body
+      body =
+        case format
+        when nil
+          body.split(/(?=\n\n)/)
+        when 'text/plain', 'text/textile'
+          body.split(/(?=\n)/)
+        when 'text/html'
+          body.split(%r{(?=<(?!\s*/))})
+        else
+          [body]
+        end
+      body = body.collect {|line| content.render(@request, :full, line) }
+    else
+      body = [ content.render(@request, :short) ]
+    end
+
+    body
   end
 end

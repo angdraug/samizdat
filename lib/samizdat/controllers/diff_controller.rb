@@ -23,6 +23,6 @@ class DiffController < Controller
     @title = _('Message') + ' / ' + Resource.new(@request, new.id).title +
       ' / ' + _('Changes')
 
-    @content_for_layout = box(@title, render_diff(old, new))
+    @content_for_layout = render_diff(old, new)
   end
 end

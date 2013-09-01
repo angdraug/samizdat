@@ -1,0 +1,3 @@
+<% tags.sort_by {|_, _, title| title.downcase }.each do |tag, usage, title| %>
+<a style="font-size: <%= 75 + 75 * usage / max_usage %>%" href="<%= tag %>"><%= title %></a>
+<% end %>

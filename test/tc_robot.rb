@@ -272,6 +272,7 @@ class TC_Robot < Test::Unit::TestCase
 
   def test_09_tags
     response = get('tags')
+    assert_equal Net::HTTPOK, response.class
     body = REXML::XPath.first(parse(response.body),
       '//h:div[@id="main"]/h:div', XHTML_NS)
     assert_equal 'Tag', elements(body, '//h:th[1]').join.strip

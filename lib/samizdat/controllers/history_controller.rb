@@ -31,21 +31,8 @@ class HistoryController < Controller
     dataset[page - 1].each {|r| versions.push r[:version] }
     last = dataset[page].first[:version] if dataset.size > page * limit_page
 
-    # table of changes
-    compare = _('compare with previous version')
-    0.upto(versions.size - 1) do |i|
-      diff_link =
-        if i < versions.size - 1
-          %{<a href="diff?old=#{versions[i+1]}&amp;new=#{versions[i]}">#{compare}</a>}
-        elsif last
-          # offer diff for last on page if not last in history
-          %{<a href="diff?old=#{last}&amp;new=#{versions[i]}">#{compare}</a>}
-        end
-      versions[i] = [ Resource.new(@request, versions[i]).list_item, diff_link ]
-    end
+    foot = nav(dataset)
 
-    versions.unshift [_('Versions'), _('Changes')]
-
-    @content_for_layout = box(@title, table(versions, nav(dataset)))
+    @content_for_layout = render_template('history_index.rhtml', binding)
   end
 end

@@ -17,38 +17,9 @@ class MemberController < Controller
   end
 
   def settings
-    style = ''
-
-    if config['style'].size > 1
-      style << '<p>' + _('Theme') + ': '
-      config['style'].each do |s|
-        style << %{<a class="action" href="member/set?style=#{s}">#{s}</a>\n}
-      end
-      style << '</p>'
-    end
-
-    style << '<p><a class="action" href="member/set?nostatic=' + (
-      ('yes' == @request.cookie('nostatic')) ?
-        'no">' + _('Show static content on the front page') :
-        'yes">' + _('Hide static content from the front page')
-    ) + '</a></p>'
-
-    style << '<p><a class="action" href="member/set?ui=' + (
-      @request.advanced_ui? ?
-        'basic">' + _('Return to basic interface') :
-        'advanced">' + _('Enable advanced interface')
-    ) + '</a></p>'
-
-    style = box(_('Change Appearance'), style)
-
-    if @session.moderator?
-      moderation = box(_('Moderation Facility'), (@request.moderate? ?
-        %{<a class="action" href="member/set?moderate=no">} + _('Disable') + '</a>' :
-        %{<a class="action" href="member/set?moderate=yes">} + _('Enable') + '</a>'))
-    end
 
     @title = _('Interface Settings')
-    @content_for_layout = style + moderation.to_s
+    @content_for_layout = render_template('member_settings.rhtml', binding)
   end
 
   # store UI options in cookies
@@ -72,25 +43,19 @@ class MemberController < Controller
   def profile
     assert_member
     @title = _('Profile')
-    @content_for_layout = box(@title,
-      member_form('change_profile', *profile_fields))
+    @content_for_layout = render_template('member_profile.rhtml', binding)
   end
 
   def account
     assert_member
     @title = _('Account')
-    @content_for_layout = box(@title,
-      member_form('change_account', *account_fields))
+    @email = rdf.get_property(@session.member, 's::email') if @session.member
+    @content_for_layout = render_template('member_account.rhtml', binding)
   end
 
   def create
     @title = _('Create New Account')
-    @content_for_layout = box(@title,
-      member_form('create_account',
-        *([
-            [:label, 'login', _('Login')],
-            [:text, 'login']
-          ] + account_fields)))
+    @content_for_layout = render_template('member_create.rhtml', binding)
   end
 
   def change_profile
@@ -162,28 +127,14 @@ class MemberController < Controller
         @request.redirect_when_done
       else
         @title = _('Login Failed')
-        @content_for_layout = box(
-          @title,
-          '<p>'+_('Wrong login name or password. Try again.')+'</p>'+
-          password_recovery_link)
       end
 
     else
       @request.set_redirect_when_done_cookie
-
       @title = _('Log in')
-      @content_for_layout = box(
-        @title,
-        '<p>'+_('Use existing account:')+'</p>' +
-        form(
-          secure_action('member/login'),
-          [:label, 'login', _('Login')], [:text, 'login'],
-          [:label, 'password', _('Password')], [:password, 'password'],
-          [:br], [:submit]
-        ) +
-        '<p><a href="member/create">'+_('Create New Account')+'</a></p>' +
-        password_recovery_link)
     end
+
+    @content_for_layout = render_template('member_login.rhtml', binding)
   end
 
   def logout
@@ -229,7 +180,7 @@ class MemberController < Controller
       start_session_for_new_account(login)
     else
       @title = _('Confirmation Accepted')
-      @content_for_layout = box(@title, '<p>' + _('Changes confirmed.') + '</p>')
+      @content_for_layout = render_template('member_confirm.rhtml', binding)
     end
   end
 
@@ -266,17 +217,11 @@ class MemberController < Controller
         request_confirmation(email, confirm,
           sprintf(_('New password was generated for your account: %s'), p))
       end # transaction
-      body = '<p>' + _('New password has been sent to you.') + '</p>'
-
-    else
-      body = form(
-        nil,
-        [:label, 'login', _('Login')], [:text, 'login'],
-        [:submit, 'recover'])
+      @notice = _('New password has been sent to you.')
     end
 
     @title = _('Recover Lost Password')
-    @content_for_layout = box(@title, body)
+    @content_for_layout = render_template('member_recover.rhtml', binding)
   end
 
   def block
@@ -328,39 +273,6 @@ class MemberController < Controller
     else
       action
     end
-  end
-
-  def member_form(action, *fields)
-    secure_form(secure_action('member/' + action),
-                *(fields + [[:br], [:submit, 'submit']]))
-  end
-
-  def profile_fields
-    fields = [
-      [:label, 'full_name', _('Full name')],
-      [:text, 'full_name', @session.full_name]
-    ]
-
-    site.plugins['profile'].each do |plugin|
-      fields.push(*plugin.form_fields(@member))
-    end
-
-    fields
-  end
-
-  def account_fields
-    @email = rdf.get_property(@session.member, 's::email') if @session.member
-    fields = [
-      [:label, 'email', _('Email')], [:text, 'email', @email]
-    ]
-    if @session.member
-      fields.push(
-        [:label, 'password', _('Current Password')], [:password, 'password'])
-    end
-    fields.push(
-      [:label, 'password1', _('New Password')], [:password, 'password1'],
-      [:label, 'password2', _('Reenter password to confirm')],
-        [:password, 'password2'])
   end
 
   def password_recovery_link
@@ -446,10 +358,7 @@ class MemberController < Controller
       @request.redirect(@id)
     else
       @title = _('Change Account Status')
-      @content_for_layout = box(@title,
-        '<p class="moderation">' << _('When account is blocked, the member cannot login. Please confirm that you want to change block status of this account.') << '</p>' <<
-        Resource.new(@request, @id).short <<
-        secure_form(nil, [:submit, 'confirm', _('Confirm')]))
+      @content_for_layout = render_template('member_moderate.rhtml', binding)
     end
   end
 

@@ -1,0 +1,7 @@
+<% if hidden %>
+<div class="hidden-message">
+<%= message.gsub(/<(a|img)\s+([^>]+?\s+?)?(href|src)([^>]*)>/i, '<\1 \2title\4>') %>
+</div>
+<% else %>
+<%= message %>
+<% end %>

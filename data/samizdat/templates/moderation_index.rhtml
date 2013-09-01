@@ -1,0 +1,31 @@
+<% unless links.empty? %>
+<div class="box" id="links">
+  <div class="box-title"><%= _('Links') %></div>
+  <div class="box-content">
+<%   links.each do |href, title| %>
+    <p><a href="<%= href %>"><%= title %></a></p>
+<% end %>
+  </div>
+</div>
+<% end %>
+<div class="box">
+  <div class="box-title"><%= @title %></div>
+  <div class="box-content">
+    <table><thead>
+    <tr><td><%= _('Date') %></td>
+        <td><%= _('Moderator') %></td>
+        <td><%=  _('Action') %></td>
+        <td><%=  _('Resource') %></td></tr>
+    </thead><tbody>
+<% log.each do |l| %>
+    <tr><td><%= format_date(l.date) %></td>
+        <td><%= l.moderator ? resource_href(l.moderator) : '&nbsp;' %></td>
+        <td><%= _(Moderation::ACTION_LABELS[l.action]) %></td>
+        <td><%= Resource.new(@request, l.resource).list_item %></td></tr>
+<% end %>
+     </tbody></table>
+<% if foot and not foot.empty? %>
+<div class="foot"><%= foot %></div>
+<% end %>
+  </div>
+</div>

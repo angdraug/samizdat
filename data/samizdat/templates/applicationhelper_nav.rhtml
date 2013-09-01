@@ -1,0 +1,13 @@
+<div class="nav"><%= _('pages: ') %><%
+pages.each do |i|
+  if i.kind_of?(Integer) and i != page 
+%> <a href="<%= link %><%= i %>"><%= i %></a> <%
+  else
+%> <%= i %><%
+  end
+end
+
+if page < max_page 
+%>, <a href="<%= link %><%= page + 1 %>"><%= _('next page') %></a><%
+end 
+%></div>
