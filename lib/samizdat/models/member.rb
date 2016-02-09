@@ -100,7 +100,7 @@ end
 #
 # stored in a text field as a YAML hash
 #
-class Preferences < DelegateClass(Hash)
+class Preferences
   include SiteHelper
 
   # load member preferences by login
@@ -116,8 +116,10 @@ class Preferences < DelegateClass(Hash)
       prefs = db[:member].filter(:login => @login).get(:prefs)
       @prefs = yaml_hash(prefs)
     end
+  end
 
-    super @prefs
+  def method_missing(m, *args)
+    @prefs.__send__(m, *args)
   end
 
   # save updated member preferences to database
