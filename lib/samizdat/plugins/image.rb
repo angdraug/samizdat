@@ -12,10 +12,7 @@ require 'samizdat'
 require 'samizdat/plugins/content_file'
 require 'fileutils'
 require 'nokogiri'
-
-# don't allow RMagic to second-guess ld.so
-RMAGICK_BYPASS_VERSION_TEST = true
-require 'RMagick'
+require 'rmagick'
 
 class ImagePlugin < ContentFilePlugin
   include Magick
