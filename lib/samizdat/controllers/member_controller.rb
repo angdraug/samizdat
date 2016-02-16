@@ -288,7 +288,7 @@ class MemberController < Controller
       prefs['blocked_by'] = @session.member
       prefs['password'] = password   # remember password
       prefs.save
-      db[:member][:id => @id] = {:password => nil, :session => nil}
+      db[:member].where(:id => @id).update(:password => nil, :session => nil)
     end
   end
 
@@ -389,7 +389,7 @@ class MemberController < Controller
 
   def change_full_name
     if @full_name and @full_name != @session.full_name
-      db[:member][:id => @session.member] = {:full_name => @full_name}
+      db[:member].where(:id => @session.member).update(:full_name => @full_name)
       return sprintf(_('%s updated'), _('Full name'))
     end
   end
@@ -423,7 +423,7 @@ class MemberController < Controller
         return _('Confirmation request is sent to your new email address.')
 
       else   # without confirmation
-        db[:member][:id => @session.member] = {:email => @email}
+        db[:member].where(:id => @session.member).update(:email => @email)
         return sprintf(_('%s updated'), _('Email'))
       end
     end

@@ -187,7 +187,7 @@ class Content
       end
     end
 
-    db[:message][:id => @id] = fields
+    db[:message].where(:id => @id).update(fields)
   end
 
   # Re-render HtmlCache for a single message.
@@ -464,7 +464,7 @@ class PendingUpload
       dir = File.join(site.content_dir, path.untaint)
       FileUtils.rmdir(dir) if File.exists?(dir) and File.directory?(dir)
     end
-    db[:pending_upload][:id => @id] = {:status => status}
+    db[:pending_upload].where(:id => @id).update(:status => status)
   end
 
   private

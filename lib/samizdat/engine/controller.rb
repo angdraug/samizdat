@@ -75,7 +75,7 @@ class Controller
     (@session.member and @id) or raise RuntimeError,
       'Not enough data to log moderation'
 
-    db[:Moderation].insert(
+    db[:moderation].insert(
       :moderator => @session.member,
       :action => action,
       :resource => @id

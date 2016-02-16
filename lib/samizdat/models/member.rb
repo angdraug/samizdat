@@ -129,6 +129,6 @@ class Preferences
   def save(confirm=nil)
     return if 'guest' == @login
     @prefs or raise RuntimeError, 'No preferences to save'
-    db[:member][:login => @login] = {:prefs => @prefs.to_yaml, :confirm => confirm}
+    db[:member].where(:login => @login).update(:prefs => @prefs.to_yaml, :confirm => confirm)
   end
 end

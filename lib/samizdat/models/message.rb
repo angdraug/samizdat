@@ -208,11 +208,11 @@ ORDER BY ?rating DESC}, :id => @id
   end
 
   def hide!(hide)
-    db[:message][:id => @id] = {:hidden => hide}
+    db[:message].where(:id => @id).update(:hidden => hide)
   end
 
   def lock!(lock)
-    db[:message][:id => @id] = {:locked => lock}
+    db[:message].where(:id => @id).update(:locked => lock)
   end
 
   def reparent!(new_parent, property, part_sequence_number = nil)

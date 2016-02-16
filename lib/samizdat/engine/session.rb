@@ -72,11 +72,11 @@ class Session
       end
 
       @cookie = random_digest(m[:id])
-      db[:member][:id => m[:id]] = {
+      db[:member].where(:id => m[:id]).update(
         :login_time => CURRENT_TIMESTAMP,
         :last_time => CURRENT_TIMESTAMP,
         :session => @cookie
-      }
+      )
 
       @member = m[:id]
       @login_time = Time.now
@@ -95,7 +95,7 @@ class Session
   #
   def clear!
     if @member
-      db[:member][:id => @member] = {:session => nil}
+      db[:member].where(:id => @member).update(:session => nil)
     end
     if @cookie
       cache.delete(Session.cache_key(@cookie))

@@ -309,7 +309,7 @@ class Site
     local_cache.fetch_or_add('database') do
       config['db']['adapter'] or raise RuntimeError,
         'Invalid database connection configuration: adapter not defined'
-      db = Sequel.connect(
+      Sequel.connect(
         :adapter => config['db']['adapter'],
         :host => config['db']['host'],
         :database => config['db']['database'],
@@ -317,8 +317,6 @@ class Site
         :password => config['db']['password'],
         :quote_identifiers => false
       )
-      db.extension(:sequel_3_dataset_methods)
-      db
     end
   end
 

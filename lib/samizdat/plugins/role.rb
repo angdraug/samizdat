@@ -35,7 +35,7 @@ class RolePlugin < AccessPlugin
     if member.id.kind_of?(Integer)
       member.access['role'].push('member')
 
-      db[:Role].filter(:member => member.id).select(:role).distinct.each do |r|
+      db[:role].filter(:member => member.id).select(:role).distinct.each do |r|
         member.access['role'].push(r[:role])
       end
     end
