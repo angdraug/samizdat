@@ -1,0 +1,9 @@
+PROTO=http
+SITE=samizdat
+$(PROTO)://$(SITE)/
+$(PROTO)://$(SITE)/tags
+$(PROTO)://$(SITE)/moderation
+$(PROTO)://$(SITE)/frontpage/updates?page=2
+$(PROTO)://$(SITE)/blog/siege
+$(PROTO)://$(SITE)/frontpage/rss
+$(PROTO)://$(SITE)/frontpage/rss?feed=updates

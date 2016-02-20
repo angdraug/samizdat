@@ -1,0 +1,11 @@
+# benchmark:
+# siege -c4 -b -i -t1M -q -Rdoc/examples/siege/siegerc -fdoc/examples/siege/siege-urls.txt
+#
+# load test:
+# siege -c1000 -i -t24H -q -Rdoc/examples/siege/siegerc -fdoc/examples/siege/siege-urls.txt
+#
+csv = true
+cache = true
+show-logfile = false
+# replace http://samizdat with $(PROTO) and $(SITE) values from siege-urls.txt
+login-url = http://samizdat/member/login POST login=siege&password=siege
