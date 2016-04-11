@@ -299,11 +299,9 @@ class TC_Robot < Test::Unit::TestCase
   end
 
   def get(action, header={})
-    response = Net::HTTP.start(@base.host) do |http|
+    Net::HTTP.start(@base.host) do |http|
       http.get(@base.path + action, header)
     end
-    sleep 0.001
-    response
   end
 
   def get_action_token(response)
