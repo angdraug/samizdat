@@ -144,8 +144,8 @@ format:
   other: [ application/pdf, application/ogg, audio/ogg, audio/mpeg, audio/x-mp3,
     video/mpeg, video/quicktime, video/x-msvideo, video/x-ms-asf,
     video/x-ms-wmv, application/vnd.rn-realmedia, video/mp4, video/x-flv,
-    application/x-shockwave-flash, application/x-bittorrent,
-    application/vnd.oasis.opendocument.graphics,
+    video/ogg, video/webm, application/x-shockwave-flash,
+    application/x-bittorrent, application/vnd.oasis.opendocument.graphics,
     application/vnd.oasis.opendocument.presentation,
     application/vnd.oasis.opendocument.spreadsheet,
     application/vnd.oasis.opendocument.text ]
@@ -154,8 +154,8 @@ format:
 #
 file_extension: { image/jpeg: jpg, audio/mpeg: mp3, video/quicktime: mov,
   video/x-msvideo: avi, video/x-ms-asf: wmv, video/x-ms-wmv: wmv,
-  application/vnd.rn-realmedia: rm, application/x-shockwave-flash: swf,
-  application/x-bittorrent: torrent,
+  video/ogg: ogv, application/vnd.rn-realmedia: rm,
+  application/x-shockwave-flash: swf, application/x-bittorrent: torrent,
   application/vnd.oasis.opendocument.graphics: odg,
   application/vnd.oasis.opendocument.presentation: odp,
   application/vnd.oasis.opendocument.spreadsheet: ods,
@@ -173,7 +173,7 @@ plugins:
   # Content rendering plugins.
   #
   content_inline: [ inline_default, plain_text, html, textile, squish ]
-  content_file: [ file_default, image ]
+  content_file: [ file_default, image, video ]
 
   # Member profile plugins.
   #
