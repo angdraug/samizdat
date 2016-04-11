@@ -205,18 +205,6 @@ plugins:
       full: 800
       short: 256
 
-    # Specify <object/> attributes used to embed Flowplayer Flash video player
-    # into video message pages.
-    #
-    # To enable Flowplayer, add 'flowplayer' to the list of content_file
-    # plugins, and make sure the player is accessible from the location
-    # specified in 'src' attribute. You can get the player binary from
-    # http://flowplayer.org/download.html.
-    #
-    flowplayer:
-      src: 'flowplayer/flowplayer.swf'
-      bgcolor: '#000000'
-
     # Role-based access control
     #
     role:

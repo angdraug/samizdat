@@ -33,7 +33,7 @@ class Controller
                :icon => config['site']['icon'] }
 
     # JavaScript libraries
-    @js = [ 'flashembed' ]
+    @js = []
   end
 
   def render

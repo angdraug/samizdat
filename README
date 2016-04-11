@@ -45,8 +45,7 @@ Features
 Open Publishing
 - open publishing wire
 - threaded comments
-- multimedia upload (including online viewing of FLV and MP4 videos with
-  Flowplayer free Flash video player)
+- multimedia upload (including HTML5 video)
 - format messages as text, verbatim plain text, HTML, and Textile
 - integrated message translations
 
