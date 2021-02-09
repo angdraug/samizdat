@@ -14,7 +14,7 @@ print_usage()
 	echo "Usage: samizdat-create-database site [ driver ]"
 	echo
 	echo "Supported drivers:"
-	echo "    pgsql (default)"
+	echo "    postgres (default)"
 	echo "    sqlite3"
 	echo
 	echo "Requires root priviledges to run"
@@ -27,7 +27,7 @@ fi
 
 SITE="$1"
 DRIVER="$2"
-[ -z "$DRIVER" ] && DRIVER="pgsql"
+[ -z "$DRIVER" ] && DRIVER="postgres"
 
 PACKAGE=samizdat
 SQLDIR=/usr/share/$PACKAGE/database
@@ -38,7 +38,7 @@ if [ -r "$SQLDIR/grant-${DRIVER}.sql" ]; then
 fi
 
 case "$DRIVER" in
-	pgsql)
+	postgres)
 		su -c "echo '' | psql -q '$SITE' 2>/dev/null" - postgres
 		if [ "$?" = "0" ]; then
 			echo "Error: database '$SITE' already exists."
@@ -52,7 +52,9 @@ case "$DRIVER" in
 		echo "Please configure IDENT access as described in install.txt, or provide"
 		echo "other means for Samizdat to log in to PostrgreSQL database '$SITE'."
 		echo
-		echo "Data source: 'DBI:Pg:${SITE}'"
+		echo "adapter: postgres"
+		echo "database: ${SITE}"
+		echo "user: ${SITE}"
 		;;
 	sqlite3)
 		SQLITE_DIR=$DATADIR/$SITE
@@ -69,11 +71,11 @@ case "$DRIVER" in
 		chmod 775 $SQLITE_DIR
 		chmod 664 $SQLITE_FILE
 		echo
-		echo "Data source: 'DBI:SQLite3:$SQLITE_FILE'"
-		echo "User: '$SITE'"
+		echo "adapter: sqlite3"
+		echo "database: $SQLITE_FILE"
 		;;
 	*)
-		echo "Error: database '$DRIVER' is not supported."
+		echo "Error: driver '$DRIVER' is not supported."
 		exit 2
 		;;
 esac
