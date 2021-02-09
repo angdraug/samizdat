@@ -4,7 +4,7 @@ Samizdat ToDo Lists
 Short-term Goals
 ----------------
 
-0.7.1
+0.7.2
 - feature: basic calendar
 - feature: wysiwig HTML editor
 - performance: mark-and-sweep, static caching

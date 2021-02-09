@@ -1,6 +1,12 @@
 Samizdat News
 =============
 
+2021-02-08: Samizdat 0.7.1 is released.
+
+    This is a bugfix release that brings Samizdat up to date with latest
+    versions of its dependencies, adds new Captcha plugin, drops the obsolete
+    Flash and Flowplayer plugins, and replaces them with HTML5 video renderer.
+
 2012-05-12: Samizdat 0.7.0 is released.
 
     This version features massive improvements both in the user interface and
