@@ -386,7 +386,7 @@ class Request
     end
 
     if body
-      @headers['Content-Length'] = Rack::Utils.bytesize(body).to_s
+      @headers['Content-Length'] = body.bytesize.to_s
       @headers['Content-Location'] = File.join('', @uri_prefix)
       return [ @status, @headers, [body] ]
     else
