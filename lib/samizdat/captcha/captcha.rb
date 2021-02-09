@@ -1,10 +1,6 @@
-#!/usr/bin/env ruby
-#
 # vim: et sw=2 sts=2 ts=8 tw=0
 
-# don't allow RMagic to second-guess ld.so
-RMAGICK_BYPASS_VERSION_TEST = true
-require 'RMagick'
+require 'rmagick'
 require 'samizdat'
 
 class Captcha
@@ -108,4 +104,3 @@ private
     i
   end
 end
-
