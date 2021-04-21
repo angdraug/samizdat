@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%= @request.language %>" lang="<%= @request.language %>">
+<head>
+  <title><%= @title %></title>
+  <base href="<%= @request.base %>" />
+  <meta name="generator" content="Samizdat <%= SAMIZDAT_VERSION %>" />
+
+  <link rel="stylesheet" type="text/css" href="css/<%= @request.style %>.css" media="screen" />
+<% @request.alt_styles.each do |alt| %>
+  <link rel="alternate stylesheet" type="text/css" title="<%= alt %>" href="css/<%= alt %>.css" media="screen" />
+<% end %>
+
+<% @feeds.each do |title, link| %>
+  <link rel="alternate" type="application/rss+xml" title="<%= title %>" href="<%= @request.base + link %>" />
+<% end %>
+<% @links.each do |rel, href| %>
+  <link rel="<%= rel %>" href="<%= href %>" />
+<% end %>
+
+<% @js.each do |js| %>
+  <script type="text/javascript" src="js/<%= js %>.js"></script>
+<% end %>
+</head>
+
+<body>
+<div><a href="#main" class="hidden">Skip navigation</a></div>
+<div id="head">
+  <div id="head-left"><a href="<%= @request.base %>" title="<%= logo_link_title %>"><%= config['site']['logo'] %></a></div>
+  <div id="head-right"><a href="message/publish"><%= _('Publish') %></a>
+    :: <a href="query"><%= _('Search') %></a></div>
+</div>
+<div id="subhead">
+  <div id="subhead-right">
+<% unless @member.guest? %>
+    <%= member_link(@member) %>:
+    <a href="member/profile" title="<%= _('View and edit your profile') %>"><%= _('Profile') %></a>,
+    <a href="member/account" title="<%= _('Change account parameters (email and password)') %>"><%= _('Account') %></a>,
+<% end %>
+    <a href="member/settings" title="<%= _('Change user interface settings') %>"><%= _('Settings') %></a>,
+<% if @session.member %>
+    <a href="member/logout"><%= _('Log out') %></a>
+<% else %>
+    <a href="member/login"><%= _('Log in') %></a>
+<% end %>
+  </div>
+</div>
+
+<div id="main">
+

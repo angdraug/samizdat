@@ -20,6 +20,8 @@ class FrontpageController < Controller
       _('Features') => 'frontpage/rss',
       _('Recent Updates') => 'frontpage/rss?feed=updates'
     )
+
+    @lazy_content = []
   end
 
   def index
@@ -42,6 +44,24 @@ class FrontpageController < Controller
     @footer = static_text('footer')
 
     @template = 'frontpage_index.rhtml'
+    @lazy_content << 'lazy_page_layout_begin.rhtml'
+    @lazy_content << 'lazy_frontpage_index_1.rhtml'
+    @lazy_content << lambda {|_| tag_cloud }
+    @lazy_content << 'lazy_frontpage_index_2.rhtml'
+    @lazy_content << lambda {|_| FeaturesList.new(@request) }
+    @lazy_content << 'lazy_frontpage_index_3.rhtml'
+    @lazy_content << lambda {|_| UpdatesList.new(@request) }
+    @lazy_content << 'lazy_frontpage_index_4.rhtml'
+    @lazy_content << 'lazy_page_layout_end.rhtml'
+  end
+
+  def render
+
+     out = LazyContent.new(@request)
+     @lazy_content.each do |x|
+       out.push(x.kind_of?(Proc) ? x : render_template(x))
+     end
+     out
   end
 
   def features

@@ -1,0 +1,18 @@
+<% unless @language_list.empty? %>
+<div id="languages"><%= @language_list %></div>
+<% end %>
+
+<% unless @header.empty? %>
+<div id="front-header"><%= @header %></div>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= _('Top Tags') %></th>
+      <th><%= _('Features') %></th>
+      <th><%= _('Recent Updates') %></th>
+    </tr>
+  </thead>
+  <tr>
+    <td class="tags">

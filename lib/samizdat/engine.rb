@@ -60,3 +60,5 @@ require 'samizdat/components/resource'
 require 'samizdat/components/list'
 
 require 'samizdat/engine/plugins'
+
+require 'samizdat/engine/lazycontent'
